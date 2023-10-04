@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Geo.Country",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Code": {
+      "type": "string",
+      "regex": "[A-Z]{3}",
+      "required": true,
+      "unique": true,
+      "maxLength": 3
+    },
+    "Slug": {
+      "type": "string"
+    }
+  }
+}

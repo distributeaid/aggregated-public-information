@@ -4,7 +4,8 @@
   "info": {
     "singularName": "subregion",
     "pluralName": "subregions",
-    "displayName": "Subregion"
+    "displayName": "Geo.Subregion",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,11 +21,12 @@
       "type": "string"
     },
     "Map": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "Overview": {
       "type": "richtext"
@@ -37,6 +39,11 @@
       "relation": "manyToOne",
       "target": "api::geo.region",
       "inversedBy": "Subregions"
+    },
+    "Country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
     }
   }
 }

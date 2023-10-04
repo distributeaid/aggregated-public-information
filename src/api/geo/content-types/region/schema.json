@@ -4,7 +4,7 @@
   "info": {
     "singularName": "region",
     "pluralName": "regions",
-    "displayName": "Region",
+    "displayName": "Geo.Region",
     "description": ""
   },
   "options": {
@@ -39,6 +39,11 @@
       "relation": "oneToMany",
       "target": "api::geo.subregion",
       "mappedBy": "Region"
+    },
+    "Countries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::geo.country"
     }
   }
 }

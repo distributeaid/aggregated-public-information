@@ -716,12 +716,50 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiGeoCountry extends Schema.CollectionType {
+  collectionName: 'countries';
+  info: {
+    singularName: 'country';
+    pluralName: 'countries';
+    displayName: 'Geo.Country';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Code: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        maxLength: 3;
+      }>;
+    Slug: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::geo.country',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::geo.country',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGeoRegion extends Schema.CollectionType {
   collectionName: 'regions';
   info: {
     singularName: 'region';
     pluralName: 'regions';
-    displayName: 'Region';
+    displayName: 'Geo.Region';
     description: '';
   };
   options: {
@@ -737,6 +775,11 @@ export interface ApiGeoRegion extends Schema.CollectionType {
       'api::geo.region',
       'oneToMany',
       'api::geo.subregion'
+    >;
+    Countries: Attribute.Relation<
+      'api::geo.region',
+      'oneToMany',
+      'api::geo.country'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -761,7 +804,8 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   info: {
     singularName: 'subregion';
     pluralName: 'subregions';
-    displayName: 'Subregion';
+    displayName: 'Geo.Subregion';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -776,6 +820,11 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
       'api::geo.subregion',
       'manyToOne',
       'api::geo.region'
+    >;
+    Country: Attribute.Relation<
+      'api::geo.subregion',
+      'oneToOne',
+      'api::geo.country'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -812,6 +861,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
     }

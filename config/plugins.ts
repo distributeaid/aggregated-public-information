@@ -11,6 +11,10 @@ module.exports = ({ env }) => ({
         subregion: {
           field: 'Slug',
           references: 'Name',
+        },
+        country: {
+          field: 'Slug',
+          references: 'Code',
         }
       },
     },
