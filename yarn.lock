@@ -8331,6 +8331,13 @@ std-env@^3.0.1:
   resolved "https://registry.yarnpkg.com/std-env/-/std-env-3.4.3.tgz#326f11db518db751c83fd58574f449b7c3060910"
   integrity sha512-f9aPhy8fYBuMN+sNfakZV18U39PbalgjXG3lLB9WkaYTxijru61wb57V9wxxNthXM5Sd88ETBWi29qLAsHO52Q==
 
+strapi-plugin-slugify@^2.3.5:
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-slugify/-/strapi-plugin-slugify-2.3.5.tgz#ed135f00cc042801f7c8adb8a86512d5d056fcc1"
+  integrity sha512-wSoxWjKBfIaeEq6rk2FQsrAeVh+74NSQrqWTupUva/CZmiu9iG3b7Rl/yCutanL7t2CiaH8GILAxHb8oq+go6Q==
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+
 stream-chain@2.2.5, stream-chain@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/stream-chain/-/stream-chain-2.2.5.tgz#b30967e8f14ee033c5b9a19bbe8a2cba90ba0d09"

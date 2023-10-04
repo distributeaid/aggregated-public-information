@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "regions",
+  "info": {
+    "singularName": "region",
+    "pluralName": "regions",
+    "displayName": "Region",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "Map": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Overview": {
+      "type": "richtext"
+    },
+    "GovernmentResponse": {
+      "type": "richtext"
+    },
+    "Subregions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::geo.subregion",
+      "mappedBy": "Region"
+    }
+  }
+}

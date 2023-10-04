@@ -11,10 +11,11 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.14.0",
-    "@strapi/plugin-users-permissions": "4.14.0",
     "@strapi/plugin-i18n": "4.14.0",
-    "pg": "8.8.0"
+    "@strapi/plugin-users-permissions": "4.14.0",
+    "@strapi/strapi": "4.14.0",
+    "pg": "8.8.0",
+    "strapi-plugin-slugify": "^2.3.5"
   },
   "author": {
     "name": "A Strapi developer"
