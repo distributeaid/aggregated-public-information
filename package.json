@@ -15,6 +15,7 @@
     "@strapi/plugin-users-permissions": "4.14.0",
     "@strapi/strapi": "4.14.0",
     "pg": "8.8.0",
+    "strapi-plugin-multi-select": "^1.2.2",
     "strapi-plugin-slugify": "^2.3.5"
   },
   "author": {

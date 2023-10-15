@@ -844,6 +844,46 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   };
 }
 
+export interface ApiTeamMember extends Schema.CollectionType {
+  collectionName: 'members';
+  info: {
+    singularName: 'member';
+    pluralName: 'members';
+    displayName: 'Team.Member';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Pronouns: Attribute.String;
+    From: Attribute.Relation<
+      'api::team.member',
+      'oneToOne',
+      'api::geo.country'
+    >;
+    Bio: Attribute.RichText;
+    Profile: Attribute.Media & Attribute.Required;
+    Roles: Attribute.Component<'team.role', true> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::team.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::team.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -864,6 +904,7 @@ declare module '@strapi/types' {
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
+      'api::team.member': ApiTeamMember;
     }
   }
 }
