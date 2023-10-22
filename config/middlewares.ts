@@ -1,6 +1,33 @@
 export default [
   'strapi::errors',
-  'strapi::security',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'market-assets.strapi.io',
+            `${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}`,
+            `${process.env.DO_CDN_URL}`,
+          ],
+          'media-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'market-assets.strapi.io',
+            `${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}`,
+            `${process.env.DO_CDN_URL}`,
+          ],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
