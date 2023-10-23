@@ -8337,9 +8337,9 @@ strapi-plugin-multi-select@^1.2.2:
   integrity sha512-D10hSUzFn7TU3fwH7SUn4/2dsL/JtSgyLLz7S8ozBQbK+GPjOJU264h6lpGppURkxwdXbihJvGzutZlM0DzFVQ==
 
 strapi-plugin-slugify@^2.3.5:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-slugify/-/strapi-plugin-slugify-2.3.5.tgz#ed135f00cc042801f7c8adb8a86512d5d056fcc1"
-  integrity sha512-wSoxWjKBfIaeEq6rk2FQsrAeVh+74NSQrqWTupUva/CZmiu9iG3b7Rl/yCutanL7t2CiaH8GILAxHb8oq+go6Q==
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-slugify/-/strapi-plugin-slugify-2.3.6.tgz#b3988ff9994183464f925c06c1725421249bedf2"
+  integrity sha512-VNLDqD+Y7D2pxoFEbECjEwxFelOSRBi0vqRsoLaY8Durs1QeD3YELmVlBYzum1NKQmp+66lGnxKtQ5OD7aG0nA==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
 
