@@ -12,7 +12,7 @@
     },
     "End": {
       "type": "datetime",
-      "required": true
+      "required": false
     }
   }
 }
