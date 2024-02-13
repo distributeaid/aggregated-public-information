@@ -48,7 +48,7 @@ export interface TimeDuration extends Schema.Component {
   };
   attributes: {
     Start: Attribute.DateTime & Attribute.Required;
-    End: Attribute.DateTime & Attribute.Required;
+    End: Attribute.DateTime;
   };
 }
 
