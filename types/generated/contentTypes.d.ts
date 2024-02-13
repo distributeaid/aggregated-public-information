@@ -858,13 +858,13 @@ export interface ApiTeamMember extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String & Attribute.Required & Attribute.Unique;
     Pronouns: Attribute.String;
+    Profile: Attribute.Media & Attribute.Required;
     From: Attribute.Relation<
       'api::team.member',
       'oneToOne',
       'api::geo.country'
     >;
     Bio: Attribute.RichText;
-    Profile: Attribute.Media & Attribute.Required;
     Roles: Attribute.Component<'team.role', true> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
