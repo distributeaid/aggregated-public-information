@@ -42,6 +42,11 @@
       "type": "component",
       "repeatable": false,
       "component": "product.needs-met"
+    },
+    "secondHand": {
+      "type": "component",
+      "repeatable": false,
+      "component": "product.second-hand"
     }
   }
 }

@@ -46,6 +46,26 @@ export interface ProductProductWeight extends Schema.Component {
   };
 }
 
+export interface ProductSecondHand extends Schema.Component {
+  collectionName: 'components_product_second_hands';
+  info: {
+    displayName: 'Second Hand';
+  };
+  attributes: {
+    canBeUsed: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    priceAdjustment: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 100;
+        },
+        number
+      >;
+  };
+}
+
 export interface ProductVolume extends Schema.Component {
   collectionName: 'components_product_volumes';
   info: {
@@ -112,6 +132,7 @@ declare module '@strapi/types' {
       'geo.location': GeoLocation;
       'product.needs-met': ProductNeedsMet;
       'product.product-weight': ProductProductWeight;
+      'product.second-hand': ProductSecondHand;
       'product.volume': ProductVolume;
       'team.role': TeamRole;
       'time.duration': TimeDuration;
