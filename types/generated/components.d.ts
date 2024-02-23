@@ -12,6 +12,24 @@ export interface GeoLocation extends Schema.Component {
   };
 }
 
+export interface ProductProductWeight extends Schema.Component {
+  collectionName: 'components_product_product_weights';
+  info: {
+    displayName: 'Product Weight';
+  };
+  attributes: {
+    packageWeight: Attribute.Decimal;
+    weightUnit: Attribute.JSON &
+      Attribute.CustomField<'plugin::multi-select.multi-select'>;
+    countPerPackage: Attribute.Integer;
+    itemWeight: Attribute.Decimal;
+    countPerKg: Attribute.Decimal;
+    weightSource: Attribute.String;
+    logDate: Attribute.Date;
+    notes: Attribute.String;
+  };
+}
+
 export interface ProductVolume extends Schema.Component {
   collectionName: 'components_product_volumes';
   info: {
@@ -76,6 +94,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'geo.location': GeoLocation;
+      'product.product-weight': ProductProductWeight;
       'product.volume': ProductVolume;
       'team.role': TeamRole;
       'time.duration': TimeDuration;

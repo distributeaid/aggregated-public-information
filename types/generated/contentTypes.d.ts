@@ -1011,6 +1011,7 @@ export interface ApiProductItem extends Schema.CollectionType {
       'api::product.category'
     >;
     volume: Attribute.Component<'product.volume', true>;
+    weight: Attribute.Component<'product.product-weight'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
