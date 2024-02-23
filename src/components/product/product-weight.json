@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_product_product_weights",
+  "info": {
+    "displayName": "Product Weight"
+  },
+  "options": {},
+  "attributes": {
+    "packageWeight": {
+      "type": "decimal"
+    },
+    "weightUnit": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "countPerPackage": {
+      "type": "integer"
+    },
+    "itemWeight": {
+      "type": "decimal"
+    },
+    "countPerKg": {
+      "type": "decimal"
+    },
+    "weightSource": {
+      "type": "string"
+    },
+    "logDate": {
+      "type": "date"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
