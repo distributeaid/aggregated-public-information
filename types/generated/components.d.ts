@@ -12,6 +12,22 @@ export interface GeoLocation extends Schema.Component {
   };
 }
 
+export interface ProductNeedsMet extends Schema.Component {
+  collectionName: 'components_product_needs_mets';
+  info: {
+    displayName: 'Needs Met';
+    description: '';
+  };
+  attributes: {
+    Items: Attribute.Integer;
+    People: Attribute.Integer;
+    Type: Attribute.Enumeration<['DA', 'SPHERE']>;
+    Months: Attribute.Integer;
+    MonthlyNeedsMetPerUnit: Attribute.Integer;
+    Notes: Attribute.Text;
+  };
+}
+
 export interface ProductProductWeight extends Schema.Component {
   collectionName: 'components_product_product_weights';
   info: {
@@ -94,6 +110,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'geo.location': GeoLocation;
+      'product.needs-met': ProductNeedsMet;
       'product.product-weight': ProductProductWeight;
       'product.volume': ProductVolume;
       'team.role': TeamRole;
