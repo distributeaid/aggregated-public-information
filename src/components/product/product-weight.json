@@ -1,19 +1,27 @@
 {
   "collectionName": "components_product_product_weights",
   "info": {
-    "displayName": "Product Weight"
+    "displayName": "Product Weight",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "packageWeight": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
-    "weightUnit": {
+    "packageWeightUnit": {
       "type": "customField",
-      "customField": "plugin::multi-select.multi-select"
+      "customField": "plugin::multi-select.multi-select",
+      "options": [
+        "lb",
+        "oz"
+      ],
+      "required": true
     },
     "countPerPackage": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "itemWeight": {
       "type": "decimal"
@@ -22,10 +30,12 @@
       "type": "decimal"
     },
     "weightSource": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "logDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "notes": {
       "type": "string"
