@@ -15,7 +15,9 @@
       "customField": "plugin::multi-select.multi-select",
       "options": [
         "lb",
-        "oz"
+        "oz",
+        "g",
+        "kg"
       ],
       "required": true
     },
