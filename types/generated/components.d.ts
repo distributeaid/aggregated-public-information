@@ -12,6 +12,26 @@ export interface GeoLocation extends Schema.Component {
   };
 }
 
+export interface ProductVolume extends Schema.Component {
+  collectionName: 'components_product_volumes';
+  info: {
+    displayName: 'Volume';
+  };
+  attributes: {
+    packageVolume: Attribute.Decimal;
+    volumeUnit: Attribute.Enumeration<
+      ['cubic in', 'cubic cm', 'cubic ft', 'cubic m']
+    > &
+      Attribute.DefaultTo<'cubic in'>;
+    countPerPackage: Attribute.Integer & Attribute.DefaultTo<1>;
+    itemVolumeCBCM: Attribute.BigInteger;
+    countPerCBM: Attribute.BigInteger;
+    volumeSource: Attribute.String;
+    logDate: Attribute.Date;
+    notes: Attribute.Text;
+  };
+}
+
 export interface TeamRole extends Schema.Component {
   collectionName: 'components_team_roles';
   info: {
@@ -56,6 +76,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'geo.location': GeoLocation;
+      'product.volume': ProductVolume;
       'team.role': TeamRole;
       'time.duration': TimeDuration;
     }
