@@ -27,6 +27,11 @@
       "relation": "manyToOne",
       "target": "api::product.category",
       "inversedBy": "items"
+    },
+    "volume": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.volume"
     }
   }
 }
