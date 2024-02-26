@@ -22,7 +22,10 @@ export interface ProductProductWeight extends Schema.Component {
     packageWeight: Attribute.Decimal & Attribute.Required;
     packageWeightUnit: Attribute.JSON &
       Attribute.Required &
-      Attribute.CustomField<'plugin::multi-select.multi-select', ['lb', 'oz']>;
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['lb', 'oz', 'g', 'kg']
+      >;
     countPerPackage: Attribute.Integer & Attribute.Required;
     itemWeight: Attribute.Decimal;
     countPerKg: Attribute.Decimal;
