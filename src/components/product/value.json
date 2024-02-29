@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_product_values",
+  "info": {
+    "displayName": "Value",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Price": {
+      "type": "decimal"
+    },
+    "Count": {
+      "type": "integer"
+    },
+    "PricePerUnit": {
+      "type": "decimal"
+    },
+    "PricingSource": {
+      "type": "string"
+    },
+    "LogDate": {
+      "type": "date"
+    },
+    "Notes": {
+      "type": "text"
+    }
+  }
+}
