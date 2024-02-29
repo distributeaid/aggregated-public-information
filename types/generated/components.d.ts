@@ -58,14 +58,27 @@ export interface ProductSecondHand extends Schema.Component {
       Attribute.DefaultTo<false>;
     priceAdjustment: Attribute.Integer &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 100;
-        },
-        number
-      > &
+      Attribute.SetMinMax<{
+        min: 0;
+        max: 100;
+      }> &
       Attribute.DefaultTo<100>;
+  };
+}
+
+export interface ProductValue extends Schema.Component {
+  collectionName: 'components_product_values';
+  info: {
+    displayName: 'Value';
+    description: '';
+  };
+  attributes: {
+    Price: Attribute.Decimal;
+    Count: Attribute.Integer;
+    PricePerUnit: Attribute.Decimal;
+    PricingSource: Attribute.String;
+    LogDate: Attribute.Date;
+    Notes: Attribute.Text;
   };
 }
 
@@ -136,6 +149,7 @@ declare module '@strapi/types' {
       'product.needs-met': ProductNeedsMet;
       'product.product-weight': ProductProductWeight;
       'product.second-hand': ProductSecondHand;
+      'product.value': ProductValue;
       'product.volume': ProductVolume;
       'team.role': TeamRole;
       'time.duration': TimeDuration;
