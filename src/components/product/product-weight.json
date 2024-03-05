@@ -10,17 +10,6 @@
       "type": "decimal",
       "required": true
     },
-    "packageWeightUnit": {
-      "type": "customField",
-      "customField": "plugin::multi-select.multi-select",
-      "options": [
-        "lb",
-        "oz",
-        "g",
-        "kg"
-      ],
-      "required": true
-    },
     "countPerPackage": {
       "type": "integer",
       "required": true
@@ -41,6 +30,15 @@
     },
     "notes": {
       "type": "string"
+    },
+    "packageWeightUnit": {
+      "type": "enumeration",
+      "enum": [
+        "lb",
+        "oz",
+        "g",
+        "kg"
+      ]
     }
   }
 }
