@@ -20,18 +20,13 @@ export interface ProductProductWeight extends Schema.Component {
   };
   attributes: {
     packageWeight: Attribute.Decimal & Attribute.Required;
-    packageWeightUnit: Attribute.JSON &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['lb', 'oz', 'g', 'kg']
-      >;
     countPerPackage: Attribute.Integer & Attribute.Required;
     itemWeight: Attribute.Decimal;
     countPerKg: Attribute.Decimal;
     weightSource: Attribute.String & Attribute.Required;
     logDate: Attribute.Date & Attribute.Required;
     notes: Attribute.String;
+    packageWeightUnit: Attribute.Enumeration<['lb', 'oz', 'g', 'kg']>;
   };
 }
 
