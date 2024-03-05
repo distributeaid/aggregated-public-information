@@ -14,7 +14,7 @@
       "type": "integer",
       "required": true
     },
-    "itemWeight": {
+    "itemWeightKg": {
       "type": "decimal"
     },
     "countPerKg": {
