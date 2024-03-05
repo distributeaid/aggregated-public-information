@@ -21,7 +21,7 @@ export interface ProductProductWeight extends Schema.Component {
   attributes: {
     packageWeight: Attribute.Decimal & Attribute.Required;
     countPerPackage: Attribute.Integer & Attribute.Required;
-    itemWeight: Attribute.Decimal;
+    itemWeightKg: Attribute.Decimal;
     countPerKg: Attribute.Decimal;
     weightSource: Attribute.String & Attribute.Required;
     logDate: Attribute.Date & Attribute.Required;
