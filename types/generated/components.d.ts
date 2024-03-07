@@ -23,7 +23,7 @@ export interface ProductNeedsMet extends Schema.Component {
     People: Attribute.Integer;
     Type: Attribute.Enumeration<['DA', 'SPHERE']>;
     Months: Attribute.Integer;
-    MonthlyNeedsMetPerUnit: Attribute.Integer;
+    MonthlyNeedsMetPerUnit: Attribute.Decimal;
     Notes: Attribute.Text;
   };
 }
