@@ -14,13 +14,16 @@
     },
     "Type": {
       "type": "enumeration",
-      "enum": ["DA", "SPHERE"]
+      "enum": [
+        "DA",
+        "SPHERE"
+      ]
     },
     "Months": {
       "type": "integer"
     },
     "MonthlyNeedsMetPerUnit": {
-      "type": "integer"
+      "type": "decimal"
     },
     "Notes": {
       "type": "text"
