@@ -1,7 +1,8 @@
 {
   "collectionName": "components_product_second_hands",
   "info": {
-    "displayName": "Second Hand"
+    "displayName": "Second Hand",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,7 +14,9 @@
     "priceAdjustment": {
       "type": "integer",
       "max": 100,
-      "min": 0
+      "min": 0,
+      "default": 100,
+      "required": true
     }
   }
 }
