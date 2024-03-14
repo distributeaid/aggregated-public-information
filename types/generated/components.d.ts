@@ -58,10 +58,13 @@ export interface ProductSecondHand extends Schema.Component {
       Attribute.DefaultTo<false>;
     priceAdjustment: Attribute.Integer &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 0;
-        max: 100;
-      }> &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 100;
+        },
+        number
+      > &
       Attribute.DefaultTo<100>;
   };
 }
