@@ -50,19 +50,22 @@ export interface ProductSecondHand extends Schema.Component {
   collectionName: 'components_product_second_hands';
   info: {
     displayName: 'Second Hand';
+    description: '';
   };
   attributes: {
     canBeUsed: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
     priceAdjustment: Attribute.Integer &
+      Attribute.Required &
       Attribute.SetMinMax<
         {
           min: 0;
           max: 100;
         },
         number
-      >;
+      > &
+      Attribute.DefaultTo<100>;
   };
 }
 
