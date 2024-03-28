@@ -1,34 +1,44 @@
+import database from "../../../../../config/database";
+
 export default {
   async afterCreate(event) {
-    const { data } = event.params;
-    // strapi.log.info(`data: ${JSON.stringify(event)}`)
-    strapi.log.info(`data: ${JSON.stringify(data)}`);
+    strapi.log.info(`AFTER CREATE`);
+    strapi.log.info(`result: ${JSON.stringify(event.result)}`);
 
-    const weightID = data.weight.id;
+    calculateFieldValues(event);
+  },
 
-    // strapi.log.info(`weightID: ${weightID}`);
+  async afterUpdate(event) {
+    strapi.log.info(`AFTER UPDATE`);
+    strapi.log.info(`result: ${JSON.stringify(event.result)}`);
 
-    // const entry = await strapi.db.query('api::product.product-weight').findOne({
-    //   select: ['packageWeight', 'countPerPackage'],
-    //   where: { id: weightID }
-    // });
-
-    // strapi.log.info(`entry: ${JSON.stringify(entry)}`);
-
-    const entry = await strapi.entityService.findOne('api::product.item', data.id, {
-      populate: `*`
-    });
-
-    strapi.log.info(`entry: ${JSON.stringify(entry)}`);
-
-    // const weight = data.weight.packageWeight;
-    // const numItems = data.weight.countPerPackage;
-    // const itemWtKg = weight / numItems;
-
-    // event.params.data.weight.itemWeightKg = itemWtKg;
-    // strapi.log.info(`data: ${JSON.stringify(data)}`);
-    // strapi.log.info(`weight: ${weight}`);
-    // strapi.log.info(`numItems: ${numItems}`);
-    // strapi.log.info(`itemWtKg: ${itemWtKg}`);
+    if (event.result.weight) {
+      calculateFieldValues(event);
+    }
   },
 };
+
+function calculateFieldValues(event) {
+  const { result } = event;
+
+  const recordId = result.id;
+  const { id, packageWeight, countPerPackage } = result.weight;
+
+  // Note: if packageWeightUnit is not set to kg, then we will need to do some conversion for these to be accurate.
+  const itemWeightKg = packageWeight / countPerPackage;
+  const countPerKg = countPerPackage / itemWeightKg;
+
+  strapi.log.info(`packageWeight: ${packageWeight}`);
+  strapi.log.info(`countPerPackage: ${countPerPackage}`);
+  strapi.log.info(`itemWeightKg: ${itemWeightKg}`);
+  strapi.entityService.update("api::product.item", recordId, {
+    data: {
+      weight: {
+        ...result.weight,
+        id,
+        itemWeightKg,
+        countPerKg,
+      },
+    },
+  });
+}
