@@ -4,8 +4,9 @@ export default {
   async afterCreate(event) {
     strapi.log.info(`AFTER CREATE`);
     strapi.log.info(`result: ${JSON.stringify(event.result)}`);
-
-    calculateFieldValues(event);
+    if (event.result.weight) {
+      calculateWeightValues(event);
+    }
   },
 
   async afterUpdate(event) {
@@ -13,12 +14,12 @@ export default {
     strapi.log.info(`result: ${JSON.stringify(event.result)}`);
 
     if (event.result.weight) {
-      calculateFieldValues(event);
+      calculateWeightValues(event);
     }
   },
 };
 
-function calculateFieldValues(event) {
+function calculateWeightValues(event) {
   const { result } = event;
 
   const recordId = result.id;
