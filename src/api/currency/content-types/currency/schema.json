@@ -4,7 +4,8 @@
   "info": {
     "singularName": "currency",
     "pluralName": "currencies",
-    "displayName": "Financial.CurrencyConversion"
+    "displayName": "Financial.CurrencyConversion",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,13 +14,11 @@
   "attributes": {
     "year": {
       "type": "string",
-      "default": "2020",
       "required": true,
       "maxLength": 4
     },
     "month": {
       "type": "integer",
-      "default": 1,
       "required": true,
       "max": 12,
       "min": 1
