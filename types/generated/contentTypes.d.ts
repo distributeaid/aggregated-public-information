@@ -833,6 +833,7 @@ export interface ApiCurrencyCurrency extends Schema.CollectionType {
     singularName: 'currency';
     pluralName: 'currencies';
     displayName: 'Financial.CurrencyConversion';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -842,8 +843,7 @@ export interface ApiCurrencyCurrency extends Schema.CollectionType {
       Attribute.Required &
       Attribute.SetMinMaxLength<{
         maxLength: 4;
-      }> &
-      Attribute.DefaultTo<'2020'>;
+      }>;
     month: Attribute.Integer &
       Attribute.Required &
       Attribute.SetMinMax<
@@ -852,8 +852,7 @@ export interface ApiCurrencyCurrency extends Schema.CollectionType {
           max: 12;
         },
         number
-      > &
-      Attribute.DefaultTo<1>;
+      >;
     currency: Attribute.Enumeration<
       ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
     > &
