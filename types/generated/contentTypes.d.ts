@@ -827,6 +827,58 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCurrencyCurrency extends Schema.CollectionType {
+  collectionName: 'currencies';
+  info: {
+    singularName: 'currency';
+    pluralName: 'currencies';
+    displayName: 'Financial.CurrencyConversion';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    year: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 4;
+      }> &
+      Attribute.DefaultTo<'2020'>;
+    month: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 12;
+        },
+        number
+      > &
+      Attribute.DefaultTo<1>;
+    currency: Attribute.Enumeration<
+      ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
+    > &
+      Attribute.Required;
+    equivalentToUSD: Attribute.Float & Attribute.Required;
+    source: Attribute.String;
+    notes: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::currency.currency',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::currency.currency',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGeoCountry extends Schema.CollectionType {
   collectionName: 'countries';
   info: {
@@ -1101,6 +1153,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::currency.currency': ApiCurrencyCurrency;
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;

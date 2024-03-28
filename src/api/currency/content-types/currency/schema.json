@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "currencies",
+  "info": {
+    "singularName": "currency",
+    "pluralName": "currencies",
+    "displayName": "Financial.CurrencyConversion"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "year": {
+      "type": "string",
+      "default": "2020",
+      "required": true,
+      "maxLength": 4
+    },
+    "month": {
+      "type": "integer",
+      "default": 1,
+      "required": true,
+      "max": 12,
+      "min": 1
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "USD",
+        "GBP",
+        "EUR",
+        "LBP",
+        "LTL",
+        "RSD",
+        "BAM"
+      ],
+      "required": true
+    },
+    "equivalentToUSD": {
+      "type": "float",
+      "required": true
+    },
+    "source": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}
