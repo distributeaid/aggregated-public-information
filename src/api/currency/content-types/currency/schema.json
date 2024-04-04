@@ -13,9 +13,10 @@
   "pluginOptions": {},
   "attributes": {
     "year": {
-      "type": "string",
+      "type": "biginteger",
       "required": true,
-      "maxLength": 4
+      "max": "2030",
+      "min": "2019"
     },
     "month": {
       "type": "integer",
