@@ -839,11 +839,15 @@ export interface ApiCurrencyCurrency extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    year: Attribute.String &
+    year: Attribute.BigInteger &
       Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 4;
-      }>;
+      Attribute.SetMinMax<
+        {
+          min: '2019';
+          max: '2030';
+        },
+        string
+      >;
     month: Attribute.Integer &
       Attribute.Required &
       Attribute.SetMinMax<
