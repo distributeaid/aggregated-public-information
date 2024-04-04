@@ -8,26 +8,26 @@ export default factories.createCoreController(
   "api::product.item",
   ({ strapi }) => ({
     async find(ctx) {
+      strapi.log.info(`API FIND: ${JSON.stringify(ctx.request)}`);
       const result = await super.find(ctx);
-      strapi.log.info(`API FIND: ${JSON.stringify(result)}`);
       return result;
     },
 
     async findOne(ctx) {
+      strapi.log.info(`API FINDONE: ${JSON.stringify(ctx.request)}`);
       const result = await super.findOne(ctx);
-      strapi.log.info(`API FINDONE: ${JSON.stringify(result)}`);
       return result;
     },
 
     async create(ctx) {
+      strapi.log.info(`API CREATE: ${JSON.stringify(ctx.request.body)}`);
       const result = await super.create(ctx);
-      strapi.log.info(`API CREATE: ${JSON.stringify(result)}`);
       return result;
     },
 
     async update(ctx) {
+      strapi.log.info(`API UPDATE: ${JSON.stringify(ctx.request.body)}`);
       const result = await super.update(ctx);
-      strapi.log.info(`API UPDATE: ${JSON.stringify(result)}`);
       return result;
     },
   })
