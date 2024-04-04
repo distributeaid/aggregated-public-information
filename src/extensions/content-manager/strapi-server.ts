@@ -1,13 +1,13 @@
 module.exports = (plugin) => {
   let originalFind = plugin.controllers["collection-types"].find;
   plugin.controllers["collection-types"].find = (ctx) => {
-    strapi.log.info(`ADMIN PANEL FIND ${JSON.stringify(ctx.request)}`);
+    strapi.log.info(`ADMIN PANEL FIND`);
     return originalFind(ctx);
   };
 
   let originalFindOne = plugin.controllers["collection-types"].findOne;
   plugin.controllers["collection-types"].findOne = (ctx) => {
-    strapi.log.info(`ADMIN PANEL FINEONE ${JSON.stringify(ctx.request.body)}`);
+    strapi.log.info(`ADMIN PANEL FINEONE`);
 
     return originalFindOne(ctx);
   };
