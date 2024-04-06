@@ -827,16 +827,16 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiCurrencyCurrency extends Schema.CollectionType {
-  collectionName: 'currencies';
+export interface ApiFinancialCurrencyConversion extends Schema.CollectionType {
+  collectionName: 'currency_conversions';
   info: {
-    singularName: 'currency';
-    pluralName: 'currencies';
-    displayName: 'Financial.CurrencyConversion';
-    description: '';
+    singularName: 'currency-conversion';
+    pluralName: 'currency-conversions';
+    displayName: 'Financial.CurrencyConversions';
   };
   options: {
     draftAndPublish: true;
+    comment: '';
   };
   attributes: {
     year: Attribute.BigInteger &
@@ -868,13 +868,13 @@ export interface ApiCurrencyCurrency extends Schema.CollectionType {
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::currency.currency',
+      'api::financial.currency-conversion',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::currency.currency',
+      'api::financial.currency-conversion',
       'oneToOne',
       'admin::user'
     > &
@@ -1156,7 +1156,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::currency.currency': ApiCurrencyCurrency;
+      'api::financial.currency-conversion': ApiFinancialCurrencyConversion;
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
