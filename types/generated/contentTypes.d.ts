@@ -833,21 +833,17 @@ export interface ApiFinancialCurrencyConversion extends Schema.CollectionType {
     singularName: 'currency-conversion';
     pluralName: 'currency-conversions';
     displayName: 'Financial.CurrencyConversions';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
-    year: Attribute.BigInteger &
+    year: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: '2019';
-          max: '2030';
-        },
-        string
-      >;
+      Attribute.SetMinMaxLength<{
+        maxLength: 4;
+      }>;
     month: Attribute.Integer &
       Attribute.Required &
       Attribute.SetMinMax<
