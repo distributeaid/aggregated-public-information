@@ -1006,6 +1006,43 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   };
 }
 
+export interface ApiNeedsAssessmentSurvey extends Schema.CollectionType {
+  collectionName: 'surveys';
+  info: {
+    singularName: 'survey';
+    pluralName: 'surveys';
+    displayName: 'NeedsAssessment.Survey';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  attributes: {
+    year: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 4;
+      }>;
+    quarter: Attribute.Enumeration<['Q1', 'Q2', 'Q3', 'Q4']> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::needs-assessment.survey',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::needs-assessment.survey',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -1156,6 +1193,7 @@ declare module '@strapi/types' {
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
+      'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
       'api::team.member': ApiTeamMember;
