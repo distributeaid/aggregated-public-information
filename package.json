@@ -28,12 +28,11 @@
     "strapi-plugin-slugify": "^2.3.5",
     "styled-components": "^5.2.1"
   },
-  "devDependencies": {},
   "engines": {
-    "node": ">=20.0.0 <=20.x.x",
-    "yarn": ">=1.22.21"
+    "node": ">=20.0.0 <=20.x.x"
   },
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
-  }
+  },
+  "packageManager": "yarn@4.2.2"
 }
