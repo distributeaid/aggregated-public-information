@@ -1,4 +1,3 @@
-
 {
   "kind": "collectionType",
   "collectionName": "surveys",
@@ -27,6 +26,12 @@
         "Q4"
       ],
       "required": true
+    },
+    "needs_assessment_needs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::needs-assessment.need",
+      "mappedBy": "needs_assessment_survey"
     }
   }
 }

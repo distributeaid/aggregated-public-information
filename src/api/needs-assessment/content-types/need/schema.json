@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "needs",
+  "info": {
+    "singularName": "need",
+    "pluralName": "needs",
+    "displayName": "NeedsAssessment.Need"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "needs_assessment_survey": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::needs-assessment.survey",
+      "inversedBy": "needs_assessment_needs"
+    },
+    "geo_region": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.region"
+    },
+    "geo_subregion": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.subregion"
+    },
+    "product_item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.item"
+    },
+    "need": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}
