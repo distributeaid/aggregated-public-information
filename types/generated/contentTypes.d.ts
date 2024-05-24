@@ -1006,6 +1006,56 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   };
 }
 
+export interface ApiNeedsAssessmentNeed extends Schema.CollectionType {
+  collectionName: 'needs';
+  info: {
+    singularName: 'need';
+    pluralName: 'needs';
+    displayName: 'NeedsAssessment.Need';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    needs_assessment_survey: Attribute.Relation<
+      'api::needs-assessment.need',
+      'manyToOne',
+      'api::needs-assessment.survey'
+    >;
+    geo_region: Attribute.Relation<
+      'api::needs-assessment.need',
+      'oneToOne',
+      'api::geo.region'
+    >;
+    geo_subregion: Attribute.Relation<
+      'api::needs-assessment.need',
+      'oneToOne',
+      'api::geo.subregion'
+    >;
+    product_item: Attribute.Relation<
+      'api::needs-assessment.need',
+      'oneToOne',
+      'api::product.item'
+    >;
+    need: Attribute.Integer & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::needs-assessment.need',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::needs-assessment.need',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNeedsAssessmentSurvey extends Schema.CollectionType {
   collectionName: 'surveys';
   info: {
@@ -1025,6 +1075,11 @@ export interface ApiNeedsAssessmentSurvey extends Schema.CollectionType {
       }>;
     quarter: Attribute.Enumeration<['Q1', 'Q2', 'Q3', 'Q4']> &
       Attribute.Required;
+    needs_assessment_needs: Attribute.Relation<
+      'api::needs-assessment.survey',
+      'oneToMany',
+      'api::needs-assessment.need'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1193,6 +1248,7 @@ declare module '@strapi/types' {
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
+      'api::needs-assessment.need': ApiNeedsAssessmentNeed;
       'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
