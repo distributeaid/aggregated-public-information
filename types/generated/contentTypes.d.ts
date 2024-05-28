@@ -1017,22 +1017,22 @@ export interface ApiNeedsAssessmentNeed extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    needs_assessment_survey: Attribute.Relation<
+    survey: Attribute.Relation<
       'api::needs-assessment.need',
       'manyToOne',
       'api::needs-assessment.survey'
     >;
-    geo_region: Attribute.Relation<
+    region: Attribute.Relation<
       'api::needs-assessment.need',
       'oneToOne',
       'api::geo.region'
     >;
-    geo_subregion: Attribute.Relation<
+    subregion: Attribute.Relation<
       'api::needs-assessment.need',
       'oneToOne',
       'api::geo.subregion'
     >;
-    product_item: Attribute.Relation<
+    item: Attribute.Relation<
       'api::needs-assessment.need',
       'oneToOne',
       'api::product.item'
