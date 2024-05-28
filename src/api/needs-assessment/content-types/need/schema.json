@@ -11,23 +11,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "needs_assessment_survey": {
+    "survey": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::needs-assessment.survey",
       "inversedBy": "needs_assessment_needs"
     },
-    "geo_region": {
+    "region": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.region"
     },
-    "geo_subregion": {
+    "subregion": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.subregion"
     },
-    "product_item": {
+    "item": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::product.item"
