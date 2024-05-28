@@ -36,6 +36,27 @@ yarn build
 
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
 
+# 🚀 Getting started with Gitpod
+Gitpod provides a fully automated development environment for your Strapi project, and the development environment is set up with just a single click. Follow these steps to get started:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/distributeaid/aggregated-public-information)
+
+1. Click the ``Open in Gitpod`` button above. Note: you'll need to have an account on [Gitpod](https://gitpod.io/login/) before proceeding with the next steps (this requires a GitHub account)..
+2. Click the `Continue` button.
+3. Relax, a development environment is being set up for you in the first terminal. There's currently a bug that will stop the setup from being completed, but we'll fix that in the next steps.
+4. Create a new file called `.env` to store the environment variables.
+5. Copy and paste the content from the `.env.example` file into the `.env` file you just created.
+6. Open a new terminal and paste this code inside `openssl rand -base64 16`. This generates a secret key that will be used inside the env file.
+
+**Note:** Do not copy or use the generated keys that have `plus` or `forward slash` in them. Only copy the ones with `numbers`, `alphabets` and `equals`.
+
+7. Copy the generated key and locate the lines in `.env` file that have `key{number}==`. Remove the dummy keys `key{number}==` and replace them with the generated key. The `{number}` is from 1 to 8.
+8. Each of the `key{number}==` placeholder has to be replaced with a generated key so you have to run `Step 6` until all the dummy keys have been removed.
+9. After running these steps, you can then start the build to build the admin panel by running `yarn build`.
+10. Run `yarn develop`. This starts the development server at [http://localhost:1337/admin](http://localhost:1337/admin)
+
+
+
 ## 📚 Learn more
 
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.
