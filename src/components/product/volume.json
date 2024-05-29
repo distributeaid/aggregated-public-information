@@ -7,21 +7,24 @@
   "options": {},
   "attributes": {
     "packageVolume": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true,
+      "customErrorMessage": {
+        "type": "packageVolume must be a number.",
+        "required": "packageVolume cannot be empty."
+      }
     },
     "volumeUnit": {
       "type": "enumeration",
-      "enum": [
-        "cubic in",
-        "cubic cm",
-        "cubic ft",
-        "cubic m"
-      ],
-      "default": "cubic in"
+      "enum": ["cubic in", "cubic cm", "cubic ft", "cubic m"],
+      "default": "cubic in",
+      "required": true
     },
     "countPerPackage": {
       "type": "integer",
-      "default": 1
+      "required": true,
+      "default": 1,
+      "min": 1
     },
     "itemVolumeCBCM": {
       "type": "decimal"
@@ -30,10 +33,12 @@
       "type": "decimal"
     },
     "volumeSource": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "logDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "notes": {
       "type": "text"

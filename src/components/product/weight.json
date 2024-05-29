@@ -10,9 +10,15 @@
       "type": "decimal",
       "required": true
     },
+    "packageWeightUnit": {
+      "type": "enumeration",
+      "enum": ["lb", "oz", "g", "kg"],
+      "required": true
+    },
     "countPerPackage": {
       "type": "integer",
-      "required": true
+      "required": true,
+      "min": 1
     },
     "itemWeightKg": {
       "type": "decimal"
@@ -30,10 +36,6 @@
     },
     "notes": {
       "type": "string"
-    },
-    "packageWeightUnit": {
-      "type": "enumeration",
-      "enum": ["lb", "oz", "g", "kg"]
     }
   }
 }
