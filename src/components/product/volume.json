@@ -1,7 +1,8 @@
 {
   "collectionName": "components_product_volumes",
   "info": {
-    "displayName": "Volume"
+    "displayName": "Volume",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -23,10 +24,10 @@
       "default": 1
     },
     "itemVolumeCBCM": {
-      "type": "biginteger"
+      "type": "decimal"
     },
     "countPerCBM": {
-      "type": "biginteger"
+      "type": "decimal"
     },
     "volumeSource": {
       "type": "string"
