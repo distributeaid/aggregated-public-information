@@ -74,16 +74,25 @@ export interface ProductVolume extends Schema.Component {
     description: '';
   };
   attributes: {
-    packageVolume: Attribute.Decimal;
+    packageVolume: Attribute.Decimal & Attribute.Required;
     volumeUnit: Attribute.Enumeration<
       ['cubic in', 'cubic cm', 'cubic ft', 'cubic m']
     > &
+      Attribute.Required &
       Attribute.DefaultTo<'cubic in'>;
-    countPerPackage: Attribute.Integer & Attribute.DefaultTo<1>;
+    countPerPackage: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Attribute.DefaultTo<1>;
     itemVolumeCBCM: Attribute.Decimal;
     countPerCBM: Attribute.Decimal;
-    volumeSource: Attribute.String;
-    logDate: Attribute.Date;
+    volumeSource: Attribute.String & Attribute.Required;
+    logDate: Attribute.Date & Attribute.Required;
     notes: Attribute.Text;
   };
 }
@@ -96,13 +105,21 @@ export interface ProductWeight extends Schema.Component {
   };
   attributes: {
     packageWeight: Attribute.Decimal & Attribute.Required;
-    countPerPackage: Attribute.Integer & Attribute.Required;
+    packageWeightUnit: Attribute.Enumeration<['lb', 'oz', 'g', 'kg']> &
+      Attribute.Required;
+    countPerPackage: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     itemWeightKg: Attribute.Decimal;
     countPerKg: Attribute.Decimal;
     weightSource: Attribute.String & Attribute.Required;
     logDate: Attribute.Date & Attribute.Required;
     notes: Attribute.String;
-    packageWeightUnit: Attribute.Enumeration<['lb', 'oz', 'g', 'kg']>;
   };
 }
 
