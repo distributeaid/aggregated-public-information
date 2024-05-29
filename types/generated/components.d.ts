@@ -89,6 +89,7 @@ export interface ProductVolume extends Schema.Component {
   collectionName: 'components_product_volumes';
   info: {
     displayName: 'Volume';
+    description: '';
   };
   attributes: {
     packageVolume: Attribute.Decimal;
@@ -97,8 +98,8 @@ export interface ProductVolume extends Schema.Component {
     > &
       Attribute.DefaultTo<'cubic in'>;
     countPerPackage: Attribute.Integer & Attribute.DefaultTo<1>;
-    itemVolumeCBCM: Attribute.BigInteger;
-    countPerCBM: Attribute.BigInteger;
+    itemVolumeCBCM: Attribute.Decimal;
+    countPerCBM: Attribute.Decimal;
     volumeSource: Attribute.String;
     logDate: Attribute.Date;
     notes: Attribute.Text;
