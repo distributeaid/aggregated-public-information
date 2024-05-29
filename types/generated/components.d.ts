@@ -28,24 +28,6 @@ export interface ProductNeedsMet extends Schema.Component {
   };
 }
 
-export interface ProductProductWeight extends Schema.Component {
-  collectionName: 'components_product_product_weights';
-  info: {
-    displayName: 'Product Weight';
-    description: '';
-  };
-  attributes: {
-    packageWeight: Attribute.Decimal & Attribute.Required;
-    countPerPackage: Attribute.Integer & Attribute.Required;
-    itemWeightKg: Attribute.Decimal;
-    countPerKg: Attribute.Decimal;
-    weightSource: Attribute.String & Attribute.Required;
-    logDate: Attribute.Date & Attribute.Required;
-    notes: Attribute.String;
-    packageWeightUnit: Attribute.Enumeration<['lb', 'oz', 'g', 'kg']>;
-  };
-}
-
 export interface ProductSecondHand extends Schema.Component {
   collectionName: 'components_product_second_hands';
   info: {
@@ -106,6 +88,24 @@ export interface ProductVolume extends Schema.Component {
   };
 }
 
+export interface ProductWeight extends Schema.Component {
+  collectionName: 'components_product_weights';
+  info: {
+    displayName: 'Weight';
+    description: '';
+  };
+  attributes: {
+    packageWeight: Attribute.Decimal & Attribute.Required;
+    countPerPackage: Attribute.Integer & Attribute.Required;
+    itemWeightKg: Attribute.Decimal;
+    countPerKg: Attribute.Decimal;
+    weightSource: Attribute.String & Attribute.Required;
+    logDate: Attribute.Date & Attribute.Required;
+    notes: Attribute.String;
+    packageWeightUnit: Attribute.Enumeration<['lb', 'oz', 'g', 'kg']>;
+  };
+}
+
 export interface TeamRole extends Schema.Component {
   collectionName: 'components_team_roles';
   info: {
@@ -151,10 +151,10 @@ declare module '@strapi/types' {
     export interface Components {
       'geo.location': GeoLocation;
       'product.needs-met': ProductNeedsMet;
-      'product.product-weight': ProductProductWeight;
       'product.second-hand': ProductSecondHand;
       'product.value': ProductValue;
       'product.volume': ProductVolume;
+      'product.weight': ProductWeight;
       'team.role': TeamRole;
       'time.duration': TimeDuration;
     }

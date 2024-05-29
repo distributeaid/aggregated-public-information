@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_product_product_weights",
+  "collectionName": "components_product_weights",
   "info": {
-    "displayName": "Product Weight",
+    "displayName": "Weight",
     "description": ""
   },
   "options": {},
@@ -33,12 +33,7 @@
     },
     "packageWeightUnit": {
       "type": "enumeration",
-      "enum": [
-        "lb",
-        "oz",
-        "g",
-        "kg"
-      ]
+      "enum": ["lb", "oz", "g", "kg"]
     }
   }
 }

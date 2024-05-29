@@ -35,8 +35,8 @@
     },
     "weight": {
       "type": "component",
-      "repeatable": false,
-      "component": "product.product-weight"
+      "repeatable": true,
+      "component": "product.weight"
     },
     "needsMet": {
       "type": "component",
