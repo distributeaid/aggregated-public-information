@@ -15,7 +15,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::needs-assessment.survey",
-      "inversedBy": "needs_assessment_needs"
+      "inversedBy": "needs"
     },
     "region": {
       "type": "relation",

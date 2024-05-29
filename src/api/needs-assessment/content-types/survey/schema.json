@@ -27,7 +27,7 @@
       ],
       "required": true
     },
-    "needs_assessment_needs": {
+    "needs": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::needs-assessment.need",

@@ -1075,7 +1075,7 @@ export interface ApiNeedsAssessmentSurvey extends Schema.CollectionType {
       }>;
     quarter: Attribute.Enumeration<['Q1', 'Q2', 'Q3', 'Q4']> &
       Attribute.Required;
-    needs_assessment_needs: Attribute.Relation<
+    needs: Attribute.Relation<
       'api::needs-assessment.survey',
       'oneToMany',
       'api::needs-assessment.need'
