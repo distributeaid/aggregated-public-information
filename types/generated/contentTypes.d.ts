@@ -1099,7 +1099,7 @@ export interface ApiProductItem extends Schema.CollectionType {
       'api::product.category'
     >;
     volume: Attribute.Component<'product.volume', true>;
-    weight: Attribute.Component<'product.product-weight'>;
+    weight: Attribute.Component<'product.weight', true>;
     needsMet: Attribute.Component<'product.needs-met'>;
     secondHand: Attribute.Component<'product.second-hand'>;
     value: Attribute.Component<'product.value', true>;
