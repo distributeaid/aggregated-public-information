@@ -2,17 +2,7 @@ module.exports = (plugin) => {
   let originalCreate = plugin.controllers["collection-types"].create;
   plugin.controllers["collection-types"].create = (ctx) => {
     if (isProductItem(ctx)) {
-      for (let i = 0; i < ctx.request.body.weight.length; i++) {
-        ctx.request.body.weight[i] = calculateWeightFields(
-          ctx.request.body.weight[i]
-        );
-      }
-
-      for (let i = 0; i < ctx.request.body.volume.length; i++) {
-        ctx.request.body.volume[i] = calculateVolumeFields(
-          ctx.request.body.volume[i]
-        );
-      }
+      processProductItemComponents(ctx);
     }
 
     return originalCreate(ctx);
@@ -21,17 +11,7 @@ module.exports = (plugin) => {
   let originalUpdate = plugin.controllers["collection-types"].update;
   plugin.controllers["collection-types"].update = (ctx) => {
     if (isProductItem(ctx)) {
-      for (let i = 0; i < ctx.request.body.weight.length; i++) {
-        ctx.request.body.weight[i] = calculateWeightFields(
-          ctx.request.body.weight[i]
-        );
-      }
-
-      for (let i = 0; i < ctx.request.body.volume.length; i++) {
-        ctx.request.body.volume[i] = calculateVolumeFields(
-          ctx.request.body.volume[i]
-        );
-      }
+      processProductItemComponents(ctx);
     }
 
     return originalUpdate(ctx);
@@ -39,6 +19,16 @@ module.exports = (plugin) => {
 
   return plugin;
 };
+
+function processProductItemComponents(ctx) {
+  // weight component
+  ctx.request.body.weight =
+    ctx.request.body.weight?.map(calculateWeightFields) || [];
+
+  // volume component
+  ctx.request.body.volume =
+    ctx.request.body.volume?.map(calculateVolumeFields) || [];
+}
 
 function isProductItem(ctx) {
   return ctx.request.path.includes("api::product.item");
