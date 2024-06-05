@@ -1,37 +1,93 @@
 module.exports = (plugin) => {
   let originalCreate = plugin.controllers["collection-types"].create;
   plugin.controllers["collection-types"].create = (ctx) => {
-    if (isProductItem(ctx)) {
-      processProductItemComponents(ctx);
-    }
-
+    processContentType(ctx);
     return originalCreate(ctx);
   };
 
   let originalUpdate = plugin.controllers["collection-types"].update;
   plugin.controllers["collection-types"].update = (ctx) => {
-    if (isProductItem(ctx)) {
-      processProductItemComponents(ctx);
-    }
-
+    processContentType(ctx);
     return originalUpdate(ctx);
   };
 
   return plugin;
 };
 
-function processProductItemComponents(ctx) {
-  // weight component
-  ctx.request.body.weight =
-    ctx.request.body.weight?.map(calculateWeightFields) || [];
+function processContentType(ctx) {
+  /*
+   Content-manager paths look like this:
+    http://host/admin/content-manager/collection-types/api::product.item/15
 
-  // volume component
-  ctx.request.body.volume =
-    ctx.request.body.volume?.map(calculateVolumeFields) || [];
+   API paths look like this (note the use of the plural version here!)
+    http://host/api/items/15 )
+
+   So need to map both options to the appropriate handler
+  */
+  const contentTypeHandlers = {
+    "product.item": processProductItem,
+    items: processProductItem,
+    "product.category": processProductCatetory,
+    categories: processProductCatetory,
+    "geo.country": processGeoCountry,
+    countries: processGeoCountry,
+  };
+
+  const contentType = detectContentType(ctx.request.path);
+  strapi.log.info(`DETECTED CONTENT TYPE ${contentType}`);
+
+  const handler = contentTypeHandlers[contentType];
+  if (handler) {
+    handler(ctx);
+  }
 }
 
-function isProductItem(ctx) {
-  return ctx.request.path.includes("api::product.item");
+function detectContentType(path) {
+  if (path.includes("content-manager/collection-types/api::")) {
+    return path.split("api::")[1].split("/")[0];
+  }
+
+  if (path.includes("/api/")) {
+    return path.split("/api/")[1].split("/")[0];
+  }
+}
+
+function processProductItem(ctx) {
+  const componentHandlers = {
+    weight: calculateWeightFields,
+    volume: calculateVolumeFields,
+    secondHand: calculateSecondHandFields,
+  };
+
+  for (const [component, handler] of Object.entries(componentHandlers)) {
+    strapi.log.info(`PROCESSING COMPONENT: ${component}`);
+
+    const componentData = ctx.request.body[component];
+    if (componentData) {
+      if (Array.isArray(componentData)) {
+        ctx.request.body[component] = componentData.map(handler) || [];
+      } else {
+        ctx.request.body[component] = handler(componentData);
+      }
+    }
+  }
+}
+
+function processProductCatetory(ctx) {
+  // strapi.log.info(`PROCESS PRODUCT CATEGORY`);
+}
+function processGeoCountry(ctx) {
+  // strapi.log.info(`PROCESS GEO COUNTRY`);
+}
+
+function calculateSecondHandFields(data) {
+  strapi.log.info(`CALCULATE SECOND HAND FIELDS ${JSON.stringify(data)}`);
+
+  let { canBeUsed, priceAdjustment } = data;
+  if (!canBeUsed) {
+    priceAdjustment = 100;
+  }
+  return { ...data, priceAdjustment };
 }
 
 function calculateWeightFields(data) {
