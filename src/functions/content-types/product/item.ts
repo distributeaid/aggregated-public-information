@@ -35,9 +35,12 @@ function calculateWeightFields(data) {
 }
 
 function calculateVolumeFields(data) {
-  const { packageVolume, countPerPackage, volumeUnit } = data;
+  const { packageVolume, countPerPackage, packageVolumeUnit } = data;
 
-  const normalizedPagkageVolume = normalizeToCM(packageVolume, volumeUnit);
+  const normalizedPagkageVolume = normalizeToCM(
+    packageVolume,
+    packageVolumeUnit
+  );
 
   let itemVolumeCBCM = normalizedPagkageVolume / countPerPackage;
   let countPerCBM = 1000000 / itemVolumeCBCM;

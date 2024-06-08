@@ -26,7 +26,7 @@
     "countPerKg": {
       "type": "decimal"
     },
-    "weightSource": {
+    "source": {
       "type": "string",
       "required": true
     },
@@ -35,7 +35,7 @@
       "required": true
     },
     "notes": {
-      "type": "string"
+      "type": "text"
     }
   }
 }
