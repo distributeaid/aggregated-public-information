@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-06-06T16:59:16.833Z"
+    "x-generation-date": "2024-06-06T23:04:41.522Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -5047,7 +5047,7 @@
                                                         "type": "number",
                                                         "format": "float"
                                                       },
-                                                      "volumeUnit": {
+                                                      "packageVolumeUnit": {
                                                         "type": "string",
                                                         "enum": [
                                                           "cubic in",
@@ -5067,7 +5067,7 @@
                                                         "type": "number",
                                                         "format": "float"
                                                       },
-                                                      "volumeSource": {
+                                                      "source": {
                                                         "type": "string"
                                                       },
                                                       "logDate": {
@@ -5112,7 +5112,7 @@
                                                         "type": "number",
                                                         "format": "float"
                                                       },
-                                                      "weightSource": {
+                                                      "source": {
                                                         "type": "string"
                                                       },
                                                       "logDate": {
@@ -5131,27 +5131,27 @@
                                                     "id": {
                                                       "type": "number"
                                                     },
-                                                    "Items": {
+                                                    "items": {
                                                       "type": "integer"
                                                     },
-                                                    "People": {
+                                                    "people": {
                                                       "type": "integer"
                                                     },
-                                                    "Type": {
+                                                    "type": {
                                                       "type": "string",
                                                       "enum": [
                                                         "DA",
                                                         "SPHERE"
                                                       ]
                                                     },
-                                                    "Months": {
+                                                    "months": {
                                                       "type": "integer"
                                                     },
-                                                    "MonthlyNeedsMetPerUnit": {
+                                                    "monthlyNeedsMetPerUnit": {
                                                       "type": "number",
                                                       "format": "float"
                                                     },
-                                                    "Notes": {
+                                                    "notes": {
                                                       "type": "string"
                                                     }
                                                   }
@@ -5178,25 +5178,25 @@
                                                       "id": {
                                                         "type": "number"
                                                       },
-                                                      "Price": {
+                                                      "packagePrice": {
                                                         "type": "number",
                                                         "format": "float"
                                                       },
-                                                      "Count": {
+                                                      "countPerPackage": {
                                                         "type": "integer"
                                                       },
-                                                      "PricePerUnit": {
+                                                      "itemPrice": {
                                                         "type": "number",
                                                         "format": "float"
                                                       },
-                                                      "PricingSource": {
+                                                      "source": {
                                                         "type": "string"
                                                       },
-                                                      "LogDate": {
+                                                      "logDate": {
                                                         "type": "string",
                                                         "format": "date"
                                                       },
-                                                      "Notes": {
+                                                      "notes": {
                                                         "type": "string"
                                                       }
                                                     }
@@ -6870,7 +6870,7 @@
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "volumeUnit": {
+                                          "packageVolumeUnit": {
                                             "type": "string",
                                             "enum": [
                                               "cubic in",
@@ -6890,7 +6890,7 @@
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "volumeSource": {
+                                          "source": {
                                             "type": "string"
                                           },
                                           "logDate": {
@@ -6935,7 +6935,7 @@
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "weightSource": {
+                                          "source": {
                                             "type": "string"
                                           },
                                           "logDate": {
@@ -6954,27 +6954,27 @@
                                         "id": {
                                           "type": "number"
                                         },
-                                        "Items": {
+                                        "items": {
                                           "type": "integer"
                                         },
-                                        "People": {
+                                        "people": {
                                           "type": "integer"
                                         },
-                                        "Type": {
+                                        "type": {
                                           "type": "string",
                                           "enum": [
                                             "DA",
                                             "SPHERE"
                                           ]
                                         },
-                                        "Months": {
+                                        "months": {
                                           "type": "integer"
                                         },
-                                        "MonthlyNeedsMetPerUnit": {
+                                        "monthlyNeedsMetPerUnit": {
                                           "type": "number",
                                           "format": "float"
                                         },
-                                        "Notes": {
+                                        "notes": {
                                           "type": "string"
                                         }
                                       }
@@ -7001,25 +7001,25 @@
                                           "id": {
                                             "type": "number"
                                           },
-                                          "Price": {
+                                          "packagePrice": {
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "Count": {
+                                          "countPerPackage": {
                                             "type": "integer"
                                           },
-                                          "PricePerUnit": {
+                                          "itemPrice": {
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "PricingSource": {
+                                          "source": {
                                             "type": "string"
                                           },
-                                          "LogDate": {
+                                          "logDate": {
                                             "type": "string",
                                             "format": "date"
                                           },
-                                          "Notes": {
+                                          "notes": {
                                             "type": "string"
                                           }
                                         }
@@ -7668,7 +7668,7 @@
                                 "type": "number",
                                 "format": "float"
                               },
-                              "volumeUnit": {
+                              "packageVolumeUnit": {
                                 "type": "string",
                                 "enum": [
                                   "cubic in",
@@ -7688,7 +7688,7 @@
                                 "type": "number",
                                 "format": "float"
                               },
-                              "volumeSource": {
+                              "source": {
                                 "type": "string"
                               },
                               "logDate": {
@@ -7733,7 +7733,7 @@
                                 "type": "number",
                                 "format": "float"
                               },
-                              "weightSource": {
+                              "source": {
                                 "type": "string"
                               },
                               "logDate": {
@@ -7752,27 +7752,27 @@
                             "id": {
                               "type": "number"
                             },
-                            "Items": {
+                            "items": {
                               "type": "integer"
                             },
-                            "People": {
+                            "people": {
                               "type": "integer"
                             },
-                            "Type": {
+                            "type": {
                               "type": "string",
                               "enum": [
                                 "DA",
                                 "SPHERE"
                               ]
                             },
-                            "Months": {
+                            "months": {
                               "type": "integer"
                             },
-                            "MonthlyNeedsMetPerUnit": {
+                            "monthlyNeedsMetPerUnit": {
                               "type": "number",
                               "format": "float"
                             },
-                            "Notes": {
+                            "notes": {
                               "type": "string"
                             }
                           }
@@ -7799,25 +7799,25 @@
                               "id": {
                                 "type": "number"
                               },
-                              "Price": {
+                              "packagePrice": {
                                 "type": "number",
                                 "format": "float"
                               },
-                              "Count": {
+                              "countPerPackage": {
                                 "type": "integer"
                               },
-                              "PricePerUnit": {
+                              "itemPrice": {
                                 "type": "number",
                                 "format": "float"
                               },
-                              "PricingSource": {
+                              "source": {
                                 "type": "string"
                               },
-                              "LogDate": {
+                              "logDate": {
                                 "type": "string",
                                 "format": "date"
                               },
-                              "Notes": {
+                              "notes": {
                                 "type": "string"
                               }
                             }
@@ -8142,7 +8142,7 @@
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "volumeUnit": {
+                                          "packageVolumeUnit": {
                                             "type": "string",
                                             "enum": [
                                               "cubic in",
@@ -8162,7 +8162,7 @@
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "volumeSource": {
+                                          "source": {
                                             "type": "string"
                                           },
                                           "logDate": {
@@ -8207,7 +8207,7 @@
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "weightSource": {
+                                          "source": {
                                             "type": "string"
                                           },
                                           "logDate": {
@@ -8226,27 +8226,27 @@
                                         "id": {
                                           "type": "number"
                                         },
-                                        "Items": {
+                                        "items": {
                                           "type": "integer"
                                         },
-                                        "People": {
+                                        "people": {
                                           "type": "integer"
                                         },
-                                        "Type": {
+                                        "type": {
                                           "type": "string",
                                           "enum": [
                                             "DA",
                                             "SPHERE"
                                           ]
                                         },
-                                        "Months": {
+                                        "months": {
                                           "type": "integer"
                                         },
-                                        "MonthlyNeedsMetPerUnit": {
+                                        "monthlyNeedsMetPerUnit": {
                                           "type": "number",
                                           "format": "float"
                                         },
-                                        "Notes": {
+                                        "notes": {
                                           "type": "string"
                                         }
                                       }
@@ -8273,25 +8273,25 @@
                                           "id": {
                                             "type": "number"
                                           },
-                                          "Price": {
+                                          "packagePrice": {
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "Count": {
+                                          "countPerPackage": {
                                             "type": "integer"
                                           },
-                                          "PricePerUnit": {
+                                          "itemPrice": {
                                             "type": "number",
                                             "format": "float"
                                           },
-                                          "PricingSource": {
+                                          "source": {
                                             "type": "string"
                                           },
-                                          "LogDate": {
+                                          "logDate": {
                                             "type": "string",
                                             "format": "date"
                                           },
-                                          "Notes": {
+                                          "notes": {
                                             "type": "string"
                                           }
                                         }
@@ -8764,7 +8764,7 @@
             "type": "number",
             "format": "float"
           },
-          "volumeUnit": {
+          "packageVolumeUnit": {
             "type": "string",
             "enum": [
               "cubic in",
@@ -8784,7 +8784,7 @@
             "type": "number",
             "format": "float"
           },
-          "volumeSource": {
+          "source": {
             "type": "string"
           },
           "logDate": {
@@ -8826,7 +8826,7 @@
             "type": "number",
             "format": "float"
           },
-          "weightSource": {
+          "source": {
             "type": "string"
           },
           "logDate": {
@@ -8844,27 +8844,27 @@
           "id": {
             "type": "number"
           },
-          "Items": {
+          "items": {
             "type": "integer"
           },
-          "People": {
+          "people": {
             "type": "integer"
           },
-          "Type": {
+          "type": {
             "type": "string",
             "enum": [
               "DA",
               "SPHERE"
             ]
           },
-          "Months": {
+          "months": {
             "type": "integer"
           },
-          "MonthlyNeedsMetPerUnit": {
+          "monthlyNeedsMetPerUnit": {
             "type": "number",
             "format": "float"
           },
-          "Notes": {
+          "notes": {
             "type": "string"
           }
         }
@@ -8889,25 +8889,25 @@
           "id": {
             "type": "number"
           },
-          "Price": {
+          "packagePrice": {
             "type": "number",
             "format": "float"
           },
-          "Count": {
+          "countPerPackage": {
             "type": "integer"
           },
-          "PricePerUnit": {
+          "itemPrice": {
             "type": "number",
             "format": "float"
           },
-          "PricingSource": {
+          "source": {
             "type": "string"
           },
-          "LogDate": {
+          "logDate": {
             "type": "string",
             "format": "date"
           },
-          "Notes": {
+          "notes": {
             "type": "string"
           }
         }
