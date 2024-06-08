@@ -19,12 +19,12 @@ export interface ProductNeedsMet extends Schema.Component {
     description: '';
   };
   attributes: {
-    Items: Attribute.Integer;
-    People: Attribute.Integer;
-    Type: Attribute.Enumeration<['DA', 'SPHERE']>;
-    Months: Attribute.Integer;
-    MonthlyNeedsMetPerUnit: Attribute.Decimal;
-    Notes: Attribute.Text;
+    items: Attribute.Integer;
+    people: Attribute.Integer;
+    type: Attribute.Enumeration<['DA', 'SPHERE']>;
+    months: Attribute.Integer;
+    monthlyNeedsMetPerUnit: Attribute.Decimal;
+    notes: Attribute.Text;
   };
 }
 
@@ -58,12 +58,12 @@ export interface ProductValue extends Schema.Component {
     description: '';
   };
   attributes: {
-    Price: Attribute.Decimal;
-    Count: Attribute.Integer;
-    PricePerUnit: Attribute.Decimal;
-    PricingSource: Attribute.String;
-    LogDate: Attribute.Date;
-    Notes: Attribute.Text;
+    packagePrice: Attribute.Decimal;
+    countPerPackage: Attribute.Integer;
+    itemPrice: Attribute.Decimal;
+    source: Attribute.String;
+    logDate: Attribute.Date;
+    notes: Attribute.Text;
   };
 }
 
@@ -75,11 +75,10 @@ export interface ProductVolume extends Schema.Component {
   };
   attributes: {
     packageVolume: Attribute.Decimal & Attribute.Required;
-    volumeUnit: Attribute.Enumeration<
+    packageVolumeUnit: Attribute.Enumeration<
       ['cubic in', 'cubic cm', 'cubic ft', 'cubic m']
     > &
-      Attribute.Required &
-      Attribute.DefaultTo<'cubic in'>;
+      Attribute.Required;
     countPerPackage: Attribute.Integer &
       Attribute.Required &
       Attribute.SetMinMax<
@@ -87,11 +86,10 @@ export interface ProductVolume extends Schema.Component {
           min: 1;
         },
         number
-      > &
-      Attribute.DefaultTo<1>;
+      >;
     itemVolumeCBCM: Attribute.Decimal;
     countPerCBM: Attribute.Decimal;
-    volumeSource: Attribute.String & Attribute.Required;
+    source: Attribute.String & Attribute.Required;
     logDate: Attribute.Date & Attribute.Required;
     notes: Attribute.Text;
   };
@@ -117,9 +115,9 @@ export interface ProductWeight extends Schema.Component {
       >;
     itemWeightKg: Attribute.Decimal;
     countPerKg: Attribute.Decimal;
-    weightSource: Attribute.String & Attribute.Required;
+    source: Attribute.String & Attribute.Required;
     logDate: Attribute.Date & Attribute.Required;
-    notes: Attribute.String;
+    notes: Attribute.Text;
   };
 }
 

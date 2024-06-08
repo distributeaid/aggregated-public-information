@@ -6,22 +6,22 @@
   },
   "options": {},
   "attributes": {
-    "Price": {
+    "packagePrice": {
       "type": "decimal"
     },
-    "Count": {
+    "countPerPackage": {
       "type": "integer"
     },
-    "PricePerUnit": {
+    "itemPrice": {
       "type": "decimal"
     },
-    "PricingSource": {
+    "source": {
       "type": "string"
     },
-    "LogDate": {
+    "logDate": {
       "type": "date"
     },
-    "Notes": {
+    "notes": {
       "type": "text"
     }
   }
