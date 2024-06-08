@@ -46,14 +46,13 @@ Gitpod provides a fully automated development environment for your Strapi projec
 3. Relax, a development environment is being set up for you in the first terminal. There's currently a bug that will stop the setup from being completed, but we'll fix that in the next steps.
 4. Create a new file called `.env` to store the environment variables.
 5. Copy and paste the content from the `.env.example` file into the `.env` file you just created.
-6. Open a new terminal and paste this code inside `openssl rand -base64 16`. This generates a secret key that will be used inside the env file.
-
-**Note:** Do not copy or use the generated keys that have `plus` or `forward slash` in them. Only copy the ones with `numbers`, `alphabets` and `equals`.
-
-7. Copy the generated key and locate the lines in `.env` file that have `key{number}==`. Remove the dummy keys `key{number}==` and replace them with the generated key. The `{number}` is from 1 to 8.
-8. Each of the `key{number}==` placeholder has to be replaced with a generated key so you have to run `Step 6` until all the dummy keys have been removed.
-9. After running these steps, you can then start the build to build the admin panel by running `yarn build`.
-10. Run `yarn develop`. This starts the development server at [http://localhost:1337/admin](http://localhost:1337/admin)
+6. Open a new terminal and run this command `openssl rand -base64 16`. This generates a secret key that will be used inside the env file.
+7. Do not copy or use the generated keys that have `+` or `/` in them. Only copy the keys that consist of `numbers`, `alphabets` and `equals` sign. For example, a good key is `mTcTuwUP7lI4hqfhAonDmQ==`, while a bad key is `n7gtNQ0U7Xjpu2e4U2xE/A==`.
+8. Copy the generated key and locate the lines in `.env` file that have `key{number}==`. Remove the placeholder keys `key{number}==` and replace them with the generated key. The `{number}` is from 1 to 8.
+9. Each of the `key{number}==` placeholder has to be replaced with a generated key so you have to run `Step 6` until all the placeholders have been removed.
+10. After running these steps, you can then start the build to build the admin panel by running `yarn build`.
+11. Run `yarn develop`. This starts the development server at [http://localhost:1337/admin](http://localhost:1337/admin).
+12. To access your workspace later, go to [Gitpod Workspaces](https://gitpod.io/workspaces). Pin the `aggregated-public-information` workspace to prevent auto-deletion after 14 days by clicking the three dots next to the workspace name and selecting "Pin".
 
 
 
