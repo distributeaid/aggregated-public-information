@@ -20,6 +20,8 @@
     "@strapi/provider-upload-aws-s3": "^4.14.5",
     "@strapi/strapi": "4.24.3",
     "better-sqlite3": "^9.4.1",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^3.3.2",
     "pg": "^8.11.3",
     "pg-connection-string": "^2.6.2",
     "react": "^18.0.0",
@@ -35,5 +37,6 @@
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.2.2",
+  "type": "module"
 }
