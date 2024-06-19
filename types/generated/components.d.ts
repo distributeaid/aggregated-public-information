@@ -59,10 +59,13 @@ export interface ProductValue extends Schema.Component {
   };
   attributes: {
     packagePrice: Attribute.Decimal;
+    packagePriceUnit: Attribute.Enumeration<['USD']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'USD'>;
     countPerPackage: Attribute.Integer;
-    itemPrice: Attribute.Decimal;
-    source: Attribute.String;
-    logDate: Attribute.Date;
+    pricePerItemUSD: Attribute.Decimal;
+    source: Attribute.String & Attribute.Required;
+    logDate: Attribute.Date & Attribute.Required;
     notes: Attribute.Text;
   };
 }
