@@ -19,7 +19,7 @@
     "months": {
       "type": "integer"
     },
-    "monthlyNeedsMetPerUnit": {
+    "monthlyNeedsMetPerItem": {
       "type": "decimal"
     },
     "notes": {
