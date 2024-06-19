@@ -9,17 +9,25 @@
     "packagePrice": {
       "type": "decimal"
     },
+    "packagePriceUnit": {
+      "type": "enumeration",
+      "enum": ["USD"],
+      "required": true,
+      "default": "USD"
+    },
     "countPerPackage": {
       "type": "integer"
     },
-    "itemPrice": {
+    "pricePerItemUSD": {
       "type": "decimal"
     },
     "source": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "logDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "notes": {
       "type": "text"
