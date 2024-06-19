@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-06-06T23:04:41.522Z"
+    "x-generation-date": "2024-06-19T20:23:24.035Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -5147,7 +5147,7 @@
                                                     "months": {
                                                       "type": "integer"
                                                     },
-                                                    "monthlyNeedsMetPerUnit": {
+                                                    "monthlyNeedsMetPerItem": {
                                                       "type": "number",
                                                       "format": "float"
                                                     },
@@ -5182,10 +5182,16 @@
                                                         "type": "number",
                                                         "format": "float"
                                                       },
+                                                      "packagePriceUnit": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                          "USD"
+                                                        ]
+                                                      },
                                                       "countPerPackage": {
                                                         "type": "integer"
                                                       },
-                                                      "itemPrice": {
+                                                      "pricePerItemUSD": {
                                                         "type": "number",
                                                         "format": "float"
                                                       },
@@ -6970,7 +6976,7 @@
                                         "months": {
                                           "type": "integer"
                                         },
-                                        "monthlyNeedsMetPerUnit": {
+                                        "monthlyNeedsMetPerItem": {
                                           "type": "number",
                                           "format": "float"
                                         },
@@ -7005,10 +7011,16 @@
                                             "type": "number",
                                             "format": "float"
                                           },
+                                          "packagePriceUnit": {
+                                            "type": "string",
+                                            "enum": [
+                                              "USD"
+                                            ]
+                                          },
                                           "countPerPackage": {
                                             "type": "integer"
                                           },
-                                          "itemPrice": {
+                                          "pricePerItemUSD": {
                                             "type": "number",
                                             "format": "float"
                                           },
@@ -7768,7 +7780,7 @@
                             "months": {
                               "type": "integer"
                             },
-                            "monthlyNeedsMetPerUnit": {
+                            "monthlyNeedsMetPerItem": {
                               "type": "number",
                               "format": "float"
                             },
@@ -7803,10 +7815,16 @@
                                 "type": "number",
                                 "format": "float"
                               },
+                              "packagePriceUnit": {
+                                "type": "string",
+                                "enum": [
+                                  "USD"
+                                ]
+                              },
                               "countPerPackage": {
                                 "type": "integer"
                               },
-                              "itemPrice": {
+                              "pricePerItemUSD": {
                                 "type": "number",
                                 "format": "float"
                               },
@@ -8242,7 +8260,7 @@
                                         "months": {
                                           "type": "integer"
                                         },
-                                        "monthlyNeedsMetPerUnit": {
+                                        "monthlyNeedsMetPerItem": {
                                           "type": "number",
                                           "format": "float"
                                         },
@@ -8277,10 +8295,16 @@
                                             "type": "number",
                                             "format": "float"
                                           },
+                                          "packagePriceUnit": {
+                                            "type": "string",
+                                            "enum": [
+                                              "USD"
+                                            ]
+                                          },
                                           "countPerPackage": {
                                             "type": "integer"
                                           },
-                                          "itemPrice": {
+                                          "pricePerItemUSD": {
                                             "type": "number",
                                             "format": "float"
                                           },
@@ -8860,7 +8884,7 @@
           "months": {
             "type": "integer"
           },
-          "monthlyNeedsMetPerUnit": {
+          "monthlyNeedsMetPerItem": {
             "type": "number",
             "format": "float"
           },
@@ -8893,10 +8917,16 @@
             "type": "number",
             "format": "float"
           },
+          "packagePriceUnit": {
+            "type": "string",
+            "enum": [
+              "USD"
+            ]
+          },
           "countPerPackage": {
             "type": "integer"
           },
-          "itemPrice": {
+          "pricePerItemUSD": {
             "type": "number",
             "format": "float"
           },
