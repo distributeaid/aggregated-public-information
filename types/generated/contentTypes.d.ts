@@ -1185,6 +1185,64 @@ export interface ApiProductItem extends Schema.CollectionType {
   };
 }
 
+export interface ApiReportingShipment extends Schema.CollectionType {
+  collectionName: 'shipments';
+  info: {
+    singularName: 'shipment';
+    pluralName: 'shipments';
+    displayName: 'Reporting.Shipment';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  attributes: {
+    number: Attribute.String & Attribute.Required;
+    sendingCountry: Attribute.String;
+    receivingCountry: Attribute.String;
+    carrierId: Attribute.String;
+    exporter: Attribute.String;
+    importer: Attribute.String;
+    type: Attribute.String;
+    project: Attribute.String;
+    nNeedAssessment: Attribute.Boolean;
+    asInKindDonation: Attribute.Boolean;
+    asProcurement: Attribute.Boolean;
+    asCommunityCollection: Attribute.Boolean;
+    nAidMatching: Attribute.Boolean;
+    fmTransportation: Attribute.Boolean;
+    fmStorageCommunity: Attribute.Boolean;
+    fmStorageCommercial: Attribute.Boolean;
+    mlTransportation: Attribute.Boolean;
+    cTransit: Attribute.Boolean;
+    cExport: Attribute.Boolean;
+    cImport: Attribute.Boolean;
+    lmTransportation: Attribute.Boolean;
+    lmStorageCommunity: Attribute.Boolean;
+    lmStorageCommercial: Attribute.Boolean;
+    Other: Attribute.Boolean;
+    CarbonOffsetPaid: Attribute.Boolean;
+    CO2TonsGenerated: Attribute.Decimal;
+    CarbonOffsetCost: Attribute.Decimal;
+    Notes: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTeamMember extends Schema.CollectionType {
   collectionName: 'members';
   info: {
@@ -1252,6 +1310,7 @@ declare module '@strapi/types' {
       'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
+      'api::reporting.shipment': ApiReportingShipment;
       'api::team.member': ApiTeamMember;
     }
   }

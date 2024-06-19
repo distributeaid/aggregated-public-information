@@ -1,0 +1,103 @@
+
+{
+  "kind": "collectionType",
+  "collectionName": "shipments",
+  "info": {
+    "singularName": "shipment",
+    "pluralName": "shipments",
+    "displayName": "Reporting.Shipment"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": ""
+  },
+  "attributes": {
+    "number": {
+      "type": "string",
+      "required": true
+    },
+    "sendingCountry": {
+      "type": "string",
+      "regex": "[A-Z]{3}"
+    },
+    "receivingCountry": {
+      "type": "string",
+      "regex": "[A-Z]{3}"
+    },
+    "carrierId": {
+      "type": "string"
+    },
+    "exporter": {
+      "type": "string"
+    },
+    "importer": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "nNeedAssessment": {
+      "type": "boolean"
+    },
+    "asInKindDonation": {
+      "type": "boolean"
+    },
+    "asProcurement": {
+      "type": "boolean"
+    },
+    "asCommunityCollection": {
+      "type": "boolean"
+    },
+    "nAidMatching": {
+      "type": "boolean"
+    },
+    "fmTransportation": {
+      "type": "boolean"
+    },
+    "fmStorageCommunity": {
+      "type": "boolean"
+    },
+    "fmStorageCommercial": {
+      "type": "boolean"
+    },
+    "mlTransportation": {
+      "type": "boolean"
+    },
+    "cTransit": {
+      "type": "boolean"
+    },
+    "cExport": {
+      "type": "boolean"
+    },
+    "cImport": {
+      "type": "boolean"
+    },
+    "lmTransportation": {
+      "type": "boolean"
+    },
+    "lmStorageCommunity": {
+      "type": "boolean"
+    },
+    "lmStorageCommercial": {
+      "type": "boolean"
+    },
+    "Other": {
+      "type": "boolean"
+    },
+    "CarbonOffsetPaid": {
+      "type": "boolean"
+    },
+    "CO2TonsGenerated": {
+      "type": "decimal"
+    },
+    "CarbonOffsetCost": {
+      "type": "decimal"
+    },
+    "Notes": {
+      "type": "string"
+    }
+  }
+}
