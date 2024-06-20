@@ -8,9 +8,10 @@ import { readFileSync } from 'fs'
 const jsonData = readFileSync("./needs-data.json", 'utf8');
 const data = JSON.parse(jsonData);
 
+// Extracting places
 const places = data.map((need) => {
     return need.place
-}) 
+})
 
 // Create regions
 // ------------------------------------
@@ -31,3 +32,18 @@ const subregions = places.map((place) => {
 })
 
 const uniqueSubregions = Array.from(new Set(subregions))
+
+
+
+// Extracting products along with their categories
+// -------------------------------------
+const productsWithCategories = data.map((need) => {
+    return {
+        product: need.product,
+        category: need.product.category
+    };
+});
+
+// Extracting categories from the products
+const categories = productsWithCategories.map(product => product.category)
+console.log(categories);
