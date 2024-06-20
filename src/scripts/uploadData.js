@@ -46,4 +46,5 @@ const productsWithCategories = data.map((need) => {
 
 // Extracting categories from the products
 const categories = productsWithCategories.map(product => product.category)
-console.log(categories);
+const uniqueCategories = Array.from(new Set(categories))
+console.log(uniqueCategories);
