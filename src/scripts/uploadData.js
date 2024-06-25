@@ -47,4 +47,23 @@ const productsWithCategories = data.map((need) => {
 // Extracting categories from the products
 const categories = productsWithCategories.map(product => product.category)
 const uniqueCategories = Array.from(new Set(categories))
-console.log(uniqueCategories);
+
+
+// Extracting surveys and grouping them by id, year, and quarter
+// ------------------------------------------------------------
+const groupedSurveys = data.reduce((acc, need) => {
+    const key = `${need.survey.id}-${need.survey.year}-${need.survey.quarter}`;
+    if (!acc[key]) {
+        acc[key] = need.survey;
+    }
+    return acc;
+}, {}); 
+
+// Extract unique surveys
+const uniqueSurveys = Object.values(groupedSurveys).map(survey => ({
+    id: survey.id,
+    year: survey.year,
+    quarter: survey.quarter
+}));
+
+console.log(uniqueSurveys);
