@@ -3,6 +3,7 @@ export function processProductItem(data) {
     weight: calculateWeightFields,
     volume: calculateVolumeFields,
     needsMet: calculateNeedsMetFields,
+    value: calculateValueFields,
   };
 
   for (const [component, handler] of Object.entries(componentHandlers)) {
@@ -87,4 +88,13 @@ function calculateNeedsMetFields(data) {
   let monthlyNeedsMetPerItem = (people * months) / items;
   monthlyNeedsMetPerItem = parseFloat(monthlyNeedsMetPerItem.toFixed(2));
   return { ...data, monthlyNeedsMetPerItem };
+}
+
+function calculateValueFields(data) {
+  // Note there is no normalizing of currency units as
+  // currently USD is the only unit available.
+  const { packagePrice, countPerPackage } = data;
+  let pricePerItemUSD = packagePrice / countPerPackage;
+  pricePerItemUSD = parseFloat(pricePerItemUSD.toFixed(2));
+  return { ...data, pricePerItemUSD };
 }
