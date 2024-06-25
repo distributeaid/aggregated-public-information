@@ -65,5 +65,4 @@ const uniqueSurveys = Object.values(groupedSurveys).map(survey => ({
     quarter: survey.quarter
 }));
 
-
-console.log(uniqueCategories);
+console.log(uniqueSurveys);
