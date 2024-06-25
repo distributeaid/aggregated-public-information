@@ -2,6 +2,7 @@ export function processProductItem(data) {
   const componentHandlers = {
     weight: calculateWeightFields,
     volume: calculateVolumeFields,
+    needsMet: calculateNeedsMetFields,
   };
 
   for (const [component, handler] of Object.entries(componentHandlers)) {
@@ -79,4 +80,11 @@ function normalizeToCM(volume, unit) {
     default:
       throw new Error(`Unsupported volume unit: ${unit}`);
   }
+}
+
+function calculateNeedsMetFields(data) {
+  const { items, months, people } = data;
+  let monthlyNeedsMetPerItem = (people * months) / items;
+  monthlyNeedsMetPerItem = parseFloat(monthlyNeedsMetPerItem.toFixed(2));
+  return { ...data, monthlyNeedsMetPerItem };
 }
