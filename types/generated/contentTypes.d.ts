@@ -1006,6 +1006,54 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   };
 }
 
+export interface ApiMovementMovement extends Schema.CollectionType {
+  collectionName: 'movements';
+  info: {
+    singularName: 'movement';
+    pluralName: 'movements';
+    displayName: 'Reporting.Movement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    number: Attribute.String & Attribute.Required & Attribute.Unique;
+    segment: Attribute.Enumeration<
+      ['First Mile', 'Last Mile', 'Main Leg', 'Main Leg-Cont']
+    >;
+    pickupDate: Attribute.Date;
+    dropoffDate: Attribute.Date;
+    serviceProvider: Attribute.String;
+    packageNum: Attribute.Integer;
+    packagingType: Attribute.String;
+    totalCargo: Attribute.Decimal;
+    totalCargoWeight: Attribute.Decimal;
+    deliveryMethod: Attribute.String;
+    vehicleNum: Attribute.Integer;
+    pickupAddress: Attribute.Text;
+    dropoffAddress: Attribute.Text;
+    distance: Attribute.Integer;
+    involvement: Attribute.String;
+    notes: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::movement.movement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::movement.movement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNeedsAssessmentNeed extends Schema.CollectionType {
   collectionName: 'needs';
   info: {
@@ -1306,6 +1354,7 @@ declare module '@strapi/types' {
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
+      'api::movement.movement': ApiMovementMovement;
       'api::needs-assessment.need': ApiNeedsAssessmentNeed;
       'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
       'api::product.category': ApiProductCategory;
