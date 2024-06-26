@@ -1273,6 +1273,11 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     CO2TonsGenerated: Attribute.Decimal;
     CarbonOffsetCost: Attribute.Decimal;
     Notes: Attribute.String;
+    reporting_cargos: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToMany',
+      'api::reporting-cargo.reporting-cargo'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1284,6 +1289,73 @@ export interface ApiReportingShipment extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::reporting.shipment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
+  collectionName: 'reporting_cargos';
+  info: {
+    singularName: 'reporting-cargo';
+    pluralName: 'reporting-cargos';
+    displayName: 'Reporting.Cargo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    number: Attribute.Relation<
+      'api::reporting-cargo.reporting-cargo',
+      'manyToOne',
+      'api::reporting.shipment'
+    >;
+    shipmentDropoffDate: Attribute.Date;
+    category: Attribute.String;
+    item: Attribute.String;
+    ageGender: Attribute.Enumeration<
+      ['Baby', 'Boy', 'Girl', 'Kid', 'Adult', 'Man', 'Woman']
+    >;
+    sizeStyle: Attribute.String;
+    count: Attribute.Integer;
+    unit: Attribute.Enumeration<
+      [
+        'Bag',
+        'Medium Bag',
+        'Large Bag',
+        'Box',
+        'Banana Box',
+        'Pallet',
+        'Euro Pallet',
+        'Item',
+        'Single Item'
+      ]
+    >;
+    used: Attribute.Boolean;
+    itemCount: Attribute.Integer;
+    costOverride: Attribute.Decimal;
+    costOverrideCurrency: Attribute.Enumeration<
+      ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
+    >;
+    countryGDPContextCostOverride: Attribute.Enumeration<
+      ['DEU', 'ESP', 'FRA', 'GRC', 'LTU', 'NLD', 'USA']
+    >;
+    costOverrideUSD: Attribute.Decimal;
+    costOverrideUSDGDP: Attribute.Decimal;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reporting-cargo.reporting-cargo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reporting-cargo.reporting-cargo',
       'oneToOne',
       'admin::user'
     > &
@@ -1360,6 +1432,7 @@ declare module '@strapi/types' {
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
       'api::reporting.shipment': ApiReportingShipment;
+      'api::reporting-cargo.reporting-cargo': ApiReportingCargoReportingCargo;
       'api::team.member': ApiTeamMember;
     }
   }
