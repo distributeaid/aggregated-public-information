@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movements",
+  "info": {
+    "singularName": "movement",
+    "pluralName": "movements",
+    "displayName": "Reporting.Movement",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "number": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "segment": {
+      "type": "enumeration",
+      "enum": [
+        "First Mile",
+        "Last Mile",
+        "Main Leg",
+        "Main Leg-Cont"
+      ]
+    },
+    "pickupDate": {
+      "type": "date"
+    },
+    "dropoffDate": {
+      "type": "date"
+    },
+    "serviceProvider": {
+      "type": "string"
+    },
+    "packageNum": {
+      "type": "integer"
+    },
+    "packagingType": {
+      "type": "string"
+    },
+    "totalCargo": {
+      "type": "decimal"
+    },
+    "totalCargoWeight": {
+      "type": "decimal"
+    },
+    "deliveryMethod": {
+      "type": "string"
+    },
+    "vehicleNum": {
+      "type": "integer"
+    },
+    "pickupAddress": {
+      "type": "text"
+    },
+    "dropoffAddress": {
+      "type": "text"
+    },
+    "distance": {
+      "type": "integer"
+    },
+    "involvement": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}
