@@ -1006,54 +1006,6 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   };
 }
 
-export interface ApiMovementMovement extends Schema.CollectionType {
-  collectionName: 'movements';
-  info: {
-    singularName: 'movement';
-    pluralName: 'movements';
-    displayName: 'Reporting.Movement';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    number: Attribute.String & Attribute.Required & Attribute.Unique;
-    segment: Attribute.Enumeration<
-      ['First Mile', 'Last Mile', 'Main Leg', 'Main Leg-Cont']
-    >;
-    pickupDate: Attribute.Date;
-    dropoffDate: Attribute.Date;
-    serviceProvider: Attribute.String;
-    packageNum: Attribute.Integer;
-    packagingType: Attribute.String;
-    totalCargo: Attribute.Decimal;
-    totalCargoWeight: Attribute.Decimal;
-    deliveryMethod: Attribute.String;
-    vehicleNum: Attribute.Integer;
-    pickUpAddress: Attribute.Text;
-    dropOffAddress: Attribute.Text;
-    distance: Attribute.Integer;
-    involvement: Attribute.String;
-    notes: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::movement.movement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::movement.movement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiNeedsAssessmentNeed extends Schema.CollectionType {
   collectionName: 'needs';
   info: {
@@ -1233,98 +1185,11 @@ export interface ApiProductItem extends Schema.CollectionType {
   };
 }
 
-export interface ApiReportingShipment extends Schema.CollectionType {
-  collectionName: 'shipments';
+export interface ApiReportingCargo extends Schema.CollectionType {
+  collectionName: 'cargos';
   info: {
-    singularName: 'shipment';
-    pluralName: 'shipments';
-    displayName: 'Reporting.Shipment';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    number: Attribute.Relation<
-      'api::reporting.shipment',
-      'oneToMany',
-      'api::reporting-cargo.reporting-cargo'
-    >;
-    sendingCountry: Attribute.String;
-    receivingCountry: Attribute.String;
-    carrierId: Attribute.String;
-    exporter: Attribute.String;
-    importer: Attribute.String;
-    project: Attribute.String;
-    nNeedAssessment: Attribute.Boolean;
-    asInKindDonation: Attribute.Boolean;
-    asProcurement: Attribute.Boolean;
-    asCommunityCollection: Attribute.Boolean;
-    nAidMatching: Attribute.Boolean;
-    fmTransportation: Attribute.Boolean;
-    fmStorageCommunity: Attribute.Boolean;
-    fmStorageCommercial: Attribute.Boolean;
-    mlTransportation: Attribute.Boolean;
-    cTransit: Attribute.Boolean;
-    cExport: Attribute.Boolean;
-    cImport: Attribute.Boolean;
-    lmTransportation: Attribute.Boolean;
-    lmStorageCommunity: Attribute.Boolean;
-    lmStorageCommercial: Attribute.Boolean;
-    other: Attribute.Boolean;
-    carbonOffsetPaid: Attribute.Boolean;
-    CO2TonsGenerated: Attribute.Decimal;
-    carbonOffsetCost: Attribute.Decimal;
-    notes: Attribute.Text;
-    type: Attribute.Enumeration<
-      ['Regular Route', 'Ad Hoc', 'Aid Swap/Local Transfer', 'Other']
-    >;
-    DARoles: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Needs - Needs Assessment',
-          'Aid Sourcing - In-Kind Donations',
-          'Aid Sourcing - Procurement',
-          'Aid Sourcing - Community Collection',
-          'Needs - Aid Matching',
-          'First Mile - Transportation',
-          'First Mile - Storage - Community',
-          'First Mile - Storage - Commercial',
-          'Main Leg - Transportation',
-          'Main Leg - Transportation - International',
-          'Customs - Transit',
-          'Customs - Export',
-          'Customs - Import',
-          'Last Mile - Transportation',
-          'Last Mile - Storage - Community',
-          'Last Mile - Storage - Commercial',
-          'Other'
-        ]
-      >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::reporting.shipment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::reporting.shipment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
-  collectionName: 'reporting_cargos';
-  info: {
-    singularName: 'reporting-cargo';
-    pluralName: 'reporting-cargos';
+    singularName: 'cargo';
+    pluralName: 'cargos';
     displayName: 'Reporting.Cargo';
     description: '';
   };
@@ -1445,7 +1310,7 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
     inflationAdjustedCostOnShipping: Attribute.Decimal;
     inflationAdjustedCostToday: Attribute.Decimal;
     number: Attribute.Relation<
-      'api::reporting-cargo.reporting-cargo',
+      'api::reporting.cargo',
       'manyToOne',
       'api::reporting.shipment'
     >;
@@ -1454,13 +1319,148 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::reporting-cargo.reporting-cargo',
+      'api::reporting.cargo',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::reporting-cargo.reporting-cargo',
+      'api::reporting.cargo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiReportingMovement extends Schema.CollectionType {
+  collectionName: 'movements';
+  info: {
+    singularName: 'movement';
+    pluralName: 'movements';
+    displayName: 'Reporting.Movement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    number: Attribute.String & Attribute.Required & Attribute.Unique;
+    segment: Attribute.Enumeration<
+      ['First Mile', 'Last Mile', 'Main Leg', 'Main Leg-Cont']
+    >;
+    pickupDate: Attribute.Date;
+    dropoffDate: Attribute.Date;
+    serviceProvider: Attribute.String;
+    packageNum: Attribute.Integer;
+    packagingType: Attribute.String;
+    totalCargo: Attribute.Decimal;
+    totalCargoWeight: Attribute.Decimal;
+    deliveryMethod: Attribute.String;
+    vehicleNum: Attribute.Integer;
+    pickUpAddress: Attribute.Text;
+    dropOffAddress: Attribute.Text;
+    distance: Attribute.Integer;
+    involvement: Attribute.String;
+    notes: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reporting.movement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reporting.movement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiReportingShipment extends Schema.CollectionType {
+  collectionName: 'shipments';
+  info: {
+    singularName: 'shipment';
+    pluralName: 'shipments';
+    displayName: 'Reporting.Shipment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    number: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToMany',
+      'api::reporting.cargo'
+    >;
+    sendingCountry: Attribute.String;
+    receivingCountry: Attribute.String;
+    carrierId: Attribute.String;
+    exporter: Attribute.String;
+    importer: Attribute.String;
+    project: Attribute.String;
+    nNeedAssessment: Attribute.Boolean;
+    asInKindDonation: Attribute.Boolean;
+    asProcurement: Attribute.Boolean;
+    asCommunityCollection: Attribute.Boolean;
+    nAidMatching: Attribute.Boolean;
+    fmTransportation: Attribute.Boolean;
+    fmStorageCommunity: Attribute.Boolean;
+    fmStorageCommercial: Attribute.Boolean;
+    mlTransportation: Attribute.Boolean;
+    cTransit: Attribute.Boolean;
+    cExport: Attribute.Boolean;
+    cImport: Attribute.Boolean;
+    lmTransportation: Attribute.Boolean;
+    lmStorageCommunity: Attribute.Boolean;
+    lmStorageCommercial: Attribute.Boolean;
+    other: Attribute.Boolean;
+    carbonOffsetPaid: Attribute.Boolean;
+    CO2TonsGenerated: Attribute.Decimal;
+    carbonOffsetCost: Attribute.Decimal;
+    notes: Attribute.Text;
+    type: Attribute.Enumeration<
+      ['Regular Route', 'Ad Hoc', 'Aid Swap/Local Transfer', 'Other']
+    >;
+    DARoles: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Needs - Needs Assessment',
+          'Aid Sourcing - In-Kind Donations',
+          'Aid Sourcing - Procurement',
+          'Aid Sourcing - Community Collection',
+          'Needs - Aid Matching',
+          'First Mile - Transportation',
+          'First Mile - Storage - Community',
+          'First Mile - Storage - Commercial',
+          'Main Leg - Transportation',
+          'Main Leg - Transportation - International',
+          'Customs - Transit',
+          'Customs - Export',
+          'Customs - Import',
+          'Last Mile - Transportation',
+          'Last Mile - Storage - Community',
+          'Last Mile - Storage - Commercial',
+          'Other'
+        ]
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reporting.shipment',
       'oneToOne',
       'admin::user'
     > &
@@ -1531,13 +1531,13 @@ declare module '@strapi/types' {
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
-      'api::movement.movement': ApiMovementMovement;
       'api::needs-assessment.need': ApiNeedsAssessmentNeed;
       'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
+      'api::reporting.cargo': ApiReportingCargo;
+      'api::reporting.movement': ApiReportingMovement;
       'api::reporting.shipment': ApiReportingShipment;
-      'api::reporting-cargo.reporting-cargo': ApiReportingCargoReportingCargo;
       'api::team.member': ApiTeamMember;
     }
   }
