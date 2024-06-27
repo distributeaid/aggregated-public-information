@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-06-27T12:47:47.279Z"
+    "x-generation-date": "2024-06-27T16:00:41.073Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -9456,9 +9456,6 @@
               "importer": {
                 "type": "string"
               },
-              "type": {
-                "type": "string"
-              },
               "project": {
                 "type": "string"
               },
@@ -9523,7 +9520,17 @@
               },
               "notes": {
                 "type": "string"
-              }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Regular Route",
+                  "Ad Hoc",
+                  "Aid Swap/Local Transfer",
+                  "Other"
+                ]
+              },
+              "DARoles": {}
             }
           }
         }
@@ -9869,9 +9876,6 @@
                                     "importer": {
                                       "type": "string"
                                     },
-                                    "type": {
-                                      "type": "string"
-                                    },
                                     "project": {
                                       "type": "string"
                                     },
@@ -9937,6 +9941,16 @@
                                     "notes": {
                                       "type": "string"
                                     },
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "Regular Route",
+                                        "Ad Hoc",
+                                        "Aid Swap/Local Transfer",
+                                        "Other"
+                                      ]
+                                    },
+                                    "DARoles": {},
                                     "createdAt": {
                                       "type": "string",
                                       "format": "date-time"
@@ -10313,9 +10327,6 @@
           "importer": {
             "type": "string"
           },
-          "type": {
-            "type": "string"
-          },
           "project": {
             "type": "string"
           },
@@ -10381,6 +10392,16 @@
           "notes": {
             "type": "string"
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Regular Route",
+              "Ad Hoc",
+              "Aid Swap/Local Transfer",
+              "Other"
+            ]
+          },
+          "DARoles": {},
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -11588,9 +11609,6 @@
                       "importer": {
                         "type": "string"
                       },
-                      "type": {
-                        "type": "string"
-                      },
                       "project": {
                         "type": "string"
                       },
@@ -11656,6 +11674,16 @@
                       "notes": {
                         "type": "string"
                       },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "Regular Route",
+                          "Ad Hoc",
+                          "Aid Swap/Local Transfer",
+                          "Other"
+                        ]
+                      },
+                      "DARoles": {},
                       "createdAt": {
                         "type": "string",
                         "format": "date-time"
