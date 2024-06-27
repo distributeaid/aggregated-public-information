@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "reporting_cargos",
+  "collectionName": "cargos",
   "info": {
-    "singularName": "reporting-cargo",
-    "pluralName": "reporting-cargos",
+    "singularName": "cargo",
+    "pluralName": "cargos",
     "displayName": "Reporting.Cargo",
     "description": ""
   },

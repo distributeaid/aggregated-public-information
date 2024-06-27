@@ -14,7 +14,7 @@
     "number": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::reporting-cargo.reporting-cargo",
+      "target": "api::reporting.cargo",
       "mappedBy": "number"
     },
     "sendingCountry": {

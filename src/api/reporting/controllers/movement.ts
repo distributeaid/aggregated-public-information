@@ -4,4 +4,4 @@
 
 import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::movement.movement');
+export default factories.createCoreController('api::reporting.movement');
