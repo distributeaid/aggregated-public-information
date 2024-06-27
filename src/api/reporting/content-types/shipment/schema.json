@@ -4,16 +4,18 @@
   "info": {
     "singularName": "shipment",
     "pluralName": "shipments",
-    "displayName": "Reporting.Shipment"
+    "displayName": "Reporting.Shipment",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true,
-    "comment": ""
+    "draftAndPublish": true
   },
   "attributes": {
     "number": {
-      "type": "string",
-      "required": true
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reporting-cargo.reporting-cargo",
+      "mappedBy": "number"
     },
     "sendingCountry": {
       "type": "string",
@@ -83,26 +85,20 @@
     "lmStorageCommercial": {
       "type": "boolean"
     },
-    "Other": {
+    "other": {
       "type": "boolean"
     },
-    "CarbonOffsetPaid": {
+    "carbonOffsetPaid": {
       "type": "boolean"
     },
     "CO2TonsGenerated": {
       "type": "decimal"
     },
-    "CarbonOffsetCost": {
+    "carbonOffsetCost": {
       "type": "decimal"
     },
-    "Notes": {
-      "type": "string"
-    },
-    "reporting_cargos": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::reporting-cargo.reporting-cargo",
-      "mappedBy": "number"
+    "notes": {
+      "type": "text"
     }
   }
 }

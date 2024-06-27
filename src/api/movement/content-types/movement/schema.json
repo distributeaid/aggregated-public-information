@@ -53,10 +53,10 @@
     "vehicleNum": {
       "type": "integer"
     },
-    "pickupAddress": {
+    "pickUpAddress": {
       "type": "text"
     },
-    "dropoffAddress": {
+    "dropOffAddress": {
       "type": "text"
     },
     "distance": {

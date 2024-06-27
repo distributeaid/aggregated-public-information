@@ -12,13 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "number": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::reporting.shipment",
-      "inversedBy": "reporting_cargos"
-    },
-    "shipmentDropoffDate": {
+    "shipmentDropOffDate": {
       "type": "date"
     },
     "category": {
@@ -62,7 +56,7 @@
     "used": {
       "type": "boolean"
     },
-    "itemCount": {
+    "itemNum": {
       "type": "integer"
     },
     "costOverride": {
@@ -218,7 +212,7 @@
         "ERROR_005",
         "ERROR_007",
         "ERROR_008",
-        "ERROR_0011"
+        "ERROR_011"
       ],
       "customField": "plugin::multi-select.multi-select"
     },
@@ -241,6 +235,15 @@
       "type": "decimal"
     },
     "inflationAdjustedCostToday": {
+      "type": "decimal"
+    },
+    "number": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::reporting.shipment",
+      "inversedBy": "number"
+    },
+    "overriddenCost": {
       "type": "decimal"
     }
   }
