@@ -66,7 +66,7 @@
       "type": "integer"
     },
     "costOverride": {
-      "type": "decimal"
+      "type": "boolean"
     },
     "costOverrideCurrency": {
       "type": "enumeration",
@@ -96,6 +96,151 @@
       "type": "decimal"
     },
     "costOverrideUSDGDP": {
+      "type": "decimal"
+    },
+    "costItem": {
+      "type": "decimal"
+    },
+    "costAdjustment": {
+      "type": "decimal"
+    },
+    "adjustedCostItem": {
+      "type": "decimal"
+    },
+    "country": {
+      "type": "enumeration",
+      "enum": [
+        "DEU",
+        "ESP",
+        "FRA",
+        "GRC",
+        "LTU",
+        "NLD",
+        "USA"
+      ]
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "USD",
+        "GBP",
+        "EUR",
+        "LBP",
+        "LTL",
+        "RSD",
+        "BAM"
+      ]
+    },
+    "cost": {
+      "type": "decimal"
+    },
+    "sendingCountry": {
+      "type": "enumeration",
+      "enum": [
+        "AUT",
+        "BEL",
+        "BIH",
+        "CHE",
+        "CHN",
+        "DEU",
+        "ESP",
+        "GBR",
+        "GRC",
+        "ITA",
+        "LTU",
+        "NLD",
+        "NOR",
+        "PAK",
+        "POL",
+        "UKR",
+        "USA"
+      ]
+    },
+    "sendingCountryRatio": {
+      "type": "integer"
+    },
+    "valueInSendingCountry": {
+      "type": "decimal"
+    },
+    "receivingCountry": {
+      "type": "enumeration",
+      "enum": [
+        "AUT",
+        "BEL",
+        "BIH",
+        "CHE",
+        "CHN",
+        "DEU",
+        "ESP",
+        "GBR",
+        "GRC",
+        "ITA",
+        "LTU",
+        "NLD",
+        "NOR",
+        "PAK",
+        "POL",
+        "UKR",
+        "USA"
+      ]
+    },
+    "receivingCountryRatio": {
+      "type": "integer"
+    },
+    "valueInReceivingCountry": {
+      "type": "decimal"
+    },
+    "logisticsSentBy": {
+      "type": "integer"
+    },
+    "logisticsReceiveBy": {
+      "type": "integer"
+    },
+    "needsMetItem": {
+      "type": "decimal"
+    },
+    "standard": {
+      "type": "enumeration",
+      "enum": [
+        "DA",
+        "SPHERE",
+        "NONE"
+      ]
+    },
+    "totalNeedsMet": {
+      "type": "decimal"
+    },
+    "Error": {
+      "type": "customField",
+      "options": [
+        "ERROR_001",
+        "ERROR_004",
+        "ERROR_005",
+        "ERROR_007",
+        "ERROR_008",
+        "ERROR_0011"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "standardItemCount": {
+      "type": "integer"
+    },
+    "itemValueDate": {
+      "type": "date"
+    },
+    "cumulativeInflationOnValueDate": {
+      "type": "float"
+    },
+    "cumulativeInflationOnDeliveredDate": {
+      "type": "float"
+    },
+    "cumulativeInflationOnToday": {
+      "type": "float"
+    },
+    "inflationAdjustedCostOnShipping": {
+      "type": "decimal"
+    },
+    "inflationAdjustedCostToday": {
       "type": "decimal"
     }
   }
