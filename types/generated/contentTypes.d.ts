@@ -1255,7 +1255,6 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     carrierId: Attribute.String;
     exporter: Attribute.String;
     importer: Attribute.String;
-    type: Attribute.String;
     project: Attribute.String;
     nNeedAssessment: Attribute.Boolean;
     asInKindDonation: Attribute.Boolean;
@@ -1277,6 +1276,32 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     CO2TonsGenerated: Attribute.Decimal;
     carbonOffsetCost: Attribute.Decimal;
     notes: Attribute.Text;
+    type: Attribute.Enumeration<
+      ['Regular Route', 'Ad Hoc', 'Aid Swap/Local Transfer', 'Other']
+    >;
+    DARoles: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Needs - Needs Assessment',
+          'Aid Sourcing - In-Kind Donations',
+          'Aid Sourcing - Procurement',
+          'Aid Sourcing - Community Collection',
+          'Needs - Aid Matching',
+          'First Mile - Transportation',
+          'First Mile - Storage - Community',
+          'First Mile - Storage - Commercial',
+          'Main Leg - Transportation',
+          'Main Leg - Transportation - International',
+          'Customs - Transit',
+          'Customs - Export',
+          'Customs - Import',
+          'Last Mile - Transportation',
+          'Last Mile - Storage - Community',
+          'Last Mile - Storage - Commercial',
+          'Other'
+        ]
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

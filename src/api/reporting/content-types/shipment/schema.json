@@ -34,9 +34,6 @@
     "importer": {
       "type": "string"
     },
-    "type": {
-      "type": "string"
-    },
     "project": {
       "type": "string"
     },
@@ -99,6 +96,38 @@
     },
     "notes": {
       "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Regular Route",
+        "Ad Hoc",
+        "Aid Swap/Local Transfer",
+        "Other"
+      ]
+    },
+    "DARoles": {
+      "type": "customField",
+      "options": [
+        "Needs - Needs Assessment",
+        "Aid Sourcing - In-Kind Donations",
+        "Aid Sourcing - Procurement",
+        "Aid Sourcing - Community Collection",
+        "Needs - Aid Matching",
+        "First Mile - Transportation",
+        "First Mile - Storage - Community",
+        "First Mile - Storage - Commercial",
+        "Main Leg - Transportation",
+        "Main Leg - Transportation - International",
+        "Customs - Transit",
+        "Customs - Export",
+        "Customs - Import",
+        "Last Mile - Transportation",
+        "Last Mile - Storage - Community",
+        "Last Mile - Storage - Commercial",
+        "Other"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }
