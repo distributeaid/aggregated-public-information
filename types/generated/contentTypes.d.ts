@@ -1031,8 +1031,8 @@ export interface ApiMovementMovement extends Schema.CollectionType {
     totalCargoWeight: Attribute.Decimal;
     deliveryMethod: Attribute.String;
     vehicleNum: Attribute.Integer;
-    pickupAddress: Attribute.Text;
-    dropoffAddress: Attribute.Text;
+    pickUpAddress: Attribute.Text;
+    dropOffAddress: Attribute.Text;
     distance: Attribute.Integer;
     involvement: Attribute.String;
     notes: Attribute.Text;
@@ -1239,13 +1239,17 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     singularName: 'shipment';
     pluralName: 'shipments';
     displayName: 'Reporting.Shipment';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
-    number: Attribute.String & Attribute.Required;
+    number: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToMany',
+      'api::reporting-cargo.reporting-cargo'
+    >;
     sendingCountry: Attribute.String;
     receivingCountry: Attribute.String;
     carrierId: Attribute.String;
@@ -1268,16 +1272,11 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     lmTransportation: Attribute.Boolean;
     lmStorageCommunity: Attribute.Boolean;
     lmStorageCommercial: Attribute.Boolean;
-    Other: Attribute.Boolean;
-    CarbonOffsetPaid: Attribute.Boolean;
+    other: Attribute.Boolean;
+    carbonOffsetPaid: Attribute.Boolean;
     CO2TonsGenerated: Attribute.Decimal;
-    CarbonOffsetCost: Attribute.Decimal;
-    Notes: Attribute.String;
-    reporting_cargos: Attribute.Relation<
-      'api::reporting.shipment',
-      'oneToMany',
-      'api::reporting-cargo.reporting-cargo'
-    >;
+    carbonOffsetCost: Attribute.Decimal;
+    notes: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1308,12 +1307,7 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    number: Attribute.Relation<
-      'api::reporting-cargo.reporting-cargo',
-      'manyToOne',
-      'api::reporting.shipment'
-    >;
-    shipmentDropoffDate: Attribute.Date;
+    shipmentDropOffDate: Attribute.Date;
     category: Attribute.String;
     item: Attribute.String;
     ageGender: Attribute.Enumeration<
@@ -1335,7 +1329,7 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
       ]
     >;
     used: Attribute.Boolean;
-    itemCount: Attribute.Integer;
+    itemNum: Attribute.Integer;
     costOverride: Attribute.Boolean;
     costOverrideCurrency: Attribute.Enumeration<
       ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
@@ -1415,7 +1409,7 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
           'ERROR_005',
           'ERROR_007',
           'ERROR_008',
-          'ERROR_0011'
+          'ERROR_011'
         ]
       >;
     standardItemCount: Attribute.Integer;
@@ -1425,6 +1419,12 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
     cumulativeInflationOnToday: Attribute.Float;
     inflationAdjustedCostOnShipping: Attribute.Decimal;
     inflationAdjustedCostToday: Attribute.Decimal;
+    number: Attribute.Relation<
+      'api::reporting-cargo.reporting-cargo',
+      'manyToOne',
+      'api::reporting.shipment'
+    >;
+    overriddenCost: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
