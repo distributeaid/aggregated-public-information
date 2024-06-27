@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-06-26T12:19:47.128Z"
+    "x-generation-date": "2024-06-27T12:03:10.924Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10157,8 +10157,7 @@
                           "type": "integer"
                         },
                         "costOverride": {
-                          "type": "number",
-                          "format": "float"
+                          "type": "boolean"
                         },
                         "costOverrideCurrency": {
                           "type": "string",
@@ -10189,6 +10188,154 @@
                           "format": "float"
                         },
                         "costOverrideUSDGDP": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "costItem": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "costAdjustment": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "adjustedCostItem": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "country": {
+                          "type": "string",
+                          "enum": [
+                            "DEU",
+                            "ESP",
+                            "FRA",
+                            "GRC",
+                            "LTU",
+                            "NLD",
+                            "USA"
+                          ]
+                        },
+                        "currency": {
+                          "type": "string",
+                          "enum": [
+                            "USD",
+                            "GBP",
+                            "EUR",
+                            "LBP",
+                            "LTL",
+                            "RSD",
+                            "BAM"
+                          ]
+                        },
+                        "cost": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "sendingCountry": {
+                          "type": "string",
+                          "enum": [
+                            "AUT",
+                            "BEL",
+                            "BIH",
+                            "CHE",
+                            "CHN",
+                            "DEU",
+                            "ESP",
+                            "GBR",
+                            "GRC",
+                            "ITA",
+                            "LTU",
+                            "NLD",
+                            "NOR",
+                            "PAK",
+                            "POL",
+                            "UKR",
+                            "USA"
+                          ]
+                        },
+                        "sendingCountryRatio": {
+                          "type": "integer"
+                        },
+                        "valueInSendingCountry": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "receivingCountry": {
+                          "type": "string",
+                          "enum": [
+                            "AUT",
+                            "BEL",
+                            "BIH",
+                            "CHE",
+                            "CHN",
+                            "DEU",
+                            "ESP",
+                            "GBR",
+                            "GRC",
+                            "ITA",
+                            "LTU",
+                            "NLD",
+                            "NOR",
+                            "PAK",
+                            "POL",
+                            "UKR",
+                            "USA"
+                          ]
+                        },
+                        "receivingCountryRatio": {
+                          "type": "integer"
+                        },
+                        "valueInReceivingCountry": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "logisticsSentBy": {
+                          "type": "integer"
+                        },
+                        "logisticsReceiveBy": {
+                          "type": "integer"
+                        },
+                        "needsMetItem": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "standard": {
+                          "type": "string",
+                          "enum": [
+                            "DA",
+                            "SPHERE",
+                            "NONE"
+                          ]
+                        },
+                        "totalNeedsMet": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "Error": {},
+                        "standardItemCount": {
+                          "type": "integer"
+                        },
+                        "itemValueDate": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "cumulativeInflationOnValueDate": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "cumulativeInflationOnDeliveredDate": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "cumulativeInflationOnToday": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "inflationAdjustedCostOnShipping": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "inflationAdjustedCostToday": {
                           "type": "number",
                           "format": "float"
                         },
@@ -10384,8 +10531,7 @@
                 "type": "integer"
               },
               "costOverride": {
-                "type": "number",
-                "format": "float"
+                "type": "boolean"
               },
               "costOverrideCurrency": {
                 "type": "string",
@@ -10416,6 +10562,154 @@
                 "format": "float"
               },
               "costOverrideUSDGDP": {
+                "type": "number",
+                "format": "float"
+              },
+              "costItem": {
+                "type": "number",
+                "format": "float"
+              },
+              "costAdjustment": {
+                "type": "number",
+                "format": "float"
+              },
+              "adjustedCostItem": {
+                "type": "number",
+                "format": "float"
+              },
+              "country": {
+                "type": "string",
+                "enum": [
+                  "DEU",
+                  "ESP",
+                  "FRA",
+                  "GRC",
+                  "LTU",
+                  "NLD",
+                  "USA"
+                ]
+              },
+              "currency": {
+                "type": "string",
+                "enum": [
+                  "USD",
+                  "GBP",
+                  "EUR",
+                  "LBP",
+                  "LTL",
+                  "RSD",
+                  "BAM"
+                ]
+              },
+              "cost": {
+                "type": "number",
+                "format": "float"
+              },
+              "sendingCountry": {
+                "type": "string",
+                "enum": [
+                  "AUT",
+                  "BEL",
+                  "BIH",
+                  "CHE",
+                  "CHN",
+                  "DEU",
+                  "ESP",
+                  "GBR",
+                  "GRC",
+                  "ITA",
+                  "LTU",
+                  "NLD",
+                  "NOR",
+                  "PAK",
+                  "POL",
+                  "UKR",
+                  "USA"
+                ]
+              },
+              "sendingCountryRatio": {
+                "type": "integer"
+              },
+              "valueInSendingCountry": {
+                "type": "number",
+                "format": "float"
+              },
+              "receivingCountry": {
+                "type": "string",
+                "enum": [
+                  "AUT",
+                  "BEL",
+                  "BIH",
+                  "CHE",
+                  "CHN",
+                  "DEU",
+                  "ESP",
+                  "GBR",
+                  "GRC",
+                  "ITA",
+                  "LTU",
+                  "NLD",
+                  "NOR",
+                  "PAK",
+                  "POL",
+                  "UKR",
+                  "USA"
+                ]
+              },
+              "receivingCountryRatio": {
+                "type": "integer"
+              },
+              "valueInReceivingCountry": {
+                "type": "number",
+                "format": "float"
+              },
+              "logisticsSentBy": {
+                "type": "integer"
+              },
+              "logisticsReceiveBy": {
+                "type": "integer"
+              },
+              "needsMetItem": {
+                "type": "number",
+                "format": "float"
+              },
+              "standard": {
+                "type": "string",
+                "enum": [
+                  "DA",
+                  "SPHERE",
+                  "NONE"
+                ]
+              },
+              "totalNeedsMet": {
+                "type": "number",
+                "format": "float"
+              },
+              "Error": {},
+              "standardItemCount": {
+                "type": "integer"
+              },
+              "itemValueDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "cumulativeInflationOnValueDate": {
+                "type": "number",
+                "format": "float"
+              },
+              "cumulativeInflationOnDeliveredDate": {
+                "type": "number",
+                "format": "float"
+              },
+              "cumulativeInflationOnToday": {
+                "type": "number",
+                "format": "float"
+              },
+              "inflationAdjustedCostOnShipping": {
+                "type": "number",
+                "format": "float"
+              },
+              "inflationAdjustedCostToday": {
                 "type": "number",
                 "format": "float"
               }
@@ -10650,8 +10944,7 @@
                                       "type": "integer"
                                     },
                                     "costOverride": {
-                                      "type": "number",
-                                      "format": "float"
+                                      "type": "boolean"
                                     },
                                     "costOverrideCurrency": {
                                       "type": "string",
@@ -10682,6 +10975,154 @@
                                       "format": "float"
                                     },
                                     "costOverrideUSDGDP": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "costItem": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "costAdjustment": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "adjustedCostItem": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "country": {
+                                      "type": "string",
+                                      "enum": [
+                                        "DEU",
+                                        "ESP",
+                                        "FRA",
+                                        "GRC",
+                                        "LTU",
+                                        "NLD",
+                                        "USA"
+                                      ]
+                                    },
+                                    "currency": {
+                                      "type": "string",
+                                      "enum": [
+                                        "USD",
+                                        "GBP",
+                                        "EUR",
+                                        "LBP",
+                                        "LTL",
+                                        "RSD",
+                                        "BAM"
+                                      ]
+                                    },
+                                    "cost": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "sendingCountry": {
+                                      "type": "string",
+                                      "enum": [
+                                        "AUT",
+                                        "BEL",
+                                        "BIH",
+                                        "CHE",
+                                        "CHN",
+                                        "DEU",
+                                        "ESP",
+                                        "GBR",
+                                        "GRC",
+                                        "ITA",
+                                        "LTU",
+                                        "NLD",
+                                        "NOR",
+                                        "PAK",
+                                        "POL",
+                                        "UKR",
+                                        "USA"
+                                      ]
+                                    },
+                                    "sendingCountryRatio": {
+                                      "type": "integer"
+                                    },
+                                    "valueInSendingCountry": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "receivingCountry": {
+                                      "type": "string",
+                                      "enum": [
+                                        "AUT",
+                                        "BEL",
+                                        "BIH",
+                                        "CHE",
+                                        "CHN",
+                                        "DEU",
+                                        "ESP",
+                                        "GBR",
+                                        "GRC",
+                                        "ITA",
+                                        "LTU",
+                                        "NLD",
+                                        "NOR",
+                                        "PAK",
+                                        "POL",
+                                        "UKR",
+                                        "USA"
+                                      ]
+                                    },
+                                    "receivingCountryRatio": {
+                                      "type": "integer"
+                                    },
+                                    "valueInReceivingCountry": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "logisticsSentBy": {
+                                      "type": "integer"
+                                    },
+                                    "logisticsReceiveBy": {
+                                      "type": "integer"
+                                    },
+                                    "needsMetItem": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "standard": {
+                                      "type": "string",
+                                      "enum": [
+                                        "DA",
+                                        "SPHERE",
+                                        "NONE"
+                                      ]
+                                    },
+                                    "totalNeedsMet": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "Error": {},
+                                    "standardItemCount": {
+                                      "type": "integer"
+                                    },
+                                    "itemValueDate": {
+                                      "type": "string",
+                                      "format": "date"
+                                    },
+                                    "cumulativeInflationOnValueDate": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "cumulativeInflationOnDeliveredDate": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "cumulativeInflationOnToday": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "inflationAdjustedCostOnShipping": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "inflationAdjustedCostToday": {
                                       "type": "number",
                                       "format": "float"
                                     },
@@ -11091,8 +11532,7 @@
             "type": "integer"
           },
           "costOverride": {
-            "type": "number",
-            "format": "float"
+            "type": "boolean"
           },
           "costOverrideCurrency": {
             "type": "string",
@@ -11123,6 +11563,154 @@
             "format": "float"
           },
           "costOverrideUSDGDP": {
+            "type": "number",
+            "format": "float"
+          },
+          "costItem": {
+            "type": "number",
+            "format": "float"
+          },
+          "costAdjustment": {
+            "type": "number",
+            "format": "float"
+          },
+          "adjustedCostItem": {
+            "type": "number",
+            "format": "float"
+          },
+          "country": {
+            "type": "string",
+            "enum": [
+              "DEU",
+              "ESP",
+              "FRA",
+              "GRC",
+              "LTU",
+              "NLD",
+              "USA"
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "GBP",
+              "EUR",
+              "LBP",
+              "LTL",
+              "RSD",
+              "BAM"
+            ]
+          },
+          "cost": {
+            "type": "number",
+            "format": "float"
+          },
+          "sendingCountry": {
+            "type": "string",
+            "enum": [
+              "AUT",
+              "BEL",
+              "BIH",
+              "CHE",
+              "CHN",
+              "DEU",
+              "ESP",
+              "GBR",
+              "GRC",
+              "ITA",
+              "LTU",
+              "NLD",
+              "NOR",
+              "PAK",
+              "POL",
+              "UKR",
+              "USA"
+            ]
+          },
+          "sendingCountryRatio": {
+            "type": "integer"
+          },
+          "valueInSendingCountry": {
+            "type": "number",
+            "format": "float"
+          },
+          "receivingCountry": {
+            "type": "string",
+            "enum": [
+              "AUT",
+              "BEL",
+              "BIH",
+              "CHE",
+              "CHN",
+              "DEU",
+              "ESP",
+              "GBR",
+              "GRC",
+              "ITA",
+              "LTU",
+              "NLD",
+              "NOR",
+              "PAK",
+              "POL",
+              "UKR",
+              "USA"
+            ]
+          },
+          "receivingCountryRatio": {
+            "type": "integer"
+          },
+          "valueInReceivingCountry": {
+            "type": "number",
+            "format": "float"
+          },
+          "logisticsSentBy": {
+            "type": "integer"
+          },
+          "logisticsReceiveBy": {
+            "type": "integer"
+          },
+          "needsMetItem": {
+            "type": "number",
+            "format": "float"
+          },
+          "standard": {
+            "type": "string",
+            "enum": [
+              "DA",
+              "SPHERE",
+              "NONE"
+            ]
+          },
+          "totalNeedsMet": {
+            "type": "number",
+            "format": "float"
+          },
+          "Error": {},
+          "standardItemCount": {
+            "type": "integer"
+          },
+          "itemValueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "cumulativeInflationOnValueDate": {
+            "type": "number",
+            "format": "float"
+          },
+          "cumulativeInflationOnDeliveredDate": {
+            "type": "number",
+            "format": "float"
+          },
+          "cumulativeInflationOnToday": {
+            "type": "number",
+            "format": "float"
+          },
+          "inflationAdjustedCostOnShipping": {
+            "type": "number",
+            "format": "float"
+          },
+          "inflationAdjustedCostToday": {
             "type": "number",
             "format": "float"
           },

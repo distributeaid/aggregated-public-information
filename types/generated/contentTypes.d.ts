@@ -1336,7 +1336,7 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
     >;
     used: Attribute.Boolean;
     itemCount: Attribute.Integer;
-    costOverride: Attribute.Decimal;
+    costOverride: Attribute.Boolean;
     costOverrideCurrency: Attribute.Enumeration<
       ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
     >;
@@ -1345,6 +1345,86 @@ export interface ApiReportingCargoReportingCargo extends Schema.CollectionType {
     >;
     costOverrideUSD: Attribute.Decimal;
     costOverrideUSDGDP: Attribute.Decimal;
+    costItem: Attribute.Decimal;
+    costAdjustment: Attribute.Decimal;
+    adjustedCostItem: Attribute.Decimal;
+    country: Attribute.Enumeration<
+      ['DEU', 'ESP', 'FRA', 'GRC', 'LTU', 'NLD', 'USA']
+    >;
+    currency: Attribute.Enumeration<
+      ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
+    >;
+    cost: Attribute.Decimal;
+    sendingCountry: Attribute.Enumeration<
+      [
+        'AUT',
+        'BEL',
+        'BIH',
+        'CHE',
+        'CHN',
+        'DEU',
+        'ESP',
+        'GBR',
+        'GRC',
+        'ITA',
+        'LTU',
+        'NLD',
+        'NOR',
+        'PAK',
+        'POL',
+        'UKR',
+        'USA'
+      ]
+    >;
+    sendingCountryRatio: Attribute.Integer;
+    valueInSendingCountry: Attribute.Decimal;
+    receivingCountry: Attribute.Enumeration<
+      [
+        'AUT',
+        'BEL',
+        'BIH',
+        'CHE',
+        'CHN',
+        'DEU',
+        'ESP',
+        'GBR',
+        'GRC',
+        'ITA',
+        'LTU',
+        'NLD',
+        'NOR',
+        'PAK',
+        'POL',
+        'UKR',
+        'USA'
+      ]
+    >;
+    receivingCountryRatio: Attribute.Integer;
+    valueInReceivingCountry: Attribute.Decimal;
+    logisticsSentBy: Attribute.Integer;
+    logisticsReceiveBy: Attribute.Integer;
+    needsMetItem: Attribute.Decimal;
+    standard: Attribute.Enumeration<['DA', 'SPHERE', 'NONE']>;
+    totalNeedsMet: Attribute.Decimal;
+    Error: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'ERROR_001',
+          'ERROR_004',
+          'ERROR_005',
+          'ERROR_007',
+          'ERROR_008',
+          'ERROR_0011'
+        ]
+      >;
+    standardItemCount: Attribute.Integer;
+    itemValueDate: Attribute.Date;
+    cumulativeInflationOnValueDate: Attribute.Float;
+    cumulativeInflationOnDeliveredDate: Attribute.Float;
+    cumulativeInflationOnToday: Attribute.Float;
+    inflationAdjustedCostOnShipping: Attribute.Decimal;
+    inflationAdjustedCostToday: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
