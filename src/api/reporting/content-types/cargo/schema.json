@@ -12,34 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "shipmentDropOffDate": {
-      "type": "date"
-    },
-    "category": {
-      "type": "string"
-    },
-    "item": {
-      "type": "string"
-    },
-    "ageGender": {
-      "type": "enumeration",
-      "enum": [
-        "Baby",
-        "Boy",
-        "Girl",
-        "Kid",
-        "Adult",
-        "Man",
-        "Woman"
-      ]
-    },
-    "sizeStyle": {
-      "type": "string"
-    },
-    "count": {
+    "packageCount": {
       "type": "integer"
     },
-    "unit": {
+    "packageUnit": {
       "type": "enumeration",
       "enum": [
         "Bag",
@@ -56,13 +32,13 @@
     "used": {
       "type": "boolean"
     },
-    "itemNum": {
+    "itemCount": {
       "type": "integer"
     },
-    "costOverride": {
+    "valueOverride": {
       "type": "boolean"
     },
-    "costOverrideCurrency": {
+    "valueOverrideCurrency": {
       "type": "enumeration",
       "enum": [
         "USD",
@@ -86,100 +62,14 @@
         "USA"
       ]
     },
-    "costOverrideUSD": {
+    "normalizedValuePerItem": {
       "type": "decimal"
     },
-    "costOverrideUSDGDP": {
+    "totalNormalizedValue": {
       "type": "decimal"
-    },
-    "costItem": {
-      "type": "decimal"
-    },
-    "costAdjustment": {
-      "type": "decimal"
-    },
-    "adjustedCostItem": {
-      "type": "decimal"
-    },
-    "country": {
-      "type": "enumeration",
-      "enum": [
-        "DEU",
-        "ESP",
-        "FRA",
-        "GRC",
-        "LTU",
-        "NLD",
-        "USA"
-      ]
-    },
-    "currency": {
-      "type": "enumeration",
-      "enum": [
-        "USD",
-        "GBP",
-        "EUR",
-        "LBP",
-        "LTL",
-        "RSD",
-        "BAM"
-      ]
-    },
-    "cost": {
-      "type": "decimal"
-    },
-    "sendingCountry": {
-      "type": "enumeration",
-      "enum": [
-        "AUT",
-        "BEL",
-        "BIH",
-        "CHE",
-        "CHN",
-        "DEU",
-        "ESP",
-        "GBR",
-        "GRC",
-        "ITA",
-        "LTU",
-        "NLD",
-        "NOR",
-        "PAK",
-        "POL",
-        "UKR",
-        "USA"
-      ]
-    },
-    "sendingCountryRatio": {
-      "type": "integer"
     },
     "valueInSendingCountry": {
       "type": "decimal"
-    },
-    "receivingCountry": {
-      "type": "enumeration",
-      "enum": [
-        "AUT",
-        "BEL",
-        "BIH",
-        "CHE",
-        "CHN",
-        "DEU",
-        "ESP",
-        "GBR",
-        "GRC",
-        "ITA",
-        "LTU",
-        "NLD",
-        "NOR",
-        "PAK",
-        "POL",
-        "UKR",
-        "USA"
-      ]
-    },
-    "receivingCountryRatio": {
-      "type": "integer"
     },
     "valueInReceivingCountry": {
       "type": "decimal"
@@ -190,61 +80,32 @@
     "logisticsReceiveBy": {
       "type": "integer"
     },
-    "needsMetItem": {
-      "type": "decimal"
-    },
-    "standard": {
-      "type": "enumeration",
-      "enum": [
-        "DA",
-        "SPHERE",
-        "NONE"
-      ]
-    },
     "totalNeedsMet": {
       "type": "decimal"
-    },
-    "Error": {
-      "type": "customField",
-      "options": [
-        "ERROR_001",
-        "ERROR_004",
-        "ERROR_005",
-        "ERROR_007",
-        "ERROR_008",
-        "ERROR_011"
-      ],
-      "customField": "plugin::multi-select.multi-select"
     },
     "standardItemCount": {
       "type": "integer"
     },
-    "itemValueDate": {
-      "type": "date"
-    },
-    "cumulativeInflationOnValueDate": {
-      "type": "float"
-    },
-    "cumulativeInflationOnDeliveredDate": {
-      "type": "float"
-    },
-    "cumulativeInflationOnToday": {
-      "type": "float"
-    },
-    "inflationAdjustedCostOnShipping": {
-      "type": "decimal"
-    },
-    "inflationAdjustedCostToday": {
-      "type": "decimal"
-    },
-    "number": {
+    "shipment": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::reporting.shipment",
-      "inversedBy": "number"
+      "inversedBy": "cargo"
     },
-    "overriddenCost": {
-      "type": "decimal"
+    "item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.item"
+    },
+    "sendingCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "receivingCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
     }
   }
 }

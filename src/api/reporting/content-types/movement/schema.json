@@ -13,9 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "number": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::reporting.shipment"
     },
     "segment": {
       "type": "enumeration",
@@ -35,22 +35,19 @@
     "serviceProvider": {
       "type": "string"
     },
-    "packageNum": {
+    "packageCount": {
       "type": "integer"
     },
     "packagingType": {
       "type": "string"
     },
-    "totalCargo": {
+    "totalCargoVolM3": {
       "type": "decimal"
     },
-    "totalCargoWeight": {
+    "totalCargoWeightKG": {
       "type": "decimal"
     },
-    "deliveryMethod": {
-      "type": "string"
-    },
-    "vehicleNum": {
+    "vehicleCount": {
       "type": "integer"
     },
     "pickUpAddress": {
@@ -59,14 +56,37 @@
     "dropOffAddress": {
       "type": "text"
     },
-    "distance": {
+    "distanceKM": {
       "type": "integer"
-    },
-    "involvement": {
-      "type": "string"
     },
     "notes": {
       "type": "text"
+    },
+    "deliveryMethod": {
+      "type": "enumeration",
+      "enum": [
+        "FTL",
+        "LTL",
+        "Box Truck",
+        "Van",
+        "Personal Vehicle",
+        "FCL: 20 ft",
+        "FCL: 40 ft",
+        "FCL: 20 ft HC",
+        "FCL: 40 ft HC",
+        "LCL",
+        "Rail",
+        "Air"
+      ]
+    },
+    "involvement": {
+      "type": "enumeration",
+      "enum": [
+        "Advised",
+        "Assisted",
+        "Organized",
+        "Not involved"
+      ]
     }
   }
 }
