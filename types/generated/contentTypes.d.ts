@@ -1197,15 +1197,8 @@ export interface ApiReportingCargo extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    shipmentDropOffDate: Attribute.Date;
-    category: Attribute.String;
-    item: Attribute.String;
-    ageGender: Attribute.Enumeration<
-      ['Baby', 'Boy', 'Girl', 'Kid', 'Adult', 'Man', 'Woman']
-    >;
-    sizeStyle: Attribute.String;
-    count: Attribute.Integer;
-    unit: Attribute.Enumeration<
+    packageCount: Attribute.Integer;
+    packageUnit: Attribute.Enumeration<
       [
         'Bag',
         'Medium Bag',
@@ -1219,102 +1212,42 @@ export interface ApiReportingCargo extends Schema.CollectionType {
       ]
     >;
     used: Attribute.Boolean;
-    itemNum: Attribute.Integer;
-    costOverride: Attribute.Boolean;
-    costOverrideCurrency: Attribute.Enumeration<
+    itemCount: Attribute.Integer;
+    valueOverride: Attribute.Boolean;
+    valueOverrideCurrency: Attribute.Enumeration<
       ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
     >;
     countryGDPContextCostOverride: Attribute.Enumeration<
       ['DEU', 'ESP', 'FRA', 'GRC', 'LTU', 'NLD', 'USA']
     >;
-    costOverrideUSD: Attribute.Decimal;
-    costOverrideUSDGDP: Attribute.Decimal;
-    costItem: Attribute.Decimal;
-    costAdjustment: Attribute.Decimal;
-    adjustedCostItem: Attribute.Decimal;
-    country: Attribute.Enumeration<
-      ['DEU', 'ESP', 'FRA', 'GRC', 'LTU', 'NLD', 'USA']
-    >;
-    currency: Attribute.Enumeration<
-      ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
-    >;
-    cost: Attribute.Decimal;
-    sendingCountry: Attribute.Enumeration<
-      [
-        'AUT',
-        'BEL',
-        'BIH',
-        'CHE',
-        'CHN',
-        'DEU',
-        'ESP',
-        'GBR',
-        'GRC',
-        'ITA',
-        'LTU',
-        'NLD',
-        'NOR',
-        'PAK',
-        'POL',
-        'UKR',
-        'USA'
-      ]
-    >;
-    sendingCountryRatio: Attribute.Integer;
+    normalizedValuePerItem: Attribute.Decimal;
+    totalNormalizedValue: Attribute.Decimal;
     valueInSendingCountry: Attribute.Decimal;
-    receivingCountry: Attribute.Enumeration<
-      [
-        'AUT',
-        'BEL',
-        'BIH',
-        'CHE',
-        'CHN',
-        'DEU',
-        'ESP',
-        'GBR',
-        'GRC',
-        'ITA',
-        'LTU',
-        'NLD',
-        'NOR',
-        'PAK',
-        'POL',
-        'UKR',
-        'USA'
-      ]
-    >;
-    receivingCountryRatio: Attribute.Integer;
     valueInReceivingCountry: Attribute.Decimal;
     logisticsSentBy: Attribute.Integer;
     logisticsReceiveBy: Attribute.Integer;
-    needsMetItem: Attribute.Decimal;
-    standard: Attribute.Enumeration<['DA', 'SPHERE', 'NONE']>;
     totalNeedsMet: Attribute.Decimal;
-    Error: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'ERROR_001',
-          'ERROR_004',
-          'ERROR_005',
-          'ERROR_007',
-          'ERROR_008',
-          'ERROR_011'
-        ]
-      >;
     standardItemCount: Attribute.Integer;
-    itemValueDate: Attribute.Date;
-    cumulativeInflationOnValueDate: Attribute.Float;
-    cumulativeInflationOnDeliveredDate: Attribute.Float;
-    cumulativeInflationOnToday: Attribute.Float;
-    inflationAdjustedCostOnShipping: Attribute.Decimal;
-    inflationAdjustedCostToday: Attribute.Decimal;
-    number: Attribute.Relation<
+    shipment: Attribute.Relation<
       'api::reporting.cargo',
       'manyToOne',
       'api::reporting.shipment'
     >;
-    overriddenCost: Attribute.Decimal;
+    item: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::product.item'
+    >;
+    sendingCountry: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::geo.country'
+    >;
+    receivingCountry: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::geo.country'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1345,24 +1278,45 @@ export interface ApiReportingMovement extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    number: Attribute.String & Attribute.Required & Attribute.Unique;
+    number: Attribute.Relation<
+      'api::reporting.movement',
+      'oneToOne',
+      'api::reporting.shipment'
+    >;
     segment: Attribute.Enumeration<
       ['First Mile', 'Last Mile', 'Main Leg', 'Main Leg-Cont']
     >;
     pickupDate: Attribute.Date;
     dropoffDate: Attribute.Date;
     serviceProvider: Attribute.String;
-    packageNum: Attribute.Integer;
+    packageCount: Attribute.Integer;
     packagingType: Attribute.String;
-    totalCargo: Attribute.Decimal;
-    totalCargoWeight: Attribute.Decimal;
-    deliveryMethod: Attribute.String;
-    vehicleNum: Attribute.Integer;
+    totalCargoVolM3: Attribute.Decimal;
+    totalCargoWeightKG: Attribute.Decimal;
+    vehicleCount: Attribute.Integer;
     pickUpAddress: Attribute.Text;
     dropOffAddress: Attribute.Text;
-    distance: Attribute.Integer;
-    involvement: Attribute.String;
+    distanceKM: Attribute.Integer;
     notes: Attribute.Text;
+    deliveryMethod: Attribute.Enumeration<
+      [
+        'FTL',
+        'LTL',
+        'Box Truck',
+        'Van',
+        'Personal Vehicle',
+        'FCL: 20 ft',
+        'FCL: 40 ft',
+        'FCL: 20 ft HC',
+        'FCL: 40 ft HC',
+        'LCL',
+        'Rail',
+        'Air'
+      ]
+    >;
+    involvement: Attribute.Enumeration<
+      ['Advised', 'Assisted', 'Organized', 'Not involved']
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1393,33 +1347,14 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    number: Attribute.Relation<
+    cargo: Attribute.Relation<
       'api::reporting.shipment',
       'oneToMany',
       'api::reporting.cargo'
     >;
-    sendingCountry: Attribute.String;
-    receivingCountry: Attribute.String;
     carrierId: Attribute.String;
     exporter: Attribute.String;
     importer: Attribute.String;
-    project: Attribute.String;
-    nNeedAssessment: Attribute.Boolean;
-    asInKindDonation: Attribute.Boolean;
-    asProcurement: Attribute.Boolean;
-    asCommunityCollection: Attribute.Boolean;
-    nAidMatching: Attribute.Boolean;
-    fmTransportation: Attribute.Boolean;
-    fmStorageCommunity: Attribute.Boolean;
-    fmStorageCommercial: Attribute.Boolean;
-    mlTransportation: Attribute.Boolean;
-    cTransit: Attribute.Boolean;
-    cExport: Attribute.Boolean;
-    cImport: Attribute.Boolean;
-    lmTransportation: Attribute.Boolean;
-    lmStorageCommunity: Attribute.Boolean;
-    lmStorageCommercial: Attribute.Boolean;
-    other: Attribute.Boolean;
     carbonOffsetPaid: Attribute.Boolean;
     CO2TonsGenerated: Attribute.Decimal;
     carbonOffsetCost: Attribute.Decimal;
@@ -1440,7 +1375,6 @@ export interface ApiReportingShipment extends Schema.CollectionType {
           'First Mile - Storage - Community',
           'First Mile - Storage - Commercial',
           'Main Leg - Transportation',
-          'Main Leg - Transportation - International',
           'Customs - Transit',
           'Customs - Export',
           'Customs - Import',
@@ -1450,6 +1384,30 @@ export interface ApiReportingShipment extends Schema.CollectionType {
           'Other'
         ]
       >;
+    sendingCountry: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'api::geo.country'
+    >;
+    receivingCountry: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'api::geo.country'
+    >;
+    number: Attribute.String & Attribute.Required & Attribute.Unique;
+    project: Attribute.Enumeration<
+      [
+        'Covid 19',
+        'Disaster Relief',
+        'Moria Fire',
+        'Refugee Aid - Europe',
+        'Refugee Aid - Lebanon',
+        'Social Enterprise Support',
+        'Ukraine',
+        'US ARR',
+        'Other'
+      ]
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

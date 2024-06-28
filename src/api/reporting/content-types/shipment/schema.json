@@ -11,19 +11,11 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "number": {
+    "cargo": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::reporting.cargo",
-      "mappedBy": "number"
-    },
-    "sendingCountry": {
-      "type": "string",
-      "regex": "[A-Z]{3}"
-    },
-    "receivingCountry": {
-      "type": "string",
-      "regex": "[A-Z]{3}"
+      "mappedBy": "shipment"
     },
     "carrierId": {
       "type": "string"
@@ -33,57 +25,6 @@
     },
     "importer": {
       "type": "string"
-    },
-    "project": {
-      "type": "string"
-    },
-    "nNeedAssessment": {
-      "type": "boolean"
-    },
-    "asInKindDonation": {
-      "type": "boolean"
-    },
-    "asProcurement": {
-      "type": "boolean"
-    },
-    "asCommunityCollection": {
-      "type": "boolean"
-    },
-    "nAidMatching": {
-      "type": "boolean"
-    },
-    "fmTransportation": {
-      "type": "boolean"
-    },
-    "fmStorageCommunity": {
-      "type": "boolean"
-    },
-    "fmStorageCommercial": {
-      "type": "boolean"
-    },
-    "mlTransportation": {
-      "type": "boolean"
-    },
-    "cTransit": {
-      "type": "boolean"
-    },
-    "cExport": {
-      "type": "boolean"
-    },
-    "cImport": {
-      "type": "boolean"
-    },
-    "lmTransportation": {
-      "type": "boolean"
-    },
-    "lmStorageCommunity": {
-      "type": "boolean"
-    },
-    "lmStorageCommercial": {
-      "type": "boolean"
-    },
-    "other": {
-      "type": "boolean"
     },
     "carbonOffsetPaid": {
       "type": "boolean"
@@ -118,7 +59,6 @@
         "First Mile - Storage - Community",
         "First Mile - Storage - Commercial",
         "Main Leg - Transportation",
-        "Main Leg - Transportation - International",
         "Customs - Transit",
         "Customs - Export",
         "Customs - Import",
@@ -128,6 +68,35 @@
         "Other"
       ],
       "customField": "plugin::multi-select.multi-select"
+    },
+    "sendingCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "receivingCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "number": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "project": {
+      "type": "enumeration",
+      "enum": [
+        "Covid 19",
+        "Disaster Relief",
+        "Moria Fire",
+        "Refugee Aid - Europe",
+        "Refugee Aid - Lebanon",
+        "Social Enterprise Support",
+        "Ukraine",
+        "US ARR",
+        "Other"
+      ]
     }
   }
 }
