@@ -1098,6 +1098,49 @@ export interface ApiNeedsAssessmentSurvey extends Schema.CollectionType {
   };
 }
 
+export interface ApiPartnerPartner extends Schema.CollectionType {
+  collectionName: 'partners';
+  info: {
+    singularName: 'partner';
+    pluralName: 'partners';
+    displayName: 'Partner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    movementServiceProvider: Attribute.String;
+    shipmentImporter: Attribute.String;
+    shipmentExporter: Attribute.String;
+    cargoSender: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'api::reporting.cargo'
+    >;
+    cargoReceiver: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'api::reporting.cargo'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -1217,15 +1260,15 @@ export interface ApiReportingCargo extends Schema.CollectionType {
     valueOverrideCurrency: Attribute.Enumeration<
       ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
     >;
-    countryGDPContextCostOverride: Attribute.Enumeration<
-      ['DEU', 'ESP', 'FRA', 'GRC', 'LTU', 'NLD', 'USA']
-    >;
     normalizedValuePerItem: Attribute.Decimal;
     totalNormalizedValue: Attribute.Decimal;
     valueInSendingCountry: Attribute.Decimal;
     valueInReceivingCountry: Attribute.Decimal;
-    logisticsSentBy: Attribute.Integer;
-    logisticsReceiveBy: Attribute.Integer;
+    logisticsSentBy: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::partner.partner'
+    >;
     totalNeedsMet: Attribute.Decimal;
     standardItemCount: Attribute.Integer;
     shipment: Attribute.Relation<
@@ -1247,6 +1290,16 @@ export interface ApiReportingCargo extends Schema.CollectionType {
       'api::reporting.cargo',
       'oneToOne',
       'api::geo.country'
+    >;
+    countryGDPContextCostOverride: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::geo.country'
+    >;
+    logisticsReceiveBy: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::partner.partner'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1278,7 +1331,7 @@ export interface ApiReportingMovement extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    number: Attribute.Relation<
+    shipment: Attribute.Relation<
       'api::reporting.movement',
       'oneToOne',
       'api::reporting.shipment'
@@ -1288,7 +1341,6 @@ export interface ApiReportingMovement extends Schema.CollectionType {
     >;
     pickupDate: Attribute.Date;
     dropoffDate: Attribute.Date;
-    serviceProvider: Attribute.String;
     packageCount: Attribute.Integer;
     packagingType: Attribute.String;
     totalCargoVolM3: Attribute.Decimal;
@@ -1316,6 +1368,11 @@ export interface ApiReportingMovement extends Schema.CollectionType {
     >;
     involvement: Attribute.Enumeration<
       ['Advised', 'Assisted', 'Organized', 'Not involved']
+    >;
+    serviceProvider: Attribute.Relation<
+      'api::reporting.movement',
+      'oneToOne',
+      'api::partner.partner'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1353,8 +1410,6 @@ export interface ApiReportingShipment extends Schema.CollectionType {
       'api::reporting.cargo'
     >;
     carrierId: Attribute.String;
-    exporter: Attribute.String;
-    importer: Attribute.String;
     carbonOffsetPaid: Attribute.Boolean;
     CO2TonsGenerated: Attribute.Decimal;
     carbonOffsetCost: Attribute.Decimal;
@@ -1407,6 +1462,16 @@ export interface ApiReportingShipment extends Schema.CollectionType {
         'US ARR',
         'Other'
       ]
+    >;
+    importer: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'api::partner.partner'
+    >;
+    exporter: Attribute.Relation<
+      'api::reporting.shipment',
+      'oneToOne',
+      'api::partner.partner'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1491,6 +1556,7 @@ declare module '@strapi/types' {
       'api::geo.subregion': ApiGeoSubregion;
       'api::needs-assessment.need': ApiNeedsAssessmentNeed;
       'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
+      'api::partner.partner': ApiPartnerPartner;
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
       'api::reporting.cargo': ApiReportingCargo;
