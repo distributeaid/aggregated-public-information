@@ -1,4 +1,5 @@
 import { processProductItem } from "./product/item";
+import { processGroup } from "./group/item";
 
 export function processContentType(path, data) {
   /*
@@ -7,6 +8,7 @@ export function processContentType(path, data) {
   */
   const contentTypeHandlers = {
     "product.item": processProductItem,
+    'group.group': processGroup, 
   };
 
   const contentType = detectContentType(path);
