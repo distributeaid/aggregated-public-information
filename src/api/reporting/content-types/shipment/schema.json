@@ -20,12 +20,6 @@
     "carrierId": {
       "type": "string"
     },
-    "exporter": {
-      "type": "string"
-    },
-    "importer": {
-      "type": "string"
-    },
     "carbonOffsetPaid": {
       "type": "boolean"
     },
@@ -97,6 +91,16 @@
         "US ARR",
         "Other"
       ]
+    },
+    "importer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner.partner"
+    },
+    "exporter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner.partner"
     }
   }
 }

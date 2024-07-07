@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "number": {
+    "shipment": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::reporting.shipment"
@@ -31,9 +31,6 @@
     },
     "dropoffDate": {
       "type": "date"
-    },
-    "serviceProvider": {
-      "type": "string"
     },
     "packageCount": {
       "type": "integer"
@@ -87,6 +84,11 @@
         "Organized",
         "Not involved"
       ]
+    },
+    "serviceProvider": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner.partner"
     }
   }
 }

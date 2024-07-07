@@ -50,18 +50,6 @@
         "BAM"
       ]
     },
-    "countryGDPContextCostOverride": {
-      "type": "enumeration",
-      "enum": [
-        "DEU",
-        "ESP",
-        "FRA",
-        "GRC",
-        "LTU",
-        "NLD",
-        "USA"
-      ]
-    },
     "normalizedValuePerItem": {
       "type": "decimal"
     },
@@ -75,10 +63,10 @@
       "type": "decimal"
     },
     "logisticsSentBy": {
-      "type": "integer"
-    },
-    "logisticsReceiveBy": {
-      "type": "integer"
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner.partner",
+      "inversedBy": "cargoSender"
     },
     "totalNeedsMet": {
       "type": "decimal"
@@ -106,6 +94,17 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.country"
+    },
+    "countryGDPContextCostOverride": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "logisticsReceiveBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner.partner",
+      "inversedBy": "cargoReceiver"
     }
   }
 }
