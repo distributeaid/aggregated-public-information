@@ -88,7 +88,7 @@
     "serviceProvider": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::partner.partner"
+      "target": "api::group.group"
     }
   }
 }

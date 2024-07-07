@@ -62,12 +62,6 @@
     "valueInReceivingCountry": {
       "type": "decimal"
     },
-    "logisticsSentBy": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::partner.partner",
-      "inversedBy": "cargoSender"
-    },
     "totalNeedsMet": {
       "type": "decimal"
     },
@@ -100,11 +94,11 @@
       "relation": "oneToOne",
       "target": "api::geo.country"
     },
-    "logisticsReceiveBy": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::partner.partner",
-      "inversedBy": "cargoReceiver"
+    "senderCount": {
+      "type": "integer"
+    },
+    "receiverCount": {
+      "type": "integer"
     }
   }
 }

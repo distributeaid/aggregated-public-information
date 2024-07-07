@@ -1,5 +1,5 @@
 {
-  "/partners": {
+  "/groups": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PartnerListResponse"
+                "$ref": "#/components/schemas/GroupListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "Partner"
+        "Group"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/partners"
+      "operationId": "get/groups"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PartnerResponse"
+                "$ref": "#/components/schemas/GroupResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "Partner"
+        "Group"
       ],
       "parameters": [],
-      "operationId": "post/partners",
+      "operationId": "post/groups",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/PartnerRequest"
+              "$ref": "#/components/schemas/GroupRequest"
             }
           }
         }
       }
     }
   },
-  "/partners/{id}": {
+  "/groups/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PartnerResponse"
+                "$ref": "#/components/schemas/GroupResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "Partner"
+        "Group"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/partners/{id}"
+      "operationId": "get/groups/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PartnerResponse"
+                "$ref": "#/components/schemas/GroupResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "Partner"
+        "Group"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/partners/{id}",
+      "operationId": "put/groups/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/PartnerRequest"
+              "$ref": "#/components/schemas/GroupRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "Partner"
+        "Group"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/partners/{id}"
+      "operationId": "delete/groups/{id}"
     }
   }
 }

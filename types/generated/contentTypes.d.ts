@@ -1006,6 +1006,52 @@ export interface ApiGeoSubregion extends Schema.CollectionType {
   };
 }
 
+export interface ApiGroupGroup extends Schema.CollectionType {
+  collectionName: 'groups';
+  info: {
+    singularName: 'group';
+    pluralName: 'groups';
+    displayName: 'Group';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    shortName: Attribute.String;
+    fullName: Attribute.Text;
+    umbrellaOrganisation: Attribute.String;
+    region: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'api::geo.region'
+    >;
+    notes: Attribute.Text;
+    groupConvertFrom: Attribute.String;
+    shortNameStripped: Attribute.String;
+    groupNameStripped: Attribute.Text;
+    groupConvertFromStripped: Attribute.String;
+    groupType: Attribute.Enumeration<
+      ['Aid group', 'In-Kind Donor', 'Service Provider']
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNeedsAssessmentNeed extends Schema.CollectionType {
   collectionName: 'needs';
   info: {
@@ -1091,49 +1137,6 @@ export interface ApiNeedsAssessmentSurvey extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::needs-assessment.survey',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPartnerPartner extends Schema.CollectionType {
-  collectionName: 'partners';
-  info: {
-    singularName: 'partner';
-    pluralName: 'partners';
-    displayName: 'Partner';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    movementServiceProvider: Attribute.String;
-    shipmentImporter: Attribute.String;
-    shipmentExporter: Attribute.String;
-    cargoSender: Attribute.Relation<
-      'api::partner.partner',
-      'oneToOne',
-      'api::reporting.cargo'
-    >;
-    cargoReceiver: Attribute.Relation<
-      'api::partner.partner',
-      'oneToOne',
-      'api::reporting.cargo'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::partner.partner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::partner.partner',
       'oneToOne',
       'admin::user'
     > &
@@ -1264,11 +1267,6 @@ export interface ApiReportingCargo extends Schema.CollectionType {
     totalNormalizedValue: Attribute.Decimal;
     valueInSendingCountry: Attribute.Decimal;
     valueInReceivingCountry: Attribute.Decimal;
-    logisticsSentBy: Attribute.Relation<
-      'api::reporting.cargo',
-      'oneToOne',
-      'api::partner.partner'
-    >;
     totalNeedsMet: Attribute.Decimal;
     standardItemCount: Attribute.Integer;
     shipment: Attribute.Relation<
@@ -1296,11 +1294,8 @@ export interface ApiReportingCargo extends Schema.CollectionType {
       'oneToOne',
       'api::geo.country'
     >;
-    logisticsReceiveBy: Attribute.Relation<
-      'api::reporting.cargo',
-      'oneToOne',
-      'api::partner.partner'
-    >;
+    senderCount: Attribute.Integer;
+    receiverCount: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1372,7 +1367,7 @@ export interface ApiReportingMovement extends Schema.CollectionType {
     serviceProvider: Attribute.Relation<
       'api::reporting.movement',
       'oneToOne',
-      'api::partner.partner'
+      'api::group.group'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1466,12 +1461,12 @@ export interface ApiReportingShipment extends Schema.CollectionType {
     importer: Attribute.Relation<
       'api::reporting.shipment',
       'oneToOne',
-      'api::partner.partner'
+      'api::group.group'
     >;
     exporter: Attribute.Relation<
       'api::reporting.shipment',
       'oneToOne',
-      'api::partner.partner'
+      'api::group.group'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1554,9 +1549,9 @@ declare module '@strapi/types' {
       'api::geo.country': ApiGeoCountry;
       'api::geo.region': ApiGeoRegion;
       'api::geo.subregion': ApiGeoSubregion;
+      'api::group.group': ApiGroupGroup;
       'api::needs-assessment.need': ApiNeedsAssessmentNeed;
       'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
-      'api::partner.partner': ApiPartnerPartner;
       'api::product.category': ApiProductCategory;
       'api::product.item': ApiProductItem;
       'api::reporting.cargo': ApiReportingCargo;
