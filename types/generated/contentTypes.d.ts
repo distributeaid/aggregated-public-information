@@ -1019,7 +1019,7 @@ export interface ApiGroupGroup extends Schema.CollectionType {
   };
   attributes: {
     shortName: Attribute.String;
-    fullName: Attribute.Text;
+    groupName: Attribute.String;
     umbrellaOrganisation: Attribute.String;
     region: Attribute.Relation<
       'api::group.group',
@@ -1034,6 +1034,7 @@ export interface ApiGroupGroup extends Schema.CollectionType {
     groupType: Attribute.Enumeration<
       ['Aid group', 'In-Kind Donor', 'Service Provider']
     >;
+    number: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

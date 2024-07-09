@@ -15,8 +15,8 @@
     "shortName": {
       "type": "string"
     },
-    "fullName": {
-      "type": "text"
+    "groupName": {
+      "type": "string"
     },
     "umbrellaOrganisation": {
       "type": "string"
@@ -48,6 +48,9 @@
         "In-Kind Donor",
         "Service Provider"
       ]
+    },
+    "number": {
+      "type": "integer"
     }
   }
 }
