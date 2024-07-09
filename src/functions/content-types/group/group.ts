@@ -2,8 +2,8 @@ export function processGroup(data) {
     if (data.shortName) {
       data.shortNameStripped = generateNameStripped(data.shortName);
     }
-    if (data.fullName) {
-      data.groupNameStripped = generateNameStripped(data.fullName);
+    if (data.groupName) {
+      data.groupNameStripped = generateNameStripped(data.groupName);
     }
     if (data.groupConvertFrom) {
       data.groupConvertFromStripped = generateNameStripped(data.groupConvertFrom);
