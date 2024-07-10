@@ -20,6 +20,8 @@ export function processContentType(path, data) {
   const handler = contentTypeHandlers[contentType];
   if (handler) {
     return handler(data);
+  } else {
+    return data;
   }
 }
 
