@@ -1,5 +1,7 @@
 import { processProductItem } from "./product/item";
 import { processGroup } from "./group/group";
+import { processCargo } from "./reporting/cargo";
+
 
 export function processContentType(path, data) {
   /*
@@ -10,6 +12,10 @@ export function processContentType(path, data) {
     "product.item": processProductItem,
     "group.group": processGroup, 
     "geo.country": (data) => data,
+    "reporting.shipment": (data) => data,
+    "reporting.cargo": (data, strapi) => processCargo(data, strapi),
+    "reporting.movement": (data) => data,
+    "product.category": (data) => data,
   };
 
   const contentType = detectContentType(path);
