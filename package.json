@@ -11,7 +11,16 @@
     "build": "strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "test": "jest --forceExit --detectOpenHandles"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      ".tmp",
+      ".cache"
+    ]
   },
   "dependencies": {
     "@strapi/plugin-documentation": "4.24.3",
@@ -29,11 +38,16 @@
     "strapi-plugin-slugify": "^2.3.5",
     "styled-components": "^5.2.1"
   },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sqlite3": "^5.1.7",
+    "supertest": "^7.0.0"
+  },
+  "packageManager": "yarn@4.3.1",
   "engines": {
     "node": ">=20.0.0 <=20.x.x"
   },
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
-  },
-  "packageManager": "yarn@4.3.1"
+  }
 }
