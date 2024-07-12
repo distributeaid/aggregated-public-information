@@ -13,7 +13,7 @@ export function processContentType(path, data) {
     "group.group": processGroup, 
     "geo.country": (data) => data,
     "reporting.shipment": (data) => data,
-    "reporting.cargo": (data, strapi) => processCargo(data, strapi),
+    "reporting.cargo": processCargo,
     "reporting.movement": (data) => data,
     "product.category": (data) => data,
   };
