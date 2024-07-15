@@ -2,8 +2,8 @@ import 'dotenv/config'
 import fetch from 'node-fetch'
 import { readFileSync } from 'fs'
 
-// const strapiURL = 'https://1337-distributea-aggregatedp-hvms4i4hj5d.ws-us114.gitpod.io/needs';
-// const apiKey = process.env.STRAPI_API_KEY;  -----Need to get an API_Key from Strapi----
+const strapiURL = 'https://1337-distributea-aggregatedp-hvms4i4hj5d.ws-us114.gitpod.io/categories';
+const apiKey = process.env.STRAPI_API_KEY;
 
 const jsonData = readFileSync("./needs-data.json", 'utf8');
 const data = JSON.parse(jsonData);
