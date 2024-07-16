@@ -6,22 +6,30 @@
   },
   "options": {},
   "attributes": {
-    "Price": {
+    "packagePrice": {
       "type": "decimal"
     },
-    "Count": {
+    "packagePriceUnit": {
+      "type": "enumeration",
+      "enum": ["USD"],
+      "required": true,
+      "default": "USD"
+    },
+    "countPerPackage": {
       "type": "integer"
     },
-    "PricePerUnit": {
+    "pricePerItemUSD": {
       "type": "decimal"
     },
-    "PricingSource": {
-      "type": "string"
+    "source": {
+      "type": "string",
+      "required": true
     },
-    "LogDate": {
-      "type": "date"
+    "logDate": {
+      "type": "date",
+      "required": true
     },
-    "Notes": {
+    "notes": {
       "type": "text"
     }
   }

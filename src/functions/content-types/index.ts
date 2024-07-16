@@ -4,15 +4,9 @@ export function processContentType(path, data) {
   /*
    Content-manager paths look like this:
     http://host/admin/content-manager/collection-types/api::product.item/15
-
-   API paths look like this (note the use of the plural version here!)
-    http://host/api/items/15 )
-
-   So need to map both options to the appropriate handler
   */
   const contentTypeHandlers = {
     "product.item": processProductItem,
-    items: processProductItem,
   };
 
   const contentType = detectContentType(path);
@@ -20,6 +14,8 @@ export function processContentType(path, data) {
   const handler = contentTypeHandlers[contentType];
   if (handler) {
     return handler(data);
+  } else {
+    return data;
   }
 }
 

@@ -6,26 +6,23 @@
   },
   "options": {},
   "attributes": {
-    "Items": {
+    "items": {
       "type": "integer"
     },
-    "People": {
+    "people": {
       "type": "integer"
     },
-    "Type": {
+    "type": {
       "type": "enumeration",
-      "enum": [
-        "DA",
-        "SPHERE"
-      ]
+      "enum": ["DA", "SPHERE"]
     },
-    "Months": {
+    "months": {
       "type": "integer"
     },
-    "MonthlyNeedsMetPerUnit": {
+    "monthlyNeedsMetPerItem": {
       "type": "decimal"
     },
-    "Notes": {
+    "notes": {
       "type": "text"
     }
   }
