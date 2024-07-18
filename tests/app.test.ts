@@ -1,5 +1,4 @@
-const fs = require("fs");
-const { setupStrapi, cleanupStrapi } = require("./helpers/strapi");
+import { setupStrapi, cleanupStrapi } from "./helpers/strapi";
 
 beforeAll(async () => {
   await setupStrapi();
