@@ -1295,8 +1295,16 @@ export interface ApiReportingCargo extends Schema.CollectionType {
       'oneToOne',
       'api::geo.country'
     >;
-    senderCount: Attribute.Integer;
-    receiverCount: Attribute.Integer;
+    sender: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::group.group'
+    >;
+    receiver: Attribute.Relation<
+      'api::reporting.cargo',
+      'oneToOne',
+      'api::group.group'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

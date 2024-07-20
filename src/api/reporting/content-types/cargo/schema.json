@@ -94,11 +94,15 @@
       "relation": "oneToOne",
       "target": "api::geo.country"
     },
-    "senderCount": {
-      "type": "integer"
+    "sender": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::group.group"
     },
-    "receiverCount": {
-      "type": "integer"
+    "receiver": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::group.group"
     }
   }
 }
