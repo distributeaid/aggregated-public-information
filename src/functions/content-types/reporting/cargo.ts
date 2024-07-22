@@ -17,7 +17,7 @@ export function processCargo(data) {
     return data;
   }
 
-  if (packageUnit === 'Item' || packageUnit === 'Single item') {
+  if (packageUnit === 'Item' || packageUnit === 'Single Item') {
     data.itemCount = packageCount;
     return data;
   }
