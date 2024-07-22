@@ -65,9 +65,6 @@
     "totalNeedsMet": {
       "type": "decimal"
     },
-    "standardItemCount": {
-      "type": "integer"
-    },
     "shipment": {
       "type": "relation",
       "relation": "manyToOne",
