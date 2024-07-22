@@ -22,13 +22,14 @@ export function processContentType(path, data) {
 
   const handler = contentTypeHandlers[contentType];
   if (handler) {
+    console.log(`Processing content type: ${contentType}`);
     return handler(data);
   } else {
     return data;
   }
 }
 
-function detectContentType(path) {
+function detectContentType(path: string): string {
   if (path.includes("content-manager/collection-types/api::")) {
     return path.split("api::")[1].split("/")[0];
   }
@@ -36,4 +37,7 @@ function detectContentType(path) {
   if (path.includes("/api/")) {
     return path.split("/api/")[1].split("/")[0];
   }
+
+  console.log('Unable to detect content type from path:', path);
+  return '';
 }
