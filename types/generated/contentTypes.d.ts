@@ -1269,7 +1269,6 @@ export interface ApiReportingCargo extends Schema.CollectionType {
     valueInSendingCountry: Attribute.Decimal;
     valueInReceivingCountry: Attribute.Decimal;
     totalNeedsMet: Attribute.Decimal;
-    standardItemCount: Attribute.Integer;
     shipment: Attribute.Relation<
       'api::reporting.cargo',
       'manyToOne',
