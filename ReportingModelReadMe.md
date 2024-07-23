@@ -1,18 +1,18 @@
 # ReportingModelReadMe
 
 ## Table of Contents
-- Overview
-- Strapi Environment Setup
-- Grouping Models
-- Reporting Models
-- Group Model
-- Functions
-- Bulk Entry
-- Data Sources
-- Troubleshooting
-- Costs Involved
-- Passwords and Credentials
-- Contact Information
+- [Overview](#overview)
+- [Strapi Environment Setup](#strapi-environment-setup)
+- [Grouping Models](#grouping-models)
+- [Reporting Models](#reporting-models)
+- [Group Model](#group-model)
+- [Functions](#functions)
+- [Bulk Entry](#bulk-entry)
+- [Data Sources](#data-sources)
+- [Troubleshooting](#troubleshooting)
+- [Costs Involved](#costs-involved)
+- [Passwords and Credentials](#passwords-and-credentials)
+- [Contact Information](#contact-information)
 
 ## Overview
 This project involves setting up a Strapi environment to manage and report data efficiently. The environment was set up on Gitpod, and all changes are recorded in Distribute Aid's GitHub repository: [aggregated-public-information, branch FinalReportingModels](https://github.com/distributeaid/aggregated-public-information/tree/FinalReportingModels).
@@ -88,10 +88,52 @@ The provided Python script, [bulkEntryItem.py](https://github.com/distributeaid/
 
 ### Key Functions and Logic
 1. **csv_to_json_entries**: Reads the CSV file and converts it into JSON entries.
+    ```python
+    def csv_to_json_entries(csv_file_name):
+        entries = []
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_file_path = os.path.join(script_dir, csv_file_name)
+        ...
+        return entries
+    ```
 2. **post_entries_to_api**: Posts the JSON entries to the specified API endpoint.
+    ```python
+    def post_entries_to_api(entries, api_url, api_key):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+        ...
+    ```
 3. **Data Parsing Functions**: These helper functions (`parse_number`, `parse_integer`, `parse_string`, `parse_enum`, `parse_date`) handle the conversion of CSV data into appropriate types for the API.
+    ```python
+    def parse_number(value, default=0):
+        try:
+            return float(value.replace(',', '').replace('$', '')) if value else default
+        except (ValueError, TypeError):
+            return default
+    ```
 4. **Category Mapping**: Maps category names from the CSV to their corresponding IDs in the API.
+    ```python
+    category_mapping = {
+        "baby": 13,
+        "cleaning": 18,
+        "clothing": 12,
+        ...
+    }
+    def get_category_number(category_name):
+        return category_mapping.get(category_name.lower())
+    ```
 5. **Validation**: Ensures that all required fields are present before posting data to the API.
+    ```python
+    def has_required_fields(entry, required_fields):
+        return all(field in entry and entry[field] for field in required_fields)
+    ```
+
+### Important Considerations
+- **Model-Specific Design**: The script is designed specifically for the item model. It must be adapted for use with other models due to differences in required fields and data types.
+- **Category Mapping**: Ensure that the category mapping is up-to-date and includes all relevant categories.
+- **Error Handling**: The script includes basic error handling to skip entries with missing or invalid categories and to report failed API requests.
 
 ## Data Sources
 All the data and model structure used the Distribute Aid's reporting data.
