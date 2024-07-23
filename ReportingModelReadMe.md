@@ -1,12 +1,26 @@
 # ReportingModelReadMe
 
+## Table of Contents
+- Overview
+- Strapi Environment Setup
+- Grouping Models
+- Reporting Models
+- Group Model
+- Functions
+- Bulk Entry
+- Data Sources
+- Troubleshooting
+- Costs Involved
+- Passwords and Credentials
+- Contact Information
+
 ## Overview
 This project involves setting up a Strapi environment to manage and report data efficiently. The environment was set up on Gitpod, and all changes are recorded in Distribute Aid's GitHub repository: [aggregated-public-information, branch FinalReportingModels](https://github.com/distributeaid/aggregated-public-information/tree/FinalReportingModels).
 
 Whenever changes are made in Strapi (both front and back end), GitHub records these commits. Some actions also edit documentation files due to the setup. Since these are not relevant, the focus here is on the main files created.
 
 ## Strapi Environment Setup
-For setting up the Strapi environment, please refer to the [README.md file in the repository](https://github.com/distributeaid/aggregated-public-information/blob/FinalReportingModels/README.md).
+For installing and setting up the Strapi environment, please refer to the [README.md file in the repository](https://github.com/distributeaid/aggregated-public-information/blob/FinalReportingModels/README.md).
 
 ## Grouping Models
 Whenever generating a model in Strapi, it auto-generates the `content-types`, `controller`, `routes`, and `services` folders. To group models (e.g., the reporting models), you need to combine each model's `content-types`, `controllers`, `routes`, and `services` folders to one.
@@ -74,59 +88,26 @@ The provided Python script, [bulkEntryItem.py](https://github.com/distributeaid/
 
 ### Key Functions and Logic
 1. **csv_to_json_entries**: Reads the CSV file and converts it into JSON entries.
-    ```python
-    def csv_to_json_entries(csv_file_name):
-        entries = []
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_file_path = os.path.join(script_dir, csv_file_name)
-        ...
-        return entries
-    ```
 2. **post_entries_to_api**: Posts the JSON entries to the specified API endpoint.
-    ```python
-    def post_entries_to_api(entries, api_url, api_key):
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
-        }
-        ...
-    ```
 3. **Data Parsing Functions**: These helper functions (`parse_number`, `parse_integer`, `parse_string`, `parse_enum`, `parse_date`) handle the conversion of CSV data into appropriate types for the API.
-    ```python
-    def parse_number(value, default=0):
-        try:
-            return float(value.replace(',', '').replace('$', '')) if value else default
-        except (ValueError, TypeError):
-            return default
-    ```
 4. **Category Mapping**: Maps category names from the CSV to their corresponding IDs in the API.
-    ```python
-    category_mapping = {
-        "baby": 13,
-        "cleaning": 18,
-        "clothing": 12,
-        ...
-    }
-    def get_category_number(category_name):
-        return category_mapping.get(category_name.lower())
-    ```
 5. **Validation**: Ensures that all required fields are present before posting data to the API.
-    ```python
-    def has_required_fields(entry, required_fields):
-        return all(field in entry and entry[field] for field in required_fields)
-    ```
 
-### Important Considerations
-- **Model-Specific Design**: The script is designed specifically for the item model. It must be adapted for use with other models due to differences in required fields and data types.
-- **Category Mapping**: Ensure that the category mapping is up-to-date and includes all relevant categories.
-- **Error Handling**: The script includes basic error handling to skip entries with missing or invalid categories and to report failed API requests.
+## Data Sources
+All the data and model structure used the Distribute Aid's reporting data.
 
+## Troubleshooting
+Whenever writing a function, remember to change the controller and index.ts file for the functions to work.
+The bulk entry data need to be fitting the data structure of the model for it to work.
+
+## Costs Involved
+There is no additional cost needed for this project since it is using the existing platforms.
+
+## Passwords and Credentials
+No passwords and credentials are needed. API tokens can be generated in the Strapi settings.
 
 ## Contact Information
-
-For any questions or concerns regarding the initial strapi reporting model development, please contact:
-
+For any questions or concerns regarding the initial Strapi reporting model development, please contact:
 - Name: Ivy
 - Email: qianlou.ivy@gmail.com
 - GitHub: https://github.com/ItIsIvyLou
-
