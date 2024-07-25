@@ -1,4 +1,13 @@
 ############################
+# Project
+############################
+
+# Ignore the generated documentation since it updates a timestamp on each build.
+# Manually override the git ignore using `git add -f` in order to update the docs.
+src/extensions/documentation/documentation/1.0.0/full_documentation.json
+
+
+############################
 # OS X
 ############################
 
