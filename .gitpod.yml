@@ -4,6 +4,12 @@
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
+ports:
+    - name: Strapi
+      port: 1337
+      onOpen: open-browser
+      visibility: public
+
 tasks:
   - name: dev server
     init: yarn install && yarn run build
@@ -11,3 +17,4 @@ tasks:
 
   - name: bash
     init: bash
+    command: export STRAPI_URL=$(gp url 1337)
