@@ -11,3 +11,5 @@ afterAll(async () => {
 it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
+
+import "./item";
