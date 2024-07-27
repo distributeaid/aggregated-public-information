@@ -18,6 +18,7 @@
     ".tmp/",
     "src/admin/",
     "**/*.test.*",
-    "src/plugins/**"
+    "src/plugins/**",
+    "src/scripts/**"
   ]
 }
