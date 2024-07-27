@@ -10,7 +10,7 @@ const volCBMMap = {
   'Bulk Bag': 0.729
 };
 
-export function processCargo(data) {
+export function processReportingCargo(data) {
   const { packageCount, packageUnit, item } = data;
 
   if (!packageCount || !packageUnit || !item) {
