@@ -8,8 +8,9 @@ import { processProductItem } from "../../../functions/content-types/product/ite
 export default factories.createCoreController(
   "api::product.item",
 
-  ({ strapi }) => ({
+  () => ({
     async create(ctx) {
+      // @ts-expect-error 2339
       ctx.request.body.data = processProductItem(ctx.request.body.data);
 
       const result = await super.create(ctx);
@@ -17,10 +18,11 @@ export default factories.createCoreController(
     },
 
     async update(ctx) {
+      // @ts-expect-error 2339
       ctx.request.body.data = processProductItem(ctx.request.body.data);
 
       const result = await super.update(ctx);
       return result;
     },
-  })
+  }),
 );

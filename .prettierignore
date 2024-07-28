@@ -1,0 +1,12 @@
+# Ignore artifacts:
+build
+coverage
+dist
+.strapi
+.yarn
+.tmp
+*.example.ts
+*.example.js
+types/generated
+src/api/*/documentation
+src/extensions/documentation

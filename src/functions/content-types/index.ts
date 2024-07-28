@@ -11,7 +11,7 @@ export function processContentType(path, data) {
 
   const contentType = detectContentType(path);
 
-  const handler = contentTypeHandlers[contentType];
+  const handler = contentType && contentTypeHandlers[contentType];
   if (handler) {
     return handler(data);
   } else {
@@ -19,7 +19,7 @@ export function processContentType(path, data) {
   }
 }
 
-function detectContentType(path) {
+function detectContentType(path: string) {
   if (path.includes("content-manager/collection-types/api::")) {
     return path.split("api::")[1].split("/")[0];
   }

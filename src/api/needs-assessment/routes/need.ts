@@ -2,6 +2,6 @@
  * need router
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreRouter('api::needs-assessment.need');
+export default factories.createCoreRouter("api::needs-assessment.need");

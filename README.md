@@ -37,11 +37,12 @@ yarn build
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
 
 # 🚀 Getting started with Gitpod
+
 Gitpod provides a fully automated development environment for your Strapi project, and the development environment is set up with just a single click. Follow these steps to get started:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/distributeaid/aggregated-public-information)
 
-1. Click the ``Open in Gitpod`` button above. Note: you'll need to have an account on [Gitpod](https://gitpod.io/login/) before proceeding with the next steps (this requires a GitHub account)..
+1. Click the `Open in Gitpod` button above. Note: you'll need to have an account on [Gitpod](https://gitpod.io/login/) before proceeding with the next steps (this requires a GitHub account)..
 2. Click the `Continue` button.
 3. Relax, a development environment is being set up for you in the first terminal. There's currently a bug that will stop the setup from being completed, but we'll fix that in the next steps.
 4. Create a new file called `.env` to store the environment variables.
@@ -53,8 +54,6 @@ Gitpod provides a fully automated development environment for your Strapi projec
 10. After running these steps, you can then start the build to build the admin panel by running `yarn build`.
 11. Run `yarn develop`. This starts the development server at [http://localhost:1337/admin](http://localhost:1337/admin).
 12. To access your workspace later, go to [Gitpod Workspaces](https://gitpod.io/workspaces). Pin the `aggregated-public-information` workspace to prevent auto-deletion after 14 days by clicking the three dots next to the workspace name and selecting "Pin".
-
-
 
 ## 📚 Learn more
 

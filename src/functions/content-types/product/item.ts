@@ -22,7 +22,7 @@ function calculateWeightFields(data) {
 
   const normalizedPagkageWeight = normalizeToKg(
     packageWeight,
-    packageWeightUnit
+    packageWeightUnit,
   );
 
   let itemWeightKg = normalizedPagkageWeight / countPerPackage;
@@ -39,7 +39,7 @@ function calculateVolumeFields(data) {
 
   const normalizedPagkageVolume = normalizeToCM(
     packageVolume,
-    packageVolumeUnit
+    packageVolumeUnit,
   );
 
   let itemVolumeCBCM = normalizedPagkageVolume / countPerPackage;

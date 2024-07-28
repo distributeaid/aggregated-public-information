@@ -1,0 +1,16 @@
+name: Checks
+on:
+  - pull_request
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install modules
+        run: yarn
+      - name: Run type check
+        run: yarn run check:types
+      - name: Run lint check
+        run: yarn run check:lint
+      - name: Run format check
+        run: yarn run check:format
