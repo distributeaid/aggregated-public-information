@@ -14,3 +14,5 @@ jobs:
         run: yarn run check:lint
       - name: Run format check
         run: yarn run check:format
+      - name: Run tests
+        run: yarn test
