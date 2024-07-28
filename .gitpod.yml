@@ -4,6 +4,11 @@
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
+ports:
+  - name: Strapi
+    port: 1337
+    visibility: public
+
 tasks:
   - name: dev server
     init: yarn install && yarn run build

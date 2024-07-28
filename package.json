@@ -11,7 +11,8 @@
     "build": "strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "import:product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
     "@strapi/plugin-documentation": "4.24.3",
@@ -37,6 +38,7 @@
   },
   "packageManager": "yarn@4.3.1",
   "devDependencies": {
-    "csvtojson": "^2.0.10"
+    "csvtojson": "^2.0.10",
+    "esrun": "^3.2.26"
   }
 }
