@@ -1,12 +1,13 @@
 import Strapi, { LoadedStrapi } from "@strapi/strapi";
 import type { Database } from "@strapi/database";
+import * as path from "path";
 import * as fs from "fs";
 
 let instance: LoadedStrapi;
 
 export const setupStrapi = async () => {
   if (!instance) {
-    await Strapi({ distDir: "./dist" }).load();
+    await Strapi({ distDir: path.resolve("./dist") }).load();
     instance = strapi;
 
     instance.server.mount();
