@@ -11,11 +11,13 @@ jobs:
           node-version-file: package.json
           cache: yarn
           cache-dependency-path: yarn.lock
+      - name: Install modules
+        run: corepack yarn
       - name: Run type check
-        run: yarn run check:types
+        run: corepack yarn run check:types
       - name: Run lint check
-        run: yarn run check:lint
+        run: corepack yarn run check:lint
       - name: Run format check
-        run: yarn run check:format
+        run: corepack yarn run check:format
       - name: Run tests
-        run: yarn test
+        run: corepack yarn test
