@@ -1,5 +1,6 @@
 import { toTitleCase } from "../helpers"
 import { STRAPI_ENV } from "../strapi-env"
+import { getCategories } from "./get-existing-data"
 
 
 /* Categories
@@ -11,25 +12,28 @@ export default async function addCategories(products) {
   console.log("Adding categories from Product Info sheet...")
 
   const categories = await parseCategories(products)
-  const existingCategories = await getExistingCategories()
-  const newCategories = diffCategories(categories, existingCategories)
-  const responses = await uploadCategories(newCategories)
+  const existingCategories = await getCategories()
+  const newCategories = diffCategories(
+    categories,
+    new Set(Object.keys(existingCategories))
+  )
+  await uploadCategories(newCategories)
 
   console.log("Adding categories completed!")
 }
 
-/* Parse CSV Categories
+/* Parse Categories
  * ----------------------------------------------------- */
-function parseCategories(products) {
+function parseCategories(products): Set<string> {
   console.log("    - parsing categories")
 
   const categories = products.reduce(
     (cats: Set<string>, product, line) => {
-      if (product["Category"] === '') {
+      if (product.category.name === '') {
         console.log(`    - skipping empty category on line ${line}`)
         console.log(`      ${JSON.stringify(product)}`)
       } else {
-        const category = toTitleCase(product["Category"])
+        const category = toTitleCase(product.category.name)
         cats.add(category)
       }
 
@@ -41,38 +45,9 @@ function parseCategories(products) {
   return categories
 }
 
-/* Get Existing Categories
- * ----------------------------------------------------- */
-export async function getExistingCategories() {
-  console.log("    - getting existing categories")
-
-  let response = await fetch(`${STRAPI_ENV.URL}/categories`, {
-    method: "GET",
-    headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${STRAPI_ENV.KEY}`
-    },
-  });
-
-  if (!response.ok) {
-    console.log(response)
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-
-  const responseJson = await response.json()
-  const existingCategories = responseJson.data.reduce(
-    (cats: Set<string>, category) => {
-      return cats.add(category.attributes.name)
-    },
-    new Set<string>()
-  )
-
-  return existingCategories
-}
-
 /* Diff Categories
  * ----------------------------------------------------- */
-function diffCategories(categories, existingCategories) {
+function diffCategories(categories: Set<string>, existingCategories: Set<string>) {
   const newCategories = [...categories].filter(
     (category) => {
       if (existingCategories.has(category)) {
