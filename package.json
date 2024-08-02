@@ -38,7 +38,9 @@
   },
   "packageManager": "yarn@4.3.1",
   "devDependencies": {
+    "@types/qs": "^6",
     "csvtojson": "^2.0.10",
-    "esrun": "^3.2.26"
+    "esrun": "^3.2.26",
+    "qs": "^6.13.0"
   }
 }
