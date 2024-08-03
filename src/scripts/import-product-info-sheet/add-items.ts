@@ -4,8 +4,37 @@ import { toTitleCase } from "../helpers"
 import { getCategories } from "./get-existing-data"
 import type { NameToIdMap } from "./get-existing-data"
 
+enum ItemUploadWorkflowStatus {
+  PROCESSING = "PROCESSING",
+  ORIGINAL_DATA_INVALID = "ORIGINAL_DATA_INVALID",
+  DUPLICATE_CHECK_ERROR = "DUPLICATE_CHECK_ERROR",
+  ALREADY_EXISTS = "ALREADY_EXISTS",
+  UPLOAD_ERROR = "UPLOAD_ERROR",
+  SUCCESS = "SUCCESS",
+  OTHER = "OTHER"
+}
+
+type ItemUploadWorkflow = {
+  item: any,
+  origItem: any,
+  status: ItemUploadWorkflowStatus,
+  logs: string[]
+}
+
 /* Categories
- * ========================================================================= */
+ * =========================================================================
+ * NOTE: If there are duplicate items in the Product Info Sheet, there's a
+ *       race-conition where those items may be uploaded at the same time.
+ *       Usually the script prevents duplicates by checking if the item
+ *       already exists on the server (so that running it multiple times)
+ *       doesn't save all the items again.  But when you're running the
+ *       script for the first time (or after purging the server data)
+ *       then those items won't exist there, pass the check, and the
+ *       duplicates in the data will be created on the server.
+ *
+ * TODO: To prevent this, we should check for duplicate items in the data
+ *       during the parsing stage, and then skip them.
+ */
 
 /* Add Items
  * ----------------------------------------------------- */
@@ -13,23 +42,75 @@ export default async function addItems(products) {
   console.log("Adding items from Product Info sheet...")
 
   const categories = await getCategories()
-  const results = await Promise.allSettled(
-    products.map((product) => {
-      return parseItem(product, categories)
-        .then((value) => {
-          return value
-        })
+  const results = await Promise.allSettled<ItemUploadWorkflow>(
+    products.map((origItem) => {
+      const workflow: ItemUploadWorkflow = {
+        item: {},
+        origItem,
+        status: ItemUploadWorkflowStatus.PROCESSING,
+        logs: []
+      }
+
+      return parseItem(workflow, categories)
         .then(getItem)
         .then(uploadItem)
     })
   )
 
-  results.forEach((result) => {
-    console.log(result)
-  })
+  // { "SUCCESS": [], "ALREADY_EXISTS": [], ...}
+  const resultsMap = Object.keys(ItemUploadWorkflowStatus).reduce((resultsMap, key) => {
+    resultsMap[key] = []
+    return resultsMap
+  }, {})
 
+  results
+    .map((result) => {
+      if (isFulfilled(result)) {
+        return result.value
+      } else {
+        return result.reason as ItemUploadWorkflow
+      }
+    })
+    .reduce(
+      (resultsMap, workflowResult) => {
+        if (workflowResult.status) {
+          resultsMap[workflowResult.status].push(workflowResult)
+        } else {
+          resultsMap[ItemUploadWorkflowStatus.OTHER].push(workflowResult)
+        }
+        return resultsMap
+      },
+      resultsMap
+    )
+  
+  console.log("Add items results:")
+  Object.keys(resultsMap).forEach((key) => {
+    console.log(`    ${key}: ${resultsMap[key].length}`)
+
+    // NOTE: uncomment & set the status key to debug different types of results
+    if (key === ItemUploadWorkflowStatus.DUPLICATE_CHECK_ERROR) {
+      // resultsMap[key].forEach((result) => {
+      //   console.log(result.logs)
+      //   console.log(JSON.stringify(result.item))
+      //   console.log("/n")
+      // })
+    }
+  })
   console.log("Adding items completed!")
 }
+
+const isFulfilled = <T>(
+  value: PromiseSettledResult<T>
+): value is PromiseFulfilledResult<T> => {
+  return value.status === 'fulfilled'
+}
+
+const isRejected = <T>(
+  value: PromiseSettledResult<T>
+): value is PromiseRejectedResult => {
+  return value.status === 'rejected'
+}
+
 
 /* Parse Item
  * ------------------------------------------------------ */
@@ -46,38 +127,45 @@ function stripAndParseFloat(numberString: string): number {
 }
 
 function parseItem(
-  origItem,
+  {item, origItem, status, logs}: ItemUploadWorkflow,
   categories: NameToIdMap
-): Promise<{item: any, origItem: any, logs: string[]}> {
-  const logs = [
+): Promise<ItemUploadWorkflow> {
+  logs = [
+    ...logs,
     `Log: Parsing item "${origItem.name} // ${origItem.age_gender} // ${origItem.size_style}".`
   ]
 
-  return new Promise<{item: any, origItem: any, logs: string[]}>((resolve, reject) => {
-    if (origItem.name === "") {
-      reject({
-        item: {},
-        origItem,
-        logs: [
-          ...logs,
-          "Error: Item is missing a name. Skipping..."
-        ]
-      })
-    }
-
-    resolve({
-      item: {
-        name: toTitleCase(origItem.name),
-        age_gender: toTitleCase(origItem.age_gender),
-        size_style: origItem.size_style,
-        packSize: stripAndParseInt(origItem.packSize) || 1, // default to 1
-        uuid: undefined, // TODO: add uuid support in the model
-      },
-      origItem,
-      logs
-    })
+  // create and immediately resolve a promise to let us chain
+  return new Promise<ItemUploadWorkflow>((resolve, _reject) => {
+    resolve({item, origItem, status, logs})
   })
-    .then((results) => {
+    .then(({item, origItem, status, logs}): ItemUploadWorkflow => {    
+      if (origItem.name === "") {
+        throw {
+          item,
+          origItem,
+          status: ItemUploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+          logs: [
+            ...logs,
+            "Error: Item is missing a name. Skipping..."
+          ]
+        }
+      }
+
+      return {
+        item: {
+          name: toTitleCase(origItem.name),
+          age_gender: toTitleCase(origItem.age_gender),
+          size_style: origItem.size_style,
+          packSize: stripAndParseInt(origItem.packSize) || 1, // default to 1
+          uuid: undefined, // TODO: add uuid support in the model
+        },
+        origItem,
+        status,
+        logs
+      }
+    })
+    .then((results): ItemUploadWorkflow => {
       return parseCategory(results, categories)
     })
     .then(parseNeedsMet)
@@ -85,10 +173,11 @@ function parseItem(
     .then(parseValue)
     .then(parseWeight)
     .then(parseVolume)
-    .then(({item, logs}) => {
+    .then(({item, origItem, status, logs}): ItemUploadWorkflow => {
       return {
         item,
         origItem,
+        status,
         logs: [
           ...logs,
           "Log: Successfully parsed item."
@@ -98,13 +187,14 @@ function parseItem(
 }
 
 function parseCategory(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]},
+  {item, origItem, status, logs}: ItemUploadWorkflow,
   categories: NameToIdMap
 ) {
   if (origItem.category.name === "") {
     throw {
       item,
       origItem,
+      status: ItemUploadWorkflowStatus.ORIGINAL_DATA_INVALID,
       logs: [
         ...logs,
         "Error: Category is missing a name.  Skipping..."
@@ -112,11 +202,12 @@ function parseCategory(
     }
   }
 
-  const categoryId = categories[origItem.category.name]
+  const categoryId = categories[toTitleCase(origItem.category.name)]
   if (categoryId === undefined) {
     throw {
       item,
       origItem,
+      status: ItemUploadWorkflowStatus.ORIGINAL_DATA_INVALID,
       logs: [
         ...logs,
         "Error: Category doesn't exist.  Skipping..."
@@ -130,13 +221,14 @@ function parseCategory(
       category: categoryId
     },
     origItem,
+    status,
     logs
   }
 }
 
 function parseNeedsMet(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): {item: any, origItem: any, logs: string[]}  {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): ItemUploadWorkflow  {
   const needsMet = origItem.needsMet
 
   // no needs met info
@@ -148,6 +240,7 @@ function parseNeedsMet(
     return {
       item,
       origItem,
+      status,
       logs
     }
   }
@@ -160,6 +253,7 @@ function parseNeedsMet(
     return {
       item,
       origItem,
+      status,
       logs: [
         ...logs,
         "Error: Incomplete needsMet data. Ignoring..."
@@ -175,18 +269,19 @@ function parseNeedsMet(
         people: stripAndParseInt(needsMet.people),
         months: stripAndParseInt(needsMet.months),
         monthlyNeedsMetPerItem: undefined, // calculated
-        type: needsMet.type,
+        type: needsMet.type.toUpperCase(),
         notes: needsMet.notes
       }
     },
     origItem,
+    status,
     logs
   }
 }
 
 function parseSecondHand(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): {item: any, origItem: any, logs: string[]}  {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): ItemUploadWorkflow  {
   const secondHand = origItem.secondHand
 
   if ( secondHand.priceAdjustment === "N/A"
@@ -201,6 +296,7 @@ function parseSecondHand(
         }
       },
       origItem,
+      status,
       logs
     }
   } else {
@@ -213,14 +309,15 @@ function parseSecondHand(
         }
       },
       origItem,
+      status,
       logs
     }
   }
 }
 
 function parseValue(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): {item: any, origItem: any, logs: string[]}  {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): ItemUploadWorkflow  {
   const value = origItem.value[0]
 
   // no value info
@@ -234,6 +331,7 @@ function parseValue(
     return {
       item,
       origItem,
+      status,
       logs
     }
   }
@@ -248,6 +346,7 @@ function parseValue(
     return {
       item,
       origItem,
+      status,
       logs: [
         ...logs,
         "Error: Incomplete value data. Ignoring..."
@@ -260,7 +359,14 @@ function parseValue(
       ...item,
       value: [{
         packagePrice: stripAndParseFloat(value.packagePrice),
-        packagePriceUnit: value.packagePriceUnit,
+        packagePriceUnit:
+          // TODO: spreadsheet data lists this column as country
+          //       backend lists it as currency
+          //       it should probably be both for the economic context
+          //       (i.e. USD in USA)
+          value.packagePriceUnit === "USA"
+            ? "USD"
+            : value.packagePriceUnit,
         countPerPackage: stripAndParseInt(value.countPerPackage),
         pricePerItemUSD: undefined, // calculated
         source: value.source,
@@ -269,13 +375,14 @@ function parseValue(
       }]
     },
     origItem,
+    status,
     logs
   }
 }
 
 function parseWeight(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): {item: any, origItem: any, logs: string[]}  {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): ItemUploadWorkflow  {
   const weight = origItem.weight[0]
 
   // no weight data
@@ -288,6 +395,7 @@ function parseWeight(
     return {
       item,
       origItem,
+      status,
       logs
     }
   }
@@ -301,6 +409,7 @@ function parseWeight(
     return {
       item,
       origItem,
+      status,
       logs: [
         ...logs,
         "Error: Incomplete weight data. Ignoring..."
@@ -323,13 +432,14 @@ function parseWeight(
       }]
     },
     origItem,
+    status,
     logs
   }
 }
 
 function parseVolume(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): {item: any, origItem: any, logs: string[]}  {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): ItemUploadWorkflow  {
   const volume = origItem.volume[0]
 
   // no volume data
@@ -342,6 +452,7 @@ function parseVolume(
     return {
       item,
       origItem,
+      status,
       logs
     }
   }
@@ -355,6 +466,7 @@ function parseVolume(
     return {
       item,
       origItem,
+      status,
       logs: [
         ...logs,
         "Error: Incomplete volume data. Ignoring..."
@@ -377,6 +489,7 @@ function parseVolume(
       }]
     },
     origItem,
+    status,
     logs
   }
 }
@@ -384,11 +497,11 @@ function parseVolume(
 /* Get Item
  * ----------------------------------------------------- */
 async function getItem(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): Promise<{item: any, origItem: any, logs: string[]}> {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): Promise<ItemUploadWorkflow> {
   logs = [
     ...logs,
-    `Log: Checking if item "${item.name} // ${item.age_gender} // ${item.size_style}" already exists.`
+    `Log: Checking if item "${origItem.name} // ${origItem.age_gender} // ${origItem.size_style}" already exists.`
   ]
 
   const query = qs.stringify({
@@ -419,6 +532,7 @@ async function getItem(
     throw {
       item,
       origItem,
+      status: ItemUploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       logs: [
         ...logs,
         `Error: Failed to get item. HttpStatus: ${response.status} - ${response.statusText}`,
@@ -431,6 +545,7 @@ async function getItem(
     throw {
       item,
       origItem,
+      status: ItemUploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       logs: [
         ...logs,
         `Error: Found too many matching items (${body.data.length}). Skipping...`
@@ -440,11 +555,9 @@ async function getItem(
 
   if (body.data.length === 1) {
     throw {
-      item: {
-        ...item,
-        id: body.data[0].id
-      },
+      item: body.data[0],
       origItem,
+      status: ItemUploadWorkflowStatus.ALREADY_EXISTS,
       logs: [
         ...logs,
         "Log: Found existing item. Skipping..."
@@ -453,8 +566,9 @@ async function getItem(
   }
 
   return {
-    item: body.data[0],
+    item,
     origItem,
+    status,
     logs: [
       ...logs,
       "Success: Confirmed item does not exist."
@@ -465,11 +579,11 @@ async function getItem(
 /* Upload Item
  * ------------------------------------------------------ */
 async function uploadItem(
-  {item, origItem, logs}: {item: any, origItem: any, logs: string[]}
-): Promise<{item: any, origItem: any, logs: string[]}> {
+  {item, origItem, status, logs}: ItemUploadWorkflow
+): Promise<ItemUploadWorkflow> {
   logs = [
     ...logs,
-    `Log: Creating item "${item.name} // ${item.age_gender} // ${item.size_style}".`
+    `Log: Creating item "${origItem.name} // ${origItem.age_gender} // ${origItem.size_style}".`
   ]
 
   const response = await fetch(`${STRAPI_ENV.URL}/items`, {
@@ -486,6 +600,7 @@ async function uploadItem(
     throw {
       item,
       origItem,
+      status: ItemUploadWorkflowStatus.UPLOAD_ERROR,
       logs: [
         ...logs,
         `Error: Failed to create item. HttpStatus: ${response.status} - ${response.statusText}`,
@@ -497,6 +612,7 @@ async function uploadItem(
   return {
     item: body.data,
     origItem,
+    status: ItemUploadWorkflowStatus.SUCCESS,
     logs: [
       ...logs,
       "Success: Created item."
