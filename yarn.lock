@@ -8014,7 +8014,6 @@ __metadata:
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
     react-router-dom: "npm:^6.0.0"
-    strapi-plugin-multi-select: "npm:^1.2.2"
     strapi-plugin-slugify: "npm:^2.3.5"
     styled-components: "npm:^6.0.0"
     typescript: "npm:^5"
@@ -18318,15 +18317,6 @@ __metadata:
   version: 1.5.0
   resolution: "statuses@npm:1.5.0"
   checksum: 10c0/e433900956357b3efd79b1c547da4d291799ac836960c016d10a98f6a810b1b5c0dcc13b5a7aa609a58239b5190e1ea176ad9221c2157d2fd1c747393e6b2940
-  languageName: node
-  linkType: hard
-
-"strapi-plugin-multi-select@npm:^1.2.2":
-  version: 1.2.3
-  resolution: "strapi-plugin-multi-select@npm:1.2.3"
-  peerDependencies:
-    "@strapi/strapi": ^4.4.0
-  checksum: 10c0/e2b9a9f4a486f4be5d871ceafbf3910bdb6f1f10ef20342457f991ddf1d5892ec6fd4a0fdaae72e2fc53c039e0dded06193382316443b1fbe158a59f0e5ceda1
   languageName: node
   linkType: hard
 
