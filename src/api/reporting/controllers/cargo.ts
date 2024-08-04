@@ -3,6 +3,7 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { processReportingCargo } from "../../../functions/content-types/reporting/cargo";
 
 export default factories.createCoreController(
   "api::reporting.cargo",
