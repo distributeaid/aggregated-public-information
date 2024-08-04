@@ -36,7 +36,7 @@
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
-  "packageManager": "yarn@4.3.1",
+  "packageManager": "yarn@4.4.0",
   "devDependencies": {
     "@types/qs": "^6",
     "csvtojson": "^2.0.10",
