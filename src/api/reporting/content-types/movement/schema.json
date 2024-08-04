@@ -1,0 +1,90 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movements",
+  "info": {
+    "singularName": "movement",
+    "pluralName": "movements",
+    "displayName": "Reporting.Movement"
+  },
+  "options": {},
+  "attributes": {
+    "shipment": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::reporting.shipment"
+    },
+    "segment": {
+      "type": "enumeration",
+      "enum": [
+        "First Mile",
+        "Last Mile",
+        "Main Leg",
+        "Main Leg-Cont"
+      ]
+    },
+    "pickupDate": {
+      "type": "date"
+    },
+    "dropoffDate": {
+      "type": "date"
+    },
+    "packageCount": {
+      "type": "integer"
+    },
+    "packagingType": {
+      "type": "string"
+    },
+    "totalCargoVolM3": {
+      "type": "decimal"
+    },
+    "totalCargoWeightKG": {
+      "type": "decimal"
+    },
+    "vehicleCount": {
+      "type": "integer"
+    },
+    "pickUpAddress": {
+      "type": "text"
+    },
+    "dropOffAddress": {
+      "type": "text"
+    },
+    "distanceKM": {
+      "type": "integer"
+    },
+    "notes": {
+      "type": "text"
+    },
+    "deliveryMethod": {
+      "type": "enumeration",
+      "enum": [
+        "FTL",
+        "LTL",
+        "Box Truck",
+        "Van",
+        "Personal Vehicle",
+        "FCL: 20 ft",
+        "FCL: 40 ft",
+        "FCL: 20 ft HC",
+        "FCL: 40 ft HC",
+        "LCL",
+        "Rail",
+        "Air"
+      ]
+    },
+    "involvement": {
+      "type": "enumeration",
+      "enum": [
+        "Advised",
+        "Assisted",
+        "Organized",
+        "Not involved"
+      ]
+    },
+    "serviceProvider": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::group.group"
+    }
+  }
+}

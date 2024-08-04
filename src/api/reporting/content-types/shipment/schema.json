@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipments",
+  "info": {
+    "singularName": "shipment",
+    "pluralName": "shipments",
+    "displayName": "Reporting.Shipment",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "cargo": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reporting.cargo",
+      "mappedBy": "shipment"
+    },
+    "carrierId": {
+      "type": "string"
+    },
+    "carbonOffsetPaid": {
+      "type": "boolean"
+    },
+    "CO2TonsGenerated": {
+      "type": "decimal"
+    },
+    "carbonOffsetCost": {
+      "type": "decimal"
+    },
+    "notes": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Regular Route",
+        "Ad Hoc",
+        "Aid Swap/Local Transfer",
+        "Other"
+      ]
+    },
+    "DARoles": {
+      "type": "json"
+    },
+    "sendingCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "receivingCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "number": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "project": {
+      "type": "enumeration",
+      "enum": [
+        "Covid 19",
+        "Disaster Relief",
+        "Moria Fire",
+        "Refugee Aid - Europe",
+        "Refugee Aid - Lebanon",
+        "Social Enterprise Support",
+        "Ukraine",
+        "US ARR",
+        "Other"
+      ]
+    },
+    "importer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::group.group"
+    },
+    "exporter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::group.group"
+    }
+  }
+}

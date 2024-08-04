@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_product_needs_mets",
+  "info": {
+    "displayName": "Needs Met"
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "integer"
+    },
+    "people": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["DA", "SPHERE"]
+    },
+    "months": {
+      "type": "integer"
+    },
+    "monthlyNeedsMetPerItem": {
+      "type": "decimal"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

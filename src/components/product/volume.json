@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_product_volumes",
+  "info": {
+    "displayName": "Volume",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "packageVolume": {
+      "type": "decimal",
+      "required": true
+    },
+    "packageVolumeUnit": {
+      "type": "enumeration",
+      "enum": ["cubic in", "cubic cm", "cubic ft", "cubic m"],
+      "required": true
+    },
+    "countPerPackage": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "itemVolumeCBCM": {
+      "type": "decimal"
+    },
+    "countPerCBM": {
+      "type": "decimal"
+    },
+    "source": {
+      "type": "string",
+      "required": true
+    },
+    "logDate": {
+      "type": "date",
+      "required": true
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

@@ -2,6 +2,7 @@ export default ({ env }) => ({
   auth: {
     secret: env('ADMIN_JWT_SECRET'),
   },
+  autoOpen: !env.bool('NO_OPEN_BROWSER', false),
   apiToken: {
     salt: env('API_TOKEN_SALT'),
   },

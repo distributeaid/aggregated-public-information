@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Product.Category"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.item",
+      "mappedBy": "category"
+    }
+  }
+}

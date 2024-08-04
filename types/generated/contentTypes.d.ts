@@ -1,105 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
-  collectionName: 'countries';
-  info: {
-    singularName: 'country';
-    pluralName: 'countries';
-    displayName: 'Geo.Country';
-    description: '';
-  };
-  options: {
-    comment: '';
-    draftAndPublish: false;
-  };
-  attributes: {
-    Name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    Code: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 3;
-      }>;
-    Slug: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
-  collectionName: 'regions';
-  info: {
-    singularName: 'region';
-    pluralName: 'regions';
-    displayName: 'Geo.Region';
-    description: '';
-  };
-  options: {
-    comment: '';
-    draftAndPublish: false;
-  };
-  attributes: {
-    Name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    Slug: Schema.Attribute.String;
-    Map: Schema.Attribute.Media<'images'>;
-    Overview: Schema.Attribute.RichText;
-    GovernmentResponse: Schema.Attribute.RichText;
-    Subregions: Schema.Attribute.Relation<'oneToMany', 'api::geo.subregion'>;
-    Countries: Schema.Attribute.Relation<'oneToMany', 'api::geo.country'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiGeoSubregion extends Struct.CollectionTypeSchema {
-  collectionName: 'subregions';
-  info: {
-    singularName: 'subregion';
-    pluralName: 'subregions';
-    displayName: 'Geo.Subregion';
-    description: '';
-  };
-  options: {
-    comment: '';
-    draftAndPublish: false;
-  };
-  attributes: {
-    Name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    Slug: Schema.Attribute.String;
-    Map: Schema.Attribute.Media<'images'>;
-    Overview: Schema.Attribute.RichText;
-    GovernmentResponse: Schema.Attribute.RichText;
-    Region: Schema.Attribute.Relation<'manyToOne', 'api::geo.region'>;
-    Country: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -545,6 +445,472 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiFinancialCurrencyConversion
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'currency_conversions';
+  info: {
+    singularName: 'currency-conversion';
+    pluralName: 'currency-conversions';
+    displayName: 'Financial.CurrencyConversions';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    year: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 4;
+      }>;
+    month: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 12;
+        },
+        number
+      >;
+    currency: Schema.Attribute.Enumeration<
+      ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
+    > &
+      Schema.Attribute.Required;
+    equivalentToUSD: Schema.Attribute.Float & Schema.Attribute.Required;
+    source: Schema.Attribute.String;
+    notes: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
+  collectionName: 'countries';
+  info: {
+    singularName: 'country';
+    pluralName: 'countries';
+    displayName: 'Geo.Country';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    Code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 3;
+      }>;
+    Slug: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
+  collectionName: 'regions';
+  info: {
+    singularName: 'region';
+    pluralName: 'regions';
+    displayName: 'Geo.Region';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    Slug: Schema.Attribute.String;
+    Map: Schema.Attribute.Media<'images'>;
+    Overview: Schema.Attribute.RichText;
+    GovernmentResponse: Schema.Attribute.RichText;
+    Subregions: Schema.Attribute.Relation<'oneToMany', 'api::geo.subregion'>;
+    Countries: Schema.Attribute.Relation<'oneToMany', 'api::geo.country'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiGeoSubregion extends Struct.CollectionTypeSchema {
+  collectionName: 'subregions';
+  info: {
+    singularName: 'subregion';
+    pluralName: 'subregions';
+    displayName: 'Geo.Subregion';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    Slug: Schema.Attribute.String;
+    Map: Schema.Attribute.Media<'images'>;
+    Overview: Schema.Attribute.RichText;
+    GovernmentResponse: Schema.Attribute.RichText;
+    Region: Schema.Attribute.Relation<'manyToOne', 'api::geo.region'>;
+    Country: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiGroupGroup extends Struct.CollectionTypeSchema {
+  collectionName: 'groups';
+  info: {
+    singularName: 'group';
+    pluralName: 'groups';
+    displayName: 'Group';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    shortName: Schema.Attribute.String;
+    groupName: Schema.Attribute.String;
+    umbrellaOrganisation: Schema.Attribute.String;
+    region: Schema.Attribute.Relation<'oneToOne', 'api::geo.region'>;
+    notes: Schema.Attribute.Text;
+    groupConvertFrom: Schema.Attribute.String;
+    shortNameStripped: Schema.Attribute.String;
+    groupNameStripped: Schema.Attribute.Text;
+    groupConvertFromStripped: Schema.Attribute.String;
+    groupType: Schema.Attribute.Enumeration<
+      ['Aid group', 'In-Kind Donor', 'Service Provider']
+    >;
+    number: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
+  collectionName: 'needs';
+  info: {
+    singularName: 'need';
+    pluralName: 'needs';
+    displayName: 'NeedsAssessment.Need';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    survey: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::needs-assessment.survey'
+    >;
+    region: Schema.Attribute.Relation<'oneToOne', 'api::geo.region'>;
+    subregion: Schema.Attribute.Relation<'oneToOne', 'api::geo.subregion'>;
+    item: Schema.Attribute.Relation<'oneToOne', 'api::product.item'>;
+    need: Schema.Attribute.Integer & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
+  collectionName: 'surveys';
+  info: {
+    singularName: 'survey';
+    pluralName: 'surveys';
+    displayName: 'NeedsAssessment.Survey';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    year: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 4;
+      }>;
+    quarter: Schema.Attribute.Enumeration<['Q1', 'Q2', 'Q3', 'Q4']> &
+      Schema.Attribute.Required;
+    needs: Schema.Attribute.Relation<'oneToMany', 'api::needs-assessment.need'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiProductCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Product.Category';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    items: Schema.Attribute.Relation<'oneToMany', 'api::product.item'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiProductItem extends Struct.CollectionTypeSchema {
+  collectionName: 'items';
+  info: {
+    singularName: 'item';
+    pluralName: 'items';
+    displayName: 'Product.Item';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    age_gender: Schema.Attribute.String;
+    size_style: Schema.Attribute.String;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::product.category'>;
+    volume: Schema.Attribute.Component<'product.volume', true>;
+    weight: Schema.Attribute.Component<'product.weight', true>;
+    needsMet: Schema.Attribute.Component<'product.needs-met', false>;
+    secondHand: Schema.Attribute.Component<'product.second-hand', false>;
+    value: Schema.Attribute.Component<'product.value', true>;
+    packSize: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiReportingCargo extends Struct.CollectionTypeSchema {
+  collectionName: 'cargos';
+  info: {
+    singularName: 'cargo';
+    pluralName: 'cargos';
+    displayName: 'Reporting.Cargo';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    packageCount: Schema.Attribute.Integer;
+    packageUnit: Schema.Attribute.Enumeration<
+      [
+        'Bag',
+        'Medium Bag',
+        'Large Bag',
+        'Box',
+        'Banana Box',
+        'Pallet',
+        'Euro Pallet',
+        'Item',
+        'Single Item',
+      ]
+    >;
+    used: Schema.Attribute.Boolean;
+    itemCount: Schema.Attribute.Integer;
+    valueOverride: Schema.Attribute.Boolean;
+    valueOverrideCurrency: Schema.Attribute.Enumeration<
+      ['USD', 'GBP', 'EUR', 'LBP', 'LTL', 'RSD', 'BAM']
+    >;
+    normalizedValuePerItem: Schema.Attribute.Decimal;
+    totalNormalizedValue: Schema.Attribute.Decimal;
+    valueInSendingCountry: Schema.Attribute.Decimal;
+    valueInReceivingCountry: Schema.Attribute.Decimal;
+    totalNeedsMet: Schema.Attribute.Decimal;
+    shipment: Schema.Attribute.Relation<'manyToOne', 'api::reporting.shipment'>;
+    item: Schema.Attribute.Relation<'oneToOne', 'api::product.item'>;
+    sendingCountry: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
+    receivingCountry: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
+    countryGDPContextCostOverride: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::geo.country'
+    >;
+    sender: Schema.Attribute.Relation<'oneToOne', 'api::group.group'>;
+    receiver: Schema.Attribute.Relation<'oneToOne', 'api::group.group'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiReportingMovement extends Struct.CollectionTypeSchema {
+  collectionName: 'movements';
+  info: {
+    singularName: 'movement';
+    pluralName: 'movements';
+    displayName: 'Reporting.Movement';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    shipment: Schema.Attribute.Relation<'oneToOne', 'api::reporting.shipment'>;
+    segment: Schema.Attribute.Enumeration<
+      ['First Mile', 'Last Mile', 'Main Leg', 'Main Leg-Cont']
+    >;
+    pickupDate: Schema.Attribute.Date;
+    dropoffDate: Schema.Attribute.Date;
+    packageCount: Schema.Attribute.Integer;
+    packagingType: Schema.Attribute.String;
+    totalCargoVolM3: Schema.Attribute.Decimal;
+    totalCargoWeightKG: Schema.Attribute.Decimal;
+    vehicleCount: Schema.Attribute.Integer;
+    pickUpAddress: Schema.Attribute.Text;
+    dropOffAddress: Schema.Attribute.Text;
+    distanceKM: Schema.Attribute.Integer;
+    notes: Schema.Attribute.Text;
+    deliveryMethod: Schema.Attribute.Enumeration<
+      [
+        'FTL',
+        'LTL',
+        'Box Truck',
+        'Van',
+        'Personal Vehicle',
+        'FCL: 20 ft',
+        'FCL: 40 ft',
+        'FCL: 20 ft HC',
+        'FCL: 40 ft HC',
+        'LCL',
+        'Rail',
+        'Air',
+      ]
+    >;
+    involvement: Schema.Attribute.Enumeration<
+      ['Advised', 'Assisted', 'Organized', 'Not involved']
+    >;
+    serviceProvider: Schema.Attribute.Relation<'oneToOne', 'api::group.group'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
+  collectionName: 'shipments';
+  info: {
+    singularName: 'shipment';
+    pluralName: 'shipments';
+    displayName: 'Reporting.Shipment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    cargo: Schema.Attribute.Relation<'oneToMany', 'api::reporting.cargo'>;
+    carrierId: Schema.Attribute.String;
+    carbonOffsetPaid: Schema.Attribute.Boolean;
+    CO2TonsGenerated: Schema.Attribute.Decimal;
+    carbonOffsetCost: Schema.Attribute.Decimal;
+    notes: Schema.Attribute.Text;
+    type: Schema.Attribute.Enumeration<
+      ['Regular Route', 'Ad Hoc', 'Aid Swap/Local Transfer', 'Other']
+    >;
+    DARoles: Schema.Attribute.JSON;
+    sendingCountry: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
+    receivingCountry: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
+    number: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    project: Schema.Attribute.Enumeration<
+      [
+        'Covid 19',
+        'Disaster Relief',
+        'Moria Fire',
+        'Refugee Aid - Europe',
+        'Refugee Aid - Lebanon',
+        'Social Enterprise Support',
+        'Ukraine',
+        'US ARR',
+        'Other',
+      ]
+    >;
+    importer: Schema.Attribute.Relation<'oneToOne', 'api::group.group'>;
+    exporter: Schema.Attribute.Relation<'oneToOne', 'api::group.group'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -894,9 +1260,6 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
-      'api::geo.country': ApiGeoCountry;
-      'api::geo.region': ApiGeoRegion;
-      'api::geo.subregion': ApiGeoSubregion;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -907,6 +1270,18 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::financial.currency-conversion': ApiFinancialCurrencyConversion;
+      'api::geo.country': ApiGeoCountry;
+      'api::geo.region': ApiGeoRegion;
+      'api::geo.subregion': ApiGeoSubregion;
+      'api::group.group': ApiGroupGroup;
+      'api::needs-assessment.need': ApiNeedsAssessmentNeed;
+      'api::needs-assessment.survey': ApiNeedsAssessmentSurvey;
+      'api::product.category': ApiProductCategory;
+      'api::product.item': ApiProductItem;
+      'api::reporting.cargo': ApiReportingCargo;
+      'api::reporting.movement': ApiReportingMovement;
+      'api::reporting.shipment': ApiReportingShipment;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

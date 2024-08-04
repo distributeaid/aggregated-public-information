@@ -4,12 +4,9 @@
   "info": {
     "singularName": "region",
     "pluralName": "regions",
-    "displayName": "Geo.Region",
-    "description": ""
+    "displayName": "Geo.Region"
   },
-  "options": {
-    "comment": ""
-  },
+  "options": {},
   "attributes": {
     "Name": {
       "type": "string",

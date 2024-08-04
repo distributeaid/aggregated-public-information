@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_product_weights",
+  "info": {
+    "displayName": "Weight"
+  },
+  "options": {},
+  "attributes": {
+    "packageWeight": {
+      "type": "decimal",
+      "required": true
+    },
+    "packageWeightUnit": {
+      "type": "enumeration",
+      "enum": ["lb", "oz", "g", "kg"],
+      "required": true
+    },
+    "countPerPackage": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "itemWeightKg": {
+      "type": "decimal"
+    },
+    "countPerKg": {
+      "type": "decimal"
+    },
+    "source": {
+      "type": "string",
+      "required": true
+    },
+    "logDate": {
+      "type": "date",
+      "required": true
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

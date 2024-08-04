@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "items",
+  "info": {
+    "singularName": "item",
+    "pluralName": "items",
+    "displayName": "Product.Item"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "age_gender": {
+      "type": "string"
+    },
+    "size_style": {
+      "type": "string"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.category",
+      "inversedBy": "items"
+    },
+    "volume": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.volume"
+    },
+    "weight": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.weight"
+    },
+    "needsMet": {
+      "type": "component",
+      "repeatable": false,
+      "component": "product.needs-met"
+    },
+    "secondHand": {
+      "type": "component",
+      "repeatable": false,
+      "component": "product.second-hand"
+    },
+    "value": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.value"
+    },
+    "packSize": {
+      "type": "integer",
+      "default": 1,
+      "required": true,
+      "min": 1
+    }
+  }
+}
