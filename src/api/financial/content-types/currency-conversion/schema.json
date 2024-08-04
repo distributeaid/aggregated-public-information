@@ -4,12 +4,9 @@
   "info": {
     "singularName": "currency-conversion",
     "pluralName": "currency-conversions",
-    "displayName": "Financial.CurrencyConversions",
-    "description": ""
+    "displayName": "Financial.CurrencyConversions"
   },
-  "options": {
-    "draftAndPublish": true
-  },
+  "options": {},
   "attributes": {
     "year": {
       "type": "string",
@@ -25,15 +22,7 @@
     },
     "currency": {
       "type": "enumeration",
-      "enum": [
-        "USD",
-        "GBP",
-        "EUR",
-        "LBP",
-        "LTL",
-        "RSD",
-        "BAM"
-      ],
+      "enum": ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"],
       "required": true
     },
     "equivalentToUSD": {

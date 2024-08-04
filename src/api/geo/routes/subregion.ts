@@ -1,7 +1,7 @@
 /**
- * subregion router
+ *  router
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreRouter('api::geo.subregion');
+export default factories.createCoreRouter("api::geo.subregion");

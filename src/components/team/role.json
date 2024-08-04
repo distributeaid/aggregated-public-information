@@ -12,18 +12,7 @@
       "required": true
     },
     "Type": {
-      "type": "customField",
-      "options": [
-        "Contributor",
-        "Volunteer",
-        "Maintainer",
-        "Coordinator",
-        "Director",
-        "Board",
-        "Advisory Board",
-        "Founder"
-      ],
-      "customField": "plugin::multi-select.multi-select"
+      "type": "string"
     },
     "Location": {
       "type": "component",

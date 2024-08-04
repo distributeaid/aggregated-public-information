@@ -2,7 +2,6 @@ import { processProductItem } from "./product/item";
 import { processGroup } from "./group/group";
 import { processReportingCargo } from "./reporting/cargo";
 
-
 export function processContentType(path, data) {
   /*
    Content-manager paths look like this:
@@ -10,7 +9,7 @@ export function processContentType(path, data) {
   */
   const contentTypeHandlers = {
     "product.item": processProductItem,
-    "group.group": processGroup, 
+    "group.group": processGroup,
     "reporting.cargo": processReportingCargo,
   };
 
@@ -33,6 +32,6 @@ function detectContentType(path: string): string {
     return path.split("/api/")[1].split("/")[0];
   }
 
-  console.log('Unable to detect content type from path:', path);
-  return '';
+  console.log("Unable to detect content type from path:", path);
+  return "";
 }

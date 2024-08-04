@@ -24,7 +24,7 @@ function calculateWeightFields(data) {
 
   const normalizedPagkageWeight = normalizeToKg(
     packageWeight,
-    packageWeightUnit
+    packageWeightUnit,
   );
 
   let itemWeightKg = normalizedPagkageWeight / countPerPackage;
@@ -41,7 +41,7 @@ function calculateVolumeFields(data) {
 
   const normalizedPagkageVolume = normalizeToCM(
     packageVolume,
-    packageVolumeUnit
+    packageVolumeUnit,
   );
 
   let itemVolumeCBCM = normalizedPagkageVolume / countPerPackage;
@@ -85,7 +85,7 @@ function normalizeToCM(volume, unit) {
 
 function calculateNeedsMetFields(data) {
   const { items, months, people } = data;
-  let monthlyNeedsMetPerItem = (people * months) / items;
+  const monthlyNeedsMetPerItem = (people * months) / items;
   return { ...data, monthlyNeedsMetPerItem };
 }
 

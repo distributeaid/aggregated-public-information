@@ -1,5 +1,5 @@
 /**
- * item controller
+ *  controller
  */
 
 import { factories } from "@strapi/strapi";
@@ -7,9 +7,9 @@ import { processProductItem } from "../../../functions/content-types/product/ite
 
 export default factories.createCoreController(
   "api::product.item",
-
-  ({ strapi }) => ({
+  ({ strapi: _strapi }) => ({
     async create(ctx) {
+      // @ts-expect-error It thinks ctx.request.body doesn't exist
       ctx.request.body.data = processProductItem(ctx.request.body.data);
 
       const result = await super.create(ctx);
@@ -17,10 +17,11 @@ export default factories.createCoreController(
     },
 
     async update(ctx) {
+      // @ts-expect-error It thinks ctx.request.body doesn't exist
       ctx.request.body.data = processProductItem(ctx.request.body.data);
 
       const result = await super.update(ctx);
       return result;
     },
-  })
+  }),
 );

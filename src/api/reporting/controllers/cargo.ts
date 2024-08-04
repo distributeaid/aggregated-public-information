@@ -1,15 +1,15 @@
 /**
- * cargo controller
+ *  controller
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 import { processReportingCargo } from "../../../functions/content-types/reporting/cargo";
 
 export default factories.createCoreController(
-  'api::reporting.cargo',
-
-  ({ strapi }) => ({
+  "api::reporting.cargo",
+  ({ strapi: _strapi }) => ({
     async create(ctx) {
+      // @ts-expect-error It thinks ctx.request.body doesn't exist
       ctx.request.body.data = processReportingCargo(ctx.request.body.data);
 
       const result = await super.create(ctx);
@@ -17,10 +17,11 @@ export default factories.createCoreController(
     },
 
     async update(ctx) {
+      // @ts-expect-error It thinks ctx.request.body doesn't exist
       ctx.request.body.data = processReportingCargo(ctx.request.body.data);
 
       const result = await super.update(ctx);
       return result;
     },
-  })
+  }),
 );

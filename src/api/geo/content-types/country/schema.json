@@ -4,13 +4,9 @@
   "info": {
     "singularName": "country",
     "pluralName": "countries",
-    "displayName": "Geo.Country",
-    "description": ""
+    "displayName": "Geo.Country"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "Name": {
       "type": "string",

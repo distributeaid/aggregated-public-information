@@ -1,7 +1,7 @@
 /**
- * subregion controller
+ *  controller
  */
 
-import { factories } from '@strapi/strapi'
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::geo.subregion');
+export default factories.createCoreController("api::geo.subregion");
