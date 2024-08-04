@@ -15,32 +15,34 @@
     "import:product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.24.3",
-    "@strapi/plugin-i18n": "4.24.3",
-    "@strapi/plugin-users-permissions": "4.24.3",
-    "@strapi/provider-upload-aws-s3": "^4.14.5",
-    "@strapi/strapi": "4.24.3",
+    "@strapi/plugin-documentation": "5.0.0-rc.8",
+    "@strapi/plugin-users-permissions": "5.0.0-rc.8",
+    "@strapi/provider-upload-aws-s3": "5.0.0-rc.8",
+    "@strapi/strapi": "5.0.0-rc.8",
     "better-sqlite3": "^11.0.0",
     "pg": "^8.11.3",
     "pg-connection-string": "^2.6.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^5.2.0",
-    "strapi-plugin-multi-select": "^1.2.2",
-    "strapi-plugin-slugify": "^2.3.5",
-    "styled-components": "^5.2.1"
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
   "engines": {
-    "node": ">=20.0.0 <=20.x.x"
+    "node": ">=20.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
   },
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
-  "packageManager": "yarn@4.3.1",
   "devDependencies": {
+    "@types/node": "^20",
     "@types/qs": "^6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "csvtojson": "^2.0.10",
     "esrun": "^3.2.26",
-    "qs": "^6.13.0"
-  }
+    "qs": "^6.13.0",
+    "typescript": "^5"
+  },
+  "packageManager": "yarn@4.3.1"
 }

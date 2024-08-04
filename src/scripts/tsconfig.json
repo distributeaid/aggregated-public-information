@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "module": "nodenext",
-    "target": "esnext",
-    "esModuleInterop": true
-  }
-}

@@ -8,9 +8,8 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "comment": ""
   },
-  "pluginOptions": {},
   "attributes": {
     "Name": {
       "type": "string",

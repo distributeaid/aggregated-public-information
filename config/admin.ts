@@ -10,6 +10,10 @@ export default ({ env }) => ({
       salt: env('TRANSFER_TOKEN_SALT'),
     },
   },
+  flags: {
+    nps: env.bool('FLAG_NPS', true),
+    promoteEE: env.bool('FLAG_PROMOTE_EE', true),
+  },
   watchIgnoreFiles: [
     /* NOTE: this isn't a very specific path, but various combinations of
      * "./src/scripts/**" didn't work. Might need to make it more specific

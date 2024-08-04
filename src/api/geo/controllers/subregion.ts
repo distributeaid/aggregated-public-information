@@ -1,5 +1,5 @@
 /**
- * subregion controller
+ *  controller
  */
 
 import { factories } from '@strapi/strapi'

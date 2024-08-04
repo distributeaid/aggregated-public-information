@@ -1,6 +1,6 @@
-const defaultPluginsConfig = require("../../plugins.ts")
+import defaultPluginsConfig from "../../plugins"
 
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
   ...defaultPluginsConfig,
   upload: {
     config: {

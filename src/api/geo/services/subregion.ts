@@ -1,5 +1,5 @@
 /**
- * subregion service
+ *  service
  */
 
 import { factories } from '@strapi/strapi';

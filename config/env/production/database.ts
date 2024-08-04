@@ -1,12 +1,12 @@
 // from: https://docs.strapi.io/dev-docs/deployment/digitalocean-app-platform
-const parse = require("pg-connection-string").parse;
+import {parse} from "pg-connection-string";
 
 const { host, port, database, user, password } = parse(
   process.env.DATABASE_URL
 );
 
 export default ({ env }) => ({
-  connection: {  
+  connection: {
     client: 'postgres',
     connection: {
       host,
