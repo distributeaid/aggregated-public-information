@@ -1,5 +1,32 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface TimeDuration extends Struct.ComponentSchema {
+  collectionName: 'components_time_durations';
+  info: {
+    displayName: 'Duration';
+    icon: 'clock';
+  };
+  attributes: {
+    Start: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    End: Schema.Attribute.DateTime;
+  };
+}
+
+export interface TeamRole extends Struct.ComponentSchema {
+  collectionName: 'components_team_roles';
+  info: {
+    displayName: 'Role';
+    icon: 'handHeart';
+    description: '';
+  };
+  attributes: {
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+    Type: Schema.Attribute.String;
+    Location: Schema.Attribute.Component<'geo.location', false>;
+    Duration: Schema.Attribute.Component<'time.duration', false>;
+  };
+}
+
 export interface ProductWeight extends Struct.ComponentSchema {
   collectionName: 'components_product_weights';
   info: {
@@ -123,6 +150,8 @@ export interface GeoLocation extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'time.duration': TimeDuration;
+      'team.role': TeamRole;
       'product.weight': ProductWeight;
       'product.volume': ProductVolume;
       'product.value': ProductValue;

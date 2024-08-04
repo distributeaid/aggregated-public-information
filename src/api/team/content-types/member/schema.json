@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "members",
+  "info": {
+    "singularName": "member",
+    "pluralName": "members",
+    "displayName": "Team.Member"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Pronouns": {
+      "type": "string"
+    },
+    "Profile": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "From": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
+    },
+    "Bio": {
+      "type": "richtext"
+    },
+    "Roles": {
+      "type": "component",
+      "repeatable": true,
+      "component": "team.role",
+      "required": true
+    }
+  }
+}
