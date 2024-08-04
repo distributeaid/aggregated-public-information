@@ -1,7 +1,7 @@
 /**
- * region controller
+ *  controller
  */
 
-import { factories } from '@strapi/strapi'
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::geo.region');
+export default factories.createCoreController("api::geo.region");

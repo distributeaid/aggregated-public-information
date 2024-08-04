@@ -6,10 +6,7 @@
     "pluralName": "categories",
     "displayName": "Product.Category"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "name": {
       "type": "string",

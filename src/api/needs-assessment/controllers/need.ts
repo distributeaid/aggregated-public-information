@@ -1,7 +1,7 @@
 /**
- * need controller
+ *  controller
  */
 
-import { factories } from '@strapi/strapi'
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::needs-assessment.need');
+export default factories.createCoreController("api::needs-assessment.need");

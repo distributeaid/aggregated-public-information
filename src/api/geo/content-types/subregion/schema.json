@@ -4,13 +4,9 @@
   "info": {
     "singularName": "subregion",
     "pluralName": "subregions",
-    "displayName": "Geo.Subregion",
-    "description": ""
+    "displayName": "Geo.Subregion"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "Name": {
       "type": "string",
@@ -24,9 +20,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "Overview": {
       "type": "richtext"

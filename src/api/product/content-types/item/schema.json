@@ -4,13 +4,9 @@
   "info": {
     "singularName": "item",
     "pluralName": "items",
-    "displayName": "Product.Item",
-    "description": ""
+    "displayName": "Product.Item"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "name": {
       "type": "string",

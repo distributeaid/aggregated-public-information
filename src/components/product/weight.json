@@ -1,8 +1,7 @@
 {
   "collectionName": "components_product_weights",
   "info": {
-    "displayName": "Weight",
-    "description": ""
+    "displayName": "Weight"
   },
   "options": {},
   "attributes": {

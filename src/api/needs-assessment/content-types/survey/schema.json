@@ -6,10 +6,7 @@
     "pluralName": "surveys",
     "displayName": "NeedsAssessment.Survey"
   },
-  "options": {
-    "draftAndPublish": true,
-    "comment": ""
-  },
+  "options": {},
   "attributes": {
     "year": {
       "type": "string",
@@ -19,12 +16,7 @@
     },
     "quarter": {
       "type": "enumeration",
-      "enum": [
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
-      ],
+      "enum": ["Q1", "Q2", "Q3", "Q4"],
       "required": true
     },
     "needs": {

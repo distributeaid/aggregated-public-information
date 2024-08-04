@@ -4,13 +4,9 @@
   "info": {
     "singularName": "cargo",
     "pluralName": "cargos",
-    "displayName": "Reporting.Cargo",
-    "description": ""
+    "displayName": "Reporting.Cargo"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "packageCount": {
       "type": "integer"
@@ -40,15 +36,7 @@
     },
     "valueOverrideCurrency": {
       "type": "enumeration",
-      "enum": [
-        "USD",
-        "GBP",
-        "EUR",
-        "LBP",
-        "LTL",
-        "RSD",
-        "BAM"
-      ]
+      "enum": ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
     },
     "normalizedValuePerItem": {
       "type": "decimal"

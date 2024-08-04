@@ -4,13 +4,9 @@
   "info": {
     "singularName": "group",
     "pluralName": "groups",
-    "displayName": "Group",
-    "description": ""
+    "displayName": "Group"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "shortName": {
       "type": "string"
@@ -43,11 +39,7 @@
     },
     "groupType": {
       "type": "enumeration",
-      "enum": [
-        "Aid group",
-        "In-Kind Donor",
-        "Service Provider"
-      ]
+      "enum": ["Aid group", "In-Kind Donor", "Service Provider"]
     },
     "number": {
       "type": "integer"

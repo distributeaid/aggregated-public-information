@@ -5,7 +5,7 @@
 # Ignore the generated documentation since it updates a timestamp on each build.
 # Manually override the git ignore using `git add -f` in order to update the docs.
 src/extensions/documentation/documentation/1.0.0/full_documentation.json
-
+src/extensions/documentation/public/index.html
 
 ############################
 # OS X
@@ -91,7 +91,8 @@ ssl
 nbproject
 public/uploads/*
 !public/uploads/.gitkeep
-.vscode
+.tsbuildinfo
+.eslintcache
 
 ############################
 # Node.js
@@ -106,6 +107,20 @@ node_modules
 .node_history
 
 ############################
+# Package managers
+############################
+
+.yarn/*
+!.yarn/cache
+!.yarn/unplugged
+!.yarn/patches
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+yarn-error.log
+
+############################
 # Tests
 ############################
 
@@ -118,10 +133,11 @@ coverage
 .env
 license.txt
 exports
-*.cache
+.strapi
 dist
 build
 .strapi-updater.json
+.strapi-cloud.json
 
 ############################
 # Yarn

@@ -4,13 +4,9 @@
   "info": {
     "singularName": "movement",
     "pluralName": "movements",
-    "displayName": "Reporting.Movement",
-    "description": ""
+    "displayName": "Reporting.Movement"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "shipment": {
       "type": "relation",
@@ -19,12 +15,7 @@
     },
     "segment": {
       "type": "enumeration",
-      "enum": [
-        "First Mile",
-        "Last Mile",
-        "Main Leg",
-        "Main Leg-Cont"
-      ]
+      "enum": ["First Mile", "Last Mile", "Main Leg", "Main Leg-Cont"]
     },
     "pickupDate": {
       "type": "date"
@@ -78,12 +69,7 @@
     },
     "involvement": {
       "type": "enumeration",
-      "enum": [
-        "Advised",
-        "Assisted",
-        "Organized",
-        "Not involved"
-      ]
+      "enum": ["Advised", "Assisted", "Organized", "Not involved"]
     },
     "serviceProvider": {
       "type": "relation",

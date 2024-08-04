@@ -1,13 +1,13 @@
 const volCBMMap = {
-  'Banana Box': 0.05,
-  'Box': 0.056,
-  'Large Box': 0.087,
-  'Euro Pallet': 1.92,
-  'Pallet': 2.04,
-  'Bag': 0.036,
-  'Medium Bag': 0.079,
-  'Large Bag': 0.2,
-  'Bulk Bag': 0.729
+  "Banana Box": 0.05,
+  Box: 0.056,
+  "Large Box": 0.087,
+  "Euro Pallet": 1.92,
+  Pallet: 2.04,
+  Bag: 0.036,
+  "Medium Bag": 0.079,
+  "Large Bag": 0.2,
+  "Bulk Bag": 0.729,
 };
 
 export function processReportingCargo(data) {
@@ -17,7 +17,7 @@ export function processReportingCargo(data) {
     return data;
   }
 
-  if (packageUnit === 'Item' || packageUnit === 'Single Item') {
+  if (packageUnit === "Item" || packageUnit === "Single Item") {
     data.itemCount = packageCount;
     return data;
   }
