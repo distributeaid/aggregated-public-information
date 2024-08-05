@@ -22,7 +22,8 @@
     "check:types": "yarn tsc",
     "check:lint": "yarn lint",
     "check:format": "yarn format",
-    "check:test": "yarn test:build",
+    "check:build": "yarn build",
+    "check:test": "yarn test",
     "check:all": "yarn check:types && yarn check:lint && yarn check:format && yarn check:test",
     "import:product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
