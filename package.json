@@ -12,6 +12,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
+    "test": "jest --forceExit --detectOpenHandles",
+    "ci": "yarn build && yarn test",
     "import:product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
@@ -36,13 +38,16 @@
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/qs": "^6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "csvtojson": "^2.0.10",
     "esrun": "^3.2.26",
+    "jest": "^29.7.0",
     "qs": "^6.13.0",
+    "ts-jest": "^29.2.4",
     "typescript": "^5"
   },
   "packageManager": "yarn@4.3.1"
