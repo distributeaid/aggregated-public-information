@@ -1,5 +1,5 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
-module.exports = {
+export default {
   testPathIgnorePatterns: ["/node_modules/", ".tmp", ".cache"],
   transform: {
     "^.+.tsx?$": ["ts-jest", {}],
