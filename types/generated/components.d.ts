@@ -1,10 +1,10 @@
-import type { Struct, Schema } from '@strapi/strapi';
+import type { Struct, Schema } from "@strapi/strapi";
 
 export interface TimeDuration extends Struct.ComponentSchema {
-  collectionName: 'components_time_durations';
+  collectionName: "components_time_durations";
   info: {
-    displayName: 'Duration';
-    icon: 'clock';
+    displayName: "Duration";
+    icon: "clock";
   };
   attributes: {
     Start: Schema.Attribute.DateTime & Schema.Attribute.Required;
@@ -13,28 +13,28 @@ export interface TimeDuration extends Struct.ComponentSchema {
 }
 
 export interface TeamRole extends Struct.ComponentSchema {
-  collectionName: 'components_team_roles';
+  collectionName: "components_team_roles";
   info: {
-    displayName: 'Role';
-    icon: 'handHeart';
-    description: '';
+    displayName: "Role";
+    icon: "handHeart";
+    description: "";
   };
   attributes: {
     Title: Schema.Attribute.String & Schema.Attribute.Required;
     Type: Schema.Attribute.String;
-    Location: Schema.Attribute.Component<'geo.location', false>;
-    Duration: Schema.Attribute.Component<'time.duration', false>;
+    Location: Schema.Attribute.Component<"geo.location", false>;
+    Duration: Schema.Attribute.Component<"time.duration", false>;
   };
 }
 
 export interface ProductWeight extends Struct.ComponentSchema {
-  collectionName: 'components_product_weights';
+  collectionName: "components_product_weights";
   info: {
-    displayName: 'Weight';
+    displayName: "Weight";
   };
   attributes: {
     packageWeight: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    packageWeightUnit: Schema.Attribute.Enumeration<['lb', 'oz', 'g', 'kg']> &
+    packageWeightUnit: Schema.Attribute.Enumeration<["lb", "oz", "g", "kg"]> &
       Schema.Attribute.Required;
     countPerPackage: Schema.Attribute.Integer &
       Schema.Attribute.Required &
@@ -53,15 +53,15 @@ export interface ProductWeight extends Struct.ComponentSchema {
 }
 
 export interface ProductVolume extends Struct.ComponentSchema {
-  collectionName: 'components_product_volumes';
+  collectionName: "components_product_volumes";
   info: {
-    displayName: 'Volume';
-    description: '';
+    displayName: "Volume";
+    description: "";
   };
   attributes: {
     packageVolume: Schema.Attribute.Decimal & Schema.Attribute.Required;
     packageVolumeUnit: Schema.Attribute.Enumeration<
-      ['cubic in', 'cubic cm', 'cubic ft', 'cubic m']
+      ["cubic in", "cubic cm", "cubic ft", "cubic m"]
     > &
       Schema.Attribute.Required;
     countPerPackage: Schema.Attribute.Integer &
@@ -81,15 +81,15 @@ export interface ProductVolume extends Struct.ComponentSchema {
 }
 
 export interface ProductValue extends Struct.ComponentSchema {
-  collectionName: 'components_product_values';
+  collectionName: "components_product_values";
   info: {
-    displayName: 'Value';
+    displayName: "Value";
   };
   attributes: {
     packagePrice: Schema.Attribute.Decimal;
-    packagePriceUnit: Schema.Attribute.Enumeration<['USD']> &
+    packagePriceUnit: Schema.Attribute.Enumeration<["USD"]> &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'USD'>;
+      Schema.Attribute.DefaultTo<"USD">;
     countPerPackage: Schema.Attribute.Integer;
     pricePerItemUSD: Schema.Attribute.Decimal;
     source: Schema.Attribute.String & Schema.Attribute.Required;
@@ -99,9 +99,9 @@ export interface ProductValue extends Struct.ComponentSchema {
 }
 
 export interface ProductSecondHand extends Struct.ComponentSchema {
-  collectionName: 'components_product_second_hands';
+  collectionName: "components_product_second_hands";
   info: {
-    displayName: 'Second Hand';
+    displayName: "Second Hand";
   };
   attributes: {
     canBeUsed: Schema.Attribute.Boolean &
@@ -121,14 +121,14 @@ export interface ProductSecondHand extends Struct.ComponentSchema {
 }
 
 export interface ProductNeedsMet extends Struct.ComponentSchema {
-  collectionName: 'components_product_needs_mets';
+  collectionName: "components_product_needs_mets";
   info: {
-    displayName: 'Needs Met';
+    displayName: "Needs Met";
   };
   attributes: {
     items: Schema.Attribute.Integer;
     people: Schema.Attribute.Integer;
-    type: Schema.Attribute.Enumeration<['DA', 'SPHERE']>;
+    type: Schema.Attribute.Enumeration<["DA", "SPHERE"]>;
     months: Schema.Attribute.Integer;
     monthlyNeedsMetPerItem: Schema.Attribute.Decimal;
     notes: Schema.Attribute.Text;
@@ -136,28 +136,28 @@ export interface ProductNeedsMet extends Struct.ComponentSchema {
 }
 
 export interface GeoLocation extends Struct.ComponentSchema {
-  collectionName: 'components_geo_locations';
+  collectionName: "components_geo_locations";
   info: {
-    displayName: 'Location';
-    icon: 'pinMap';
+    displayName: "Location";
+    icon: "pinMap";
   };
   attributes: {
     Name: Schema.Attribute.String & Schema.Attribute.Required;
-    Country: Schema.Attribute.Relation<'oneToOne', 'api::geo.country'>;
+    Country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
   };
 }
 
-declare module '@strapi/strapi' {
+declare module "@strapi/strapi" {
   export module Public {
     export interface ComponentSchemas {
-      'time.duration': TimeDuration;
-      'team.role': TeamRole;
-      'product.weight': ProductWeight;
-      'product.volume': ProductVolume;
-      'product.value': ProductValue;
-      'product.second-hand': ProductSecondHand;
-      'product.needs-met': ProductNeedsMet;
-      'geo.location': GeoLocation;
+      "time.duration": TimeDuration;
+      "team.role": TeamRole;
+      "product.weight": ProductWeight;
+      "product.volume": ProductVolume;
+      "product.value": ProductValue;
+      "product.second-hand": ProductSecondHand;
+      "product.needs-met": ProductNeedsMet;
+      "geo.location": GeoLocation;
     }
   }
 }

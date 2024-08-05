@@ -7,7 +7,7 @@ dist
 .tmp
 *.example.ts
 *.example.js
-types/generated
+types/generated/*
 src/api/*/documentation
 src/extensions/documentation
 
