@@ -11,6 +11,8 @@ jobs:
           node-version-file: package.json
           cache: yarn
           cache-dependency-path: yarn.lock
+      - name: "Configure"
+        run: cp .env.example .env
       - name: Install modules
         run: corepack yarn
       - name: Run type check
