@@ -11,10 +11,10 @@ jobs:
           node-version-file: package.json
           cache: yarn
           cache-dependency-path: yarn.lock
-      - name: "Configure"
-        run: cp .env.example .env
       - name: Install modules
         run: corepack yarn
+      - name: "Configure"
+        run: cp .env.example .env
       - name: Run type check
         run: corepack yarn run check:types
       - name: Run lint check
