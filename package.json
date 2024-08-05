@@ -14,7 +14,7 @@
     "strapi": "strapi",
     "tsc": "tsc --project tsconfig.json --noEmit",
     "test": "jest --forceExit --detectOpenHandles",
-    "test:build": "yarn build && yarn test",
+    "test:with-build": "yarn build && yarn test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier . --check",

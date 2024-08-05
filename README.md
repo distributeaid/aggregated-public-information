@@ -16,7 +16,7 @@ yarn
 yarn run develop
 ```
 
-This will launch the development server.
+This will launch the development server. `yarn test` depends on you running this!
 
 3. In another terminal, run tests:
 
@@ -25,7 +25,7 @@ yarn test
 ```
 
 > [!NOTE]
-> If you don't run `yarn run develop` then you must run `yarn build` before running `yarn test`!
+> If you don't run `yarn run develop` then you must run `yarn build` before running `yarn test`. We have provided `yarn test:with-build` as a convenience in this case.
 
 # 🚀 Getting started with Gitpod
 
