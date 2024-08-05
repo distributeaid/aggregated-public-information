@@ -28,7 +28,7 @@
     "react-router-dom": "^5.2.0",
     "strapi-plugin-multi-select": "^1.2.2",
     "strapi-plugin-slugify": "^2.3.5",
-    "styled-components": "^5.2.1"
+    "styled-components": "^6.0.0"
   },
   "engines": {
     "node": ">=20.0.0 <=20.x.x"
