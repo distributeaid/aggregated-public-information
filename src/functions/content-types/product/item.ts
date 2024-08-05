@@ -85,7 +85,7 @@ function normalizeToCM(volume, unit) {
 
 function calculateNeedsMetFields(data) {
   const { items, months, people } = data;
-  let monthlyNeedsMetPerItem = (people * months) / items;
+  const monthlyNeedsMetPerItem = (people * months) / items;
   return { ...data, monthlyNeedsMetPerItem };
 }
 
