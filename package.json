@@ -12,13 +12,13 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
-    "ci": "yarn build && yarn test",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "eslint .",
     "format": "prettier . --write",
     "check:types": "tsc --project tsconfig.json --noEmit",
     "check:lint": "eslint .",
     "check:format": "prettier . --check",
+    "check:test": "yarn build && yarn test",
     "import:product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {

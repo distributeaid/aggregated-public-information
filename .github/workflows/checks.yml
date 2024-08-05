@@ -1,0 +1,23 @@
+name: Checks
+on:
+  - pull_request
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: yarn
+          cache-dependency-path: yarn.lock
+      - name: Install modules
+        run: corepack yarn
+      - name: Run type check
+        run: corepack yarn run check:types
+      - name: Run lint check
+        run: corepack yarn run check:lint
+      - name: Run format check
+        run: corepack yarn run check:format
+      - name: Run tests
+        run: corepack yarn run check:test
