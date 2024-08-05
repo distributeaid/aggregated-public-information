@@ -8,7 +8,7 @@ import { processGroup } from "../../../functions/content-types/group/group";
 export default factories.createCoreController(
   "api::group.group",
 
-  () => ({
+  ({ strapi: _strapi }) => ({
     async create(ctx) {
       // @ts-expect-error It thinks ctx.request.body doesn't exist
       ctx.request.body.data = processGroup(ctx.request.body.data);

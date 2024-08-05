@@ -1,4 +1,4 @@
-export default () => ({
+export default ({ env: _env }) => ({
   slugify: {
     enabled: true,
     config: {
