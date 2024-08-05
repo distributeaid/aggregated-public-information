@@ -24,8 +24,8 @@ This will launch the development server.
 yarn test
 ```
 
-[!NOTE]
-If you don't run `yarn run develop` then you must run `yarn build` before running `yarn test`!
+> [!NOTE]
+> If you don't run `yarn run develop` then you must run `yarn build` before running `yarn test`!
 
 # 🚀 Getting started with Gitpod
 
