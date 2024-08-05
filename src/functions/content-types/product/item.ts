@@ -2,6 +2,8 @@ export function processProductItem(data) {
   const componentHandlers = {
     weight: calculateWeightFields,
     volume: calculateVolumeFields,
+    needsMet: calculateNeedsMetFields,
+    value: calculateValueFields,
   };
 
   for (const [component, handler] of Object.entries(componentHandlers)) {
@@ -79,4 +81,19 @@ function normalizeToCM(volume, unit) {
     default:
       throw new Error(`Unsupported volume unit: ${unit}`);
   }
+}
+
+function calculateNeedsMetFields(data) {
+  const { items, months, people } = data;
+  let monthlyNeedsMetPerItem = (people * months) / items;
+  return { ...data, monthlyNeedsMetPerItem };
+}
+
+function calculateValueFields(data) {
+  // Note there is no normalizing of currency units as
+  // currently USD is the only unit available.
+  const { packagePrice, countPerPackage } = data;
+  let pricePerItemUSD = packagePrice / countPerPackage;
+  pricePerItemUSD = parseFloat(pricePerItemUSD.toFixed(2));
+  return { ...data, pricePerItemUSD };
 }
