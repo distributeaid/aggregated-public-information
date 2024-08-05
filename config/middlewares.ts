@@ -1,26 +1,26 @@
 export default [
-  'strapi::logger',
-  'strapi::errors',
+  "strapi::logger",
+  "strapi::errors",
   {
-    name: 'strapi::security',
+    name: "strapi::security",
     config: {
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:'],
-          'img-src': [
+          "connect-src": ["'self'", "https:"],
+          "img-src": [
             "'self'",
-            'data:',
-            'blob:',
-            'market-assets.strapi.io',
+            "data:",
+            "blob:",
+            "market-assets.strapi.io",
             `${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}`,
             `${process.env.DO_CDN_URL}`,
           ],
-          'media-src': [
+          "media-src": [
             "'self'",
-            'data:',
-            'blob:',
-            'market-assets.strapi.io',
+            "data:",
+            "blob:",
+            "market-assets.strapi.io",
             `${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}`,
             `${process.env.DO_CDN_URL}`,
           ],
@@ -29,11 +29,11 @@ export default [
       },
     },
   },
-  'strapi::cors',
-  'strapi::poweredBy',
-  'strapi::query',
-  'strapi::body',
-  'strapi::session',
-  'strapi::favicon',
-  'strapi::public',
+  "strapi::cors",
+  "strapi::poweredBy",
+  "strapi::query",
+  "strapi::body",
+  "strapi::session",
+  "strapi::favicon",
+  "strapi::public",
 ];

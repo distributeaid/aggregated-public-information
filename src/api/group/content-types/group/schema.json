@@ -39,11 +39,7 @@
     },
     "groupType": {
       "type": "enumeration",
-      "enum": [
-        "Aid group",
-        "In-Kind Donor",
-        "Service Provider"
-      ]
+      "enum": ["Aid group", "In-Kind Donor", "Service Provider"]
     },
     "number": {
       "type": "integer"

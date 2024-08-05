@@ -7,7 +7,7 @@ export default ({ env }) => ({
       "..",
       "..",
       "..",
-      env("TEST_DATABASE_FILENAME", ".tmp/test_data.db")
+      env("TEST_DATABASE_FILENAME", ".tmp/test_data.db"),
     ),
   },
   useNullAsDefault: true,

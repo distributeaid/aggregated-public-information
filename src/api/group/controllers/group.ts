@@ -24,5 +24,5 @@ export default factories.createCoreController(
       const result = await super.update(ctx);
       return result;
     },
-  })
+  }),
 );

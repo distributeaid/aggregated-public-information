@@ -34,12 +34,7 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "Regular Route",
-        "Ad Hoc",
-        "Aid Swap/Local Transfer",
-        "Other"
-      ]
+      "enum": ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
     },
     "DARoles": {
       "type": "json"

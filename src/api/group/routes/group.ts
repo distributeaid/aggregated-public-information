@@ -2,6 +2,6 @@
  * group router
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreRouter('api::group.group');
+export default factories.createCoreRouter("api::group.group");
