@@ -951,7 +951,7 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    DARoles: Schema.Attribute.JSON;
+    daRoles: Schema.Attribute.Component<"reporting.shipment-roles", false>;
     exporter: Schema.Attribute.Relation<"oneToOne", "api::group.group">;
     importer: Schema.Attribute.Relation<"oneToOne", "api::group.group">;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
