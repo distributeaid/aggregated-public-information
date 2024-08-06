@@ -10,7 +10,7 @@ import addItems from "./add-items";
         `src/scripts/upload-product-info-sheet/` directory.
      3. Delete the first 3 lines (headers).
      4. Run the script from the project root directory:
-        `yarn import:product-info-sheet`
+        `yarn script:import-product-info-sheet`
 */
 
 const products = await csvToJson({
