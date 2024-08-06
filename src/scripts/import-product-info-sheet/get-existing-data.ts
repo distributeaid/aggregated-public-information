@@ -1,35 +1,35 @@
-import { STRAPI_ENV } from "../strapi-env"
+import { STRAPI_ENV } from "../strapi-env";
 
 export type NameToIdMap = {
-  [key: string]: number;
+  [key: string]: string;
 };
 
 /* Get Categories
  * ----------------------------------------------------- */
 export async function getCategories() {
-  console.log("    - getting existing categories")
+  console.log("    - getting existing categories");
 
-  let response = await fetch(`${STRAPI_ENV.URL}/categories`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
     method: "GET",
     headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${STRAPI_ENV.KEY}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
     },
   });
 
   if (!response.ok) {
-    console.log(response)
+    console.log(response);
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
-  const responseJson = await response.json()
+  const responseJson = await response.json();
   const existingCategories: NameToIdMap = responseJson.data.reduce(
     (categories: NameToIdMap, category) => {
-      categories[category.name] = category.documentId
-      return categories
+      categories[category.name] = category.documentId;
+      return categories;
     },
-    {} as NameToIdMap
-  )
+    {} as NameToIdMap,
+  );
 
-  return existingCategories
+  return existingCategories;
 }

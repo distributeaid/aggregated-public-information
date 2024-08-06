@@ -12,7 +12,6 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
-
     "tsc": "tsc --project tsconfig.json --noEmit",
     "test": "jest --forceExit --detectOpenHandles",
     "test:with-build": "yarn build && yarn test",
@@ -20,14 +19,12 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
-
     "check:types": "yarn tsc",
     "check:lint": "yarn lint",
     "check:format": "yarn format",
     "check:build": "yarn build",
     "check:test": "yarn test",
     "check:all": "yarn check:types && yarn check:lint && yarn check:format && yarn check:build && yarn check:test",
-
     "script:import-product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
