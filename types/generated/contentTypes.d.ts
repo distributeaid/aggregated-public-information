@@ -912,7 +912,6 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     type: Schema.Attribute.Enumeration<
       ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
     >;
-    DARoles: Schema.Attribute.JSON;
     sendingCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     receivingCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     number: Schema.Attribute.String &
@@ -933,6 +932,7 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     >;
     importer: Schema.Attribute.Relation<"oneToOne", "api::group.group">;
     exporter: Schema.Attribute.Relation<"oneToOne", "api::group.group">;
+    daRoles: Schema.Attribute.Component<"reporting.shipment-roles", false>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

@@ -1,0 +1,84 @@
+{
+  "collectionName": "components_reporting_shipment_roles",
+  "info": {
+    "displayName": "Shipment Roles",
+    "icon": "check"
+  },
+  "options": {},
+  "attributes": {
+    "needsAssessment": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "sourcingInKindDonations": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "sourcingProcurement": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "sourcingCommunityCollection": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "aidMatching": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "firstMileTransportation": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "firstMileStorageCommercial": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "firstMileStorageCommunity": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "mainLegTransportation": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "customsTransit": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "customsExport": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "customsImport": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "lastMileTransportation": {
+      "type": "boolean",
+      "default": false
+    },
+    "lastMileStorageCommercial": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "lastMileStorageCommunity": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

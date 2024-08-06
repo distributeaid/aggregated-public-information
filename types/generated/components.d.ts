@@ -27,6 +27,60 @@ export interface TeamRole extends Struct.ComponentSchema {
   };
 }
 
+export interface ReportingShipmentRoles extends Struct.ComponentSchema {
+  collectionName: "components_reporting_shipment_roles";
+  info: {
+    displayName: "Shipment Roles";
+    icon: "check";
+  };
+  attributes: {
+    needsAssessment: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    sourcingInKindDonations: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    sourcingProcurement: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    sourcingCommunityCollection: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    aidMatching: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    firstMileTransportation: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    firstMileStorageCommercial: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    firstMileStorageCommunity: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    mainLegTransportation: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    customsTransit: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    customsExport: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    customsImport: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    lastMileTransportation: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    lastMileStorageCommercial: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    lastMileStorageCommunity: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface ProductWeight extends Struct.ComponentSchema {
   collectionName: "components_product_weights";
   info: {
@@ -152,6 +206,7 @@ declare module "@strapi/strapi" {
     export interface ComponentSchemas {
       "time.duration": TimeDuration;
       "team.role": TeamRole;
+      "reporting.shipment-roles": ReportingShipmentRoles;
       "product.weight": ProductWeight;
       "product.volume": ProductVolume;
       "product.value": ProductValue;

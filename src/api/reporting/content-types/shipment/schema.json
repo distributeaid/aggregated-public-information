@@ -34,10 +34,12 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
-    },
-    "DARoles": {
-      "type": "json"
+      "enum": [
+        "Regular Route",
+        "Ad Hoc",
+        "Aid Swap/Local Transfer",
+        "Other"
+      ]
     },
     "sendingCountry": {
       "type": "relation",
@@ -77,6 +79,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::group.group"
+    },
+    "daRoles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "reporting.shipment-roles"
     }
   }
 }
