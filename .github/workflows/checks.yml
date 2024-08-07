@@ -21,7 +21,7 @@ jobs:
         run: corepack yarn run check:lint
       - name: Run format check
         run: corepack yarn run check:format
-      - name: Run buid check
+      - name: Run build check
         run: corepack yarn run check:build
       - name: Run test check
         run: corepack yarn run check:test
