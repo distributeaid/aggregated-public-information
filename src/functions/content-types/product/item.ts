@@ -27,11 +27,8 @@ function calculateWeightFields(data) {
     packageWeightUnit
   );
 
-  let itemWeightKg = normalizedPagkageWeight / countPerPackage;
-  let countPerKg = 1 / itemWeightKg;
-
-  itemWeightKg = parseFloat(itemWeightKg.toFixed(2));
-  countPerKg = parseFloat(countPerKg.toFixed(2));
+  const itemWeightKg = normalizedPagkageWeight / countPerPackage;
+  const countPerKg = 1 / itemWeightKg;
 
   return { ...data, itemWeightKg, countPerKg };
 }
@@ -44,11 +41,8 @@ function calculateVolumeFields(data) {
     packageVolumeUnit
   );
 
-  let itemVolumeCBCM = normalizedPagkageVolume / countPerPackage;
-  let countPerCBM = 1000000 / itemVolumeCBCM;
-
-  itemVolumeCBCM = parseFloat(itemVolumeCBCM.toFixed(2));
-  countPerCBM = parseFloat(countPerCBM.toFixed(2));
+  const itemVolumeCBCM = normalizedPagkageVolume / countPerPackage;
+  const countPerCBM = 1000000 / itemVolumeCBCM;
 
   return { ...data, itemVolumeCBCM, countPerCBM };
 }
@@ -85,8 +79,7 @@ function normalizeToCM(volume, unit) {
 
 function calculateNeedsMetFields(data) {
   const { items, months, people } = data;
-  let monthlyNeedsMetPerItem = (people * months) / items;
-  monthlyNeedsMetPerItem = parseFloat(monthlyNeedsMetPerItem.toFixed(2));
+  const monthlyNeedsMetPerItem = (people * months) / items;
   return { ...data, monthlyNeedsMetPerItem };
 }
 
@@ -95,6 +88,6 @@ function calculateValueFields(data) {
   // currently USD is the only unit available.
   const { packagePrice, countPerPackage } = data;
   let pricePerItemUSD = packagePrice / countPerPackage;
-  pricePerItemUSD = parseFloat(pricePerItemUSD.toFixed(2));
+  pricePerItemUSD = Math.round(pricePerItemUSD * 100) / 100;
   return { ...data, pricePerItemUSD };
 }
