@@ -1,6 +1,6 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
-import { toTitleCase } from "../helpers";
+import { toTitleCase, stripAndParseFloat, stripAndParseInt } from "../helpers";
 import { getCategories } from "./get-existing-data";
 import type { NameToIdMap } from "./get-existing-data";
 
@@ -234,14 +234,6 @@ const _isRejected = <T>(
 
 /* Parse Item
  * ------------------------------------------------------ */
-function stripAndParseInt(numberString: string): number {
-  return parseInt(numberString.replace(/$|,/g, ""));
-}
-
-function stripAndParseFloat(numberString: string): number {
-  return parseFloat(numberString.replace(/$|,|%/g, ""));
-}
-
 function parseItem(
   { item, origItem, status, logs }: ItemUploadWorkflow,
   categories: NameToIdMap,

@@ -15,12 +15,23 @@ export type UploadWorkflow<T, TCsv> = {
   logs: string[];
 };
 
+export type UploadWorkflowResults<T> = {
+  [Property in keyof UploadWorkflowStatus]: T[];
+}
+
 export type CountryUploadWorkflow = UploadWorkflow<Country, string>
+export type CountryUploadWorkflowResults = UploadWorkflowResults<Country>
 export type ShipmentUploadWorkflow = UploadWorkflow<Shipment, ShipmentCsv>
+export type ShipmentUploadWorkflowResults = UploadWorkflowResults<Shipment>
 
 export type Country = {
+  documentId?: string,
   name?: string,
   code?: string
+}
+
+export type CountryCodeToId = {
+  [key: string]: string;
 }
 
 export type Shipment = {
