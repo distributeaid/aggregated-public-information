@@ -27,6 +27,18 @@ export interface TeamRole extends Struct.ComponentSchema {
   };
 }
 
+export interface GeoLocation extends Struct.ComponentSchema {
+  collectionName: "components_geo_locations";
+  info: {
+    displayName: "Location";
+    icon: "pinMap";
+  };
+  attributes: {
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    Country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
+  };
+}
+
 export interface ProductWeight extends Struct.ComponentSchema {
   collectionName: "components_product_weights";
   info: {
@@ -135,29 +147,17 @@ export interface ProductNeedsMet extends Struct.ComponentSchema {
   };
 }
 
-export interface GeoLocation extends Struct.ComponentSchema {
-  collectionName: "components_geo_locations";
-  info: {
-    displayName: "Location";
-    icon: "pinMap";
-  };
-  attributes: {
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
-    Country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
-  };
-}
-
 declare module "@strapi/strapi" {
   export module Public {
     export interface ComponentSchemas {
       "time.duration": TimeDuration;
       "team.role": TeamRole;
+      "geo.location": GeoLocation;
       "product.weight": ProductWeight;
       "product.volume": ProductVolume;
       "product.value": ProductValue;
       "product.second-hand": ProductSecondHand;
       "product.needs-met": ProductNeedsMet;
-      "geo.location": GeoLocation;
     }
   }
 }

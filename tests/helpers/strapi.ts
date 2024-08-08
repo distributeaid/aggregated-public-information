@@ -9,6 +9,7 @@ export const setupStrapi = async () => {
     instance = strapi;
 
     instance.server.mount();
+    instance.server.listen();
   }
   return instance;
 };
