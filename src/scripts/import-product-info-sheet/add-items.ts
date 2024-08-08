@@ -161,7 +161,7 @@ type ItemUploadWorkflow = {
 
 /* Add Items
  * ----------------------------------------------------- */
-export default async function addItems(products) {
+export default async function addItems(products: ItemCsv[]) {
   console.log("Adding items from Product Info sheet...");
 
   const categories = await getCategories();
@@ -638,8 +638,7 @@ async function getItem({
       size_style: {
         $eq: item.size_style,
       },
-    },
-    fields: ["id"],
+    }
   });
 
   const response = await fetch(`${STRAPI_ENV.URL}/items?${query}`, {

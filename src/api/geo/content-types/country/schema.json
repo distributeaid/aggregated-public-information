@@ -4,23 +4,26 @@
   "info": {
     "singularName": "country",
     "pluralName": "countries",
-    "displayName": "Geo.Country"
+    "displayName": "Geo.Country",
+    "description": ""
   },
-  "options": {},
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Code": {
+    "code": {
       "type": "string",
       "regex": "[A-Z]{3}",
       "required": true,
       "unique": true,
       "maxLength": 3
     },
-    "Slug": {
+    "slug": {
       "type": "string"
     }
   }

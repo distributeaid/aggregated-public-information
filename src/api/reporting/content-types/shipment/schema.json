@@ -23,14 +23,11 @@
     "carbonOffsetPaid": {
       "type": "boolean"
     },
-    "CO2TonsGenerated": {
+    "co2TonsGenerated": {
       "type": "decimal"
     },
     "carbonOffsetCost": {
       "type": "decimal"
-    },
-    "notes": {
-      "type": "text"
     },
     "type": {
       "type": "enumeration",
