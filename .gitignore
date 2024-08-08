@@ -7,6 +7,10 @@
 src/extensions/documentation/documentation/1.0.0/full_documentation.json
 src/extensions/documentation/public/index.html
 
+# Explicitly gnore data import csv files so we don't accidentally commit them.
+src/scripts/import-product-infosheet/products.csv
+src/scripts/import-sdr-shipments/sheet/shipments.csv
+
 ############################
 # Scripts
 ############################

@@ -526,6 +526,7 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
 export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
   collectionName: "countries";
   info: {
+    description: "";
     displayName: "Geo.Country";
     pluralName: "countries";
     singularName: "country";
@@ -534,7 +535,7 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    Code: Schema.Attribute.String &
+    code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
@@ -546,11 +547,11 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::geo.country"> &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    Slug: Schema.Attribute.String;
+    slug: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -947,7 +948,7 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     carbonOffsetPaid: Schema.Attribute.Boolean;
     cargo: Schema.Attribute.Relation<"oneToMany", "api::reporting.cargo">;
     carrierId: Schema.Attribute.String;
-    CO2TonsGenerated: Schema.Attribute.Decimal;
+    co2TonsGenerated: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -960,7 +961,6 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
       "api::reporting.shipment"
     > &
       Schema.Attribute.Private;
-    notes: Schema.Attribute.Text;
     number: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
