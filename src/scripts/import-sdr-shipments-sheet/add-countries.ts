@@ -1,7 +1,7 @@
 import qs from "qs";
 import lookup from "country-code-lookup"
 import { STRAPI_ENV } from "../strapi-env";
-import { ShipmentCsv, Country, CountryUploadWorkflow, UploadWorkflowStatus } from "./types.d"
+import { Country, ShipmentCsv, CountryUploadWorkflow, UploadWorkflowStatus, CountryUploadWorkflowResults } from "./types.d"
 
 /* Add Countries From SDR Shipments Sheet
  * ========================================================================== */
@@ -11,11 +11,11 @@ export async function addCountries(shipments: ShipmentCsv[]) {
   const uniqueCountries = [...consolidateCountries(shipments)]
 
   const results = await Promise.allSettled<CountryUploadWorkflow>(
-    uniqueCountries.map((orig) => {
+    uniqueCountries.map((country) => {
       return new Promise<CountryUploadWorkflow>((resolve, _reject) => {
         resolve({
           data: {},
-          orig,
+          orig: country,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
         })
@@ -27,20 +27,22 @@ export async function addCountries(shipments: ShipmentCsv[]) {
   );
 
   // { "SUCCESS": [], "ALREADY_EXISTS": [], ...}
-  const resultsMap = Object.keys(UploadWorkflowStatus).reduce(
-    (resultsMap, key) => {
-      resultsMap[key] = [];
-      return resultsMap;
-    },
-    {},
-  );
+  const resultsMap: CountryUploadWorkflowResults =
+    Object.keys(UploadWorkflowStatus)
+      .reduce(
+        (resultsMap, key) => {
+          resultsMap[key] = [];
+          return resultsMap;
+        },
+        {} as CountryUploadWorkflowResults
+      );
 
   results
     .map((result) => {
       if (isFulfilled(result)) {
         return result.value;
       } else {
-        return result.reason as CountryUploadWorkflow;
+        return result.reason;
       }
     })
     .reduce((resultsMap, workflowResult) => {
@@ -57,14 +59,28 @@ export async function addCountries(shipments: ShipmentCsv[]) {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
     // NOTE: uncomment & set the status key to debug different types of results
-    if (key !== UploadWorkflowStatus.SUCCESS) {
+    if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
       resultsMap[key].forEach((result) => {
-        console.log(result)
-        console.log("\n")
+        // console.log(result)
+        // console.log("\n")
       })
     }
   });
+
   console.log("Adding items completed!");
+
+  const validCountries: Country[] =
+    [
+      ...resultsMap[UploadWorkflowStatus.SUCCESS],
+      ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS]
+    ].reduce((countries: Country[], workflow: CountryUploadWorkflow) => {
+      return [
+        ...countries,
+        workflow.data
+      ]
+    }, [] as Country[])
+
+  return validCountries
 }
 
 const isFulfilled = <T>(
@@ -104,7 +120,7 @@ function parseCountry(
 ): CountryUploadWorkflow {
   logs = [
     ...logs,
-    `Log: parsing country "${orig}"`
+    `Log: parsing Geo.Country "${orig}"`
   ]
 
   const code = orig.toUpperCase()

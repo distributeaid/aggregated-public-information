@@ -35,6 +35,10 @@
         "Regular Route",
         "Ad Hoc",
         "Aid Swap/Local Transfer",
+        "In-Kind Donation",
+        "Procurement",
+        "First Mile",
+        "Last Mile",
         "Other"
       ]
     },
@@ -61,9 +65,12 @@
         "Moria Fire",
         "Refugee Aid - Europe",
         "Refugee Aid - Lebanon",
+        "Economic Development - Lebanon",
         "Social Enterprise Support",
         "Ukraine",
-        "US ARR",
+        "US Arr",
+        "Disaster Relief - Usa",
+        "Gaza Response",
         "Other"
       ]
     },

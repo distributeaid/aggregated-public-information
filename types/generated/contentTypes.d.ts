@@ -910,7 +910,16 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     co2TonsGenerated: Schema.Attribute.Decimal;
     carbonOffsetCost: Schema.Attribute.Decimal;
     type: Schema.Attribute.Enumeration<
-      ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
+      [
+        "Regular Route",
+        "Ad Hoc",
+        "Aid Swap/Local Transfer",
+        "In-Kind Donation",
+        "Procurement",
+        "First Mile",
+        "Last Mile",
+        "Other",
+      ]
     >;
     sendingCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     receivingCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
@@ -924,9 +933,12 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
         "Moria Fire",
         "Refugee Aid - Europe",
         "Refugee Aid - Lebanon",
+        "Economic Development - Lebanon",
         "Social Enterprise Support",
         "Ukraine",
-        "US ARR",
+        "US Arr",
+        "Disaster Relief - Usa",
+        "Gaza Response",
         "Other",
       ]
     >;

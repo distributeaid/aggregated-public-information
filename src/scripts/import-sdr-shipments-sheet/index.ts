@@ -2,6 +2,7 @@ import "dotenv/config";
 import csvToJson from "csvtojson";
 
 import { addCountries } from "./add-countries"
+import { addShipments } from "./add-shipments";
 
 /* How to run this script:
      1. Setup your scripts `.env` file (copy / modify `.env.example`)
@@ -38,12 +39,13 @@ const shipments = await csvToJson({
     "daRoles.lastMileTransportation",
     "daRoles.lastMileStorageCommunity",
     "daRoles.lastMileStorageCommercial",
+    "daRoles.other",
     "carbonOffsetPaid",
     "co2TonsGenerated",
     "carbonOffsetCost"
   ],
 }).fromFile("src/scripts/import-sdr-shipments-sheet/shipments.csv");
 
-await addCountries(shipments);
-// await addShipments(shipments);
+const countries = await addCountries(shipments);
+const _shpiments = await addShipments(shipments, countries);
 
