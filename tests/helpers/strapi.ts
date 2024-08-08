@@ -18,13 +18,13 @@ export const cleanupStrapi = async () => {
     { connection?: { filename?: string } } | undefined
   >("database.connection");
 
-  //close server to release the db-file
+  // close server to release the db-file
   strapi.server.httpServer.close();
 
   // close the connection to the database before deletion
   await strapi.db.connection.destroy();
 
-  //delete test database after all tests have completed
+  // delete test database after all tests have completed
   if (dbSettings?.connection?.filename) {
     const tmpDbFile = dbSettings.connection.filename;
     if (fs.existsSync(tmpDbFile)) {
