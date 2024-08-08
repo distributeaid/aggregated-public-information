@@ -19,7 +19,6 @@ const shipments = await csvToJson({
     "number",
     "sendingCountry",
     "receivingCountry",
-    "carrierId",
     "exporter",
     "importer",
     "type",
@@ -47,4 +46,4 @@ const shipments = await csvToJson({
 }).fromFile("src/scripts/import-sdr-shipments-sheet/shipments.csv");
 
 const countries = await addCountries(shipments);
-const _shpiments = await addShipments(shipments, countries);
+const _shipments = await addShipments(shipments, countries);

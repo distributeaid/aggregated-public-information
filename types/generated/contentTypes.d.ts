@@ -974,8 +974,9 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
         "Economic Development - Lebanon",
         "Social Enterprise Support",
         "Ukraine",
-        "US Arr",
+        "Us Arr",
         "Disaster Relief - Usa",
+        "Refugee Aid - Usa",
         "Gaza Response",
         "Other",
       ]
