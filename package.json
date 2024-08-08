@@ -8,7 +8,7 @@
     "name": "A Strapi developer"
   },
   "scripts": {
-    "build": "strapi build",
+    "build": "rm -r ./dist && strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
