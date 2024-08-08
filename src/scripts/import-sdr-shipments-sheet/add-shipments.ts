@@ -154,7 +154,6 @@ function parseShipmentInner(
     number: orig.number.toUpperCase(),
     sendingCountry,
     receivingCountry,
-    carrierId: orig.number,
 
     // skip exporter / importer for now
 
