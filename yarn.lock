@@ -9189,6 +9189,7 @@ __metadata:
     "@types/react-dom": "npm:^18"
     "@types/supertest": "npm:^6.0.2"
     better-sqlite3: "npm:^11.0.0"
+    country-code-lookup: "npm:^0.1.3"
     csvtojson: "npm:^2.0.10"
     eslint: "npm:^9.8.0"
     esrun: "npm:^3.2.26"
@@ -10968,6 +10969,13 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/0382a9ed13208f8bfc22ca2f62b364855207dffdb73dc26e150ade78c3093f1cf56172df2dd460c8caf2afa91c0ed4ec8a88c62f8f9cd1cf423d26506aa8797a
+  languageName: node
+  linkType: hard
+
+"country-code-lookup@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "country-code-lookup@npm:0.1.3"
+  checksum: 10c0/242f6ac93588a3427d462fc8415469536bda2330cb99034c7f30c74db590628129d6eaed8be74e0a08d39ffd0b7f5de2a5c978abd7a7064e34aec7eaa82f78ea
   languageName: node
   linkType: hard
 

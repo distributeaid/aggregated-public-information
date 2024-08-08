@@ -6,8 +6,8 @@ import addItems from "./add-items";
 
 /* How to run this script:
      1. Setup your scripts `.env` file (copy / modify `.env.example`)
-     2. Export the Product Info sheet to a .csv and put it in the
-        `src/scripts/upload-product-info-sheet/` directory.
+     2. Export the Product Info sheet to a .csv and save it as
+        `src/scripts/import-product-infosheet/products.csv`.
      3. Delete the first 3 lines (headers).
      4. Run the script from the project root directory:
         `yarn script:import-product-info-sheet`

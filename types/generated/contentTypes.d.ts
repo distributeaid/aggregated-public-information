@@ -528,21 +528,22 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
     singularName: "country";
     pluralName: "countries";
     displayName: "Geo.Country";
+    description: "";
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    Code: Schema.Attribute.String &
+    code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 3;
       }>;
-    Slug: Schema.Attribute.String;
+    slug: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -906,9 +907,8 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     cargo: Schema.Attribute.Relation<"oneToMany", "api::reporting.cargo">;
     carrierId: Schema.Attribute.String;
     carbonOffsetPaid: Schema.Attribute.Boolean;
-    CO2TonsGenerated: Schema.Attribute.Decimal;
+    co2TonsGenerated: Schema.Attribute.Decimal;
     carbonOffsetCost: Schema.Attribute.Decimal;
-    notes: Schema.Attribute.Text;
     type: Schema.Attribute.Enumeration<
       ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
     >;
