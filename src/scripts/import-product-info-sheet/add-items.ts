@@ -630,7 +630,7 @@ async function getItem({
       size_style: {
         $eq: item.size_style,
       },
-    }
+    },
   });
 
   const response = await fetch(`${STRAPI_ENV.URL}/items?${query}`, {

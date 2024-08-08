@@ -1,19 +1,30 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
 import { toTitleCase, stripAndParseFloat, toBoolean } from "../helpers";
-import { Country, Shipment, ShipmentCsv, ShipmentUploadWorkflow, UploadWorkflowStatus, CountryCodeToId, ShipmentUploadWorkflowResults } from "./types.d"
+import {
+  Country,
+  Shipment,
+  ShipmentCsv,
+  ShipmentUploadWorkflow,
+  UploadWorkflowStatus,
+  CountryCodeToId,
+  ShipmentUploadWorkflowResults,
+} from "./types.d";
 
 /* Add Shipments From SDR Shipments Sheet
  * ========================================================================== */
-export async function addShipments(shipments: ShipmentCsv[], countries: Country[]) {
+export async function addShipments(
+  shipments: ShipmentCsv[],
+  countries: Country[],
+) {
   console.log("Adding Reporting.Shipments from SDR Shipments sheet...");
 
   const countryCodeToId = countries.reduce((codesToId, country) => {
-    codesToId[country.code] = country.documentId
-    return codesToId
-  }, {} as CountryCodeToId)
+    codesToId[country.code] = country.documentId;
+    return codesToId;
+  }, {} as CountryCodeToId);
 
-  const parseShipmentClosure = parseShipment(countryCodeToId)
+  const parseShipmentClosure = parseShipment(countryCodeToId);
 
   const results = await Promise.allSettled<ShipmentUploadWorkflow>(
     shipments.map((shipment) => {
@@ -23,7 +34,7 @@ export async function addShipments(shipments: ShipmentCsv[], countries: Country[
           orig: shipment,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
-        })
+        });
       })
         .then(parseShipmentClosure)
         .then(parseShipmentRoles)
@@ -33,21 +44,19 @@ export async function addShipments(shipments: ShipmentCsv[], countries: Country[
   );
 
   // { "SUCCESS": [], "ALREADY_EXISTS": [], ...}
-  const resultsMap: ShipmentUploadWorkflowResults =
-    Object.keys(UploadWorkflowStatus).reduce(
-      (resultsMap, key) => {
-        resultsMap[key] = [];
-        return resultsMap;
-      },
-      {} as ShipmentUploadWorkflowResults
-    );
+  const resultsMap: ShipmentUploadWorkflowResults = Object.keys(
+    UploadWorkflowStatus,
+  ).reduce((resultsMap, key) => {
+    resultsMap[key] = [];
+    return resultsMap;
+  }, {} as ShipmentUploadWorkflowResults);
 
   results
     .map((result) => {
       if (isFulfilled(result)) {
         return result.value;
       } else {
-        return result.reason
+        return result.reason;
       }
     })
     .reduce((resultsMap, workflowResult) => {
@@ -64,22 +73,22 @@ export async function addShipments(shipments: ShipmentCsv[], countries: Country[
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
     // NOTE: uncomment & set the status key to debug different types of results
-    if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-      resultsMap[key].forEach((result) => {
-        // console.log(result)
-        // console.log("\n")
-      })
-    }
+    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    //   resultsMap[key].forEach((result) => {
+    //     console.log(result)
+    //     console.log("\n")
+    //   })
+    // }
   });
 
   console.log("Adding shipments completed!");
 
   const validShipments: Shipment[] = [
     ...resultsMap[UploadWorkflowStatus.SUCCESS],
-    ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS]
-  ]
+    ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS],
+  ];
 
-  return validShipments
+  return validShipments;
 }
 
 const isFulfilled = <T>(
@@ -101,49 +110,44 @@ const _isRejected = <T>(
  */
 function parseShipment(countries: CountryCodeToId) {
   return (workflow: ShipmentUploadWorkflow): ShipmentUploadWorkflow => {
-    return parseShipmentInner(workflow, countries)
-  }
+    return parseShipmentInner(workflow, countries);
+  };
 }
 
 function parseShipmentInner(
   { data, orig, status, logs }: ShipmentUploadWorkflow,
-  countries: CountryCodeToId
+  countries: CountryCodeToId,
 ): ShipmentUploadWorkflow {
-  logs = [
-    ...logs,
-    `Log: parsing Reporting.Shipment "${orig.number}"`
-  ]
+  logs = [...logs, `Log: parsing Reporting.Shipment "${orig.number}"`];
 
-  const sendingCountry = countries[orig.sendingCountry.toUpperCase()]
-  const receivingCountry = countries[orig.receivingCountry.toUpperCase()]
-  if ( orig.number === ""
-    || sendingCountry === undefined
-    || receivingCountry === undefined
+  const sendingCountry = countries[orig.sendingCountry.toUpperCase()];
+  const receivingCountry = countries[orig.receivingCountry.toUpperCase()];
+  if (
+    orig.number === "" ||
+    sendingCountry === undefined ||
+    receivingCountry === undefined
   ) {
     if (orig.number == "") {
-      logs = [
-        ...logs,
-        `Error: No shipment number. Skipping...`
-      ]
+      logs = [...logs, `Error: No shipment number. Skipping...`];
     }
     if (sendingCountry === undefined) {
       logs = [
         ...logs,
-        `Error: Sending country "${orig.sendingCountry}" doesn't exist. Skipping...`
-      ]
+        `Error: Sending country "${orig.sendingCountry}" doesn't exist. Skipping...`,
+      ];
     }
     if (receivingCountry === undefined) {
       logs = [
         ...logs,
-        `Error: Receiving country "${orig.receivingCountry}" doesn't exist. Skipping...`
-      ]
+        `Error: Receiving country "${orig.receivingCountry}" doesn't exist. Skipping...`,
+      ];
     }
     throw {
       data,
       orig,
       status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
-      logs
-    }
+      logs,
+    };
   }
 
   const shipment = {
@@ -156,63 +160,77 @@ function parseShipmentInner(
 
     type: toTitleCase(orig.type),
     project: toTitleCase(orig.project),
-    carbonOffsetPaid: orig.carbonOffsetPaid.toLowerCase() === 'true',
+    carbonOffsetPaid: orig.carbonOffsetPaid.toLowerCase() === "true",
     co2TonsGenerated: stripAndParseFloat(orig.co2TonsGenerated),
     carbonOffsetCost: stripAndParseFloat(orig.carbonOffsetCost),
-  }
+  };
 
   return {
     data: shipment,
     orig,
     status,
-    logs
-  }
+    logs,
+  };
 }
 
 /* Parse Shipment Roles
  * ------------------------------------------------------ */
-function parseShipmentRoles(
-  { data, orig, status, logs }: ShipmentUploadWorkflow
-): ShipmentUploadWorkflow {
+function parseShipmentRoles({
+  data,
+  orig,
+  status,
+  logs,
+}: ShipmentUploadWorkflow): ShipmentUploadWorkflow {
   logs = [
     ...logs,
-    `Log: parsing roles for Reporting.Shipment "${orig.number}"`
-  ]
+    `Log: parsing roles for Reporting.Shipment "${orig.number}"`,
+  ];
 
   const roles = {
     needsAssessment: toBoolean(orig.daRoles.needsAssessment),
     sourcingInKindDonations: toBoolean(orig.daRoles.sourcingInKindDonations),
     sourcingProcurement: toBoolean(orig.daRoles.sourcingProcurement),
-    sourcingCommunityCollection: toBoolean(orig.daRoles.sourcingCommunityCollection),
+    sourcingCommunityCollection: toBoolean(
+      orig.daRoles.sourcingCommunityCollection,
+    ),
     aidMatching: toBoolean(orig.daRoles.aidMatching),
     firstMileTransportation: toBoolean(orig.daRoles.firstMileTransportation),
-    firstMileStorageCommunity: toBoolean(orig.daRoles.firstMileStorageCommunity),
-    firstMileStorageCommercial: toBoolean(orig.daRoles.firstMileStorageCommercial),
+    firstMileStorageCommunity: toBoolean(
+      orig.daRoles.firstMileStorageCommunity,
+    ),
+    firstMileStorageCommercial: toBoolean(
+      orig.daRoles.firstMileStorageCommercial,
+    ),
     mainLegTransportation: toBoolean(orig.daRoles.mainLegTransportation),
     customsTransit: toBoolean(orig.daRoles.customsTransit),
     customsExport: toBoolean(orig.daRoles.customsExport),
     customsImport: toBoolean(orig.daRoles.customsImport),
     lastMileTransportation: toBoolean(orig.daRoles.lastMileTransportation),
     lastMileStorageCommunity: toBoolean(orig.daRoles.lastMileStorageCommunity),
-    lastMileStorageCommercial: toBoolean(orig.daRoles.lastMileStorageCommercial),
-  }
+    lastMileStorageCommercial: toBoolean(
+      orig.daRoles.lastMileStorageCommercial,
+    ),
+  };
 
   return {
     data: {
       ...data,
-      daRoles: roles
+      daRoles: roles,
     },
     orig,
     status,
-    logs
-  }
+    logs,
+  };
 }
 
 /* Parse Shipment Roles
  * ------------------------------------------------------ */
-async function getShipment(
-  { data, orig, status, logs }: ShipmentUploadWorkflow
-): Promise<ShipmentUploadWorkflow> {
+async function getShipment({
+  data,
+  orig,
+  status,
+  logs,
+}: ShipmentUploadWorkflow): Promise<ShipmentUploadWorkflow> {
   logs = [
     ...logs,
     `Log: Checking if Reporting.Shipment "${orig.number}" already exists.`,
@@ -223,7 +241,7 @@ async function getShipment(
       number: {
         $eq: data.number,
       },
-    }
+    },
   });
 
   const response = await fetch(`${STRAPI_ENV.URL}/shipments?${query}`, {
@@ -279,13 +297,12 @@ async function getShipment(
 
 /* Parse Shipment Roles
  * ------------------------------------------------------ */
-async function uploadShipment(
-  { data, orig, status, logs }: ShipmentUploadWorkflow
-): Promise<ShipmentUploadWorkflow> {
-  logs = [
-    ...logs,
-    `Log: Creating Reporting.Shipment "${orig.number}".`,
-  ];
+async function uploadShipment({
+  data,
+  orig,
+  /* status, */ logs,
+}: ShipmentUploadWorkflow): Promise<ShipmentUploadWorkflow> {
+  logs = [...logs, `Log: Creating Reporting.Shipment "${orig.number}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/shipments`, {
     method: "POST",
