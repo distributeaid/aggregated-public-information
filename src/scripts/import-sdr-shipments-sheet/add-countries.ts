@@ -1,14 +1,20 @@
 import qs from "qs";
-import lookup from "country-code-lookup"
+import lookup from "country-code-lookup";
 import { STRAPI_ENV } from "../strapi-env";
-import { Country, ShipmentCsv, CountryUploadWorkflow, UploadWorkflowStatus, CountryUploadWorkflowResults } from "./types.d"
+import {
+  Country,
+  ShipmentCsv,
+  CountryUploadWorkflow,
+  UploadWorkflowStatus,
+  CountryUploadWorkflowResults,
+} from "./types.d";
 
 /* Add Countries From SDR Shipments Sheet
  * ========================================================================== */
 export async function addCountries(shipments: ShipmentCsv[]) {
   console.log("Adding Geo.Countries from SDR Shipments sheet...");
 
-  const uniqueCountries = [...consolidateCountries(shipments)]
+  const uniqueCountries = [...consolidateCountries(shipments)];
 
   const results = await Promise.allSettled<CountryUploadWorkflow>(
     uniqueCountries.map((country) => {
@@ -18,7 +24,7 @@ export async function addCountries(shipments: ShipmentCsv[]) {
           orig: country,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
-        })
+        });
       })
         .then(parseCountry)
         .then(getCountry)
@@ -27,15 +33,12 @@ export async function addCountries(shipments: ShipmentCsv[]) {
   );
 
   // { "SUCCESS": [], "ALREADY_EXISTS": [], ...}
-  const resultsMap: CountryUploadWorkflowResults =
-    Object.keys(UploadWorkflowStatus)
-      .reduce(
-        (resultsMap, key) => {
-          resultsMap[key] = [];
-          return resultsMap;
-        },
-        {} as CountryUploadWorkflowResults
-      );
+  const resultsMap: CountryUploadWorkflowResults = Object.keys(
+    UploadWorkflowStatus,
+  ).reduce((resultsMap, key) => {
+    resultsMap[key] = [];
+    return resultsMap;
+  }, {} as CountryUploadWorkflowResults);
 
   results
     .map((result) => {
@@ -59,28 +62,24 @@ export async function addCountries(shipments: ShipmentCsv[]) {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
     // NOTE: uncomment & set the status key to debug different types of results
-    if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-      resultsMap[key].forEach((result) => {
-        // console.log(result)
-        // console.log("\n")
-      })
-    }
+    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    //   resultsMap[key].forEach((result) => {
+    //     console.log(result)
+    //     console.log("\n")
+    //   })
+    // }
   });
 
   console.log("Adding items completed!");
 
-  const validCountries: Country[] =
-    [
-      ...resultsMap[UploadWorkflowStatus.SUCCESS],
-      ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS]
-    ].reduce((countries: Country[], workflow: CountryUploadWorkflow) => {
-      return [
-        ...countries,
-        workflow.data
-      ]
-    }, [] as Country[])
+  const validCountries: Country[] = [
+    ...resultsMap[UploadWorkflowStatus.SUCCESS],
+    ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS],
+  ].reduce((countries: Country[], workflow: CountryUploadWorkflow) => {
+    return [...countries, workflow.data];
+  }, [] as Country[]);
 
-  return validCountries
+  return validCountries;
 }
 
 const isFulfilled = <T>(
@@ -100,14 +99,14 @@ const _isRejected = <T>(
 function consolidateCountries(shipments: ShipmentCsv[]) {
   const countries = shipments.reduce((countries: Set<string>, shipment) => {
     if (shipment.sendingCountry !== "") {
-      countries.add(shipment.sendingCountry)
+      countries.add(shipment.sendingCountry);
     }
 
     if (shipment.receivingCountry !== "") {
-      countries.add(shipment.receivingCountry)
+      countries.add(shipment.receivingCountry);
     }
 
-    return countries
+    return countries;
   }, new Set<string>());
 
   return countries;
@@ -115,59 +114,58 @@ function consolidateCountries(shipments: ShipmentCsv[]) {
 
 /* Parse Country
  * ------------------------------------------------------ */
-function parseCountry(
-  { data, orig, status, logs }: CountryUploadWorkflow
-): CountryUploadWorkflow {
-  logs = [
-    ...logs,
-    `Log: parsing Geo.Country "${orig}"`
-  ]
+function parseCountry({
+  data,
+  orig,
+  status,
+  logs,
+}: CountryUploadWorkflow): CountryUploadWorkflow {
+  logs = [...logs, `Log: parsing Geo.Country "${orig}"`];
 
-  const code = orig.toUpperCase()
-  const name = lookup.byIso(code)?.country
+  const code = orig.toUpperCase();
+  const name = lookup.byIso(code)?.country;
+  data = {
+    ...data,
+    code,
+    name,
+  };
 
   if (name === undefined) {
     throw {
-      data: {
-        code,
-        name
-      },
+      data,
       orig,
       status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
       logs: [
         ...logs,
-        `Error: "${code}" is an invalid ISO 3166 3-digit country code.`
-      ]      
-    }
+        `Error: "${code}" is an invalid ISO 3166 3-digit country code.`,
+      ],
+    };
   }
 
   return {
-    data: {
-      name,
-      code
-    },
+    data,
     orig,
     status,
-    logs
-  }
+    logs,
+  };
 }
 
 /* Get Country
  * ------------------------------------------------------ */
-async function getCountry(
-  { data, orig, status, logs }: CountryUploadWorkflow
-): Promise<CountryUploadWorkflow> {
-  logs = [
-    ...logs,
-    `Log: Checking if Geo.Country "${orig}" already exists.`,
-  ];
+async function getCountry({
+  data,
+  orig,
+  status,
+  logs,
+}: CountryUploadWorkflow): Promise<CountryUploadWorkflow> {
+  logs = [...logs, `Log: Checking if Geo.Country "${orig}" already exists.`];
 
   const query = qs.stringify({
     filters: {
       code: {
         $eq: data.code,
       },
-    }
+    },
   });
 
   const response = await fetch(`${STRAPI_ENV.URL}/countries?${query}`, {
@@ -223,13 +221,12 @@ async function getCountry(
 
 /* Upload Country
  * ------------------------------------------------------ */
-async function uploadCountry(
-  { data, orig, status, logs }: CountryUploadWorkflow
-): Promise<CountryUploadWorkflow> {
-  logs = [
-    ...logs,
-    `Log: Creating Geo.Country "${orig}".`,
-  ];
+async function uploadCountry({
+  data,
+  orig,
+  /* status, */ logs,
+}: CountryUploadWorkflow): Promise<CountryUploadWorkflow> {
+  logs = [...logs, `Log: Creating Geo.Country "${orig}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/countries`, {
     method: "POST",
