@@ -26,7 +26,8 @@
     "check:test": "yarn test",
     "check:all": "yarn check:types && yarn check:lint && yarn check:format && yarn check:build && yarn check:test",
     "script:import-product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env",
-    "script:import-needs-assessment-data": "esrun src/scripts/import-needs-assessment-data/ dotenv_config_path=./src/scripts/.env"
+    "script:import-needs-assessment-data": "esrun src/scripts/import-needs-assessment-data/ dotenv_config_path=./src/scripts/.env",
+    "script:import-sdr-shipments-sheet": "esrun src/scripts/import-sdr-shipments-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
     "@strapi/plugin-documentation": "5.3.0",
@@ -60,6 +61,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/supertest": "^6.0.2",
+    "country-code-lookup": "^0.1.3",
     "csvtojson": "^2.0.10",
     "eslint": "~9.14.0",
     "esrun": "^3.2.26",
