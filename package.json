@@ -28,9 +28,9 @@
     "script:import-product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "5.0.0-rc.8",
-    "@strapi/plugin-users-permissions": "5.0.0-rc.8",
-    "@strapi/provider-upload-aws-s3": "5.0.0-rc.8",
+    "@strapi/plugin-documentation": "5.0.0-rc.10",
+    "@strapi/plugin-users-permissions": "5.0.0-rc.10",
+    "@strapi/provider-upload-aws-s3": "5.0.0-rc.10",
     "@strapi/strapi": "^5.0.0-rc.9",
     "better-sqlite3": "^11.0.0",
     "pg": "^8.11.3",
