@@ -10,6 +10,8 @@ import {
   CountryCodeToId,
   ShipmentUploadWorkflowResults,
 } from "./types.d";
+import _ from "lodash";
+import { isFulfilled } from "./typeUtils";
 
 /* Add Shipments From SDR Shipments Sheet
  * ========================================================================== */
@@ -44,40 +46,31 @@ export async function addShipments(
   );
 
   // { "SUCCESS": [], "ALREADY_EXISTS": [], ...}
-  const resultsMap: ShipmentUploadWorkflowResults = Object.keys(
-    UploadWorkflowStatus,
-  ).reduce((resultsMap, key) => {
-    resultsMap[key] = [];
-    return resultsMap;
-  }, {} as ShipmentUploadWorkflowResults);
-
-  results
-    .map((result) => {
-      if (isFulfilled(result)) {
-        return result.value;
-      } else {
-        return result.reason;
-      }
-    })
-    .reduce((resultsMap, workflowResult) => {
-      if (workflowResult.status) {
-        resultsMap[workflowResult.status].push(workflowResult);
-      } else {
-        resultsMap[UploadWorkflowStatus.OTHER].push(workflowResult);
-      }
-      return resultsMap;
-    }, resultsMap);
+  const resultsMap: ShipmentUploadWorkflowResults = {
+    ...(_.chain(UploadWorkflowStatus)
+      .keys()
+      .map((key) => [key, [] as Country[]])
+      .fromPairs()
+      .value() as ShipmentUploadWorkflowResults),
+    ..._.chain(results)
+      .map((res) => (isFulfilled(res) ? res.value : res.reason))
+      .groupBy((res) => res.status ?? UploadWorkflowStatus.OTHER)
+      .value(),
+  };
 
   console.log("Add Reporting.Shipments results:");
   Object.keys(resultsMap).forEach((key) => {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
     // NOTE: uncomment & set the status key to debug different types of results
-    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    // if (
+    //   key !== UploadWorkflowStatus.SUCCESS &&
+    //   key !== UploadWorkflowStatus.ALREADY_EXISTS
+    // ) {
     //   resultsMap[key].forEach((result) => {
-    //     console.log(result)
-    //     console.log("\n")
-    //   })
+    //     console.log(result);
+    //     console.log("\n");
+    //   });
     // }
   });
 
@@ -90,18 +83,6 @@ export async function addShipments(
 
   return validShipments;
 }
-
-const isFulfilled = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseFulfilledResult<T> => {
-  return value.status === "fulfilled";
-};
-
-const _isRejected = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseRejectedResult => {
-  return value.status === "rejected";
-};
 
 /* Parse Shipment
  * ------------------------------------------------------
@@ -250,7 +231,23 @@ async function getShipment({
       Authorization: `Bearer ${STRAPI_ENV.KEY}`,
     },
   });
-  const body = await response.json();
+
+  let body;
+
+  try {
+    body = await response.json();
+  } catch (error) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      error,
+      logs: [
+        ...logs,
+        `Error: Failed to get Reporting.Shipment. HttpStatus: ${response.status} - ${response.statusText}`,
+      ],
+    };
+  }
 
   if (!response.ok) {
     throw {
@@ -311,7 +308,23 @@ async function uploadShipment({
     },
     body: JSON.stringify({ data }),
   });
-  const body = await response.json();
+
+  let body;
+
+  try {
+    body = await response.json();
+  } catch (error) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      error,
+      logs: [
+        ...logs,
+        `Error: Failed to create Reporting.Shipment. HttpStatus: ${response.status} - ${response.statusText}`,
+      ],
+    };
+  }
 
   if (!response.ok) {
     throw {
