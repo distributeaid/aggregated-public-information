@@ -48,6 +48,7 @@ export async function addCountries(shipments: ShipmentCsv[]) {
   };
 
   console.log("Add Geo.Countries results:");
+
   Object.keys(resultsMap).forEach((key) => {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
@@ -75,20 +76,12 @@ export async function addCountries(shipments: ShipmentCsv[]) {
 
 /* Consolidate Countries
  * ------------------------------------------------------ */
-function consolidateCountries(shipments: ShipmentCsv[]) {
-  const countries = shipments.reduce((countries: Set<string>, shipment) => {
-    if (shipment.sendingCountry !== "") {
-      countries.add(shipment.sendingCountry);
-    }
-
-    if (shipment.receivingCountry !== "") {
-      countries.add(shipment.receivingCountry);
-    }
-
-    return countries;
-  }, new Set<string>());
-
-  return countries;
+function consolidateCountries(shipments: ShipmentCsv[]): Set<string> {
+  return new Set(
+    shipments.flatMap((s) =>
+      [s.sendingCountry, s.receivingCountry].filter((v) => v !== ""),
+    ),
+  );
 }
 
 /* Parse Country
