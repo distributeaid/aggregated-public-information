@@ -9063,7 +9063,6 @@ __metadata:
     eslint: "npm:~9.14.0"
     esrun: "npm:^3.2.26"
     jest: "npm:^29.7.0"
-    lodash: "npm:^4.17.21"
     pg: "npm:^8.11.3"
     pg-connection-string: "npm:^2.6.2"
     prettier: "npm:^3.3.3"
