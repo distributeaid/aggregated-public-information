@@ -48,7 +48,7 @@
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
-  "packageManager": "yarn@4.4.0",
+  "packageManager": "yarn@4.4.1",
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@types/eslint": "^9",
