@@ -27,7 +27,7 @@ export function consolidateRegions(data: NeedAssessment[]): Set<string> {
 
   /*  Parse Region
   * ------------------------------------------------------- */
-function parseRegion({
+export function parseRegion({
   data,
   orig,
   status,
@@ -141,3 +141,48 @@ export async function getRegion({
     logs: [...logs, "Success: Confirmed Geo.Region does not exist."],
   };
 }
+
+  /*  Upload Region
+  * ------------------------------------------------------- */
+  export async function uploadRegion({
+    data,
+    orig,
+    /* status, */ logs,
+  }: RegionUploadWorkflow): Promise<RegionUploadWorkflow> {
+    logs = [...logs, `Log: Creating Geo.Region "${orig}".`];
+  
+    const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+      },
+      // body: JSON.stringify({ data }),
+      body: JSON.stringify({ 
+        data: {
+          Name: data.region,
+        } 
+      }),
+    });
+    const body = await response.json();
+  
+    if (!response.ok) {
+      throw {
+        data,
+        orig,
+        status: UploadWorkflowStatus.UPLOAD_ERROR,
+        logs: [
+          ...logs,
+          `Error: Failed to create Geo.Region. HttpStatus: ${response.status} - ${response.statusText}`,
+          JSON.stringify(body),
+        ],
+      };
+    }
+  
+    return {
+      data: body.data,
+      orig,
+      status: UploadWorkflowStatus.SUCCESS,
+      logs: [...logs, "Success: Created Geo.Region."],
+    };
+  }

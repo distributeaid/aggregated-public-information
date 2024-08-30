@@ -2,7 +2,8 @@ import "dotenv/config";
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { consolidateRegions, getRegion } from "./add-regions";
+import { consolidateRegions, parseRegion, getRegion, uploadRegion } from "./add-regions";
+import { UploadWorkflowStatus } from "./types.d";
 
 
 async function main() {
@@ -27,6 +28,15 @@ async function main() {
                 });
 
                 console.log(`Result for region ${regionName}:`, workflow);
+
+                if (workflow.status !== UploadWorkflowStatus.ALREADY_EXISTS) {
+                    try {
+                        const uploadedRegion = await uploadRegion(workflow);
+                        console.log(`Uploaded region ${workflow.orig}:`, uploadedRegion);
+                    } catch (error) {
+                        console.error(`Error uploading region ${workflow.orig}:`, error);
+                    }
+                }
             } catch (error) {
                 console.error(`Error processing region ${regionName}:`, error);
             }
