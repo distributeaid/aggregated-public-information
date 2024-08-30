@@ -2,7 +2,7 @@ import "dotenv/config";
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { consolidateRegions } from "./add-regions.ts";
+import { consolidateRegions, getRegion } from "./add-regions";
 
 
 async function main() {
@@ -13,9 +13,24 @@ async function main() {
         const data = JSON.parse(jsonData);
 
         //  Process the regions
-        const regions = consolidateRegions(data);
+        const regions = consolidateRegions(data);  /** checks this function is working  */
+        // console.log('Processed Regions', regions);
 
-        console.log('Processed Regions', regions);
+        // Run getRegion for each consolidated region - to check this function is working
+        for (const regionName of regions) {
+            try {
+                const workflow = await getRegion({
+                    data: {region: regionName },
+                    orig: regionName,
+                    status: 'PROCESSING',
+                    logs: []
+                });
+
+                console.log(`Result for region ${regionName}:`, workflow);
+            } catch (error) {
+                console.error(`Error processing region ${regionName}:`, error);
+            }
+        }
 
     } catch (error) {
         // console.error('Error processing regions', error);
