@@ -3,6 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 import { addRegions } from "./add-regions";
+import { addSubregions } from "./add-subregions";
 
 
 async function main() {
@@ -11,10 +12,13 @@ async function main() {
         const jsonData = readFileSync(join(__dirname, './needs-data.json'), 'utf8');
         const data = JSON.parse(jsonData);
 
+        //  Process the data and upload to Strapi collections
         const regions = await addRegions(data);
+        const subregions = await addSubregions(data);
+
 
     } catch (error) {
-        console.error('Error processing regions', error);
+        console.error('Error processing subregions', error);
         if (error.code === 'ENOENT') {
             console.error(`File not found: ${error.path}`);
         } else if (error instanceof TypeError) {

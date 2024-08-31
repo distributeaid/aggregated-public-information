@@ -21,8 +21,8 @@ export type UploadWorkflowResults<T> = {
 
 export type RegionUploadWorkflow = UploadWorkflow<Region>
 export type RegionUploadWorkflowResults = UploadWorkflowResults<Region>;
-// export type SubregionUploadWorkflow = UploadWorkflow<Subregion>
-// export type SubregionUploadWorkflowResults = UploadWorkflowResults<Subregion>;
+export type SubregionUploadWorkflow = UploadWorkflow<Subregion>
+export type SubregionUploadWorkflowResults = UploadWorkflowResults<Subregion>;
 
 
 export type Region = {
