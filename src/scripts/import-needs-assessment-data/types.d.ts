@@ -19,17 +19,11 @@ export type UploadWorkflowResults<T> = {
     [Property in keyof UploadWorkflowStatus]: T[];
 };
 
-// export type PlaceUploadWorkflow = UploadWorkflow<PlaceData>;
-// export type PlaceUploadWorkflowResults = UploadWorkflowResults<PlaceData>;
 export type RegionUploadWorkflow = UploadWorkflow<Region>
 export type RegionUploadWorkflowResults = UploadWorkflowResults<Region>;
 // export type SubregionUploadWorkflow = UploadWorkflow<Subregion>
 // export type SubregionUploadWorkflowResults = UploadWorkflowResults<Subregion>;
 
-// export type PlaceData = {
-//     region?: string;
-//     subregion?: string;
-// };
 
 export type Region = {
     region?: string;
