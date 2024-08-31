@@ -1,33 +1,115 @@
-import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
 import {
-    // PlaceData,
     Region,
-    // Subregion,
     NeedAssessment,
     RegionUploadWorkflow,
     UploadWorkflowStatus,
     RegionUploadWorkflowResults,
 } from "./types.d";
 
-export function consolidateRegions(data: NeedAssessment[]): Set<string> {
-    const regions = data.reduce((acc: Set<string>, item) => {
-      const region = item.place?.region;
-      if (region) {
-        acc.add(region);
+  /*  Add Regions from Needs Assessment Data
+  * ------------------------------------------------------- */
+export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
+  console.log("Adding Geo.Regions from the Needs Assessment data ...");
+
+  const uniqueRegions = consolidateRegions(data);
+
+  const results = await Promise.allSettled<RegionUploadWorkflow> (
+    uniqueRegions.map((region) => {
+      return new Promise<RegionUploadWorkflow>((resolve, _reject) => {
+        resolve({
+          data: {},
+          orig: region,
+          status: UploadWorkflowStatus.PROCESSING,
+          logs: [],
+        });
+      })
+        .then(parseRegion)
+        .then(getRegion)
+        .then(uploadRegion);
+    }),
+  );
+
+  // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
+  const resultsMap: RegionUploadWorkflowResults = Object.keys(
+    UploadWorkflowStatus,
+  ).reduce((resultsMap, key) => {
+    resultsMap[key] = [];
+    return resultsMap;
+  }, {} as RegionUploadWorkflowResults);
+
+  results
+    .map((result) => {
+      if (isFulfilled(result)) {
+        return result.value;
+      } else {
+        return result.reason;
       }
-      return acc;
-    }, new Set<string>());
-  
-    // Log the consolidated regions to the terminal
-    console.log(regions);
+    })
+    .reduce((resultsMap, workflowResult) => {
+      if (workflowResult.status) {
+        resultsMap[workflowResult.status].push(workflowResult);
+      } else {
+        resultsMap[UploadWorkflowStatus.OTHER].push(workflowResult);
+      }
+      return resultsMap;
+    }, resultsMap);
+
+    console.log("Add Geo.Regions results:");
+    Object.keys(resultsMap).forEach((key) => {
+      console.log(`     ${key}: ${resultsMap[key].length}`);
+
+      // NOTE: uncomment & set the status key to debug different types of results
+      // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+        // resultsMap[key].forEach((result) => {
+          // console.log(result)
+          // console.log("\n")
+        // })
+      // }
+    });
+
+    console.log("Adding items completed!");
+
+    const validRegions: Region[] = [
+      ...resultsMap[UploadWorkflowStatus.SUCCESS],
+      ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS],
+    ].reduce((regions: Region[], workflow: RegionUploadWorkflow) => {
+      return [...regions, workflow.data];
+    }, [] as Region[]);
+
+    return validRegions;
+
+}
+
+const isFulfilled = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseFulfilledResult<T> => {
+  return value.status === "fulfilled";
+};
+
+const _isRejected = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseRejectedResult => {
+  return value.status === "rejected";
+};
+
+  /*  Consolidate Regions
+  * ------------------------------------------------------- */
+    function consolidateRegions(data: NeedAssessment[]): string[] {
+      const regions = data.reduce((acc: string[], item) => {
+        const region = item.place?.region;
+        if (region && !acc.includes(region)) {
+          acc.push(region);
+        }
+        return acc;
+      }, []);
   
     return regions;
   }
 
   /*  Parse Region
   * ------------------------------------------------------- */
-export function parseRegion({
+function parseRegion({
   data,
   orig,
   status,
@@ -62,23 +144,16 @@ export function parseRegion({
 
   /*  Get Region
   * ------------------------------------------------------- */
-export async function getRegion({
+async function getRegion({
   data,
   orig,
   status,
   logs,
 }: RegionUploadWorkflow): Promise<RegionUploadWorkflow> {
   logs = [...logs, `Log: Checking if Geo.Region "${orig}" already exists.`];
-  console.log('Initial logs:', logs);
 
-  // const query = qs.stringify({
-  //   filters: {
-  //     region: { $eq: data.region },
-  //   }, 
-  // }, { encodeValuesOnly: true });  // Encode values only, not keys
 
   //Fetch the data from Strapi
-  // const response = await fetch(`${STRAPI_ENV.URL}/regions?${query}`, {
   const response = await fetch(`${STRAPI_ENV.URL}/regions?`, {
     method: "GET",
     headers: {
@@ -86,8 +161,6 @@ export async function getRegion({
       Authorization: `Bearer ${STRAPI_ENV.KEY}`,
     },
   });
-  // console.log('Response status', response.status);
-  // console.log('Response ok', response.ok);
 
   const body = await response.json();
   const matchingRegion = body.data.find((region) =>
@@ -108,23 +181,8 @@ export async function getRegion({
     };
   }
 
-  console.log('Number of matching regions:', body.data.length);
-
-  // if (body.data.length > 1) {
-  //   console.warn('too many matching regions found');
-  //   throw {
-  //     data,
-  //     orig,
-  //     status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
-  //     logs: [
-  //       ...logs,
-  //       `Error: Found too many matching Geo.Regions (${body.data.length}). Skipping...`,
-  //     ],
-  //   };
-  // }
 
   if (matchingRegion) {
-    console.log('Existing region found');
     throw {
       data: body.data,
       orig,
@@ -133,7 +191,6 @@ export async function getRegion({
     };
   }
 
-  console.log('Region does not exist');
   return {
     data,
     orig,
@@ -144,7 +201,7 @@ export async function getRegion({
 
   /*  Upload Region
   * ------------------------------------------------------- */
-  export async function uploadRegion({
+  async function uploadRegion({
     data,
     orig,
     /* status, */ logs,
@@ -157,7 +214,6 @@ export async function getRegion({
         "Content-Type": "application/json",
         Authorization: `Bearer ${STRAPI_ENV.KEY}`,
       },
-      // body: JSON.stringify({ data }),
       body: JSON.stringify({ 
         data: {
           Name: data.region,
