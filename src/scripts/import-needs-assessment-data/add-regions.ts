@@ -61,10 +61,10 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
 
       // NOTE: uncomment & set the status key to debug different types of results
       // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-        // resultsMap[key].forEach((result) => {
-          // console.log(result)
-          // console.log("\n")
-        // })
+      //   resultsMap[key].forEach((result) => {
+      //     console.log(result)
+      //     console.log("\n")
+      //   })
       // }
     });
 
@@ -78,7 +78,6 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
     }, [] as Region[]);
 
     return validRegions;
-
 }
 
 const isFulfilled = <T>(
