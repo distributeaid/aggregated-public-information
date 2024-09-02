@@ -13,9 +13,8 @@ async function main() {
         const data = JSON.parse(jsonData);
 
         //  Process the data and upload to Strapi collections
-        const regions = await addRegions(data);
-        const subregions = await addSubregions(data);
-
+        const _regions = await addRegions(data);
+        const _subregions = await addSubregions(data);
 
     } catch (error) {
         console.error('Error processing subregions', error);
