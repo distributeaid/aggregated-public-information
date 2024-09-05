@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Path to your example .env file
 EXAMPLE_ENV_FILE=".env.example"
