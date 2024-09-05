@@ -101,6 +101,31 @@ To access the your deployment on Gitpod, you will have to confirm the message th
 gp ports list
 ```
 
+## Contributing
+
+Before creating a pull request, test a final time and check for errors:
+
+`yarn test:with-build`
+`yarn check:format`
+`yarn format:fix`
+`yarn check:all`
+
+### Gitpod
+
+If gitpod give you an error like the following:
+
+`Pushing to https://github.com/distributeaid/aggregated-public-information.git`
+`remote: Permission to distributeaid/aggregated-public-information.git denied to [my github username].`
+`fatal: unable to access 'https://github.com/distributeaid/aggregated-public-information.git/': The requested URL returned error: 403`
+
+You may not have the GitHub providers configured correctly. You can fix this by going to [the integrations page in Gitpod's integrations settings](https://gitpod.io/user/integrations) and ensuring Github and its permissions are enabled.
+
+![Settings page](docs/gitlab01.jpg)
+
+![Correct settings](docs/gitlab02.jpg)
+
+At this point, you will authorize git to share information with gitlab, which will require re-logging into git.
+
 ## Learn more 📚
 
 ### Distribute Aid 🌍
