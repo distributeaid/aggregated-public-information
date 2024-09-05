@@ -50,7 +50,7 @@ Once you have a development environment, you can set up your local site!
 ### 1. Set Up Local Private Keys 🔑
 
 ```sh
-sh ./setup.sh
+./setup.bash
 ```
 
 ### 2. Install your packages
