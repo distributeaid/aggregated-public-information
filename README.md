@@ -22,8 +22,13 @@ To develop or contribute to this project, you will need Node.js. We recommend yo
 #### 3. Install yarn 🧶
 
 To build dependencies, you should also have yarn installed on your system.
-If it is not yet installed, you can run
-`npm install --global yarn`
+If it is not yet installed, you can run:
+
+```sh
+npm install --global corepack
+corepack enable
+hash -r
+```
 
 ### Gitpod Development ☁️
 
