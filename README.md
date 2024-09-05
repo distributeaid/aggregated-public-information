@@ -5,20 +5,25 @@ This project uses [Strapi](https://strapi.io) as a CMS backend.
 ## Dev Environment Setup
 
 ### Local Development 🏠
+
 If you'd like to develop locally, follow these steps. Otherwise, you can skip to Gitpod development below.
 
 #### 1. Clone this repository
+
 ```sh
 git clone git@github.com:distributeaid/aggregated-public-information.git
 cd aggregated-public-information
 ```
+
 #### 2. Install nvm 🔧
+
 To develop or contribute to this project, you will need Node.js. We recommend you install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) to manage Node.js versions.
 
 #### 3. Install yarn 🧶
+
 To build dependencies, you should also have yarn installed on your system.
 If it is not yet installed, you can run
-```npm install --global yarn```
+`npm install --global yarn`
 
 ### Gitpod Development ☁️
 
@@ -31,9 +36,10 @@ If you'd prefer to develop on the cloud, Gitpod provides a fully automated devel
 3. Relax, a development environment is being set up for you in the first terminal.
 
 > [!NOTE]
-To access your workspace later, go to [Gitpod Workspaces](https://gitpod.io/workspaces). Pin the `aggregated-public-information` workspace to prevent auto-deletion after 14 days by clicking the three dots next to the workspace name and selecting "Pin".
+> To access your workspace later, go to [Gitpod Workspaces](https://gitpod.io/workspaces). Pin the `aggregated-public-information` workspace to prevent auto-deletion after 14 days by clicking the three dots next to the workspace name and selecting "Pin".
 
 ## Get Up and Running 🚀
+
 Once you have a development environment, you can set up your local site!
 
 ### 1. Set Up Local Private Keys 🔑
@@ -83,7 +89,7 @@ yarn test
 
 ### 6. View the Site and Set Up an Admin User 👤
 
-If you are running locally, your site should be available in the output after you run ```yarn develop``` - you will see something like
+If you are running locally, your site should be available in the output after you run `yarn develop` - you will see something like
 
 ```sh
 One more thing...
@@ -94,6 +100,7 @@ Create your first administrator 💻 by going to the administration panel at:
 ```
 
 To access the your deployment on Gitpod, you will have to confirm the message that pops up telling you where to access it. You can see your open ports with
+
 ```sh
 gp ports list
 ```
@@ -101,10 +108,10 @@ gp ports list
 ## Learn more 📚
 
 ### Distribute Aid 🌍
+
 - [Distribute Aid home](https://distributeaid.org/) - see what we're about and how to get in touch
 - [DA Github home](https://github.com/distributeaid) - an overview of our projects
 - [DA Project page](https://github.com/orgs/distributeaid/projects) - see where to jump in!
-
 
 ### Strapi
 
