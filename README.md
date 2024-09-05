@@ -59,15 +59,7 @@ Once you have a development environment, you can set up your local site!
 yarn
 ```
 
-### 3. Build Your Admin Panel 🛠️
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-yarn build
-```
-
-### 4. Start Your Server 🌐
+### 3. Start Your Server 🌐
 
 In one terminal, run `develop`:
 
@@ -83,7 +75,7 @@ yarn start
 
 This will launch the development server. `yarn test` depends on you running this!
 
-### 5. Run Tests ✅
+### 4. Run Tests ✅
 
 ```sh
 yarn test
@@ -92,7 +84,7 @@ yarn test
 > [!NOTE]
 > If you don't run `yarn develop` then you must run `yarn build` before running `yarn test`. We have provided `yarn test:with-build` as a convenience in this case.
 
-### 6. View the Site and Set Up an Admin User 👤
+### 5. View the Site and Set Up an Admin User 👤
 
 If you are running locally, your site should be available in the output after you run `yarn develop` - you will see something like
 
