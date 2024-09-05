@@ -61,19 +61,18 @@ yarn
 
 ### 3. Start Your Server 🌐
 
-In one terminal, run `develop`:
+In one terminal, run `develop`, this will live rebuild your application as you make changes:
 
 ```sh
 yarn develop
 ```
 
-If you want autoreload disabled, you can run `start`:
+If you want autoreload disabled, you can just run `build` and then `start`:
 
 ```sh
+yarn build
 yarn start
 ```
-
-This will launch the development server. `yarn test` depends on you running this!
 
 ### 4. Run Tests ✅
 
@@ -82,7 +81,7 @@ yarn test
 ```
 
 > [!NOTE]
-> If you don't run `yarn develop` then you must run `yarn build` before running `yarn test`. We have provided `yarn test:with-build` as a convenience in this case.
+> This depends on your application being built! If you don't run `yarn develop` then you must run `yarn build` after each change before running `yarn test`. We have provided `yarn test:with-build` as a convenience in this case.
 
 ### 5. View the Site and Set Up an Admin User 👤
 
