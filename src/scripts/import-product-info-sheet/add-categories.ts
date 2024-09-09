@@ -29,7 +29,9 @@ function parseCategories(products): Set<string> {
   const categories = products.reduce((cats: Set<string>, product, line) => {
     if (product.category.name === "") {
       console.log(`    - skipping empty category on line ${line}`);
-      console.log(`      ${JSON.stringify(product)}`);
+      if (process.env.VERBOSE) {
+        console.log(`      ${JSON.stringify(product)}`);
+      }
     } else {
       const category = toTitleCase(product.category.name);
       cats.add(category);
