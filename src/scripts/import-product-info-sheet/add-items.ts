@@ -209,12 +209,16 @@ export default async function addItems(products) {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
     // Print out the logs for the items that failed to upload
-    if (process.env.VERBOSE && key in ItemUploadWorkflowStatus && key != ItemUploadWorkflowStatus.ALREADY_EXISTS) {
+    if (
+      process.env.VERBOSE &&
+      key in ItemUploadWorkflowStatus &&
+      key != ItemUploadWorkflowStatus.ALREADY_EXISTS
+    ) {
       resultsMap[key].forEach((result) => {
-        console.log(result.logs)
-        console.log(JSON.stringify(result.item, null, 2))
-        console.log("/n")
-      })
+        console.log(result.logs);
+        console.log(JSON.stringify(result.item, null, 2));
+        console.log("/n");
+      });
     }
   });
   console.log("Adding items completed!");

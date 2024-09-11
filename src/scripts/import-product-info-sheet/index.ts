@@ -33,11 +33,12 @@ function configureEnvironment() {
 
   // If the environmental variables aren't set, remind the user where to set them.
   if (!process.env.STRAPI_URL || !process.env.STRAPI_API_KEY) {
-    console.error("Please set STRAPI_URL and STRAPI_API_KEY in the .env file in the scripts directory.");
+    console.error(
+      "Please set STRAPI_URL and STRAPI_API_KEY in the .env file in the scripts directory.",
+    );
     process.exit(1);
   }
 }
-
 
 (async () => {
   configureEnvironment();
