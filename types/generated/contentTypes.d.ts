@@ -692,14 +692,19 @@ export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    year: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 4;
-      }>;
     quarter: Schema.Attribute.Enumeration<["Q1", "Q2", "Q3", "Q4"]> &
       Schema.Attribute.Required;
     needs: Schema.Attribute.Relation<"oneToMany", "api::needs-assessment.need">;
+    year: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 2019;
+          max: 2040;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<2024>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
