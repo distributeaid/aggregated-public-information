@@ -52,5 +52,5 @@ export type NeedAssessment = {
     sizeStyle?: string;
     unit?: string;
   };
-  need?: string;
+  need?: integer;
 };
