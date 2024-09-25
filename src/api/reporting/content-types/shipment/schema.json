@@ -23,21 +23,24 @@
     "carbonOffsetPaid": {
       "type": "boolean"
     },
-    "CO2TonsGenerated": {
+    "co2TonsGenerated": {
       "type": "decimal"
     },
     "carbonOffsetCost": {
       "type": "decimal"
     },
-    "notes": {
-      "type": "text"
-    },
     "type": {
       "type": "enumeration",
-      "enum": ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
-    },
-    "DARoles": {
-      "type": "json"
+      "enum": [
+        "Regular Route",
+        "Ad Hoc",
+        "Aid Swap/Local Transfer",
+        "In-Kind Donation",
+        "Procurement",
+        "First Mile",
+        "Last Mile",
+        "Other"
+      ]
     },
     "sendingCountry": {
       "type": "relation",
@@ -62,9 +65,13 @@
         "Moria Fire",
         "Refugee Aid - Europe",
         "Refugee Aid - Lebanon",
+        "Economic Development - Lebanon",
         "Social Enterprise Support",
         "Ukraine",
-        "US ARR",
+        "Us Arr",
+        "Disaster Relief - Usa",
+        "Refugee Aid - Usa",
+        "Gaza Response",
         "Other"
       ]
     },
@@ -77,6 +84,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::group.group"
+    },
+    "daRoles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "reporting.shipment-roles"
     }
   }
 }
