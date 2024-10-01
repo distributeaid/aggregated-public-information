@@ -5,4 +5,5 @@ export default {
     "^.+.tsx?$": ["ts-jest", {}],
   },
   testEnvironment: "node",
+  verbose: true,
 };
