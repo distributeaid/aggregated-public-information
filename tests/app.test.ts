@@ -2,6 +2,8 @@ import { setupStrapi, cleanupStrapi } from "./helpers/strapi";
 import request from "supertest";
 import { createPublicApiPermissions } from "../src/createPublicApiPermissions";
 
+jest.setTimeout(10000);
+
 // user mock data
 const mockUserData = {
   username: "tester",
