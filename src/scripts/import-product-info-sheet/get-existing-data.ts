@@ -7,8 +7,7 @@ export type NameToIdMap = {
 /* Get Categories
  * ----------------------------------------------------- */
 export async function getCategories() {
-  console.log("    - getting existing categories");
-
+  console.log(`    - getting existing categories from ${STRAPI_ENV.URL}`);
   const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
     method: "GET",
     headers: {

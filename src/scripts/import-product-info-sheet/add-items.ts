@@ -208,13 +208,17 @@ export default async function addItems(products) {
   Object.keys(resultsMap).forEach((key) => {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
-    // NOTE: uncomment & set the status key to debug different types of results
-    if (key === ItemUploadWorkflowStatus.DUPLICATE_CHECK_ERROR) {
-      // resultsMap[key].forEach((result) => {
-      //   console.log(result.logs)
-      //   console.log(JSON.stringify(result.item))
-      //   console.log("/n")
-      // })
+    // Print out the logs for the items that failed to upload
+    if (
+      process.env.VERBOSE &&
+      key in ItemUploadWorkflowStatus &&
+      key != ItemUploadWorkflowStatus.ALREADY_EXISTS
+    ) {
+      resultsMap[key].forEach((result) => {
+        console.log(result.logs);
+        console.log(JSON.stringify(result.item, null, 2));
+        console.log("/n");
+      });
     }
   });
   console.log("Adding items completed!");
