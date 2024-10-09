@@ -23,6 +23,8 @@ export type RegionUploadWorkflow = UploadWorkflow<Region>;
 export type RegionUploadWorkflowResults = UploadWorkflowResults<Region>;
 export type SubregionUploadWorkflow = UploadWorkflow<Subregion>;
 export type SubregionUploadWorkflowResults = UploadWorkflowResults<Subregion>;
+export type SurveyUploadWorkflow = UploadWorkflow<Survey>;
+export type SurveyUploadWorkflowResults = UploadWorkflowResults<Survey>;
 
 export type Region = {
   region?: string;
@@ -53,4 +55,10 @@ export type NeedAssessment = {
     unit?: string;
   };
   need?: integer;
+};
+
+export type Survey = {
+  id?: string;
+  year: string;
+  quarter: string;
 };
