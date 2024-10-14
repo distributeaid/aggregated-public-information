@@ -8,12 +8,6 @@
   },
   "options": {},
   "attributes": {
-    "year": {
-      "type": "string",
-      "regex": "^2019|202[0-9]|203[0-9]$",
-      "required": true,
-      "maxLength": 4
-    },
     "quarter": {
       "type": "enumeration",
       "enum": ["Q1", "Q2", "Q3", "Q4"],
@@ -24,6 +18,13 @@
       "relation": "oneToMany",
       "target": "api::needs-assessment.need",
       "mappedBy": "needs_assessment_survey"
+    },
+    "year": {
+      "type": "integer",
+      "default": 2024,
+      "required": true,
+      "min": 2019,
+      "max": 2040
     }
   }
 }
