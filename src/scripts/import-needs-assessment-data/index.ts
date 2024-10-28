@@ -5,6 +5,8 @@ import { join } from "path";
 import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
 
+import { consolidateSurveys } from "./add-surveys";
+
 async function main() {
   try {
     //  Load the json data
@@ -14,6 +16,8 @@ async function main() {
     //  Process the data and upload to Strapi collections
     const _regions = await addRegions(data);
     const _subregions = await addSubregions(data);
+    const processedSurveys = consolidateSurveys(data); // check this function is working
+    console.log('Processed Surveys', processedSurveys);
   } catch (error) {
     console.error("Error processing subregions", error);
     if (error.code === "ENOENT") {
