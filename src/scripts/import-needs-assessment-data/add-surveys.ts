@@ -36,6 +36,38 @@ export function consolidateSurveys(data: NeedAssessment[]): string[] {
 
 /*  Parse Surveys
  * ------------------------------------------------------- */
+function parseSurvey ({
+  data,
+  orig, 
+  status,
+  logs,
+}:SurveyUploadWorkflow):SurveyUploadWorkflow {
+  logs = [...logs, `Log: parsing survey "${orig}"`];
+
+  if (orig == null || typeof orig !== "string") {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+      logs: [
+        ...logs,
+        `Error: Invalid survey input: "${orig}". Expected a non-null value.`,
+      ],
+    };
+  }
+
+  const newData = {
+    ...data,
+    survey: orig,
+  };
+
+  return {
+    data: newData,
+    orig,
+    status,
+    logs,
+  };
+} 
 
 /*  Get Surveys
  * ------------------------------------------------------- */
