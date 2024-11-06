@@ -1,3 +1,4 @@
+// import { json } from "stream/consumers";
 import { STRAPI_ENV } from "../strapi-env";
 import {
   Survey,
@@ -131,3 +132,52 @@ export async function getSurvey({
 
 /*  Upload Surveys
  * ------------------------------------------------------- */
+export async function uploadSurvey({
+  data,
+  orig,
+  /* status, */ logs,
+}: SurveyUploadWorkflow): Promise<SurveyUploadWorkflow> {
+  logs = [...logs, `Log: Creating NeedsAssessment.Survey "${orig}".`];
+
+  const formattedData = {
+    data: {
+      year: data.year,
+      quarter: data.quarter,
+    }
+  }
+  // console.log("👀 Look here for test", formattedData)
+
+  const response = await fetch(`${STRAPI_ENV.URL}/surveys`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+    body: JSON.stringify(formattedData),
+  });
+
+  const body = await response.json();
+
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.UPLOAD_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to create NeedsAssessment.Survey. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  return {
+    data: {
+      ...body.data,
+      id: body.data.id
+    },
+    orig,
+    status: UploadWorkflowStatus.SUCCESS,
+    logs: [...logs, "Success: Created NeedsAssessment.Survey."],
+  };
+}

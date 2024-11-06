@@ -5,7 +5,7 @@ import { join } from "path";
 import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
 
-import { consolidateSurveys, getSurvey } from "./add-surveys";
+import { consolidateSurveys, getSurvey, uploadSurvey } from "./add-surveys";
 import { UploadWorkflowStatus } from "./types.d";
 
 async function main() {
@@ -30,16 +30,15 @@ async function main() {
         logs: ["Initial log"]
       });
 
-      // check if survey was found
-    if (surveyResult.status === UploadWorkflowStatus.ALREADY_EXISTS) {
-      console.log("Survey found. Expected behaviour.");
-    } else if (surveyResult.status === UploadWorkflowStatus.SUCCESS) {
-      console.log("Survey not found. Expected behaviour.");
-    } else {
-      console.log("Unexpected status:", surveyResult.status);
-    }
+      // Call uploadSurvey function
+      const uploadResult = await uploadSurvey({
+        data: data[0].survey,
+        orig: `${data[0].survey.year}-${data[0].survey.quarter}`,
+        status: 'PROCESSING',
+        logs: [...surveyResult.logs, "log: Uploading NeedsAssessment.Survey."]
+      });
 
-      console.log("survey Result", surveyResult);
+      console.log("Upload Result:", uploadResult);
     } else {
       console.log('Invalid data structure');
     }
