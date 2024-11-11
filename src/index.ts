@@ -1,5 +1,6 @@
 import type { Core } from "@strapi/strapi";
 import { createPublicApiPermissions } from "./createPublicApiPermissions";
+import registerDbLifecycleHooks from "./registerDbLifecycleHooks";
 
 export default {
   /**
@@ -19,5 +20,6 @@ export default {
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     await createPublicApiPermissions(strapi);
+    registerDbLifecycleHooks(strapi);
   },
 };
