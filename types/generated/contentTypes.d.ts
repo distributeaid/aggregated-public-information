@@ -421,6 +421,7 @@ export interface ApiFinancialCurrencyConversion
 export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
   collectionName: "gdp_conversions";
   info: {
+    description: "";
     displayName: "Financial.GDPConversions";
     pluralName: "gdp-conversions";
     singularName: "gdp-conversion";
@@ -429,6 +430,60 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    Country: Schema.Attribute.Enumeration<
+      [
+        "Austria",
+        "Belgium",
+        "Bosnia",
+        "China",
+        "Croatia",
+        "France",
+        "Germany",
+        "Greece",
+        "Italy ",
+        "Lebanon",
+        "Lithuania",
+        "Moldova",
+        "Netherlands (the)",
+        "Norway",
+        "Pakistan",
+        "Poland",
+        "Romania",
+        "Serbia",
+        "Spain",
+        "Switzerland",
+        "UK",
+        "Ukraine",
+        "United States",
+      ]
+    >;
+    Country_Code: Schema.Attribute.Enumeration<
+      [
+        "AUT",
+        "BEL",
+        "BIH",
+        "CHE",
+        "CHN",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HRV",
+        "ITA",
+        "LBN",
+        "LTU",
+        "MDA",
+        "NLD",
+        "NOR",
+        "PAK",
+        "POL",
+        "ROM",
+        "SRB",
+        "UKR",
+        "USA",
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -436,7 +491,7 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
       ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
     >;
     GDPPerCapita_PPP_InternationalDollar: Schema.Attribute.Decimal;
-    LastUpdated: Schema.Attribute.Date;
+    Last_Updated: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       "oneToMany",

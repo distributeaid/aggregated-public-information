@@ -4,7 +4,8 @@
   "info": {
     "singularName": "gdp-conversion",
     "pluralName": "gdp-conversions",
-    "displayName": "Financial.GDPConversions"
+    "displayName": "Financial.GDPConversions",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -20,7 +21,7 @@
     "Source": {
       "type": "string"
     },
-    "LastUpdated": {
+    "Last_Updated": {
       "type": "date"
     },
     "Ratio_US_to_Country": {
@@ -31,7 +32,71 @@
     },
     "Currency": {
       "type": "enumeration",
-      "enum": ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
+      "enum": [
+        "USD",
+        "GBP",
+        "EUR",
+        "LBP",
+        "LTL",
+        "RSD",
+        "BAM"
+      ]
+    },
+    "Country_Code": {
+      "type": "enumeration",
+      "enum": [
+        "AUT",
+        "BEL",
+        "BIH",
+        "CHE",
+        "CHN",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HRV",
+        "ITA",
+        "LBN",
+        "LTU",
+        "MDA",
+        "NLD",
+        "NOR",
+        "PAK",
+        "POL",
+        "ROM",
+        "SRB",
+        "UKR",
+        "USA"
+      ]
+    },
+    "Country": {
+      "type": "enumeration",
+      "enum": [
+        "Austria",
+        "Belgium",
+        "Bosnia",
+        "China",
+        "Croatia",
+        "France",
+        "Germany",
+        "Greece",
+        "Italy ",
+        "Lebanon",
+        "Lithuania",
+        "Moldova",
+        "Netherlands (the)",
+        "Norway",
+        "Pakistan",
+        "Poland",
+        "Romania",
+        "Serbia",
+        "Spain",
+        "Switzerland",
+        "UK",
+        "Ukraine",
+        "United States"
+      ]
     }
   }
 }
