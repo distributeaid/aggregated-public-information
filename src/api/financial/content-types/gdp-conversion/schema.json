@@ -32,15 +32,7 @@
     },
     "Currency": {
       "type": "enumeration",
-      "enum": [
-        "USD",
-        "GBP",
-        "EUR",
-        "LBP",
-        "LTL",
-        "RSD",
-        "BAM"
-      ]
+      "enum": ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
     },
     "Country_Code": {
       "type": "enumeration",
