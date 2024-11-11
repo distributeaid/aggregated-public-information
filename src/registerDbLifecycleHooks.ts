@@ -2,9 +2,11 @@ import { Core } from "@strapi/strapi";
 import { errors } from "@strapi/utils";
 
 export default function registerDbLifecycleHooks(strapi: Core.Strapi) {
+  console.log("registering lifecycle hooks");
   strapi.db.lifecycles.subscribe({
-    models: ["need"],
+    models: [],
     async beforeCreate(event) {
+      console.log("beforeCreate index");
       const { data } = event.params;
       const preexistingNeed = await strapi.db.connection
         .from("needs")
