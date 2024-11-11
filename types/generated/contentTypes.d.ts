@@ -418,6 +418,42 @@ export interface ApiFinancialCurrencyConversion
   };
 }
 
+export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
+  collectionName: "gdp_conversions";
+  info: {
+    displayName: "Financial.GDPConversions";
+    pluralName: "gdp-conversions";
+    singularName: "gdp-conversion";
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    Currency: Schema.Attribute.Enumeration<
+      ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
+    >;
+    GDPPerCapita_PPP_InternationalDollar: Schema.Attribute.Decimal;
+    LastUpdated: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::financial.gdp-conversion"
+    > &
+      Schema.Attribute.Private;
+    Notes: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    Ratio_US_to_Country: Schema.Attribute.Decimal;
+    Source: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    Year: Schema.Attribute.Integer;
+  };
+}
+
 export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
   collectionName: "countries";
   info: {
@@ -1464,6 +1500,7 @@ declare module "@strapi/strapi" {
       "admin::transfer-token-permission": AdminTransferTokenPermission;
       "admin::user": AdminUser;
       "api::financial.currency-conversion": ApiFinancialCurrencyConversion;
+      "api::financial.gdp-conversion": ApiFinancialGdpConversion;
       "api::geo.country": ApiGeoCountry;
       "api::geo.region": ApiGeoRegion;
       "api::geo.subregion": ApiGeoSubregion;

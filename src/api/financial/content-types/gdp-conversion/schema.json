@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gdp_conversions",
+  "info": {
+    "singularName": "gdp-conversion",
+    "pluralName": "gdp-conversions",
+    "displayName": "Financial.GDPConversions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Year": {
+      "type": "integer"
+    },
+    "GDPPerCapita_PPP_InternationalDollar": {
+      "type": "decimal"
+    },
+    "Source": {
+      "type": "string"
+    },
+    "LastUpdated": {
+      "type": "date"
+    },
+    "Ratio_US_to_Country": {
+      "type": "decimal"
+    },
+    "Notes": {
+      "type": "text"
+    },
+    "Currency": {
+      "type": "enumeration",
+      "enum": [
+        "USD",
+        "GBP",
+        "EUR",
+        "LBP",
+        "LTL",
+        "RSD",
+        "BAM"
+      ]
+    }
+  }
+}
