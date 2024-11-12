@@ -19,7 +19,8 @@ export default {
    * run jobs, or perform some special logic.
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    console.log("bootstrap");
     await createPublicApiPermissions(strapi);
-    registerDbLifecycleHooks(strapi);
+    await registerDbLifecycleHooks(strapi);
   },
 };
