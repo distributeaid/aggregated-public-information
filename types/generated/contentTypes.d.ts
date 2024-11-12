@@ -456,7 +456,8 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
         "Ukraine",
         "United States",
       ]
-    >;
+    > &
+      Schema.Attribute.Required;
     Country_Code: Schema.Attribute.Enumeration<
       [
         "AUT",
@@ -488,7 +489,23 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
     Currency: Schema.Attribute.Enumeration<
-      ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
+      [
+        "BAM",
+        "CNY",
+        "EUR",
+        "GBP",
+        "HRK\t",
+        "LBP",
+        "LTL",
+        "MDL",
+        "NOK\t",
+        "PKR",
+        "PLN",
+        "RON",
+        "RSD",
+        "UAH",
+        "USD",
+      ]
     >;
     GDPPerCapita_PPP_InternationalDollar: Schema.Attribute.Decimal;
     Last_Updated: Schema.Attribute.Date;
@@ -500,12 +517,12 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     Notes: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
-    Ratio_US_to_Country: Schema.Attribute.Decimal;
+    Ratio_US_to_Country: Schema.Attribute.Integer;
     Source: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    Year: Schema.Attribute.Integer;
+    Year: Schema.Attribute.Integer & Schema.Attribute.Required;
   };
 }
 
