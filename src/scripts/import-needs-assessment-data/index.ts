@@ -17,7 +17,6 @@ async function main() {
     const _regions = await addRegions(data);
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
-
   } catch (error) {
     console.error("Error processing surveys", error);
     if (error.code === "ENOENT") {

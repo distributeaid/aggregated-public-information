@@ -10,14 +10,15 @@ import {
 /*  Add Surveys from Needs Assessment Data
  * ------------------------------------------------------- */
 export async function addSurveys(data: NeedAssessment[]): Promise<Survey[]> {
-  console.log("Adding NeedsAssessment.Survey from the Needs Assessment data ...");
+  console.log(
+    "Adding NeedsAssessment.Survey from the Needs Assessment data ...",
+  );
 
   const uniqueSurveys = consolidateSurveys(data);
 
   const results = await Promise.allSettled<SurveyUploadWorkflow>(
     uniqueSurveys.map((survey) => {
       return new Promise<SurveyUploadWorkflow>((resolve, _reject) => {
-        
         resolve({
           data: {
             year: survey.slice(0, -3),
@@ -101,9 +102,9 @@ const _isRejected = <T>(
 export function consolidateSurveys(data: NeedAssessment[]): string[] {
   const uniqueSurveys = new Set<string>();
 
-  data.forEach(item => {
+  data.forEach((item) => {
     const surveyString = `${item.survey.year}-${item.survey.quarter}`;
-    uniqueSurveys.add(surveyString)
+    uniqueSurveys.add(surveyString);
   });
 
   return Array.from(uniqueSurveys);
@@ -111,17 +112,17 @@ export function consolidateSurveys(data: NeedAssessment[]): string[] {
 
 /*  Parse Surveys
  * ------------------------------------------------------- */
-function parseSurvey ({
+function parseSurvey({
   data,
-  orig, 
+  orig,
   status,
   logs,
-}:SurveyUploadWorkflow):SurveyUploadWorkflow {
+}: SurveyUploadWorkflow): SurveyUploadWorkflow {
   logs = [...logs, `Log: parsing survey "${orig}"`];
 
   if (typeof orig === "string") {
     //if orig is a string, validate it
-    const [year, quarter] = orig.split('-');
+    const [year, quarter] = orig.split("-");
     if (!year || !quarter) {
       throw {
         data,
@@ -169,7 +170,7 @@ function parseSurvey ({
     status,
     logs,
   };
-} 
+}
 
 /*  Get Surveys
  * ------------------------------------------------------- */
@@ -179,7 +180,10 @@ export async function getSurvey({
   status,
   logs,
 }: SurveyUploadWorkflow): Promise<SurveyUploadWorkflow> {
-  logs = [...logs, `Log: Checking if NeedsAssessment.Survey "${orig}" already exists.`];
+  logs = [
+    ...logs,
+    `Log: Checking if NeedsAssessment.Survey "${orig}" already exists.`,
+  ];
 
   //Fetch the data from Strapi
   const response = await fetch(`${STRAPI_ENV.URL}/surveys?`, {
@@ -192,9 +196,7 @@ export async function getSurvey({
 
   const body = await response.json();
   const matchingSurvey = body.data.find(
-    (survey) =>
-      survey.year === data.year &&
-      survey.quarter === data.quarter
+    (survey) => survey.year === data.year && survey.quarter === data.quarter,
   );
 
   if (!response.ok) {
@@ -216,7 +218,10 @@ export async function getSurvey({
       data: body.data,
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
-      logs: [...logs, "Log: Found existing NeedsAssessment.Survey. Skipping..."],
+      logs: [
+        ...logs,
+        "Log: Found existing NeedsAssessment.Survey. Skipping...",
+      ],
     };
   }
 
@@ -224,9 +229,11 @@ export async function getSurvey({
     data,
     orig,
     status,
-    logs: [...logs, "Success: Confirmed NeedsAssessment.Survey does not exist."],
+    logs: [
+      ...logs,
+      "Success: Confirmed NeedsAssessment.Survey does not exist.",
+    ],
   };
-
 }
 
 /*  Upload Surveys
@@ -242,8 +249,8 @@ export async function uploadSurvey({
     data: {
       year: data.year,
       quarter: data.quarter,
-    }
-  }
+    },
+  };
 
   const response = await fetch(`${STRAPI_ENV.URL}/surveys`, {
     method: "POST",
@@ -272,7 +279,7 @@ export async function uploadSurvey({
   return {
     data: {
       ...body.data,
-      id: body.data.id
+      id: body.data.id,
     },
     orig,
     status: UploadWorkflowStatus.SUCCESS,
