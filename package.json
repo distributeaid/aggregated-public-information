@@ -13,7 +13,7 @@
     "start": "strapi start",
     "strapi": "strapi",
     "tsc": "tsc --project tsconfig.json --noEmit",
-    "test": "DATABASE_FILENAME=\".tmp/test_data.db\" jest --forceExit --detectOpenHandles",
+    "test": "DATABASE_FILENAME=\".tmp/test_data.db\" jest --forceExit --detectOpenHandles --silent",
     "test:with-build": "yarn build && yarn test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -29,9 +29,9 @@
     "script:import-needs-assessment-data": "esrun src/scripts/import-needs-assessment-data/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "5.0.0-rc.10",
-    "@strapi/plugin-users-permissions": "5.0.0-rc.10",
-    "@strapi/provider-upload-aws-s3": "5.0.0-rc.10",
+    "@strapi/plugin-documentation": "5.3.0",
+    "@strapi/plugin-users-permissions": "5.3.0",
+    "@strapi/provider-upload-aws-s3": "5.3.0",
     "@strapi/strapi": "^5.0.0-rc.9",
     "better-sqlite3": "^11.0.0",
     "pg": "^8.11.3",
@@ -49,7 +49,7 @@
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
-  "packageManager": "yarn@4.5.0",
+  "packageManager": "yarn@4.5.1",
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@types/eslint": "^9",

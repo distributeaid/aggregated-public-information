@@ -151,3 +151,13 @@ build
 !.yarn/sdks
 !.yarn/versions
 node_modules
+
+############################
+# Ignore All Imported Data
+############################
+src/scripts/data-exports
+
+############################
+# Allow sample data import files for development
+############################
+!src/scripts/data-demo/**/*.csv
