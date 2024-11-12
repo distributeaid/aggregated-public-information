@@ -1,4 +1,3 @@
-// import { json } from "stream/consumers";
 import { STRAPI_ENV } from "../strapi-env";
 import {
   Survey,
@@ -10,29 +9,104 @@ import {
 
 /*  Add Surveys from Needs Assessment Data
  * ------------------------------------------------------- */
+export async function addSurveys(data: NeedAssessment[]): Promise<Survey[]> {
+  console.log("Adding NeedsAssessment.Survey from the Needs Assessment data ...");
+
+  const uniqueSurveys = consolidateSurveys(data);
+
+  const results = await Promise.allSettled<SurveyUploadWorkflow>(
+    uniqueSurveys.map((survey) => {
+      return new Promise<SurveyUploadWorkflow>((resolve, _reject) => {
+        
+        resolve({
+          data: {
+            year: survey.slice(0, -3),
+            quarter: survey.slice(5, 7),
+          },
+          orig: survey,
+          status: UploadWorkflowStatus.PROCESSING,
+          logs: [],
+        });
+      })
+        .then(parseSurvey)
+        .then(getSurvey)
+        .then(uploadSurvey);
+    }),
+  );
+
+  // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
+  const resultsMap: SurveyUploadWorkflowResults = Object.keys(
+    UploadWorkflowStatus,
+  ).reduce((resultsMap, key) => {
+    resultsMap[key] = [];
+    return resultsMap;
+  }, {} as SurveyUploadWorkflowResults);
+
+  results
+    .map((result) => {
+      if (isFulfilled(result)) {
+        return result.value;
+      } else {
+        return result.reason;
+      }
+    })
+    .reduce((resultsMap, workflowResult) => {
+      if (workflowResult.status) {
+        resultsMap[workflowResult.status].push(workflowResult);
+      } else {
+        resultsMap[UploadWorkflowStatus.OTHER].push(workflowResult);
+      }
+      return resultsMap;
+    }, resultsMap);
+
+  console.log("Add NeedsAssessment.Survey results:");
+  Object.keys(resultsMap).forEach((key) => {
+    console.log(`     ${key}: ${resultsMap[key].length}`);
+
+    // NOTE: uncomment & set the status key to debug different types of results
+    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    //   resultsMap[key].forEach((result) => {
+    //     console.log(result)
+    //     console.log("\n")
+    //   })
+    // }
+  });
+
+  console.log("Adding items completed!");
+
+  const validSurveys: Survey[] = [
+    ...resultsMap[UploadWorkflowStatus.SUCCESS],
+    ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS],
+  ].reduce((surveys: Survey[], workflow: SurveyUploadWorkflow) => {
+    return [...surveys, workflow.data];
+  }, [] as Survey[]);
+
+  return validSurveys;
+}
+
+const isFulfilled = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseFulfilledResult<T> => {
+  return value.status === "fulfilled";
+};
+
+const _isRejected = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseRejectedResult => {
+  return value.status === "rejected";
+};
 
 /*  Consolidate Surveys
  * ------------------------------------------------------- */
 export function consolidateSurveys(data: NeedAssessment[]): string[] {
-  const uniqueSurveys = new Map();
+  const uniqueSurveys = new Set<string>();
 
   data.forEach(item => {
-    const surveyId = JSON.stringify(item.survey);
-    if (!uniqueSurveys.has(surveyId)) {
-      uniqueSurveys.set(surveyId, item.survey);
-    }
+    const surveyString = `${item.survey.year}-${item.survey.quarter}`;
+    uniqueSurveys.add(surveyString)
   });
 
-  const consolidatedSurveys = Array.from(uniqueSurveys.values()).map(survey => ({
-    // id: survey.id,
-    year: survey.year,
-    quarter: survey.quarter
-  }));
-
-  // Log the consolidated surveys to the terminal
-  console.log(consolidatedSurveys);
-
-  return consolidatedSurveys;
+  return Array.from(uniqueSurveys);
 }
 
 /*  Parse Surveys
@@ -45,7 +119,34 @@ function parseSurvey ({
 }:SurveyUploadWorkflow):SurveyUploadWorkflow {
   logs = [...logs, `Log: parsing survey "${orig}"`];
 
-  if (orig == null || typeof orig !== "string") {
+  if (typeof orig === "string") {
+    //if orig is a string, validate it
+    const [year, quarter] = orig.split('-');
+    if (!year || !quarter) {
+      throw {
+        data,
+        orig,
+        status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+        logs: [
+          ...logs,
+          `Error: Invalid survey input: "${orig}". Expected a non-null string in YYYY-QQ format.`,
+        ],
+      };
+    }
+  } else if (typeof orig === "object" && orig !== null) {
+    // if orig is an object, validate it
+    if (!orig.year || !orig.quarter) {
+      throw {
+        data,
+        orig,
+        status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+        logs: [
+          ...logs,
+          `Error: Invalid survey input: "${JSON.stringify(orig)}". Expected a non-null object with year and quarter.`,
+        ],
+      };
+    }
+  } else {
     throw {
       data,
       orig,
@@ -110,8 +211,6 @@ export async function getSurvey({
     };
   }
 
-  console.log("Number of matching surveys:", body.data.length);
-
   if (matchingSurvey) {
     throw {
       data: body.data,
@@ -145,7 +244,6 @@ export async function uploadSurvey({
       quarter: data.quarter,
     }
   }
-  // console.log("👀 Look here for test", formattedData)
 
   const response = await fetch(`${STRAPI_ENV.URL}/surveys`, {
     method: "POST",
