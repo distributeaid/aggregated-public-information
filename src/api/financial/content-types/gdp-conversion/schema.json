@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "Year": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "GDPPerCapita_PPP_InternationalDollar": {
       "type": "decimal"
@@ -25,14 +26,30 @@
       "type": "date"
     },
     "Ratio_US_to_Country": {
-      "type": "decimal"
+      "type": "integer"
     },
     "Notes": {
       "type": "text"
     },
     "Currency": {
       "type": "enumeration",
-      "enum": ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"]
+      "enum": [
+        "BAM",
+        "CNY",
+        "EUR",
+        "GBP",
+        "HRK\t",
+        "LBP",
+        "LTL",
+        "MDL",
+        "NOK\t",
+        "PKR",
+        "PLN",
+        "RON",
+        "RSD",
+        "UAH",
+        "USD"
+      ]
     },
     "Country_Code": {
       "type": "enumeration",
@@ -88,7 +105,8 @@
         "UK",
         "Ukraine",
         "United States"
-      ]
+      ],
+      "required": true
     }
   }
 }
