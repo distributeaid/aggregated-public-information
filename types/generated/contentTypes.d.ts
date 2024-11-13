@@ -522,7 +522,7 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    Year: Schema.Attribute.Integer & Schema.Attribute.Required;
+    Year: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
