@@ -29,7 +29,7 @@
       "relation": "oneToOne",
       "target": "api::product.item"
     },
-    "need": {
+    "amount": {
       "type": "integer",
       "required": true
     }

@@ -569,6 +569,7 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    amount: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -579,7 +580,6 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
       "api::needs-assessment.need"
     > &
       Schema.Attribute.Private;
-    need: Schema.Attribute.Integer & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.Relation<"oneToOne", "api::geo.region">;
     subregion: Schema.Attribute.Relation<"oneToOne", "api::geo.subregion">;
