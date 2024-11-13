@@ -25,32 +25,32 @@ export type SubregionUploadWorkflow = UploadWorkflow<Subregion>;
 export type SubregionUploadWorkflowResults = UploadWorkflowResults<Subregion>;
 
 export type Region = {
-  region?: string;
+  region: string;
 };
 
 export type Subregion = {
-  subregion?: string;
+  subregion: string;
 };
 
 export type NeedAssessment = {
-  id?: string;
-  survey?: {
-    id?: string;
-    year?: string;
-    quarter?: string;
-    url?: string;
-    format?: string;
+  id: string;
+  survey: {
+    id: string;
+    year: string;
+    quarter: string;
+    url: string;
+    format: string;
   };
-  place?: {
-    region?: string;
+  place: {
+    region: string;
     subregion?: string;
   };
-  product?: {
-    category?: string;
-    item?: string;
+  product: {
+    category: string;
+    item: string;
     ageGender?: string;
     sizeStyle?: string;
-    unit?: string;
+    unit: string;
   };
-  need?: integer;
+  need: number;
 };
