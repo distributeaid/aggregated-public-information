@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Year": {
-      "type": "integer",
-      "required": true
-    },
     "GDPPerCapita_PPP_InternationalDollar": {
       "type": "decimal"
     },
@@ -106,6 +102,11 @@
         "Ukraine",
         "United States"
       ],
+      "required": true
+    },
+    "Year": {
+      "type": "string",
+      "regex": "^2019|202[0-9]|203[0-9]$",
       "required": true
     }
   }
