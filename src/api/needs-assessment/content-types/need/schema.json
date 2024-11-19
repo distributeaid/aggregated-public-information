@@ -12,12 +12,14 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::needs-assessment.survey",
-      "inversedBy": "needs"
+      "inversedBy": "needs",
+      "required": true
     },
     "region": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::geo.region"
+      "target": "api::geo.region",
+      "required": true
     },
     "subregion": {
       "type": "relation",
@@ -27,7 +29,8 @@
     "item": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::product.item"
+      "target": "api::product.item",
+      "required": true
     },
     "amount": {
       "type": "integer",
