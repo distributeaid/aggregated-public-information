@@ -25,7 +25,8 @@
     "check:build": "yarn build",
     "check:test": "yarn test",
     "check:all": "yarn check:types && yarn check:lint && yarn check:format && yarn check:build && yarn check:test",
-    "script:import-product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env"
+    "script:import-product-info-sheet": "esrun src/scripts/import-product-info-sheet/ dotenv_config_path=./src/scripts/.env",
+    "script:import-needs-assessment-data": "esrun src/scripts/import-needs-assessment-data/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
     "@strapi/plugin-documentation": "5.3.0",
