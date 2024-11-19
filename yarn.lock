@@ -8282,21 +8282,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 22.8.7
-  resolution: "@types/node@npm:22.8.7"
+"@types/node@npm:*, @types/node@npm:^22":
+  version: 22.9.1
+  resolution: "@types/node@npm:22.9.1"
   dependencies:
     undici-types: "npm:~6.19.8"
-  checksum: 10c0/14372885db80059ed6e92c320b2bcd8f7dc271698adce11f51aa0f424a3f82aa1749a4f66321b87043791b894346b2458d514cbb65ce70167c2fd8a78a124947
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^22":
-  version: 22.9.0
-  resolution: "@types/node@npm:22.9.0"
-  dependencies:
-    undici-types: "npm:~6.19.8"
-  checksum: 10c0/3f46cbe0a49bab4ba30494025e4c8a6e699b98ac922857aa1f0209ce11a1313ee46e6808b8f13fe5b8b960a9d7796b77c8d542ad4e9810e85ef897d5593b5d51
+  checksum: 10c0/ea489ae603aa8874e4e88980aab6f2dad09c755da779c88dd142983bfe9609803c89415ca7781f723072934066f63daf2b3339ef084a8ad1a8079cf3958be243
   languageName: node
   linkType: hard
 
