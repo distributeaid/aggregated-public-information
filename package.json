@@ -69,6 +69,6 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.4",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "^8.15.0"
   }
 }
