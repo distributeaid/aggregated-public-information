@@ -95,15 +95,16 @@ const _isRejected = <T>(
 /*  Consolidate Regions
  * ------------------------------------------------------- */
 function consolidateRegions(data: NeedAssessment[]): string[] {
-  const regions = data.reduce((acc: string[], item) => {
-    const region = item.place?.region;
-    if (region && !acc.includes(region)) {
-      acc.push(region);
-    }
-    return acc;
-  }, []);
+  const regions = new Set<string>();
 
-  return regions;
+  data.forEach((item) => {
+    const region = item.place?.region;
+    if (region && region !== null) {
+      regions.add(region);
+    }
+  });
+  
+  return Array.from(regions);
 }
 
 /*  Parse Region
