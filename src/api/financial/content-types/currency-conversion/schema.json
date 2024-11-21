@@ -4,15 +4,17 @@
   "info": {
     "singularName": "currency-conversion",
     "pluralName": "currency-conversions",
-    "displayName": "Financial.CurrencyConversions"
+    "displayName": "Financial.CurrencyConversions",
+    "description": ""
   },
-  "options": {},
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
     "year": {
       "type": "string",
       "regex": "^2019|202[0-9]|203[0-9]$",
-      "required": true,
-      "maxLength": 4
+      "required": true
     },
     "month": {
       "type": "integer",
@@ -22,7 +24,15 @@
     },
     "currency": {
       "type": "enumeration",
-      "enum": ["USD", "GBP", "EUR", "LBP", "LTL", "RSD", "BAM"],
+      "enum": [
+        "USD",
+        "GBP",
+        "EUR",
+        "LBP",
+        "LTL",
+        "RSD",
+        "BAM"
+      ],
       "required": true
     },
     "equivalentToUSD": {

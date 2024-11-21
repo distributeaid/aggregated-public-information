@@ -22,7 +22,7 @@
       "type": "date"
     },
     "Ratio_US_to_Country": {
-      "type": "integer"
+      "type": "decimal"
     },
     "Notes": {
       "type": "text"
@@ -34,11 +34,11 @@
         "CNY",
         "EUR",
         "GBP",
-        "HRK\t",
+        "HRK",
         "LBP",
         "LTL",
         "MDL",
-        "NOK\t",
+        "NOK",
         "PKR",
         "PLN",
         "RON",
