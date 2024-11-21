@@ -373,6 +373,7 @@ export interface ApiFinancialCurrencyConversion
   extends Struct.CollectionTypeSchema {
   collectionName: "currency_conversions";
   info: {
+    description: "";
     displayName: "Financial.CurrencyConversions";
     pluralName: "currency-conversions";
     singularName: "currency-conversion";
@@ -410,11 +411,7 @@ export interface ApiFinancialCurrencyConversion
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    year: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 4;
-      }>;
+    year: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -517,7 +514,7 @@ export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     Notes: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
-    Ratio_US_to_Country: Schema.Attribute.Integer;
+    Ratio_US_to_Country: Schema.Attribute.Decimal;
     Source: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
@@ -688,6 +685,10 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     need: Schema.Attribute.Integer & Schema.Attribute.Required;
+    needs_assessment_survey: Schema.Attribute.Relation<
+      "manyToOne",
+      "api::needs-assessment.survey"
+    >;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.Relation<"oneToOne", "api::geo.region">;
     subregion: Schema.Attribute.Relation<"oneToOne", "api::geo.subregion">;
@@ -704,6 +705,7 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
 export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
   collectionName: "surveys";
   info: {
+    description: "";
     displayName: "NeedsAssessment.Survey";
     pluralName: "surveys";
     singularName: "survey";
@@ -728,11 +730,7 @@ export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    year: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 4;
-      }>;
+    year: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 

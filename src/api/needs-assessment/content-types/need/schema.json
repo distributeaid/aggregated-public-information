@@ -32,6 +32,12 @@
     "need": {
       "type": "integer",
       "required": true
+    },
+    "needs_assessment_survey": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::needs-assessment.survey",
+      "inversedBy": "needs"
     }
   }
 }
