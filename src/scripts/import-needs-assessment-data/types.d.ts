@@ -30,7 +30,7 @@ export type Survey = {
   id?: string;
   year: string;
   quarter: string;
-}
+};
 
 export type Region = {
   region: string;
