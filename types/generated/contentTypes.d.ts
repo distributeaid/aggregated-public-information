@@ -569,24 +569,27 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    amount: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    item: Schema.Attribute.Relation<"oneToOne", "api::product.item">;
+    item: Schema.Attribute.Relation<"oneToOne", "api::product.item"> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       "oneToMany",
       "api::needs-assessment.need"
     > &
       Schema.Attribute.Private;
-    need: Schema.Attribute.Integer & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    region: Schema.Attribute.Relation<"oneToOne", "api::geo.region">;
+    region: Schema.Attribute.Relation<"oneToOne", "api::geo.region"> &
+      Schema.Attribute.Required;
     subregion: Schema.Attribute.Relation<"oneToOne", "api::geo.subregion">;
     survey: Schema.Attribute.Relation<
       "manyToOne",
       "api::needs-assessment.survey"
-    >;
+    > &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
