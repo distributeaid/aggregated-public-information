@@ -103,7 +103,7 @@ function consolidateRegions(data: NeedAssessment[]): string[] {
       regions.add(region);
     }
   });
-  
+
   return Array.from(regions);
 }
 
