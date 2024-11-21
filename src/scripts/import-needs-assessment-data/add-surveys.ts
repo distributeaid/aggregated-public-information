@@ -99,7 +99,7 @@ const _isRejected = <T>(
 
 /*  Consolidate Surveys
  * ------------------------------------------------------- */
-export function consolidateSurveys(data: NeedAssessment[]): string[] {
+function consolidateSurveys(data: NeedAssessment[]): string[] {
   const uniqueSurveys = new Set<string>();
 
   data.forEach((item) => {
@@ -174,7 +174,7 @@ function parseSurvey({
 
 /*  Get Surveys
  * ------------------------------------------------------- */
-export async function getSurvey({
+async function getSurvey({
   data,
   orig = `${data.year}-${data.quarter}`,
   status,
@@ -238,7 +238,7 @@ export async function getSurvey({
 
 /*  Upload Surveys
  * ------------------------------------------------------- */
-export async function uploadSurvey({
+async function uploadSurvey({
   data,
   orig,
   /* status, */ logs,
