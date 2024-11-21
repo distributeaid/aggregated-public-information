@@ -18,7 +18,9 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
     uniqueRegions.map((region) => {
       return new Promise<RegionUploadWorkflow>((resolve, _reject) => {
         resolve({
-          data: {},
+          data: {
+            region,
+          },
           orig: region,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],

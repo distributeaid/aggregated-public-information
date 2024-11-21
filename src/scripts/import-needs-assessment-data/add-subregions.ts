@@ -20,7 +20,9 @@ export async function addSubregions(
     uniqueSubregions.map((subregion) => {
       return new Promise<SubregionUploadWorkflow>((resolve, _reject) => {
         resolve({
-          data: {},
+          data: {
+            subregion,
+          },
           orig: subregion,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],

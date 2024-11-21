@@ -1,10 +1,9 @@
 import "dotenv/config";
-import { readFileSync } from "fs";
 import { join } from "path";
+import { readFileSync } from "fs";
 
 import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
-
 import { addSurveys } from "./add-surveys";
 
 async function main() {
