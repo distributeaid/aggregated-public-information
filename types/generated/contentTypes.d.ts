@@ -732,6 +732,7 @@ export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
     year: Schema.Attribute.String & Schema.Attribute.Required;
+    yearQuarter: Schema.Attribute.String;
   };
 }
 
