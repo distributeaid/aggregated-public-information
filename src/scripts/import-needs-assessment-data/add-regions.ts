@@ -155,7 +155,7 @@ async function getRegion({
   logs = [...logs, `Log: Checking if Geo.Region "${orig}" already exists.`];
 
   //Fetch the data from Strapi
-  const response = await fetch(`${STRAPI_ENV.URL}/regions?`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -158,7 +158,7 @@ async function getSubregion({
   logs = [...logs, `Log: Checking if Geo.Subregion "${orig}" already exists.`];
 
   //Fetch the data from Strapi
-  const response = await fetch(`${STRAPI_ENV.URL}/subregions?`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/subregions`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
