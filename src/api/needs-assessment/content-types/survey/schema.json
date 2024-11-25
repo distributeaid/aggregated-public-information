@@ -4,15 +4,17 @@
   "info": {
     "singularName": "survey",
     "pluralName": "surveys",
-    "displayName": "NeedsAssessment.Survey"
+    "displayName": "NeedsAssessment.Survey",
+    "description": ""
   },
-  "options": {},
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
     "year": {
       "type": "string",
       "regex": "^2019|202[0-9]|203[0-9]$",
-      "required": true,
-      "maxLength": 4
+      "required": true
     },
     "quarter": {
       "type": "enumeration",

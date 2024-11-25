@@ -1,6 +1,6 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
-import { toTitleCase } from "../helpers";
+import { toTitleCase, stripAndParseFloat, stripAndParseInt } from "../helpers";
 import { getCategories } from "./get-existing-data";
 import type { NameToIdMap } from "./get-existing-data";
 
@@ -161,7 +161,7 @@ type ItemUploadWorkflow = {
 
 /* Add Items
  * ----------------------------------------------------- */
-export default async function addItems(products) {
+export default async function addItems(products: ItemCsv[]) {
   console.log("Adding items from Product Info sheet...");
 
   const categories = await getCategories();
@@ -238,14 +238,6 @@ const _isRejected = <T>(
 
 /* Parse Item
  * ------------------------------------------------------ */
-function stripAndParseInt(numberString: string): number {
-  return parseInt(numberString.replace(/$|,/g, ""));
-}
-
-function stripAndParseFloat(numberString: string): number {
-  return parseFloat(numberString.replace(/$|,|%/g, ""));
-}
-
 function parseItem(
   { item, origItem, status, logs }: ItemUploadWorkflow,
   categories: NameToIdMap,
@@ -643,7 +635,6 @@ async function getItem({
         $eq: item.size_style,
       },
     },
-    fields: ["id"],
   });
 
   const response = await fetch(`${STRAPI_ENV.URL}/items?${query}`, {

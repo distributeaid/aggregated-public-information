@@ -373,6 +373,7 @@ export interface ApiFinancialCurrencyConversion
   extends Struct.CollectionTypeSchema {
   collectionName: "currency_conversions";
   info: {
+    description: "";
     displayName: "Financial.CurrencyConversions";
     pluralName: "currency-conversions";
     singularName: "currency-conversion";
@@ -410,17 +411,122 @@ export interface ApiFinancialCurrencyConversion
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    year: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 4;
-      }>;
+    year: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ApiFinancialGdpConversion extends Struct.CollectionTypeSchema {
+  collectionName: "gdp_conversions";
+  info: {
+    description: "";
+    displayName: "Financial.GDPConversions";
+    pluralName: "gdp-conversions";
+    singularName: "gdp-conversion";
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Country: Schema.Attribute.Enumeration<
+      [
+        "Austria",
+        "Belgium",
+        "Bosnia",
+        "China",
+        "Croatia",
+        "France",
+        "Germany",
+        "Greece",
+        "Italy ",
+        "Lebanon",
+        "Lithuania",
+        "Moldova",
+        "Netherlands (the)",
+        "Norway",
+        "Pakistan",
+        "Poland",
+        "Romania",
+        "Serbia",
+        "Spain",
+        "Switzerland",
+        "UK",
+        "Ukraine",
+        "United States",
+      ]
+    > &
+      Schema.Attribute.Required;
+    Country_Code: Schema.Attribute.Enumeration<
+      [
+        "AUT",
+        "BEL",
+        "BIH",
+        "CHE",
+        "CHN",
+        "DEU",
+        "ESP",
+        "FRA",
+        "GBR",
+        "GRC",
+        "HRV",
+        "ITA",
+        "LBN",
+        "LTU",
+        "MDA",
+        "NLD",
+        "NOR",
+        "PAK",
+        "POL",
+        "ROM",
+        "SRB",
+        "UKR",
+        "USA",
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    Currency: Schema.Attribute.Enumeration<
+      [
+        "BAM",
+        "CNY",
+        "EUR",
+        "GBP",
+        "HRK",
+        "LBP",
+        "LTL",
+        "MDL",
+        "NOK",
+        "PKR",
+        "PLN",
+        "RON",
+        "RSD",
+        "UAH",
+        "USD",
+      ]
+    >;
+    GDPPerCapita_PPP_InternationalDollar: Schema.Attribute.Decimal;
+    Last_Updated: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::financial.gdp-conversion"
+    > &
+      Schema.Attribute.Private;
+    Notes: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    Ratio_US_to_Country: Schema.Attribute.Decimal;
+    Source: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    Year: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
 export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
   collectionName: "countries";
   info: {
+    description: "";
     displayName: "Geo.Country";
     pluralName: "countries";
     singularName: "country";
@@ -429,7 +535,7 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    Code: Schema.Attribute.String &
+    code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
@@ -441,11 +547,11 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::geo.country"> &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    Slug: Schema.Attribute.String;
+    slug: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -580,6 +686,10 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     need: Schema.Attribute.Integer & Schema.Attribute.Required;
+    needs_assessment_survey: Schema.Attribute.Relation<
+      "manyToOne",
+      "api::needs-assessment.survey"
+    >;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.Relation<"oneToOne", "api::geo.region">;
     subregion: Schema.Attribute.Relation<"oneToOne", "api::geo.subregion">;
@@ -596,6 +706,7 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
 export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
   collectionName: "surveys";
   info: {
+    description: "";
     displayName: "NeedsAssessment.Survey";
     pluralName: "surveys";
     singularName: "survey";
@@ -620,11 +731,7 @@ export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    year: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 4;
-      }>;
+    year: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -841,11 +948,11 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     carbonOffsetPaid: Schema.Attribute.Boolean;
     cargo: Schema.Attribute.Relation<"oneToMany", "api::reporting.cargo">;
     carrierId: Schema.Attribute.String;
-    CO2TonsGenerated: Schema.Attribute.Decimal;
+    co2TonsGenerated: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    DARoles: Schema.Attribute.JSON;
+    daRoles: Schema.Attribute.Component<"reporting.shipment-roles", false>;
     exporter: Schema.Attribute.Relation<"oneToOne", "api::group.group">;
     importer: Schema.Attribute.Relation<"oneToOne", "api::group.group">;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -854,7 +961,6 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
       "api::reporting.shipment"
     > &
       Schema.Attribute.Private;
-    notes: Schema.Attribute.Text;
     number: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -865,9 +971,13 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
         "Moria Fire",
         "Refugee Aid - Europe",
         "Refugee Aid - Lebanon",
+        "Economic Development - Lebanon",
         "Social Enterprise Support",
         "Ukraine",
-        "US ARR",
+        "Us Arr",
+        "Disaster Relief - Usa",
+        "Refugee Aid - Usa",
+        "Gaza Response",
         "Other",
       ]
     >;
@@ -875,7 +985,16 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
     receivingCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     sendingCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     type: Schema.Attribute.Enumeration<
-      ["Regular Route", "Ad Hoc", "Aid Swap/Local Transfer", "Other"]
+      [
+        "Regular Route",
+        "Ad Hoc",
+        "Aid Swap/Local Transfer",
+        "In-Kind Donation",
+        "Procurement",
+        "First Mile",
+        "Last Mile",
+        "Other",
+      ]
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
@@ -1464,6 +1583,7 @@ declare module "@strapi/strapi" {
       "admin::transfer-token-permission": AdminTransferTokenPermission;
       "admin::user": AdminUser;
       "api::financial.currency-conversion": ApiFinancialCurrencyConversion;
+      "api::financial.gdp-conversion": ApiFinancialGdpConversion;
       "api::geo.country": ApiGeoCountry;
       "api::geo.region": ApiGeoRegion;
       "api::geo.subregion": ApiGeoSubregion;
