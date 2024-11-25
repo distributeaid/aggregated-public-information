@@ -5,6 +5,7 @@ import { readFileSync } from "fs";
 import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
+import { consolidateCategories, getCategory } from "./add-categories";
 
 async function main() {
   try {
@@ -16,8 +17,27 @@ async function main() {
     const _regions = await addRegions(data);
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
+
+    // Check individual functions are working
+    const processedCategories = consolidateCategories(data);
+    console.log('Processed Categories', processedCategories);
+
+    for (const categoryName of processedCategories) {
+      try {
+        const categoryResult = await getCategory({
+          data: {category: categoryName},
+          orig: categoryName,
+          status: 'PROCESSING',
+          logs: ["Initial log"]
+        });
+        console.log(`Result for category ${categoryName}:`, categoryResult);
+      }catch (error) {
+        console.log(`Error processing category ${categoryName}`, error);
+      }
+    }
+
   } catch (error) {
-    console.error("Error processing needs assessment data", error);
+    console.error("Error processing categories", error);
     if (error.code === "ENOENT") {
       console.error(`File not found: ${error.path}`);
     } else if (error instanceof TypeError) {
