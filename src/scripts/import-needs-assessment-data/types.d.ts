@@ -23,6 +23,8 @@ export type RegionUploadWorkflow = UploadWorkflow<Region>;
 export type RegionUploadWorkflowResults = UploadWorkflowResults<Region>;
 export type SubregionUploadWorkflow = UploadWorkflow<Subregion>;
 export type SubregionUploadWorkflowResults = UploadWorkflowResults<Subregion>;
+export type CategoryUploadWorkflow = UploadWorkflow<Category>;
+export type CategoryUploadWorkflowResults = UploadWorkflowResults<Category>;
 
 export type Region = {
   region: string;
@@ -31,6 +33,10 @@ export type Region = {
 export type Subregion = {
   subregion: string;
 };
+
+export type Category = {
+  category: string;
+}
 
 export type NeedAssessment = {
   id: string;
