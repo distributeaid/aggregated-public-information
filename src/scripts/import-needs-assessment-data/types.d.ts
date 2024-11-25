@@ -23,6 +23,8 @@ export type Survey = {
   year: string;
   quarter: string;
 };
+export type CategoryUploadWorkflow = UploadWorkflow<Category>;
+export type CategoryUploadWorkflowResults = UploadWorkflowResults<Category>;
 
 export type Region = {
   region: string;
@@ -31,6 +33,10 @@ export type Region = {
 export type Subregion = {
   subregion: string;
 };
+
+export type Category = {
+  category: string;
+}
 
 export type NeedAssessment = {
   id: string;
