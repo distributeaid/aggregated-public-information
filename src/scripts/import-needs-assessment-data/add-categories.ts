@@ -61,6 +61,58 @@ function parseCategory({
 
 /*  Get Category
  * ------------------------------------------------------- */
+export async function getCategory({
+  data,
+  orig,
+  status,
+  logs,
+}: CategoryUploadWorkflow): Promise<CategoryUploadWorkflow> {
+  logs = [...logs, `Log: Checking if Product.Category "${orig}" already exists.`];
+
+  //Fetch the data from Strapi
+  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+  });
+
+  const body = await response.json();
+  const matchingCategory = body.data.find(
+    (category) => category.name.toLowerCase() === data.category.toLowerCase(),
+  );
+
+  if (!response.ok) {
+    console.log("Non-ok response");
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to get Product.Category. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  if (matchingCategory) {
+    throw {
+      data: body.data,
+      orig,
+      status: UploadWorkflowStatus.ALREADY_EXISTS,
+      logs: [...logs, "Log: Found existing Product.Category. Skipping..."],
+    };
+  }
+
+  return {
+    data,
+    orig,
+    status,
+    logs: [...logs, "Success: Confirmed Product.Category does not exist."],
+  };
+}
 
 /*  Upload Category
  * ------------------------------------------------------- */
