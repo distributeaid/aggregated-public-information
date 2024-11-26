@@ -9,7 +9,9 @@ import {
 
 /*  Add Categories from Needs Assessment Data
  * ------------------------------------------------------- */
-export async function addCategories(data: NeedAssessment[]): Promise<Category[]> {
+export async function addCategories(
+  data: NeedAssessment[],
+): Promise<Category[]> {
   console.log("Adding Product.Categories from the Needs Assessment data ...");
 
   const uniqueCategories = consolidateCategories(data);
@@ -151,7 +153,10 @@ async function getCategory({
   status,
   logs,
 }: CategoryUploadWorkflow): Promise<CategoryUploadWorkflow> {
-  logs = [...logs, `Log: Checking if Product.Category "${orig}" already exists.`];
+  logs = [
+    ...logs,
+    `Log: Checking if Product.Category "${orig}" already exists.`,
+  ];
 
   //Fetch the data from Strapi
   const response = await fetch(`${STRAPI_ENV.URL}/categories`, {

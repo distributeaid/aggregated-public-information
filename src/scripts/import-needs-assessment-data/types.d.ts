@@ -36,7 +36,7 @@ export type Subregion = {
 
 export type Category = {
   category: string;
-}
+};
 
 export type Product = {
   category: string;
@@ -44,7 +44,7 @@ export type Product = {
   ageGender?: string;
   sizeStyle?: string;
   unit?: string;
-}
+};
 
 export type NeedAssessment = {
   id: string;
