@@ -4,7 +4,8 @@ import { readFileSync } from "fs";
 
 import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
-import { consolidateCategories, getCategory } from "./add-categories";
+import { consolidateCategories, getCategory, uploadCategory } from "./add-categories";
+import { UploadWorkflowStatus } from "./types.d";
 
 async function main() {
   try {
@@ -29,7 +30,16 @@ async function main() {
           logs: ["Initial log"]
         });
         console.log(`Result for category ${categoryName}:`, categoryResult);
-      }catch (error) {
+
+        if (categoryResult.status !== UploadWorkflowStatus.ALREADY_EXISTS) {
+          try {
+            const uploadedCategory = await uploadCategory(categoryResult);
+            console.log(`Uploaded category ${categoryResult.orig}:`, uploadedCategory);
+          } catch (error) {
+            console.log(`Error uploading category ${categoryResult.orig}`, error);
+          }
+        }
+      } catch (error) {
         console.log(`Error processing category ${categoryName}`, error);
       }
     }
