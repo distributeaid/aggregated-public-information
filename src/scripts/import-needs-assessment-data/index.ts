@@ -5,8 +5,7 @@ import { readFileSync } from "fs";
 import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
-import { consolidateCategories, getCategory, uploadCategory } from "./add-categories";
-import { UploadWorkflowStatus } from "../statusCodes";
+import { addCategories } from "./add-categories";
 
 async function main() {
   try {
@@ -18,33 +17,7 @@ async function main() {
     const _regions = await addRegions(data);
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
-
-    // Check individual functions are working
-    const processedCategories = consolidateCategories(data);
-    console.log('Processed Categories', processedCategories);
-
-    for (const categoryName of processedCategories) {
-      try {
-        const categoryResult = await getCategory({
-          data: {category: categoryName},
-          orig: categoryName,
-          status: 'PROCESSING',
-          logs: ["Initial log"]
-        });
-        console.log(`Result for category ${categoryName}:`, categoryResult);
-
-        if (categoryResult.status !== UploadWorkflowStatus.ALREADY_EXISTS) {
-          try {
-            const uploadedCategory = await uploadCategory(categoryResult);
-            console.log(`Uploaded category ${categoryResult.orig}:`, uploadedCategory);
-          } catch (error) {
-            console.log(`Error uploading category ${categoryResult.orig}`, error);
-          }
-        }
-      } catch (error) {
-        console.log(`Error processing category ${categoryName}`, error);
-      }
-    }
+    const _categories = await addCategories(data);
 
   } catch (error) {
     console.error("Error processing categories", error);
