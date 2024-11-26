@@ -116,3 +116,44 @@ export async function getCategory({
 
 /*  Upload Category
  * ------------------------------------------------------- */
+export async function uploadCategory({
+  data,
+  orig,
+  /* status, */ logs,
+}: CategoryUploadWorkflow): Promise<CategoryUploadWorkflow> {
+  logs = [...logs, `Log: Creating Product.Category "${orig}".`];
+
+  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+    body: JSON.stringify({
+      data: {
+        name: data.category,
+      },
+    }),
+  });
+  const body = await response.json();
+
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.UPLOAD_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to create Product.Category. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  return {
+    data: body.data,
+    orig,
+    status: UploadWorkflowStatus.SUCCESS,
+    logs: [...logs, "Success: Created Product.Category."],
+  };
+}
