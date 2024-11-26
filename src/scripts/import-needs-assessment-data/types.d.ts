@@ -38,6 +38,14 @@ export type Category = {
   category: string;
 }
 
+export type Product = {
+  category: string;
+  item: string;
+  ageGender?: string;
+  sizeStyle?: string;
+  unit?: string;
+}
+
 export type NeedAssessment = {
   id: string;
   survey: {
