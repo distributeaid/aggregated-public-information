@@ -6,7 +6,7 @@ describe("processSurvey", () => {
     const expected = {
       year: "2024",
       quarter: "Q1",
-      yearQuearter: "2024 - Q1",
+      yearQuarter: "2024-Q1",
       needs: {},
     };
     const actual = processSurvey(survey);
