@@ -17,7 +17,7 @@ async function main() {
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
   } catch (error) {
-    console.error("Error processing surveys", error);
+    console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {
       console.error(`File not found: ${error.path}`);
     } else if (error instanceof TypeError) {

@@ -27,7 +27,7 @@ export type SurveyUploadWorkflow = UploadWorkflow<Survey>;
 export type SurveyUploadWorkflowResults = UploadWorkflowResults<Survey>;
 
 export type Survey = {
-  id?: string;
+  reference: string;
   year: string;
   quarter: string;
 };

@@ -21,7 +21,7 @@ export async function addSurveys(data: NeedAssessment[]): Promise<Survey[]> {
       return new Promise<SurveyUploadWorkflow>((resolve, _reject) => {
         resolve({
           data: {
-            year: survey.slice(0, -3),
+            year: survey.slice(0, 4),
             quarter: survey.slice(5, 7),
           },
           orig: survey,
@@ -120,34 +120,7 @@ function parseSurvey({
 }: SurveyUploadWorkflow): SurveyUploadWorkflow {
   logs = [...logs, `Log: parsing survey "${orig}"`];
 
-  if (typeof orig === "string") {
-    //if orig is a string, validate it
-    const [year, quarter] = orig.split("-");
-    if (!year || !quarter) {
-      throw {
-        data,
-        orig,
-        status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
-        logs: [
-          ...logs,
-          `Error: Invalid survey input: "${orig}". Expected a non-null string in YYYY-QQ format.`,
-        ],
-      };
-    }
-  } else if (typeof orig === "object" && orig !== null) {
-    // if orig is an object, validate it
-    if (!orig.year || !orig.quarter) {
-      throw {
-        data,
-        orig,
-        status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
-        logs: [
-          ...logs,
-          `Error: Invalid survey input: "${JSON.stringify(orig)}". Expected a non-null object with year and quarter.`,
-        ],
-      };
-    }
-  } else {
+  if (orig == null || typeof orig !== "string") {
     throw {
       data,
       orig,
@@ -176,7 +149,7 @@ function parseSurvey({
  * ------------------------------------------------------- */
 async function getSurvey({
   data,
-  orig = `${data.year}-${data.quarter}`,
+  orig,
   status,
   logs,
 }: SurveyUploadWorkflow): Promise<SurveyUploadWorkflow> {
