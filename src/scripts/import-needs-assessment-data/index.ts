@@ -6,11 +6,12 @@ import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
+import { consolidateProductsByCategory } from "./add-items";
 
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(join(__dirname, "./needs-data.json"), "utf8");
+    const jsonData = readFileSync(join(__dirname, "./needs-data(1).json"), "utf8");
     const data = JSON.parse(jsonData);
 
     //  Process the data and upload to Strapi collections
@@ -18,8 +19,26 @@ async function main() {
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
     const _categories = await addCategories(data);
+
+    // Check the number of objects in the needs array to manually compare totals
+    function countObjectsInArray(data: any): number {
+      if (Array.isArray(data.needs)) {
+        return data.needs.length;
+      } else if (typeof data === 'object' && data !== null) {
+        return Object.keys(data).length;
+      } else {
+        throw new Error('Invalid input: expected an array or object');
+      }
+    }
+    const totalCountInNeeds = countObjectsInArray(data);
+    console.log(`Total objects in needs array: ${totalCountInNeeds}`);
+
+    // Check individual functions are working
+    const processedProducts = consolidateProductsByCategory(data);
+    console.log('Processed Products', processedProducts);
+
   } catch (error) {
-    console.error("Error processing categories", error);
+    console.error("Error processing products", error);
     if (error.code === "ENOENT") {
       console.error(`File not found: ${error.path}`);
     } else if (error instanceof TypeError) {
