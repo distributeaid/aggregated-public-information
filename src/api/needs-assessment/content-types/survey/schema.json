@@ -18,7 +18,12 @@
     },
     "quarter": {
       "type": "enumeration",
-      "enum": ["Q1", "Q2", "Q3", "Q4"],
+      "enum": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+      ],
       "required": true
     },
     "needs": {
@@ -26,6 +31,10 @@
       "relation": "oneToMany",
       "target": "api::needs-assessment.need",
       "mappedBy": "needs_assessment_survey"
+    },
+    "reference": {
+      "type": "string",
+      "required": true
     }
   }
 }

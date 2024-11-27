@@ -728,6 +728,7 @@ export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     quarter: Schema.Attribute.Enumeration<["Q1", "Q2", "Q3", "Q4"]> &
       Schema.Attribute.Required;
+    reference: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
