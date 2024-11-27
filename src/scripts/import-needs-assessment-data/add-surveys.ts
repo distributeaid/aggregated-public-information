@@ -169,7 +169,10 @@ async function getSurvey({
 
   const body = await response.json();
   const matchingSurvey = body.data.find(
-    (survey) => survey.year === data.year && survey.quarter === data.quarter && survey.reference === data.reference,
+    (survey) =>
+      survey.year === data.year &&
+      survey.quarter === data.quarter &&
+      survey.reference === data.reference,
   );
 
   if (!response.ok) {
