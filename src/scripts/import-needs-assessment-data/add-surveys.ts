@@ -23,6 +23,7 @@ export async function addSurveys(data: NeedAssessment[]): Promise<Survey[]> {
           data: {
             year: survey.slice(0, 4),
             quarter: survey.slice(5, 7),
+            reference: survey.slice(8),
           },
           orig: survey,
           status: UploadWorkflowStatus.PROCESSING,
@@ -103,10 +104,9 @@ function consolidateSurveys(data: NeedAssessment[]): string[] {
   const uniqueSurveys = new Set<string>();
 
   data.forEach((item) => {
-    const surveyString = `${item.survey.year}-${item.survey.quarter}`;
+    const surveyString = `${item.survey.year}-${item.survey.quarter}-${item.survey.id}`;
     uniqueSurveys.add(surveyString);
   });
-
   return Array.from(uniqueSurveys);
 }
 
@@ -169,7 +169,7 @@ async function getSurvey({
 
   const body = await response.json();
   const matchingSurvey = body.data.find(
-    (survey) => survey.year === data.year && survey.quarter === data.quarter,
+    (survey) => survey.year === data.year && survey.quarter === data.quarter && survey.reference === data.reference,
   );
 
   if (!response.ok) {
@@ -222,6 +222,7 @@ async function uploadSurvey({
     data: {
       year: data.year,
       quarter: data.quarter,
+      reference: data.reference,
     },
   };
 
