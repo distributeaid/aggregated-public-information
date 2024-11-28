@@ -98,15 +98,16 @@ const _isRejected = <T>(
 /*  Consolidate Subregions
  * ------------------------------------------------------- */
 function consolidateSubregions(data: NeedAssessment[]): string[] {
-  const subregions = data.reduce((acc: string[], item) => {
-    const subregion = item.place?.subregion;
-    if (subregion && !acc.includes(subregion)) {
-      acc.push(subregion);
-    }
-    return acc;
-  }, []);
+  const subregions = new Set<string>();
 
-  return subregions;
+  data.forEach((item) => {
+    const subregion = item.place?.subregion;
+    if (subregion && subregion !== null) {
+      subregions.add(subregion);
+    }
+  });
+
+  return Array.from(subregions);
 }
 
 /*  Parse Subregion

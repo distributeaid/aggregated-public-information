@@ -99,15 +99,16 @@ const _isRejected = <T>(
 /*  Consolidate Categories
  * ------------------------------------------------------- */
 function consolidateCategories(data: NeedAssessment[]): string[] {
-  const categories = data.reduce((acc: string[], item) => {
-    const category = item.product.category;
-    if (category && !acc.includes(category)) {
-      acc.push(category);
-    }
-    return acc;
-  }, []);
+  const categories = new Set<string>();
 
-  return categories;
+  data.forEach((item) => {
+    const category = item.product.category;
+    if (category && category !== null) {
+      categories.add(category);
+    }
+  });
+
+  return Array.from(categories);
 }
 
 /*  Parse Category
