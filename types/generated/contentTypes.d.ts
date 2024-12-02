@@ -769,6 +769,7 @@ export interface ApiProductCategory extends Struct.CollectionTypeSchema {
 export interface ApiProductItem extends Struct.CollectionTypeSchema {
   collectionName: "items";
   info: {
+    description: "";
     displayName: "Product.Item";
     pluralName: "items";
     singularName: "item";
@@ -799,6 +800,7 @@ export interface ApiProductItem extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     secondHand: Schema.Attribute.Component<"product.second-hand", false>;
     size_style: Schema.Attribute.String;
+    unit: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
