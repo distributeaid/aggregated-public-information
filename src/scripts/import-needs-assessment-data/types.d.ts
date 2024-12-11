@@ -25,6 +25,8 @@ export type Survey = {
 };
 export type CategoryUploadWorkflow = UploadWorkflow<Category>;
 export type CategoryUploadWorkflowResults = UploadWorkflowResults<Category>;
+export type ProductUploadWorkflow = UploadWorkflow<Product[]>;
+export type ProductUploadWorkflowResults = UploadWorkflowResults<Product[]>;
 
 export type Region = {
   region: string;
