@@ -1,45 +1,85 @@
-import { STRAPI_ENV } from "../strapi-env";
+// import { STRAPI_ENV } from "../strapi-env";
 import {
   Product,
   NeedAssessment,
-//   ProductUploadWorkflow,
-//   UploadWorkflowStatus,
-//   ProductUploadWorkflowResults,
+  UploadWorkflowStatus,
+  ProductUploadWorkflow,
+  // ProductUploadWorkflowResults,
 } from "./types.d";
 
 /*  Consolidate Products in each Category
  * ------------------------------------------------------- */
-export function consolidateProductsByCategory(data: NeedAssessment[]): Record<string, Product[]> {
-    const consolidatedProducts: Record<string, Product[]> = {};
-    const categoryCounts: Record<string, number> = {};
+export function consolidateProductsByCategory(
+  data: NeedAssessment[],
+): Product[] {
+  const consolidatedProducts: Product[] = [];
 
-    data.forEach(assessment => {
-        const category = assessment.product.category;
+  data.forEach((assessment) => {
+    const product = assessment.product;
 
-        if (!consolidatedProducts[category]) {
-            consolidatedProducts[category] = [];
-            categoryCounts[category] = 0;
-        }
+    if (product.item) {
+      consolidatedProducts.push({
+        category: product.category,
+        item: product.item,
+        ageGender: product.ageGender || "",
+        sizeStyle: product.sizeStyle || "",
+        unit: product.unit || "",
+      });
+    }
+  });
 
-        const productItem = assessment.product.item;
+  // Print category counts after processing the data
+  const categoryCounts = {};
+  consolidatedProducts.forEach((product) => {
+    categoryCounts[product.category] =
+      (categoryCounts[product.category] || 0) + 1;
+  });
 
-        // Only add the item if it's not empty or undefined
-        if (productItem) {
-            consolidatedProducts[category].push({
-                category: category,
-                item: productItem,
-                ageGender: assessment.product.ageGender || '',
-                sizeStyle: assessment.product.sizeStyle || '',
-                unit: assessment.product.unit || ''
-            });
-            categoryCounts[category]++;
-        }
-    });
+  console.log("Category counts:", categoryCounts);
 
-    // Print category counts after processing the data
-    Object.entries(categoryCounts).forEach(([category, count]) => {
-        console.log(`${category} has ${count} products`);
-    });
+  return consolidatedProducts;
+}
 
-    return consolidatedProducts;
+/*  Parse Products
+ * ------------------------------------------------------- */
+export function parseProducts(data: Product[], orig, status): ProductUploadWorkflow {
+  const logs = [];
+  logs.push(`Parsing products ...`);
+  
+  const parsedData: Product[] = [];
+  const problematicItems: Product[] = [];
+
+  if (Array.isArray(data)) {
+  data.forEach((item: Product) => {
+    logs.push(`Parsing product: ${item.item}`);
+
+    if (!item.category || !item.item || !item.unit) {
+      problematicItems.push(item);
+    } else {
+      const processedProduct: Product = {
+        ...item,
+        parsed: true
+      };
+      parsedData.push(processedProduct);
+    }
+
+  });
+  } else {
+    console.log("Data property is not an array");
+  }
+
+  const hasProblematicItems = problematicItems.length > 0;
+  const updatedStatus = hasProblematicItems
+  ? UploadWorkflowStatus.ORIGINAL_DATA_INVALID
+  : UploadWorkflowStatus.SUCCESS
+
+  logs.push(`Workflow completed. Status: ${problematicItems.length} product items were problematic: ${JSON.stringify(problematicItems, null, 2).replace(/\\n|"/g, '')}`);
+  // console.log(problematicItems)
+
+  return {
+    data: parsedData,
+    orig,
+    status: updatedStatus,
+    logs,
+  };
 }
