@@ -527,7 +527,7 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
   collectionName: "countries";
   info: {
     description: "";
-    displayName: "Geo.Country";
+    displayName: "Geo.country";
     pluralName: "countries";
     singularName: "country";
   };
@@ -561,7 +561,7 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
 export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
   collectionName: "regions";
   info: {
-    displayName: "Geo.Region";
+    displayName: "Geo.region";
     pluralName: "regions";
     singularName: "region";
   };
@@ -569,22 +569,22 @@ export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    Countries: Schema.Attribute.Relation<"oneToMany", "api::geo.country">;
+    countries: Schema.Attribute.Relation<"oneToMany", "api::geo.country">;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    GovernmentResponse: Schema.Attribute.RichText;
+    governmentResponse: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::geo.region"> &
       Schema.Attribute.Private;
-    Map: Schema.Attribute.Media<"images">;
-    Name: Schema.Attribute.String &
+    map: Schema.Attribute.Media<"images">;
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    Overview: Schema.Attribute.RichText;
+    overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
-    Slug: Schema.Attribute.String;
-    Subregions: Schema.Attribute.Relation<"oneToMany", "api::geo.subregion">;
+    slug: Schema.Attribute.String;
+    subregions: Schema.Attribute.Relation<"oneToMany", "api::geo.subregion">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -594,7 +594,7 @@ export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
 export interface ApiGeoSubregion extends Struct.CollectionTypeSchema {
   collectionName: "subregions";
   info: {
-    displayName: "Geo.Subregion";
+    displayName: "Geo.subregion";
     pluralName: "subregions";
     singularName: "subregion";
   };
@@ -602,25 +602,25 @@ export interface ApiGeoSubregion extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    Country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
+    country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    GovernmentResponse: Schema.Attribute.RichText;
+    governmentResponse: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       "oneToMany",
       "api::geo.subregion"
     > &
       Schema.Attribute.Private;
-    Map: Schema.Attribute.Media<"images">;
-    Name: Schema.Attribute.String &
+    map: Schema.Attribute.Media<"images">;
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    Overview: Schema.Attribute.RichText;
+    overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
-    Region: Schema.Attribute.Relation<"manyToOne", "api::geo.region">;
-    Slug: Schema.Attribute.String;
+    region: Schema.Attribute.Relation<"manyToOne", "api::geo.region">;
+    slug: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
