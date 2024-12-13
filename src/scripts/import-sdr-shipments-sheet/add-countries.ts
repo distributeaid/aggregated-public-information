@@ -12,7 +12,7 @@ import {
 /* Add Countries From SDR Shipments Sheet
  * ========================================================================== */
 export async function addCountries(shipments: ShipmentCsv[]) {
-  console.log("Adding Geo.Countries from SDR Shipments sheet...");
+  console.log("Adding Geo.countries from SDR Shipments sheet...");
 
   const uniqueCountries = [...consolidateCountries(shipments)];
 
@@ -57,7 +57,7 @@ export async function addCountries(shipments: ShipmentCsv[]) {
       return resultsMap;
     }, resultsMap);
 
-  console.log("Add Geo.Countries results:");
+  console.log("Add Geo.countries results:");
   Object.keys(resultsMap).forEach((key) => {
     console.log(`    ${key}: ${resultsMap[key].length}`);
 
@@ -120,7 +120,7 @@ function parseCountry({
   status,
   logs,
 }: CountryUploadWorkflow): CountryUploadWorkflow {
-  logs = [...logs, `Log: parsing Geo.Country "${orig}"`];
+  logs = [...logs, `Log: parsing Geo.country "${orig}"`];
 
   const code = orig.toUpperCase();
   const name = lookup.byIso(code)?.country;
@@ -158,7 +158,7 @@ async function getCountry({
   status,
   logs,
 }: CountryUploadWorkflow): Promise<CountryUploadWorkflow> {
-  logs = [...logs, `Log: Checking if Geo.Country "${orig}" already exists.`];
+  logs = [...logs, `Log: Checking if Geo.country "${orig}" already exists.`];
 
   const query = qs.stringify({
     filters: {
@@ -184,7 +184,7 @@ async function getCountry({
       status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       logs: [
         ...logs,
-        `Error: Failed to get Geo.Country. HttpStatus: ${response.status} - ${response.statusText}`,
+        `Error: Failed to get Geo.country. HttpStatus: ${response.status} - ${response.statusText}`,
         JSON.stringify(body),
       ],
     };
@@ -197,7 +197,7 @@ async function getCountry({
       status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       logs: [
         ...logs,
-        `Error: Found too many matching Geo.Countries (${body.data.length}). Skipping...`,
+        `Error: Found too many matching Geo.countries (${body.data.length}). Skipping...`,
       ],
     };
   }
@@ -207,7 +207,7 @@ async function getCountry({
       data: body.data[0],
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
-      logs: [...logs, "Log: Found existing Geo.Country. Skipping..."],
+      logs: [...logs, "Log: Found existing Geo.country. Skipping..."],
     };
   }
 
@@ -215,7 +215,7 @@ async function getCountry({
     data,
     orig,
     status,
-    logs: [...logs, "Success: Confirmed Geo.Country does not exist."],
+    logs: [...logs, "Success: Confirmed Geo.country does not exist."],
   };
 }
 
@@ -226,7 +226,7 @@ async function uploadCountry({
   orig,
   /* status, */ logs,
 }: CountryUploadWorkflow): Promise<CountryUploadWorkflow> {
-  logs = [...logs, `Log: Creating Geo.Country "${orig}".`];
+  logs = [...logs, `Log: Creating Geo.country "${orig}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/countries`, {
     method: "POST",
@@ -245,7 +245,7 @@ async function uploadCountry({
       status: UploadWorkflowStatus.UPLOAD_ERROR,
       logs: [
         ...logs,
-        `Error: Failed to create Geo.Country. HttpStatus: ${response.status} - ${response.statusText}`,
+        `Error: Failed to create Geo.country. HttpStatus: ${response.status} - ${response.statusText}`,
         JSON.stringify(body),
       ],
     };
@@ -255,6 +255,6 @@ async function uploadCountry({
     data: body.data,
     orig,
     status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, "Success: Created Geo.Country."],
+    logs: [...logs, "Success: Created Geo.country."],
   };
 }

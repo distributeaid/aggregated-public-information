@@ -6,11 +6,11 @@
   },
   "options": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "Country": {
+    "country": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.country"

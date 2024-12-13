@@ -4,37 +4,37 @@
   "info": {
     "singularName": "subregion",
     "pluralName": "subregions",
-    "displayName": "Geo.Subregion"
+    "displayName": "Geo.subregion"
   },
   "options": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Slug": {
+    "slug": {
       "type": "string"
     },
-    "Map": {
+    "map": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": ["images"]
     },
-    "Overview": {
+    "overview": {
       "type": "richtext"
     },
-    "GovernmentResponse": {
+    "governmentResponse": {
       "type": "richtext"
     },
-    "Region": {
+    "region": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::geo.region",
-      "inversedBy": "Subregions"
+      "inversedBy": "subregions"
     },
-    "Country": {
+    "country": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.country"
