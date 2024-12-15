@@ -40,9 +40,9 @@ async function main() {
 
     try {
       const result = parseProducts(processedProducts);
-      console.log('Result', result);
+      console.log("Result", result);
     } catch (error) {
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   } catch (error) {
     console.error("Error processing needs assessment data", error);
