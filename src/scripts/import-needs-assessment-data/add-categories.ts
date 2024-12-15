@@ -15,49 +15,36 @@ export async function addCategories(
   console.log("Adding Product.Categories from the Needs Assessment data ...");
 
   const uniqueCategories = consolidateCategories(data);
+  // console.log('Unique categories: ', uniqueCategories);
 
   const results = await Promise.allSettled<CategoryUploadWorkflow>(
     uniqueCategories.map((category) => {
-      return new Promise<CategoryUploadWorkflow>((resolve, _reject) => {
-        resolve({
+        const initialWorkflow = {
           data: {
             category,
           },
           orig: category,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
-        });
-      })
-        .then(parseCategory)
-        .then(getCategory)
-        .then(uploadCategory);
-    }),
+        };
+
+        return Promise.resolve(initialWorkflow)
+          .then(parseCategory)
+          .then(getCategory)
+          .then(uploadCategory);
+    })
   );
 
   // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
-  const resultsMap: CategoryUploadWorkflowResults = Object.keys(
-    UploadWorkflowStatus,
-  ).reduce((resultsMap, key) => {
-    resultsMap[key] = [];
-    return resultsMap;
-  }, {} as CategoryUploadWorkflowResults);
+  const resultsMap: CategoryUploadWorkflowResults = Object.fromEntries(
+    Object.keys(UploadWorkflowStatus).map((key) => [key, []])
+  ) as CategoryUploadWorkflowResults;
 
-  results
-    .map((result) => {
-      if (isFulfilled(result)) {
-        return result.value;
-      } else {
-        return result.reason;
-      }
-    })
-    .reduce((resultsMap, workflowResult) => {
-      if (workflowResult.status) {
-        resultsMap[workflowResult.status].push(workflowResult);
-      } else {
-        resultsMap[UploadWorkflowStatus.OTHER].push(workflowResult);
-      }
-      return resultsMap;
-    }, resultsMap);
+  results.forEach((result) => {
+    const workflowResult = isFulfilled(result) ? result.value : result.reason;
+    const statusKey = workflowResult.status || UploadWorkflowStatus.OTHER;
+    resultsMap[statusKey].push(workflowResult);
+  });
 
   console.log("Add Product.Categories results:");
   Object.keys(resultsMap).forEach((key) => {
@@ -169,6 +156,10 @@ async function getCategory({
   });
 
   const body = await response.json();
+
+  // log strapi response status
+  //console.log("Strapi response status:", response.status);
+  
   const matchingCategory = body.data.find(
     (category) => category.name.toLowerCase() === data.category.toLowerCase(),
   );
