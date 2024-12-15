@@ -19,25 +19,25 @@ export async function addCategories(
 
   const results = await Promise.allSettled<CategoryUploadWorkflow>(
     uniqueCategories.map((category) => {
-        const initialWorkflow = {
-          data: {
-            category,
-          },
-          orig: category,
-          status: UploadWorkflowStatus.PROCESSING,
-          logs: [],
-        };
+      const initialWorkflow = {
+        data: {
+          category,
+        },
+        orig: category,
+        status: UploadWorkflowStatus.PROCESSING,
+        logs: [],
+      };
 
-        return Promise.resolve(initialWorkflow)
-          .then(parseCategory)
-          .then(getCategory)
-          .then(uploadCategory);
-    })
+      return Promise.resolve(initialWorkflow)
+        .then(parseCategory)
+        .then(getCategory)
+        .then(uploadCategory);
+    }),
   );
 
   // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
   const resultsMap: CategoryUploadWorkflowResults = Object.fromEntries(
-    Object.keys(UploadWorkflowStatus).map((key) => [key, []])
+    Object.keys(UploadWorkflowStatus).map((key) => [key, []]),
   ) as CategoryUploadWorkflowResults;
 
   results.forEach((result) => {
@@ -159,7 +159,7 @@ async function getCategory({
 
   // log strapi response status
   //console.log("Strapi response status:", response.status);
-  
+
   const matchingCategory = body.data.find(
     (category) => category.name.toLowerCase() === data.category.toLowerCase(),
   );

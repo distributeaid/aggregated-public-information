@@ -42,38 +42,43 @@ export function consolidateProductsByCategory(
 
 /*  Parse Products
  * ------------------------------------------------------- */
-export function parseProducts(data: Product[], orig, status): ProductUploadWorkflow {
+export function parseProducts(
+  data: Product[],
+  orig,
+  status,
+): ProductUploadWorkflow {
   const logs = [];
   logs.push(`Parsing products ...`);
-  
+
   const parsedData: Product[] = [];
   const problematicItems: Product[] = [];
 
   if (Array.isArray(data)) {
-  data.forEach((item: Product) => {
-    logs.push(`Parsing product: ${item.item}`);
+    data.forEach((item: Product) => {
+      logs.push(`Parsing product: ${item.item}`);
 
-    if (!item.category || !item.item || !item.unit) {
-      problematicItems.push(item);
-    } else {
-      const processedProduct: Product = {
-        ...item,
-        parsed: true
-      };
-      parsedData.push(processedProduct);
-    }
-
-  });
+      if (!item.category || !item.item || !item.unit) {
+        problematicItems.push(item);
+      } else {
+        const processedProduct: Product = {
+          ...item,
+          parsed: true,
+        };
+        parsedData.push(processedProduct);
+      }
+    });
   } else {
     console.log("Data property is not an array");
   }
 
   const hasProblematicItems = problematicItems.length > 0;
   const updatedStatus = hasProblematicItems
-  ? UploadWorkflowStatus.ORIGINAL_DATA_INVALID
-  : UploadWorkflowStatus.SUCCESS
+    ? UploadWorkflowStatus.ORIGINAL_DATA_INVALID
+    : UploadWorkflowStatus.SUCCESS;
 
-  logs.push(`Workflow completed. Status: ${problematicItems.length} product items were problematic: ${JSON.stringify(problematicItems, null, 2).replace(/\\n|"/g, '')}`);
+  logs.push(
+    `Workflow completed. Status: ${problematicItems.length} product items were problematic: ${JSON.stringify(problematicItems, null, 2).replace(/\\n|"/g, "")}`,
+  );
   // console.log(problematicItems)
 
   return {
