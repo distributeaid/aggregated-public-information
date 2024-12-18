@@ -42,11 +42,7 @@ export function consolidateProductsByCategory(
 
 /*  Parse Products
  * ------------------------------------------------------- */
-export function parseProducts(
-  data: Product[],
-  orig,
-  status,
-): ProductUploadWorkflow {
+export function parseProducts(data: Product[], orig, _status): ProductUploadWorkflow {
   const logs = [];
   logs.push(`Parsing products ...`);
 
@@ -57,24 +53,24 @@ export function parseProducts(
     data.forEach((item: Product) => {
       logs.push(`Parsing product: ${item.item}`);
 
-      if (!item.category || !item.item || !item.unit) {
-        problematicItems.push(item);
-      } else {
-        const processedProduct: Product = {
-          ...item,
-          parsed: true,
-        };
-        parsedData.push(processedProduct);
-      }
-    });
+    if (!item.category || !item.item || !item.unit) {
+      problematicItems.push(item);
+    } else {
+      const processedProduct: Product = {
+        ...item,
+      };
+      parsedData.push(processedProduct);
+    }
+
+  });
   } else {
     console.log("Data property is not an array");
   }
 
   const hasProblematicItems = problematicItems.length > 0;
   const updatedStatus = hasProblematicItems
-    ? UploadWorkflowStatus.ORIGINAL_DATA_INVALID
-    : UploadWorkflowStatus.SUCCESS;
+  ? UploadWorkflowStatus.PROCESSING
+  : UploadWorkflowStatus.SUCCESS
 
   logs.push(
     `Workflow completed. Status: ${problematicItems.length} product items were problematic: ${JSON.stringify(problematicItems, null, 2).replace(/\\n|"/g, "")}`,
