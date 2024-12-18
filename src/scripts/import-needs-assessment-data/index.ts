@@ -24,7 +24,7 @@ async function main() {
     const _categories = await addCategories(data);
 
     // Check the number of objects in the needs array to manually compare totals
-    function countObjectsInArray(data: any): number {
+    function countObjectsInArray(data): number {
       if (Array.isArray(data.needs)) {
         return data.needs.length;
       } else if (typeof data === "object" && data !== null) {
