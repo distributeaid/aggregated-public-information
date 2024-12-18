@@ -14,7 +14,6 @@
     "strapi": "strapi",
     "tsc": "tsc --project tsconfig.json --noEmit",
     "test": "yarn build && DATABASE_FILENAME=\".tmp/test_data.db\" jest --forceExit --detectOpenHandles --silent",
-    "test:with-build": "yarn test",
     "test:without-build": "DATABASE_FILENAME=\".tmp/test_data.db\" jest --forceExit --detectOpenHandles --silent",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
