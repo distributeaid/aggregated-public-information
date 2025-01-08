@@ -1,4 +1,4 @@
-import { UploadWorkflowStatus } from "../uploadWorkflowStatus";
+import { UploadWorkflowStatus } from "../statusCodes";
 
 export type UploadWorkflow<T> = {
   data: T;
