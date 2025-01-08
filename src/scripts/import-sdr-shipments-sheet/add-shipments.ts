@@ -1,12 +1,12 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
 import { toTitleCase, stripAndParseFloat, toBoolean } from "../helpers";
+import { UploadWorkflowStatus } from "../statusCodes";
 import {
   Country,
   Shipment,
   ShipmentCsv,
   ShipmentUploadWorkflow,
-  UploadWorkflowStatus,
   CountryCodeToId,
   ShipmentUploadWorkflowResults,
 } from "./types.d";
