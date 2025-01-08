@@ -4,5 +4,5 @@
     "moduleResolution": "NodeNext",
     "target": "esnext",
     "esModuleInterop": true
-  }
+    }
 }
