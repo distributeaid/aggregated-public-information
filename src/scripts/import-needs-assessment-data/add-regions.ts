@@ -239,3 +239,28 @@ async function uploadRegion({
     logs: [...logs, "Success: Created Geo.Region."],
   };
 }
+
+/*  Handle Response Errors
+ * Helper function to handle failed requests */
+function handleResponseError(
+  response,
+  body,
+  data,
+  orig,
+  logs,
+  status,
+  errorMessage
+) {
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status,
+      logs: [
+        ...logs,
+        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+}
