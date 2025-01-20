@@ -37,7 +37,6 @@ async function main() {
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
     const _products = await addProducts(data);
-
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {

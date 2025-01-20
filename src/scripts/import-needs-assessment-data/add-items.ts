@@ -9,9 +9,7 @@ import {
 
 /*  Add Products from Needs Assessment Data
  * ------------------------------------------------------- */
-export async function addProducts(
-  data: NeedAssessment[],
-): Promise<Product[]> {
+export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
   console.log("Adding Product.Items from the Needs Assessment data ...");
 
   const uniqueProducts = consolidateProductsByCategory(data);
@@ -27,10 +25,9 @@ export async function addProducts(
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow)
-        .then(parseProducts)
-        // .then(getCategory)
-        // .then(uploadCategory);
+      return Promise.resolve(initialWorkflow).then(parseProducts);
+      // .then(getCategory)
+      // .then(uploadCategory);
     }),
   );
 
@@ -118,7 +115,7 @@ export function consolidateProductsByCategory(
 /*  Parse Products
  * ------------------------------------------------------- */
 export function parseProducts({
-  data, 
+  data,
   orig,
   status,
   logs,
@@ -128,10 +125,10 @@ export function parseProducts({
 
   const parsedData: Product[] = [];
 
-  if (typeof data === 'object' && data !== null) {
+  if (typeof data === "object" && data !== null) {
     // Check if data contains a 'product' property
-    if ('product' in data) {
-      const product = (data.product as Product);
+    if ("product" in data) {
+      const product = data.product as Product;
 
       logs.push(`Parsing product: ${product.item}`);
 
@@ -152,7 +149,7 @@ export function parseProducts({
         parsedData.push(processedProduct);
       }
     } else {
-    console.log("unexpected object structure:", JSON.stringify(data));
+      console.log("unexpected object structure:", JSON.stringify(data));
     }
   }
 
