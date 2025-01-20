@@ -6,7 +6,7 @@ import { addRegions } from "./add-regions";
 import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
-import { consolidateProductsByCategory, parseProducts } from "./add-items";
+import { addProducts } from "./add-items";
 
 async function main() {
   try {
@@ -36,16 +36,8 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    // Check individual functions are working
-    const processedProducts = consolidateProductsByCategory(data);
-    // console.log("Processed Products", processedProducts);
+    const _products = await addProducts(data);
 
-    try {
-      const result = parseProducts(processedProducts);
-      console.log("Result", result);
-    } catch (error) {
-      console.log("Error:", error.message);
-    }
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {
