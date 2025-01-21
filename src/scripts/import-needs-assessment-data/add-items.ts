@@ -1,4 +1,4 @@
-// import { STRAPI_ENV } from "../strapi-env";
+import { STRAPI_ENV } from "../strapi-env";
 import {
   Product,
   NeedAssessment,
@@ -25,8 +25,9 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow).then(parseProducts);
-      // .then(getCategory)
+      return Promise.resolve(initialWorkflow)
+      .then(parseProducts)
+      .then(getProduct)
       // .then(uploadCategory);
     }),
   );
@@ -158,5 +159,75 @@ export function parseProducts({
     orig,
     status,
     logs,
+  };
+}
+
+/*  Get Product
+ * ------------------------------------------------------- */
+async function getProduct({
+  data,
+  orig,
+  status,
+  logs,
+}: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
+  logs = [
+    ...logs,
+    `Log: Checking if Product.Item already exists.`,
+  ];
+
+  //Fetch the data from Strapi
+  const response = await fetch(`${STRAPI_ENV.URL}/items`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+  });
+
+  const body = await response.json();
+
+  // log strapi response status
+  // console.log("Strapi response status:", response.status);
+  // console.log(body);
+
+  const matchingProduct = body.data.find(
+    (item) => {
+      const parsedItem = data[0];
+      return (
+        item.name.toLowerCase() === parsedItem.item.toLowerCase() &&
+        (parsedItem.ageGender === '' || item.age_gender === null || item.age_gender === '') &&
+        (parsedItem.sizeStyle === '' || item.size_style === '' || item.size_style === '') &&
+        (parsedItem.unit === '' || item.unit === null || item.unit === '')
+      );
+    });
+
+  if (!response.ok) {
+    console.log("Non-ok response");
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to get Product.Item. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  if (matchingProduct) {
+    throw {
+      data: body.data,
+      orig,
+      status: UploadWorkflowStatus.ALREADY_EXISTS,
+      logs: [...logs, "Log: Found existing Product.Item. Skipping..."],
+    };
+  }
+
+  return {
+    data,
+    orig,
+    status,
+    logs: [...logs, "Success: Confirmed Product.Item does not exist."],
   };
 }
