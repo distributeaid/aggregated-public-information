@@ -1,8 +1,8 @@
 import { STRAPI_ENV } from "../strapi-env";
+import { UploadWorkflowStatus } from "../statusCodes";
 import {
   Product,
   NeedAssessment,
-  UploadWorkflowStatus,
   ProductUploadWorkflow,
   ProductUploadWorkflowResults,
 } from "./types.d";
@@ -26,9 +26,8 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
       };
 
       return Promise.resolve(initialWorkflow)
-      .then(parseProducts)
-      .then(getProduct)
-      // .then(uploadCategory);
+        .then(parseProducts)
+        .then(getProduct);
     }),
   );
 
@@ -170,10 +169,7 @@ async function getProduct({
   status,
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [
-    ...logs,
-    `Log: Checking if Product.Item already exists.`,
-  ];
+  logs = [...logs, `Log: Checking if Product.Item already exists.`];
 
   //Fetch the data from Strapi
   const response = await fetch(`${STRAPI_ENV.URL}/items`, {
@@ -190,16 +186,19 @@ async function getProduct({
   // console.log("Strapi response status:", response.status);
   // console.log(body);
 
-  const matchingProduct = body.data.find(
-    (item) => {
-      const parsedItem = data[0];
-      return (
-        item.name.toLowerCase() === parsedItem.item.toLowerCase() &&
-        (parsedItem.ageGender === '' || item.age_gender === null || item.age_gender === '') &&
-        (parsedItem.sizeStyle === '' || item.size_style === '' || item.size_style === '') &&
-        (parsedItem.unit === '' || item.unit === null || item.unit === '')
-      );
-    });
+  const matchingProduct = body.data.find((item) => {
+    const parsedItem = data[0];
+    return (
+      item.name.toLowerCase() === parsedItem.item.toLowerCase() &&
+      (parsedItem.ageGender === "" ||
+        item.age_gender === null ||
+        item.age_gender === "") &&
+      (parsedItem.sizeStyle === "" ||
+        item.size_style === "" ||
+        item.size_style === "") &&
+      (parsedItem.unit === "" || item.unit === null || item.unit === "")
+    );
+  });
 
   if (!response.ok) {
     console.log("Non-ok response");
