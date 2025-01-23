@@ -49,6 +49,5 @@ export type NeedAssessment = {
 
 export type ResponseHandleParams = RegionUploadWorkflow & {
   response: Response,
-  successMessage: string,
-  errorMessage: string
+  successMessage: string
 }

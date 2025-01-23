@@ -221,6 +221,9 @@ async function uploadRegion({
   });
   const body = await response.json();
 
+  const successMessage = "Created Geo.Region.";
+  const errorMessage = "Failed to create Geo.Region."
+
   try {
     return handleResponse({
       response,
@@ -228,56 +231,39 @@ async function uploadRegion({
       orig,
       logs,
       status: UploadWorkflowStatus.UPLOAD_ERROR,
-      successMessage: "Created Geo.Region.",
-      errorMessage: "Failed to create Geo.Region.",
+      successMessage
     });
   } catch (error) {
-    console.error("Error occured during uploadRegion:", error);
-    throw error;
-  }
-/*
-  if (!response.ok) {
-    throw {
-      data,
-      orig,
-      status: UploadWorkflowStatus.UPLOAD_ERROR,
-      logs: [
+      logs = [
         ...logs,
-        `Error: Failed to create Geo.Region. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(body),
-      ],
-    };
-  }
+        `Error: ${errorMessage}.`,
+        `Response Body: ${JSON.stringify(body)}`,
+      ];
 
-  return {
-    data: body.data,
-    orig,
-    status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, "Success: Created Geo.Region."],
-  };
+      throw {
+        ...error,
+        logs,
+      };
+    }
 }
-*/
 
 /*  Handle Response Errors
  * Helper function to validate responses */
-function handleResponse<T>({
+function handleResponse({
   response,
   data,
   orig,
   logs,
   status,
-  successMessage,
-  errorMessage
+  successMessage
 }: ResponseHandleParams): RegionUploadWorkflow {
   if (!response.ok) {
     throw {
       data,
       orig,
       status,
-      logs: [
-        ...logs,
-        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
-      ],
+      logs,
+      message: `HttpStatus: ${response.status} - ${response.statusText}`,
     };
   }
 
@@ -287,5 +273,4 @@ function handleResponse<T>({
     status: UploadWorkflowStatus.SUCCESS,
     logs: [...logs, `Success: ${successMessage}`]
   }
-}
 }
