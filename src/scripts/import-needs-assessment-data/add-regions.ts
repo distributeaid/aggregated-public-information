@@ -5,7 +5,9 @@ import {
   NeedAssessment,
   RegionUploadWorkflow,
   RegionUploadWorkflowResults,
+  ResponseHandleParams,
 } from "./types.d";
+import { error } from "console";
 
 /*  Add Regions from Needs Assessment Data
  * ------------------------------------------------------- */
@@ -201,7 +203,7 @@ async function getRegion({
 async function uploadRegion({
   data,
   orig,
-  /* status, */ logs,
+  logs,
 }: RegionUploadWorkflow): Promise<RegionUploadWorkflow> {
   logs = [...logs, `Log: Creating Geo.Region "${orig}".`];
 
@@ -219,6 +221,21 @@ async function uploadRegion({
   });
   const body = await response.json();
 
+  try {
+    return handleResponse({
+      response,
+      data,
+      orig,
+      logs,
+      status: UploadWorkflowStatus.UPLOAD_ERROR,
+      successMessage: "Created Geo.Region.",
+      errorMessage: "Failed to create Geo.Region.",
+    });
+  } catch (error) {
+    console.error("Error occured during uploadRegion:", error);
+    throw error;
+  }
+/*
   if (!response.ok) {
     throw {
       data,
@@ -239,18 +256,19 @@ async function uploadRegion({
     logs: [...logs, "Success: Created Geo.Region."],
   };
 }
+*/
 
 /*  Handle Response Errors
- * Helper function to handle failed requests */
-function handleResponseError(
+ * Helper function to validate responses */
+function handleResponse<T>({
   response,
-  body,
   data,
   orig,
   logs,
   status,
+  successMessage,
   errorMessage
-) {
+}: ResponseHandleParams): RegionUploadWorkflow {
   if (!response.ok) {
     throw {
       data,
@@ -259,8 +277,15 @@ function handleResponseError(
       logs: [
         ...logs,
         `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(body),
       ],
     };
   }
+
+  return {
+    data,
+    orig,
+    status: UploadWorkflowStatus.SUCCESS,
+    logs: [...logs, `Success: ${successMessage}`]
+  }
+}
 }
