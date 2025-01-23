@@ -27,7 +27,8 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
 
       return Promise.resolve(initialWorkflow)
         .then(parseProducts)
-        .then(getProduct);
+        .then(getProduct)
+        .then(uploadProduct);
     }),
   );
 
@@ -228,5 +229,53 @@ async function getProduct({
     orig,
     status,
     logs: [...logs, "Success: Confirmed Product.Item does not exist."],
+  };
+}
+
+/*  Upload Product
+ * ------------------------------------------------------- */
+async function uploadProduct({
+  data,
+  orig,
+  status,
+  logs,
+}: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
+  logs = [...logs, `Log: Creating Product.Item "${data[0].item}".`];
+
+  const response = await fetch(`${STRAPI_ENV.URL}/items`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+    body: JSON.stringify({ 
+      data: {
+        name: data[0].item,
+        age_gender: data[0].ageGender,
+        size_style: data[0].sizeStyle,
+        unit: data[0].unit,
+      },
+    }),
+  });
+  const body = await response.json();
+
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.UPLOAD_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to create Product.Item. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  return {
+    data: body.data,
+    orig,
+    status: UploadWorkflowStatus.SUCCESS,
+    logs: [...logs, "Success: Created Product.Item."],
   };
 }
