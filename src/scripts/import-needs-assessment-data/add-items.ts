@@ -47,12 +47,12 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
     console.log(`     ${key}: ${resultsMap[key].length}`);
 
     // NOTE: uncomment & set the status key to debug different types of results
-    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-    //   resultsMap[key].forEach((result) => {
-    //     console.log(result)
-    //     console.log("\n")
-    //   })
-    // }
+    if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+      resultsMap[key].forEach((result) => {
+        console.log(result)
+        console.log("\n")
+      })
+    }
   });
 
   console.log("Adding items completed!");
@@ -114,53 +114,55 @@ export function consolidateProductsByCategory(
 
 /*  Parse Products
  * ------------------------------------------------------- */
-export function parseProducts({
+async function parseProducts({
   data,
   orig,
   status,
   logs,
-}: ProductUploadWorkflow): ProductUploadWorkflow {
+}: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
   logs = [...logs, `Log: parsing products...`];
   // console.log("👉🏻 This is the data coming into the parse function:", data);
+  return new Promise<ProductUploadWorkflow>((resolve, _reject) => {
+  
+    const parsedData: Product[] = [];
 
-  const parsedData: Product[] = [];
+    if (typeof data === "object" && data !== null) {
+      // Check if data contains a 'product' property
+      if ("product" in data) {
+        const product = data.product as Product;
 
-  if (typeof data === "object" && data !== null) {
-    // Check if data contains a 'product' property
-    if ("product" in data) {
-      const product = data.product as Product;
+        logs.push(`Parsing product: ${product.item}`);
 
-      logs.push(`Parsing product: ${product.item}`);
-
-      if (!product.category || !product.item || !product.unit) {
-        throw {
-          data,
-          orig,
-          status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
-          logs: [
-            ...logs,
-            `Error: Invalid product input: "${product.item}-${product.ageGender}". Expected a non-null value for unit`,
-          ],
-        };
+        if (!product.category || !product.item || !product.unit) {
+          throw {
+            data,
+            orig,
+            status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+            logs: [
+              ...logs,
+              `Error: Invalid product input: "${product.item}-${product.ageGender}". Expected a non-null value in category, item, and unit.`,
+            ],
+          };
+        } else {
+          const processedProduct: Product = {
+            ...product,
+          };
+          parsedData.push(processedProduct);
+        }
       } else {
-        const processedProduct: Product = {
-          ...product,
-        };
-        parsedData.push(processedProduct);
+        console.log("unexpected object structure:", JSON.stringify(data));
       }
-    } else {
-      console.log("unexpected object structure:", JSON.stringify(data));
     }
-  }
 
-  return {
-    data: parsedData,
-    orig,
-    status,
-    logs,
-  };
+    resolve({
+      data: parsedData,
+      orig,
+      status,
+      logs,
+    });
+  })
+
 }
-
 /*  Get Product
  * ------------------------------------------------------- */
 async function getProduct({
@@ -172,7 +174,7 @@ async function getProduct({
   logs = [...logs, `Log: Checking if Product.Item already exists.`];
 
   //Fetch the data from Strapi
-  const response = await fetch(`${STRAPI_ENV.URL}/items`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/items?populate=category`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -190,13 +192,11 @@ async function getProduct({
     const parsedItem = data[0];
     return (
       item.name.toLowerCase() === parsedItem.item.toLowerCase() &&
-      (parsedItem.ageGender === "" ||
-        item.age_gender === null ||
-        item.age_gender === "") &&
-      (parsedItem.sizeStyle === "" ||
-        item.size_style === "" ||
-        item.size_style === "") &&
-      (parsedItem.unit === "" || item.unit === null || item.unit === "")
+      item.category.name.toLowerCase() === parsedItem.category.toLowerCase() &&
+      ((item.age_gender === null) ||
+        item.age_gender.toLowerCase() === parsedItem.ageGender.toLowerCase()) &&
+      ((item.size_style === null) ||
+        item.size_style.toLowerCase() === parsedItem.sizeStyle.toLowerCase())
     );
   });
 
@@ -216,7 +216,7 @@ async function getProduct({
 
   if (matchingProduct) {
     throw {
-      data: body.data,
+      data,
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
       logs: [...logs, "Log: Found existing Product.Item. Skipping..."],
