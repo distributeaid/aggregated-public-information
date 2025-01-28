@@ -1,11 +1,11 @@
 import qs from "qs";
 import lookup from "country-code-lookup";
 import { STRAPI_ENV } from "../strapi-env";
+import { UploadWorkflowStatus } from "../statusCodes";
 import {
   Country,
   ShipmentCsv,
   CountryUploadWorkflow,
-  UploadWorkflowStatus,
   CountryUploadWorkflowResults,
 } from "./types.d";
 
