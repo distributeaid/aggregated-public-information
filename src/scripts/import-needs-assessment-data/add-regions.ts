@@ -1,11 +1,11 @@
 import { STRAPI_ENV } from "../strapi-env";
 import { UploadWorkflowStatus } from "../statusCodes";
+import { handleResponse } from "../helpers";
 import {
   Region,
   NeedAssessment,
   RegionUploadWorkflow,
   RegionUploadWorkflowResults,
-  ResponseHandleParams,
 } from "./types.d";
 
 
@@ -148,7 +148,7 @@ function parseRegion({
 async function getRegion({
   data,
   orig,
-  status,
+  //status,
   logs,
 }: RegionUploadWorkflow): Promise<RegionUploadWorkflow> {
   logs = [...logs, `Log: Checking if Geo.Region "${orig}" already exists.`];
@@ -180,14 +180,14 @@ async function getRegion({
   const errorMessage = "Failed to retrieve Geo.Region.";
 
   try {
-    return handleResponse({
+    return handleResponse<Region>({
       response,
       data,
       orig,
       logs,
       status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       successMessage
-    });
+    }) as RegionUploadWorkflow;
   } catch (error) {
       logs = [
         ...logs,
@@ -229,14 +229,14 @@ async function uploadRegion({
   const errorMessage = "Failed to create Geo.Region.";
 
   try {
-    return handleResponse({
+    return handleResponse<Region>({
       response,
       data,
       orig,
       logs,
       status: UploadWorkflowStatus.UPLOAD_ERROR,
       successMessage
-    });
+    }) as RegionUploadWorkflow;
   } catch (error) {
       logs = [
         ...logs,

@@ -34,6 +34,7 @@ export function stripAndParseFloat(numberString: string): number {
   return parseFloat(numberString.replace(/\$|,|%/g, ""));
 }
 
+/* Generic function to handle http responses from Strapi for Region and Subregion uploads */
 export function handleResponse<T extends Region | Subregion>({
   response,
   data,
