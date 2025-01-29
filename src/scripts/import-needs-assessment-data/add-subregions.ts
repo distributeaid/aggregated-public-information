@@ -179,8 +179,8 @@ async function getSubregion({
     };
   }
 
-  const successMessage = "Confirmed Geo.Subregion does not exist."
-  const errorMessage = "Failed to get Geo.Subregion."
+  const successMessage = "Confirmed Geo.Subregion does not exist.";
+  const errorMessage = "Failed to get Geo.Subregion.";
 
   try {
     return handleResponse<Subregion>({
@@ -192,18 +192,18 @@ async function getSubregion({
       successMessage,
     }) as SubregionUploadWorkflow;
   } catch (error) {
-      console.log("Non-ok response")
-      logs = [
-        ...logs,
-        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
-        `Response Body: ${JSON.stringify(body)}`,
-      ];
+    console.log("Non-ok response");
+    logs = [
+      ...logs,
+      `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
+      `Response Body: ${JSON.stringify(body)}`,
+    ];
 
-      throw {
-        ...error,
-        logs,
-      };
-  };
+    throw {
+      ...error,
+      logs,
+    };
+  }
 }
 
 /*  Upload Subregion
@@ -229,8 +229,8 @@ async function uploadSubregion({
   });
   const body = await response.json();
 
-  const successMessage = "Success: created Geo.Subregion."
-  const errorMessage = "Failed to create Geo.Subregion."
+  const successMessage = "Success: created Geo.Subregion.";
+  const errorMessage = "Failed to create Geo.Subregion.";
 
   try {
     return handleResponse<Subregion>({
@@ -242,17 +242,15 @@ async function uploadSubregion({
       successMessage,
     }) as SubregionUploadWorkflow;
   } catch (error) {
-      logs = [
-        ...logs,
-        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
-        `Response Body: ${JSON.stringify(body)}`,
-      ];
+    logs = [
+      ...logs,
+      `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
+      `Response Body: ${JSON.stringify(body)}`,
+    ];
 
-      throw {
-        ...error,
-        logs,
-      };
+    throw {
+      ...error,
+      logs,
+    };
   }
 }
-
-

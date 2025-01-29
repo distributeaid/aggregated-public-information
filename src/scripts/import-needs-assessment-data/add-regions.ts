@@ -8,7 +8,6 @@ import {
   RegionUploadWorkflowResults,
 } from "./types.d";
 
-
 /*  Add Regions from Needs Assessment Data
  * ------------------------------------------------------- */
 export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
@@ -186,20 +185,20 @@ async function getRegion({
       orig,
       logs,
       status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
-      successMessage
+      successMessage,
     }) as RegionUploadWorkflow;
   } catch (error) {
-      logs = [
-        ...logs,
-        `Error: ${errorMessage} HttpStatus: ${response.status} - ${response.statusText}`,
-        `Response Body: ${JSON.stringify(body)}`,
-      ];
+    logs = [
+      ...logs,
+      `Error: ${errorMessage} HttpStatus: ${response.status} - ${response.statusText}`,
+      `Response Body: ${JSON.stringify(body)}`,
+    ];
 
-      throw {
-        ...error,
-        logs,
-      };
+    throw {
+      ...error,
+      logs,
     };
+  }
 }
 
 /*  Upload Region
@@ -235,18 +234,18 @@ async function uploadRegion({
       orig,
       logs,
       status: UploadWorkflowStatus.UPLOAD_ERROR,
-      successMessage
+      successMessage,
     }) as RegionUploadWorkflow;
   } catch (error) {
-      logs = [
-        ...logs,
-        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
-        `Response Body: ${JSON.stringify(body)}`,
-      ];
+    logs = [
+      ...logs,
+      `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
+      `Response Body: ${JSON.stringify(body)}`,
+    ];
 
-      throw {
-        ...error,
-        logs,
-      };
-    }
+    throw {
+      ...error,
+      logs,
+    };
+  }
 }

@@ -41,9 +41,8 @@ export function handleResponse<T>({
   orig,
   logs,
   status,
-  successMessage
+  successMessage,
 }: ResponseHandleParams): unknown {
-
   if (!response.ok) {
     throw {
       data,
@@ -58,8 +57,8 @@ export function handleResponse<T>({
     data: data as T,
     orig: orig as T | string,
     status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, `Success: ${successMessage}`]
-  }
+    logs: [...logs, `Success: ${successMessage}`],
+  };
 
   return result;
 }
