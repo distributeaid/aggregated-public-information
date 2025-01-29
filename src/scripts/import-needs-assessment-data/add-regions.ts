@@ -7,7 +7,7 @@ import {
   RegionUploadWorkflowResults,
   ResponseHandleParams,
 } from "./types.d";
-import { error } from "console";
+
 
 /*  Add Regions from Needs Assessment Data
  * ------------------------------------------------------- */
@@ -167,20 +167,6 @@ async function getRegion({
     (region) => region.Name.toLowerCase() === data.region.toLowerCase(),
   );
 
-  if (!response.ok) {
-    console.log("Non-ok response");
-    throw {
-      data,
-      orig,
-      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
-      logs: [
-        ...logs,
-        `Error: Failed to get Geo.Region. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(body),
-      ],
-    };
-  }
-
   if (matchingRegion) {
     throw {
       data: body.data,
@@ -190,12 +176,30 @@ async function getRegion({
     };
   }
 
-  return {
-    data,
-    orig,
-    status,
-    logs: [...logs, "Success: Confirmed Geo.Region does not exist."],
-  };
+  const successMessage = "Success: Confirmed Geo.Region does not exist.";
+  const errorMessage = "Failed to retrieve Geo.Region.";
+
+  try {
+    return handleResponse({
+      response,
+      data,
+      orig,
+      logs,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      successMessage
+    });
+  } catch (error) {
+      logs = [
+        ...logs,
+        `Error: ${errorMessage} HttpStatus: ${response.status} - ${response.statusText}`,
+        `Response Body: ${JSON.stringify(body)}`,
+      ];
+
+      throw {
+        ...error,
+        logs,
+      };
+    };
 }
 
 /*  Upload Region
@@ -222,7 +226,7 @@ async function uploadRegion({
   const body = await response.json();
 
   const successMessage = "Created Geo.Region.";
-  const errorMessage = "Failed to create Geo.Region."
+  const errorMessage = "Failed to create Geo.Region.";
 
   try {
     return handleResponse({
@@ -236,7 +240,7 @@ async function uploadRegion({
   } catch (error) {
       logs = [
         ...logs,
-        `Error: ${errorMessage}.`,
+        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
         `Response Body: ${JSON.stringify(body)}`,
       ];
 
@@ -245,32 +249,4 @@ async function uploadRegion({
         logs,
       };
     }
-}
-
-/*  Handle Response Errors
- * Helper function to validate responses */
-function handleResponse({
-  response,
-  data,
-  orig,
-  logs,
-  status,
-  successMessage
-}: ResponseHandleParams): RegionUploadWorkflow {
-  if (!response.ok) {
-    throw {
-      data,
-      orig,
-      status,
-      logs,
-      message: `HttpStatus: ${response.status} - ${response.statusText}`,
-    };
-  }
-
-  return {
-    data,
-    orig,
-    status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, `Success: ${successMessage}`]
-  }
 }

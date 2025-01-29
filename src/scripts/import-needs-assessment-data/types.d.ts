@@ -47,7 +47,7 @@ export type NeedAssessment = {
   need: number;
 };
 
-export type ResponseHandleParams = RegionUploadWorkflow & {
+export type ResponseHandleParams = (RegionUploadWorkflow | SubregionUploadWorkflow) & {
   response: Response,
   successMessage: string
 }

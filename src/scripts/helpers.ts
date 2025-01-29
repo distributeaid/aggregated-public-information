@@ -1,3 +1,6 @@
+import { ResponseHandleParams, Region, Subregion } from "./import-needs-assessment-data/types";
+import { UploadWorkflowStatus } from "./statusCodes";
+
 export function toTitleCase(input: string) {
   return input.replace(
     /\w[^\s|.|\-|/]*/g,
@@ -29,4 +32,33 @@ export function stripAndParseInt(numberString: string): number {
 
 export function stripAndParseFloat(numberString: string): number {
   return parseFloat(numberString.replace(/\$|,|%/g, ""));
+}
+
+export function handleResponse<T extends Region | Subregion>({
+  response,
+  data,
+  orig,
+  logs,
+  status,
+  successMessage
+}: ResponseHandleParams): unknown {
+
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status,
+      logs,
+      message: `HttpStatus: ${response.status} - ${response.statusText}`,
+    };
+  }
+
+  const result = {
+    data: data as T,
+    orig: orig as T | string,
+    status: UploadWorkflowStatus.SUCCESS,
+    logs: [...logs, `Success: ${successMessage}`]
+  }
+
+  return result;
 }
