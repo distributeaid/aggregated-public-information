@@ -1,4 +1,4 @@
-import { ResponseHandleParams, Region, Subregion } from "./import-needs-assessment-data/types";
+import { ResponseHandleParams } from "./import-needs-assessment-data/types";
 import { UploadWorkflowStatus } from "./statusCodes";
 
 export function toTitleCase(input: string) {
@@ -35,7 +35,7 @@ export function stripAndParseFloat(numberString: string): number {
 }
 
 /* Generic function to handle http responses from Strapi for Region and Subregion uploads */
-export function handleResponse<T extends Region | Subregion>({
+export function handleResponse<T>({
   response,
   data,
   orig,
