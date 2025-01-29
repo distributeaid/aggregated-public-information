@@ -1,5 +1,6 @@
 import { STRAPI_ENV } from "../strapi-env";
 import { UploadWorkflowStatus } from "../statusCodes";
+import { handleResponse } from "../helpers";
 import {
   Subregion,
   NeedAssessment,
@@ -149,7 +150,7 @@ function parseSubregion({
 async function getSubregion({
   data,
   orig,
-  status,
+  //status,
   logs,
 }: SubregionUploadWorkflow): Promise<SubregionUploadWorkflow> {
   logs = [...logs, `Log: Checking if Geo.Subregion "${orig}" already exists.`];
@@ -169,20 +170,6 @@ async function getSubregion({
       subregion.Name.toLowerCase() === data.subregion.toLowerCase(),
   );
 
-  if (!response.ok) {
-    console.log("Non-ok response");
-    throw {
-      data,
-      orig,
-      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
-      logs: [
-        ...logs,
-        `Error: Failed to get Geo.Subregion. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(body),
-      ],
-    };
-  }
-
   if (matchingSubregion) {
     throw {
       data: body.data,
@@ -192,11 +179,30 @@ async function getSubregion({
     };
   }
 
-  return {
-    data,
-    orig,
-    status,
-    logs: [...logs, "Success: Confirmed Geo.Subregion does not exist."],
+  const successMessage = "Confirmed Geo.Subregion does not exist."
+  const errorMessage = "Failed to get Geo.Subregion."
+
+  try {
+    return handleResponse<Subregion>({
+      response,
+      data,
+      orig,
+      logs,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      successMessage,
+    }) as SubregionUploadWorkflow;
+  } catch (error) {
+      console.log("Non-ok response")
+      logs = [
+        ...logs,
+        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
+        `Response Body: ${JSON.stringify(body)}`,
+      ];
+
+      throw {
+        ...error,
+        logs,
+      };
   };
 }
 
@@ -223,25 +229,30 @@ async function uploadSubregion({
   });
   const body = await response.json();
 
-  if (!response.ok) {
-    throw {
+  const successMessage = "Success: created Geo.Subregion."
+  const errorMessage = "Failed to create Geo.Subregion."
+
+  try {
+    return handleResponse<Subregion>({
+      response,
       data,
       orig,
+      logs,
       status: UploadWorkflowStatus.UPLOAD_ERROR,
-      logs: [
+      successMessage,
+    }) as SubregionUploadWorkflow;
+  } catch (error) {
+      logs = [
         ...logs,
-        `Error: Failed to create Geo.Subregion. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(body),
-      ],
-    };
-  }
+        `Error: ${errorMessage}. HttpStatus: ${response.status} - ${response.statusText}`,
+        `Response Body: ${JSON.stringify(body)}`,
+      ];
 
-  return {
-    data: body.data,
-    orig,
-    status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, "Success: Created Geo.Subregion."],
-  };
+      throw {
+        ...error,
+        logs,
+      };
+  }
 }
 
 
