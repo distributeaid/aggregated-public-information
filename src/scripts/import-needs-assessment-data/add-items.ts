@@ -1,3 +1,4 @@
+import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
 import { UploadWorkflowStatus } from "../statusCodes";
 import {
@@ -6,6 +7,7 @@ import {
   ProductUploadWorkflow,
   ProductUploadWorkflowResults,
 } from "./types.d";
+// import { NameToIdMap, getCategories } from '../import-product-info-sheet/get-existing-data'
 
 /*  Add Products from Needs Assessment Data
  * ------------------------------------------------------- */
@@ -27,8 +29,9 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
 
       return Promise.resolve(initialWorkflow)
         .then(parseProducts)
-        .then(getProduct)
-        .then(uploadProduct);
+        .then(getCategoryIds)
+        // .then(getProduct)
+        // .then(uploadProduct);
     }),
   );
 
@@ -48,7 +51,8 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
     console.log(`     ${key}: ${resultsMap[key].length}`);
 
     // NOTE: uncomment & set the status key to debug different types of results
-    if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    if (key !== UploadWorkflowStatus.ALREADY_EXISTS) {
       resultsMap[key].forEach((result) => {
         console.log(result)
         console.log("\n")
@@ -126,7 +130,6 @@ async function parseProducts({
   return new Promise<ProductUploadWorkflow>((resolve, _reject) => {
   
     const parsedData: Product[] = [];
-
     if (typeof data === "object" && data !== null) {
       // Check if data contains a 'product' property
       if ("product" in data) {
@@ -164,6 +167,68 @@ async function parseProducts({
   })
 
 }
+
+/* Get Category Ids */
+async function getCategoryIds({
+  data,
+  orig,
+  status,
+  logs,
+}: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
+  logs = [...logs, `Log: Getting the category Id for Product.Item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
+  
+  console.log(`    - getting existing categories from ${STRAPI_ENV.URL}`);
+  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+  });
+
+  if (!response.ok) {
+    console.log(response);
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const categoryResults = await response.json();
+  const matchingCategory = categoryResults.data.find((category) => {
+    const parsedItem = data[0];
+    return (
+      category.name.toLowerCase() === parsedItem.category.toLowerCase()
+    );
+  });
+
+  if (!response.ok) {
+    console.log("Non-ok response");
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.PROCESSING,
+      logs: [
+        ...logs,
+        `Error: Failed to get Product.Item category Id. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(categoryResults),
+      ],
+    };
+  }
+
+  if (matchingCategory) {
+    const updateProduct = {
+      ...data[0],
+      categoryId: matchingCategory.id
+    };
+    data[0] = updateProduct
+  }
+
+  return {
+    data,
+    orig,
+    status,
+    logs: [...logs, "Success: Confirmed Product.Item does not exist."],
+  };
+}
+
 /*  Get Product
  * ------------------------------------------------------- */
 async function getProduct({
@@ -172,10 +237,27 @@ async function getProduct({
   status,
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Checking if Product.Item already exists.`];
+  logs = [...logs, `Log: Checking if Product.Item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}" already exists.`];
 
-  //Fetch the data from Strapi
-  const response = await fetch(`${STRAPI_ENV.URL}/items?populate=category`, {
+  //Queries to fetch the data from Strapi
+  const query = qs.stringify({
+    filters: {
+      category: {
+        $eq: data[0].category,
+      },
+      name: {
+        $eq: data[0].item,
+      },
+      age_gender: {
+        $eq: data[0].ageGender,
+      },
+      size_style: {
+        $eq: data[0].sizeStyle,
+      },
+    },
+  })
+
+  const response = await fetch(`${STRAPI_ENV.URL}/items?${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -217,7 +299,7 @@ async function getProduct({
 
   if (matchingProduct) {
     throw {
-      data,
+      data: body.data[0],
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
       logs: [...logs, "Log: Found existing Product.Item. Skipping..."],
@@ -237,10 +319,10 @@ async function getProduct({
 async function uploadProduct({
   data,
   orig,
-  status,
+  /*status, */
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Creating Product.Item "${data[0].item}".`];
+  logs = [...logs, `Log: Creating Product.Item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/items`, {
     method: "POST",
@@ -251,6 +333,9 @@ async function uploadProduct({
     body: JSON.stringify({ 
       data: {
         name: data[0].item,
+        category: {
+          name: data[0].category
+        },
         age_gender: data[0].ageGender,
         size_style: data[0].sizeStyle,
         unit: data[0].unit,
