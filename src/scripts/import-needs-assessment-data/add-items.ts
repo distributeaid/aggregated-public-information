@@ -30,7 +30,7 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
         .then(parseProducts)
         .then(getCategoryIds)
         .then(getProduct)
-        // .then(uploadProduct);
+        .then(uploadProduct);
     }),
   );
 
@@ -51,7 +51,6 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
 
     // NOTE: uncomment & set the status key to debug different types of results
     // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-    // if (key !== UploadWorkflowStatus.ALREADY_EXISTS) {
     //   resultsMap[key].forEach((result) => {
     //     console.log(result)
     //     console.log("\n")
@@ -176,7 +175,6 @@ async function getCategoryIds({
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
   logs = [...logs, `Log: Getting the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
   
-  // console.log(`    - getting existing categories from ${STRAPI_ENV.URL}`);
   const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
     method: "GET",
     headers: {
@@ -307,7 +305,7 @@ async function uploadProduct({
   /*status, */
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Creating Product.Item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
+  logs = [...logs, `Log: Creating item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/items`, {
     method: "POST",
@@ -319,7 +317,7 @@ async function uploadProduct({
       data: {
         name: data[0].item,
         category: {
-          name: data[0].category
+          id: data[0].categoryId
         },
         age_gender: data[0].ageGender,
         size_style: data[0].sizeStyle,
