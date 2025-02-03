@@ -7,7 +7,6 @@ import {
   ProductUploadWorkflow,
   ProductUploadWorkflowResults,
 } from "./types.d";
-// import { NameToIdMap, getCategories } from '../import-product-info-sheet/get-existing-data'
 
 /*  Add Products from Needs Assessment Data
  * ------------------------------------------------------- */
@@ -30,7 +29,7 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
       return Promise.resolve(initialWorkflow)
         .then(parseProducts)
         .then(getCategoryIds)
-        // .then(getProduct)
+        .then(getProduct)
         // .then(uploadProduct);
     }),
   );
@@ -52,12 +51,12 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
 
     // NOTE: uncomment & set the status key to debug different types of results
     // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-    if (key !== UploadWorkflowStatus.ALREADY_EXISTS) {
-      resultsMap[key].forEach((result) => {
-        console.log(result)
-        console.log("\n")
-      })
-    }
+    // if (key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    //   resultsMap[key].forEach((result) => {
+    //     console.log(result)
+    //     console.log("\n")
+    //   })
+    // }
   });
 
   console.log("Adding items completed!");
@@ -175,9 +174,9 @@ async function getCategoryIds({
   status,
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Getting the category Id for Product.Item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
+  logs = [...logs, `Log: Getting the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
   
-  console.log(`    - getting existing categories from ${STRAPI_ENV.URL}`);
+  // console.log(`    - getting existing categories from ${STRAPI_ENV.URL}`);
   const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
     method: "GET",
     headers: {
@@ -225,7 +224,7 @@ async function getCategoryIds({
     data,
     orig,
     status,
-    logs: [...logs, "Success: Confirmed Product.Item does not exist."],
+    logs: [...logs, "Success: Confirmed Product.Item has a matching category Id."],
   };
 }
 
@@ -237,27 +236,21 @@ async function getProduct({
   status,
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Checking if Product.Item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}" already exists.`];
+  logs = [...logs, `Log: Checking if "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}" already exists.`];
 
-  //Queries to fetch the data from Strapi
+  // Queries to fetch the data from Strapi
   const query = qs.stringify({
     filters: {
-      category: {
-        $eq: data[0].category,
-      },
-      name: {
-        $eq: data[0].item,
-      },
-      age_gender: {
-        $eq: data[0].ageGender,
-      },
-      size_style: {
-        $eq: data[0].sizeStyle,
-      },
+      $or: data.map(item => ({
+        name: { $eq: item.item },
+        category: { name: { $eq: item.category } },
+        age_gender: { $eq: item.ageGender },
+        size_style: { $eq: item.sizeStyle }
+      }))
     },
-  })
+  });
 
-  const response = await fetch(`${STRAPI_ENV.URL}/items?${query}`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/items?populate=category&${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -267,21 +260,13 @@ async function getProduct({
 
   const body = await response.json();
 
+  logs = [...logs,
+    `Log: Found ${body.data.length} matching items from ${data.length} queries.`
+  ];
+
   // log strapi response status
   // console.log("Strapi response status:", response.status);
   // console.log(body);
-
-  const matchingProduct = body.data.find((item) => {
-    const parsedItem = data[0];
-    return (
-      item.name.toLowerCase() === parsedItem.item.toLowerCase() &&
-      item.category.name.toLowerCase() === parsedItem.category.toLowerCase() &&
-      ((item.age_gender === null) ||
-        item.age_gender.toLowerCase() === parsedItem.ageGender.toLowerCase()) &&
-      ((item.size_style === null) ||
-        item.size_style.toLowerCase() === parsedItem.sizeStyle.toLowerCase())
-    );
-  });
 
   if (!response.ok) {
     console.log("Non-ok response");
@@ -297,13 +282,13 @@ async function getProduct({
     };
   }
 
-  if (matchingProduct) {
+  if (body.data.length > 0) {
     throw {
       data: body.data[0],
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
-      logs: [...logs, "Log: Found existing Product.Item. Skipping..."],
-    };
+      logs: [...logs, "Log: Found existing item. Skipping ...."],
+    }
   }
 
   return {
