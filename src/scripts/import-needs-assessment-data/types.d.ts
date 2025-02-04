@@ -46,6 +46,7 @@ export type Product = {
   ageGender?: string;
   sizeStyle?: string;
   unit?: string;
+  categoryId?: number;
 };
 
 export type NeedAssessment = {
