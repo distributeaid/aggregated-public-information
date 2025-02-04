@@ -13,10 +13,10 @@ import {
 export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
   console.log("Adding Product.Items from the Needs Assessment data ...");
 
-  const uniqueProducts = consolidateProductsByCategory(data);
+  const uniqueProductItems = consolidateProductsByCategory(data);
 
   const results = await Promise.allSettled<ProductUploadWorkflow>(
-    uniqueProducts.map((product) => {
+    uniqueProductItems.map((product) => {
       const initialWorkflow = {
         data: {
           product,
@@ -82,7 +82,7 @@ const _isRejected = <T>(
   return value.status === "rejected";
 };
 
-/*  Consolidate Products in each Category
+/*  Consolidate Products in each Category and remove duplicates
  * ------------------------------------------------------- */
 export function consolidateProductsByCategory(
   data: NeedAssessment[],
@@ -103,16 +103,27 @@ export function consolidateProductsByCategory(
     }
   });
 
+  // Remove duplicates before further processing
+  const uniqueProducts = consolidatedProducts.filter((product, index, self) =>
+      index === self.findIndex(p => 
+        p.item === product.item &&
+        p.category === product.category &&
+        p.ageGender === product.ageGender &&
+        p.sizeStyle === product.sizeStyle
+      )
+    );
+
   // Print category counts after processing the data
   const categoryCounts = {};
-  consolidatedProducts.forEach((product) => {
+  uniqueProducts.forEach((product) => {
     categoryCounts[product.category] =
       (categoryCounts[product.category] || 0) + 1;
   });
 
   console.log("Category counts:", categoryCounts);
+  console.log(`Total unique products: ${uniqueProducts.length}`);
 
-  return consolidatedProducts;
+  return uniqueProducts;
 }
 
 /*  Parse Products
