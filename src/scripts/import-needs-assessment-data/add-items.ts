@@ -104,14 +104,17 @@ export function consolidateProductsByCategory(
   });
 
   // Remove duplicates before further processing
-  const uniqueProducts = consolidatedProducts.filter((product, index, self) =>
-      index === self.findIndex(p => 
-        p.item === product.item &&
-        p.category === product.category &&
-        p.ageGender === product.ageGender &&
-        p.sizeStyle === product.sizeStyle
-      )
-    );
+  const uniqueProducts = consolidatedProducts.filter(
+    (product, index, self) =>
+      index ===
+      self.findIndex(
+        (p) =>
+          p.item === product.item &&
+          p.category === product.category &&
+          p.ageGender === product.ageGender &&
+          p.sizeStyle === product.sizeStyle,
+      ),
+  );
 
   // Print category counts after processing the data
   const categoryCounts = {};
@@ -137,7 +140,6 @@ async function parseProducts({
   logs = [...logs, `Log: parsing products...`];
   // console.log("👉🏻 This is the data coming into the parse function:", data);
   return new Promise<ProductUploadWorkflow>((resolve, _reject) => {
-  
     const parsedData: Product[] = [];
     if (typeof data === "object" && data !== null) {
       // Check if data contains a 'product' property
@@ -173,8 +175,7 @@ async function parseProducts({
       status,
       logs,
     });
-  })
-
+  });
 }
 
 /* Get Category Ids */
@@ -184,8 +185,11 @@ async function getCategoryIds({
   status,
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Getting the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
-  
+  logs = [
+    ...logs,
+    `Log: Getting the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`,
+  ];
+
   const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
     method: "GET",
     headers: {
@@ -202,9 +206,7 @@ async function getCategoryIds({
   const categoryResults = await response.json();
   const matchingCategory = categoryResults.data.find((category) => {
     const parsedItem = data[0];
-    return (
-      category.name.toLowerCase() === parsedItem.category.toLowerCase()
-    );
+    return category.name.toLowerCase() === parsedItem.category.toLowerCase();
   });
 
   if (!response.ok) {
@@ -224,16 +226,19 @@ async function getCategoryIds({
   if (matchingCategory) {
     const updateProduct = {
       ...data[0],
-      categoryId: matchingCategory.id
+      categoryId: matchingCategory.id,
     };
-    data[0] = updateProduct
+    data[0] = updateProduct;
   }
 
   return {
     data,
     orig,
     status,
-    logs: [...logs, "Success: Confirmed Product.Item has a matching category Id."],
+    logs: [
+      ...logs,
+      "Success: Confirmed Product.Item has a matching category Id.",
+    ],
   };
 }
 
@@ -245,32 +250,39 @@ async function getProduct({
   status,
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Checking if "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}" already exists.`];
+  logs = [
+    ...logs,
+    `Log: Checking if "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}" already exists.`,
+  ];
 
   // Queries to fetch the data from Strapi
   const query = qs.stringify({
     filters: {
-      $or: data.map(item => ({
+      $or: data.map((item) => ({
         name: { $eq: item.item },
         category: { name: { $eq: item.category } },
         age_gender: { $eq: item.ageGender },
-        size_style: { $eq: item.sizeStyle }
-      }))
+        size_style: { $eq: item.sizeStyle },
+      })),
     },
   });
 
-  const response = await fetch(`${STRAPI_ENV.URL}/items?populate=category&${query}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+  const response = await fetch(
+    `${STRAPI_ENV.URL}/items?populate=category&${query}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+      },
     },
-  });
+  );
 
   const body = await response.json();
 
-  logs = [...logs,
-    `Log: Found ${body.data.length} matching items from ${data.length} queries.`
+  logs = [
+    ...logs,
+    `Log: Found ${body.data.length} matching items from ${data.length} queries.`,
   ];
 
   // log strapi response status
@@ -297,7 +309,7 @@ async function getProduct({
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
       logs: [...logs, "Log: Found existing item. Skipping ...."],
-    }
+    };
   }
 
   return {
@@ -316,7 +328,10 @@ async function uploadProduct({
   /*status, */
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [...logs, `Log: Creating item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`];
+  logs = [
+    ...logs,
+    `Log: Creating item "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`,
+  ];
 
   const response = await fetch(`${STRAPI_ENV.URL}/items`, {
     method: "POST",
@@ -324,11 +339,11 @@ async function uploadProduct({
       "Content-Type": "application/json",
       Authorization: `Bearer ${STRAPI_ENV.KEY}`,
     },
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       data: {
         name: data[0].item,
         category: {
-          id: data[0].categoryId
+          id: data[0].categoryId,
         },
         age_gender: data[0].ageGender,
         size_style: data[0].sizeStyle,
