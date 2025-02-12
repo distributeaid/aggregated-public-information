@@ -137,12 +137,12 @@ async function parseProducts({
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
   logs = [...logs, `Log: parsing products...`];
 
-  const products =(() => {
+  const products = (() => {
     if (typeof data === "object" && data !== null) {
       if (Array.isArray(data)) {
         return data;
-      } else if (Object.hasOwn(data,'product')) {
-        return [((data as Record<string, unknown>).product as Product)];
+      } else if (Object.hasOwn(data, "product")) {
+        return [(data as Record<string, unknown>).product as Product];
       }
     }
     console.log("Unexpected object structure:", JSON.stringify(data));
@@ -152,27 +152,26 @@ async function parseProducts({
   return new Promise<ProductUploadWorkflow>((resolve, _reject) => {
     const parsedData: Product[] = [];
 
-      products.forEach(product => {
-        logs.push(`Parsing product: ${product.item}`);
-        
-          if (!product.category || !product.item || !product.unit) {
-            throw {
-              data,
-              orig,
-              status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
-              logs: [
-                ...logs,
-                `Error: Invalid product input: "${product.item}-${product.ageGender}". Expected a non-null value in category, item, and unit.`,
-              ],
-            };
-          }
+    products.forEach((product) => {
+      logs.push(`Parsing product: ${product.item}`);
 
-          const processedProduct: Product = {
-            ...product,
-          };
-          parsedData.push(processedProduct);
-        
-      });
+      if (!product.category || !product.item || !product.unit) {
+        throw {
+          data,
+          orig,
+          status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+          logs: [
+            ...logs,
+            `Error: Invalid product input: "${product.item}-${product.ageGender}". Expected a non-null value in category, item, and unit.`,
+          ],
+        };
+      }
+
+      const processedProduct: Product = {
+        ...product,
+      };
+      parsedData.push(processedProduct);
+    });
 
     resolve({
       data: parsedData,

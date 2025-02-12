@@ -11,10 +11,7 @@ import { addProducts } from "./add-items";
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(
-      join(__dirname, "./needs-data.json"),
-      "utf8",
-    );
+    const jsonData = readFileSync(join(__dirname, "./needs-data.json"), "utf8");
     const data = JSON.parse(jsonData);
 
     //  Process the data and upload to Strapi collections
