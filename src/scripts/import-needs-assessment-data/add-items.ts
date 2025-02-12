@@ -18,10 +18,8 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
   const results = await Promise.allSettled<ProductUploadWorkflow>(
     uniqueProductItems.map((product) => {
       const initialWorkflow = {
-        data: {
-          product,
-        },
-        orig: product,
+        data: [product],
+        orig: JSON.stringify(product, null, 2),
         status: UploadWorkflowStatus.PROCESSING,
         logs: [],
       };
@@ -123,8 +121,8 @@ export function consolidateProductsByCategory(
       (categoryCounts[product.category] || 0) + 1;
   });
 
-  console.log("Category counts:", categoryCounts);
   console.log(`Total unique products: ${uniqueProducts.length}`);
+  // console.log("Category counts:", categoryCounts);
 
   return uniqueProducts;
 }
@@ -138,36 +136,43 @@ async function parseProducts({
   logs,
 }: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
   logs = [...logs, `Log: parsing products...`];
-  // console.log("👉🏻 This is the data coming into the parse function:", data);
+
+  const products =(() => {
+    if (typeof data === "object" && data !== null) {
+      if (Array.isArray(data)) {
+        return data;
+      } else if (Object.hasOwn(data,'product')) {
+        return [((data as Record<string, unknown>).product as Product)];
+      }
+    }
+    console.log("Unexpected object structure:", JSON.stringify(data));
+    return [];
+  })();
+
   return new Promise<ProductUploadWorkflow>((resolve, _reject) => {
     const parsedData: Product[] = [];
-    if (typeof data === "object" && data !== null) {
-      // Check if data contains a 'product' property
-      if ("product" in data) {
-        const product = data.product as Product;
 
+      products.forEach(product => {
         logs.push(`Parsing product: ${product.item}`);
+        
+          if (!product.category || !product.item || !product.unit) {
+            throw {
+              data,
+              orig,
+              status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+              logs: [
+                ...logs,
+                `Error: Invalid product input: "${product.item}-${product.ageGender}". Expected a non-null value in category, item, and unit.`,
+              ],
+            };
+          }
 
-        if (!product.category || !product.item || !product.unit) {
-          throw {
-            data,
-            orig,
-            status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
-            logs: [
-              ...logs,
-              `Error: Invalid product input: "${product.item}-${product.ageGender}". Expected a non-null value in category, item, and unit.`,
-            ],
-          };
-        } else {
           const processedProduct: Product = {
             ...product,
           };
           parsedData.push(processedProduct);
-        }
-      } else {
-        console.log("unexpected object structure:", JSON.stringify(data));
-      }
-    }
+        
+      });
 
     resolve({
       data: parsedData,

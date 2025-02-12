@@ -12,7 +12,7 @@ async function main() {
   try {
     //  Load the json data
     const jsonData = readFileSync(
-      join(__dirname, "./needs-data(1).json"),
+      join(__dirname, "./needs-data.json"),
       "utf8",
     );
     const data = JSON.parse(jsonData);
