@@ -105,12 +105,12 @@ export function consolidateProductsByCategory(
   const uniqueProductSet = new Set<string>();
   const uniqueProducts: Product[] = [];
 
-  consolidatedProducts.forEach(product => {
+  consolidatedProducts.forEach((product) => {
     const productKey = JSON.stringify([
       product.item,
       product.category,
       product.ageGender,
-      product.sizeStyle
+      product.sizeStyle,
     ]);
 
     if (!uniqueProductSet.has(productKey)) {
@@ -324,7 +324,10 @@ async function getProduct({
     data,
     orig,
     status,
-    logs: [...logs, "Success: Confirmed Product.Item does not already exist. Proceed to upload product."],
+    logs: [
+      ...logs,
+      "Success: Confirmed Product.Item does not already exist. Proceed to upload product.",
+    ],
   };
 }
 
