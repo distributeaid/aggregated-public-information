@@ -203,7 +203,6 @@ async function getCategoryIds({
   });
 
   if (!response.ok) {
-    console.log(response);
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
