@@ -101,18 +101,23 @@ export function consolidateProductsByCategory(
     }
   });
 
-  // Remove duplicates before further processing
-  const uniqueProducts = consolidatedProducts.filter(
-    (product, index, self) =>
-      index ===
-      self.findIndex(
-        (p) =>
-          p.item === product.item &&
-          p.category === product.category &&
-          p.ageGender === product.ageGender &&
-          p.sizeStyle === product.sizeStyle,
-      ),
-  );
+  // Create a set for unique products
+  const uniqueProductSet = new Set<string>();
+  const uniqueProducts: Product[] = [];
+
+  consolidatedProducts.forEach(product => {
+    const productKey = JSON.stringify([
+      product.item,
+      product.category,
+      product.ageGender,
+      product.sizeStyle
+    ]);
+
+    if (!uniqueProductSet.has(productKey)) {
+      uniqueProductSet.add(productKey);
+      uniqueProducts.push(product);
+    }
+  });
 
   // Print category counts after processing the data
   const categoryCounts = {};
