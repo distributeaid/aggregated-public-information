@@ -319,7 +319,7 @@ async function getProduct({
     data,
     orig,
     status,
-    logs: [...logs, "Success: Confirmed Product.Item does not exist."],
+    logs: [...logs, "Success: Confirmed Product.Item does not already exist. Proceed to upload product."],
   };
 }
 
