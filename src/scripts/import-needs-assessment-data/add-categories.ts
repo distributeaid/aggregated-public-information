@@ -165,7 +165,6 @@ async function getCategory({
   );
 
   if (!response.ok) {
-    console.log("Non-ok response");
     throw {
       data,
       orig,
