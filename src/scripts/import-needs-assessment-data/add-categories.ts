@@ -190,7 +190,10 @@ async function getCategory({
     data,
     orig,
     status,
-    logs: [...logs, "Success: Product.Category does not already exist. Proceed to upload category."],
+    logs: [
+      ...logs,
+      "Success: Product.Category does not already exist. Proceed to upload category.",
+    ],
   };
 }
 
