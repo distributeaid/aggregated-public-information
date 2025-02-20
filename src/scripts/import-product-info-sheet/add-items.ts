@@ -3,16 +3,7 @@ import { STRAPI_ENV } from "../strapi-env";
 import { toTitleCase, stripAndParseFloat, stripAndParseInt } from "../helpers";
 import { getCategories } from "./get-existing-data";
 import type { NameToIdMap } from "./get-existing-data";
-
-enum ItemUploadWorkflowStatus {
-  PROCESSING = "PROCESSING",
-  ORIGINAL_DATA_INVALID = "ORIGINAL_DATA_INVALID",
-  DUPLICATE_CHECK_ERROR = "DUPLICATE_CHECK_ERROR",
-  ALREADY_EXISTS = "ALREADY_EXISTS",
-  UPLOAD_ERROR = "UPLOAD_ERROR",
-  SUCCESS = "SUCCESS",
-  OTHER = "OTHER",
-}
+import { UploadWorkflowStatus } from "../statusCodes";
 
 type ItemCsv = {
   category: {
@@ -140,7 +131,7 @@ type Item = {
 type ItemUploadWorkflow = {
   item: Item;
   origItem: ItemCsv;
-  status: ItemUploadWorkflowStatus;
+  status: UploadWorkflowStatus;
   logs: string[];
 };
 
@@ -170,7 +161,7 @@ export default async function addItems(products: ItemCsv[]) {
       const workflow: ItemUploadWorkflow = {
         item: {},
         origItem,
-        status: ItemUploadWorkflowStatus.PROCESSING,
+        status: UploadWorkflowStatus.PROCESSING,
         logs: [],
       };
 
@@ -179,7 +170,7 @@ export default async function addItems(products: ItemCsv[]) {
   );
 
   // { "SUCCESS": [], "ALREADY_EXISTS": [], ...}
-  const resultsMap = Object.keys(ItemUploadWorkflowStatus).reduce(
+  const resultsMap = Object.keys(UploadWorkflowStatus).reduce(
     (resultsMap, key) => {
       resultsMap[key] = [];
       return resultsMap;
@@ -199,7 +190,7 @@ export default async function addItems(products: ItemCsv[]) {
       if (workflowResult.status) {
         resultsMap[workflowResult.status].push(workflowResult);
       } else {
-        resultsMap[ItemUploadWorkflowStatus.OTHER].push(workflowResult);
+        resultsMap[UploadWorkflowStatus.OTHER].push(workflowResult);
       }
       return resultsMap;
     }, resultsMap);
@@ -211,8 +202,8 @@ export default async function addItems(products: ItemCsv[]) {
     // Print out the logs for the items that failed to upload
     if (
       process.env.VERBOSE &&
-      key in ItemUploadWorkflowStatus &&
-      key != ItemUploadWorkflowStatus.ALREADY_EXISTS
+      key in UploadWorkflowStatus &&
+      key != UploadWorkflowStatus.ALREADY_EXISTS
     ) {
       resultsMap[key].forEach((result) => {
         console.log(result.logs);
@@ -256,7 +247,7 @@ function parseItem(
         throw {
           item,
           origItem,
-          status: ItemUploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+          status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
           logs: [...logs, "Error: Item is missing a name. Skipping..."],
         };
       }
@@ -300,7 +291,7 @@ function parseCategory(
     throw {
       item,
       origItem,
-      status: ItemUploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+      status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
       logs: [...logs, "Error: Category is missing a name.  Skipping..."],
     };
   }
@@ -310,7 +301,7 @@ function parseCategory(
     throw {
       item,
       origItem,
-      status: ItemUploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+      status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
       logs: [...logs, "Error: Category doesn't exist.  Skipping..."],
     };
   }
@@ -650,7 +641,7 @@ async function getItem({
     throw {
       item,
       origItem,
-      status: ItemUploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       logs: [
         ...logs,
         `Error: Failed to get item. HttpStatus: ${response.status} - ${response.statusText}`,
@@ -663,7 +654,7 @@ async function getItem({
     throw {
       item,
       origItem,
-      status: ItemUploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
       logs: [
         ...logs,
         `Error: Found too many matching items (${body.data.length}). Skipping...`,
@@ -675,7 +666,7 @@ async function getItem({
     throw {
       item: body.data[0],
       origItem,
-      status: ItemUploadWorkflowStatus.ALREADY_EXISTS,
+      status: UploadWorkflowStatus.ALREADY_EXISTS,
       logs: [...logs, "Log: Found existing item. Skipping..."],
     };
   }
@@ -714,7 +705,7 @@ async function uploadItem({
     throw {
       item,
       origItem,
-      status: ItemUploadWorkflowStatus.UPLOAD_ERROR,
+      status: UploadWorkflowStatus.UPLOAD_ERROR,
       logs: [
         ...logs,
         `Error: Failed to create item. HttpStatus: ${response.status} - ${response.statusText}`,
@@ -726,7 +717,7 @@ async function uploadItem({
   return {
     item: body.data,
     origItem,
-    status: ItemUploadWorkflowStatus.SUCCESS,
+    status: UploadWorkflowStatus.SUCCESS,
     logs: [...logs, "Success: Created item."],
   };
 }

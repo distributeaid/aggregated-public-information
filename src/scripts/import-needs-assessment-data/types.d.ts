@@ -1,12 +1,4 @@
-export enum UploadWorkflowStatus {
-  PROCESSING = "PROCESSING",
-  ORIGINAL_DATA_INVALID = "ORIGINAL_DATA_INVALID",
-  DUPLICATE_CHECK_ERROR = "DUPLICATE_CHECK_ERROR",
-  ALREADY_EXISTS = "ALREADY_EXISTS",
-  UPLOAD_ERROR = "UPLOAD_ERROR",
-  SUCCESS = "SUCCESS",
-  OTHER = "OTHER",
-}
+import { UploadWorkflowStatus } from "../statusCodes";
 
 export type UploadWorkflow<T> = {
   data: T;

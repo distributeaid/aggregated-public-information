@@ -30,6 +30,9 @@
     "reference": {
       "type": "string",
       "required": true
+    },
+    "yearQuarter": {
+      "type": "string"
     }
   }
 }

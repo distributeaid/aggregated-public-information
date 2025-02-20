@@ -1,9 +1,9 @@
 import { STRAPI_ENV } from "../strapi-env";
+import { UploadWorkflowStatus } from "../statusCodes";
 import {
   Subregion,
   NeedAssessment,
   SubregionUploadWorkflow,
-  UploadWorkflowStatus,
   SubregionUploadWorkflowResults,
 } from "./types.d";
 
