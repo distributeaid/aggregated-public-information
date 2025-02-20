@@ -207,10 +207,6 @@ async function getCategoryIds({
     },
   });
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-
   const categoryResults = await response.json();
   const matchingCategory = categoryResults.data.find((category) => {
     const parsedItem = data[0];
