@@ -21,7 +21,9 @@ export async function addSubregions(
     uniqueSubregions.map((subregion) => {
       return new Promise<SubregionUploadWorkflow>((resolve, _reject) => {
         resolve({
-          data: {},
+          data: {
+            subregion,
+          },
           orig: subregion,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
@@ -99,15 +101,16 @@ const _isRejected = <T>(
 /*  Consolidate Subregions
  * ------------------------------------------------------- */
 function consolidateSubregions(data: NeedAssessment[]): string[] {
-  const subregions = data.reduce((acc: string[], item) => {
-    const subregion = item.place?.subregion;
-    if (subregion && !acc.includes(subregion)) {
-      acc.push(subregion);
-    }
-    return acc;
-  }, []);
+  const subregions = new Set<string>();
 
-  return subregions;
+  data.forEach((item) => {
+    const subregion = item.place?.subregion;
+    if (subregion && subregion !== null) {
+      subregions.add(subregion);
+    }
+  });
+
+  return Array.from(subregions);
 }
 
 /*  Parse Subregion
@@ -156,7 +159,7 @@ async function getSubregion({
   logs = [...logs, `Log: Checking if Geo.Subregion "${orig}" already exists.`];
 
   //Fetch the data from Strapi
-  const response = await fetch(`${STRAPI_ENV.URL}/subregions?`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/subregions`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

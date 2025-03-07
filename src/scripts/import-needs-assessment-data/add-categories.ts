@@ -1,0 +1,242 @@
+import { STRAPI_ENV } from "../strapi-env";
+import { UploadWorkflowStatus } from "../statusCodes";
+import {
+  Category,
+  NeedAssessment,
+  CategoryUploadWorkflow,
+  CategoryUploadWorkflowResults,
+} from "./types.d";
+
+/*  Add Categories from Needs Assessment Data
+ * ------------------------------------------------------- */
+export async function addCategories(
+  data: NeedAssessment[],
+): Promise<Category[]> {
+  console.log("Adding Product.Categories from the Needs Assessment data ...");
+
+  const uniqueCategories = consolidateCategories(data);
+  // console.log('Unique categories: ', uniqueCategories);
+
+  const results = await Promise.allSettled<CategoryUploadWorkflow>(
+    uniqueCategories.map((category) => {
+      const initialWorkflow = {
+        data: {
+          category,
+        },
+        orig: category,
+        status: UploadWorkflowStatus.PROCESSING,
+        logs: [],
+      };
+
+      return Promise.resolve(initialWorkflow)
+        .then(parseCategory)
+        .then(getCategory)
+        .then(uploadCategory);
+    }),
+  );
+
+  // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
+  const resultsMap: CategoryUploadWorkflowResults = Object.fromEntries(
+    Object.keys(UploadWorkflowStatus).map((key) => [key, []]),
+  ) as CategoryUploadWorkflowResults;
+
+  results.forEach((result) => {
+    const workflowResult = isFulfilled(result) ? result.value : result.reason;
+    const statusKey = workflowResult.status || UploadWorkflowStatus.OTHER;
+    resultsMap[statusKey].push(workflowResult);
+  });
+
+  console.log("Add Product.Categories results:");
+  Object.keys(resultsMap).forEach((key) => {
+    console.log(`     ${key}: ${resultsMap[key].length}`);
+
+    // NOTE: uncomment & set the status key to debug different types of results
+    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    //   resultsMap[key].forEach((result) => {
+    //     console.log(result)
+    //     console.log("\n")
+    //   })
+    // }
+  });
+
+  console.log("Adding items completed!");
+
+  const validCategories: Category[] = [
+    ...resultsMap[UploadWorkflowStatus.SUCCESS],
+    ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS],
+  ].reduce((categories: Category[], workflow: CategoryUploadWorkflow) => {
+    return [...categories, workflow.data];
+  }, [] as Category[]);
+
+  return validCategories;
+}
+
+const isFulfilled = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseFulfilledResult<T> => {
+  return value.status === "fulfilled";
+};
+
+const _isRejected = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseRejectedResult => {
+  return value.status === "rejected";
+};
+
+/*  Consolidate Categories
+ * ------------------------------------------------------- */
+function consolidateCategories(data: NeedAssessment[]): string[] {
+  const categories = new Set<string>();
+
+  data.forEach((item) => {
+    const category = item.product.category;
+    if (category && category !== null) {
+      categories.add(category);
+    }
+  });
+
+  return Array.from(categories);
+}
+
+/*  Parse Category
+ * ------------------------------------------------------- */
+function parseCategory({
+  data,
+  orig,
+  status,
+  logs,
+}: CategoryUploadWorkflow): CategoryUploadWorkflow {
+  logs = [...logs, `Log: parsing category "${orig}"`];
+
+  if (orig == null || typeof orig !== "string") {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+      logs: [
+        ...logs,
+        `Error: Invalid category input: "${orig}". Expected a non-null value.`,
+      ],
+    };
+  }
+
+  const newData = {
+    ...data,
+    category: orig,
+  };
+
+  return {
+    data: newData,
+    orig,
+    status,
+    logs,
+  };
+}
+
+/*  Get Category
+ * ------------------------------------------------------- */
+async function getCategory({
+  data,
+  orig,
+  status,
+  logs,
+}: CategoryUploadWorkflow): Promise<CategoryUploadWorkflow> {
+  logs = [
+    ...logs,
+    `Log: Checking if Product.Category "${orig}" already exists.`,
+  ];
+
+  //Fetch the data from Strapi
+  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+  });
+
+  const body = await response.json();
+
+  // log strapi response status
+  //console.log("Strapi response status:", response.status);
+
+  const matchingCategory = body.data.find(
+    (category) => category.name.toLowerCase() === data.category.toLowerCase(),
+  );
+
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to get Product.Category. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  if (matchingCategory) {
+    throw {
+      data: body.data,
+      orig,
+      status: UploadWorkflowStatus.ALREADY_EXISTS,
+      logs: [...logs, "Log: Found existing Product.Category. Skipping..."],
+    };
+  }
+
+  return {
+    data,
+    orig,
+    status,
+    logs: [
+      ...logs,
+      "Success: Product.Category does not already exist. Proceed to upload category.",
+    ],
+  };
+}
+
+/*  Upload Category
+ * ------------------------------------------------------- */
+async function uploadCategory({
+  data,
+  orig,
+  /* status, */ logs,
+}: CategoryUploadWorkflow): Promise<CategoryUploadWorkflow> {
+  logs = [...logs, `Log: Creating Product.Category "${orig}".`];
+
+  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+    body: JSON.stringify({
+      data: {
+        name: data.category,
+      },
+    }),
+  });
+  const body = await response.json();
+
+  if (!response.ok) {
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.UPLOAD_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to create Product.Category. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
+
+  return {
+    data: body.data,
+    orig,
+    status: UploadWorkflowStatus.SUCCESS,
+    logs: [...logs, "Success: Created Product.Category."],
+  };
+}

@@ -728,10 +728,12 @@ export interface ApiNeedsAssessmentSurvey extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     quarter: Schema.Attribute.Enumeration<["Q1", "Q2", "Q3", "Q4"]> &
       Schema.Attribute.Required;
+    reference: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
     year: Schema.Attribute.String & Schema.Attribute.Required;
+    yearQuarter: Schema.Attribute.String;
   };
 }
 
@@ -769,6 +771,7 @@ export interface ApiProductCategory extends Struct.CollectionTypeSchema {
 export interface ApiProductItem extends Struct.CollectionTypeSchema {
   collectionName: "items";
   info: {
+    description: "";
     displayName: "Product.Item";
     pluralName: "items";
     singularName: "item";
@@ -799,6 +802,7 @@ export interface ApiProductItem extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     secondHand: Schema.Attribute.Component<"product.second-hand", false>;
     size_style: Schema.Attribute.String;
+    unit: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;

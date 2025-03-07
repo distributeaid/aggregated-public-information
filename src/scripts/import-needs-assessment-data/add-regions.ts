@@ -19,7 +19,9 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
     uniqueRegions.map((region) => {
       return new Promise<RegionUploadWorkflow>((resolve, _reject) => {
         resolve({
-          data: {},
+          data: {
+            region,
+          },
           orig: region,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
@@ -96,15 +98,16 @@ const _isRejected = <T>(
 /*  Consolidate Regions
  * ------------------------------------------------------- */
 function consolidateRegions(data: NeedAssessment[]): string[] {
-  const regions = data.reduce((acc: string[], item) => {
-    const region = item.place?.region;
-    if (region && !acc.includes(region)) {
-      acc.push(region);
-    }
-    return acc;
-  }, []);
+  const regions = new Set<string>();
 
-  return regions;
+  data.forEach((item) => {
+    const region = item.place?.region;
+    if (region && region !== null) {
+      regions.add(region);
+    }
+  });
+
+  return Array.from(regions);
 }
 
 /*  Parse Region
@@ -153,7 +156,7 @@ async function getRegion({
   logs = [...logs, `Log: Checking if Geo.Region "${orig}" already exists.`];
 
   //Fetch the data from Strapi
-  const response = await fetch(`${STRAPI_ENV.URL}/regions?`, {
+  const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
