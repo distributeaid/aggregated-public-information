@@ -43,7 +43,7 @@ export function handleResponse<T>({
   status,
   successMessage,
 }: ResponseHandleParams): unknown {
-  if (!response.ok) {
+  if (!response?.ok) {
     throw {
       data,
       orig,
