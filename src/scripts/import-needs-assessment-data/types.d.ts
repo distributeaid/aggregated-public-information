@@ -27,6 +27,24 @@ export type Product = {
   categoryId?: number;
 };
 
+export type Need = {
+  survey: {
+    reference: string;
+    year: string;
+    quarter: string;
+  };
+  region: string;
+  subregion?: string;
+  product: {
+    category: string;
+    item: string;
+    ageGender?: string;
+    sizeStyle?: string;
+    unit?: string;
+  };
+  amount: number;
+};
+
 export type NeedAssessment = {
   id: string;
   survey: {
@@ -75,3 +93,6 @@ export type CategoryUploadWorkflowResults = UploadWorkflowResults<Category>;
 
 export type ProductUploadWorkflow = UploadWorkflow<Product[]>;
 export type ProductUploadWorkflowResults = UploadWorkflowResults<Product[]>;
+
+export type NeedUploadWorkflow = UploadWorkflow<Need[]>;
+export type NeedUploadWorkflowResults = UploadWorkflowResults<Need[]>;
