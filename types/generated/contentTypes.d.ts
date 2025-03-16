@@ -667,6 +667,7 @@ export interface ApiGroupGroup extends Struct.CollectionTypeSchema {
 export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
   collectionName: "needs";
   info: {
+    description: "";
     displayName: "NeedsAssessment.Need";
     pluralName: "needs";
     singularName: "need";
@@ -675,6 +676,7 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    amount: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -685,7 +687,6 @@ export interface ApiNeedsAssessmentNeed extends Struct.CollectionTypeSchema {
       "api::needs-assessment.need"
     > &
       Schema.Attribute.Private;
-    need: Schema.Attribute.Integer & Schema.Attribute.Required;
     needs_assessment_survey: Schema.Attribute.Relation<
       "manyToOne",
       "api::needs-assessment.survey"
