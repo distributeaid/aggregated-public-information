@@ -64,7 +64,7 @@ export function handleResponse<T>({
   return result;
 }
 
-export async function logErrorToFile(
+export function logErrorToFile(
   error: unknown,
   upload: string,
   logFilePath: string,
