@@ -28,15 +28,12 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
         const regionData = await getRegion(parsedRegion);
         return await uploadRegion(regionData);
       } catch (error) {
-        const logFilePath = 'src/scripts/import-needs-assessment-data/error.log';
-        logErrorToFile(
-          error, 
-          region,
-          logFilePath
-        );
+        const logFilePath =
+          "src/scripts/import-needs-assessment-data/error.log";
+        logErrorToFile(error, region, logFilePath);
         throw error; // ensures Promise.allSettled() registers the failure
       }
-    })
+    }),
   );
 
   // { "SUCCESS": [], "ALREADY_EXITS": [], ...}

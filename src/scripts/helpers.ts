@@ -67,14 +67,14 @@ export function handleResponse<T>({
 export async function logErrorToFile(
   error: unknown,
   upload: string,
-  logFilePath: string
- ) {
+  logFilePath: string,
+) {
   const timestamp = new Date().toISOString();
   const logMessage = `[${timestamp}] Error processing upload ${upload}: ${error instanceof Error ? error.stack : String(error)}\n`;
 
   fs.appendFile(logFilePath, logMessage, (err) => {
     if (err) {
-      console.error('Failed to write to log file:', err);
+      console.error("Failed to write to log file:", err);
     }
   });
 }
