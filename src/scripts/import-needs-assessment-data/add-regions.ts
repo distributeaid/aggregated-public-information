@@ -1,6 +1,6 @@
 import { STRAPI_ENV } from "../strapi-env";
 import { UploadWorkflowStatus } from "../statusCodes";
-import { handleResponse } from "../helpers";
+import { handleResponse, logErrorToFile } from "../helpers";
 import {
   Region,
   NeedAssessment,
@@ -15,22 +15,28 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
 
   const uniqueRegions = consolidateRegions(data);
 
-  const results = await Promise.allSettled<RegionUploadWorkflow>(
-    uniqueRegions.map((region) => {
-      return new Promise<RegionUploadWorkflow>((resolve, _reject) => {
-        resolve({
-          data: {
-            region,
-          },
+  const results = await Promise.allSettled(
+    uniqueRegions.map(async (region) => {
+      try {
+        const parsedRegion = await parseRegion({
+          data: { region },
           orig: region,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
         });
-      })
-        .then(parseRegion)
-        .then(getRegion)
-        .then(uploadRegion);
-    }),
+
+        const regionData = await getRegion(parsedRegion);
+        return await uploadRegion(regionData);
+      } catch (error) {
+        const logFilePath = 'src/scripts/import-needs-assessment-data/error.log';
+        logErrorToFile(
+          error, 
+          region,
+          logFilePath
+        );
+        throw error; // ensures Promise.allSettled() registers the failure
+      }
+    })
   );
 
   // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
