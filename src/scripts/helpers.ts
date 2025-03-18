@@ -1,11 +1,7 @@
 import fs from "fs";
 import {
-  CategoryUploadWorkflow,
-  ProductUploadWorkflow,
-  RegionUploadWorkflow,
   ResponseHandleParams,
-  SubregionUploadWorkflow,
-  SurveyUploadWorkflow,
+  UploadWorkflow
 } from "./import-needs-assessment-data/types";
 import { UploadWorkflowStatus } from "./statusCodes";
 
@@ -71,13 +67,8 @@ export function handleResponse<T>({
   return result;
 }
 
-export function logErrorToFile(
-  error:
-    | CategoryUploadWorkflow
-    | ProductUploadWorkflow
-    | RegionUploadWorkflow
-    | SubregionUploadWorkflow
-    | SurveyUploadWorkflow,
+export function logErrorToFile<T extends UploadWorkflow<object>>(
+  error: T,
   upload: string,
   logFilePath: string,
 ) {
