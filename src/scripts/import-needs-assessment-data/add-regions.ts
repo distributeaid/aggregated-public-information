@@ -31,7 +31,7 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
         const logFilePath =
           "src/scripts/import-needs-assessment-data/error.log";
         logErrorToFile(error, region, logFilePath);
-        throw error; // ensures Promise.allSettled() registers the failure
+        throw error; // ensure Promise.allSettled() registers the failure
       }
     }),
   );

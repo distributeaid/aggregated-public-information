@@ -1,5 +1,12 @@
 import fs from "fs";
-import { ResponseHandleParams } from "./import-needs-assessment-data/types";
+import {
+  CategoryUploadWorkflow,
+  ProductUploadWorkflow,
+  RegionUploadWorkflow,
+  ResponseHandleParams,
+  SubregionUploadWorkflow,
+  SurveyUploadWorkflow,
+} from "./import-needs-assessment-data/types";
 import { UploadWorkflowStatus } from "./statusCodes";
 
 export function toTitleCase(input: string) {
@@ -65,13 +72,19 @@ export function handleResponse<T>({
 }
 
 export function logErrorToFile(
-  error: unknown,
+  error:
+    | CategoryUploadWorkflow
+    | ProductUploadWorkflow
+    | RegionUploadWorkflow
+    | SubregionUploadWorkflow
+    | SurveyUploadWorkflow,
   upload: string,
   logFilePath: string,
 ) {
   const timestamp = new Date().toISOString();
-  const logMessage = `[${timestamp}] Error processing upload ${upload}: ${error instanceof Error ? error.stack : String(error)}\n`;
-
+  const logMessage = `[${timestamp}] Error processing upload ${upload}: ${
+    error instanceof Error ? error.stack : JSON.stringify(error.logs, null, 2)
+  }`;
   fs.appendFile(logFilePath, logMessage, (err) => {
     if (err) {
       console.error("Failed to write to log file:", err);
