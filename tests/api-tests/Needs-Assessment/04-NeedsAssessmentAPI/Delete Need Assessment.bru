@@ -1,0 +1,18 @@
+meta {
+  name: Delete Need Assessment
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{base_url}}/api/needs/{{needsAssessment_document_id}}
+  body: json
+  auth: none
+}
+
+tests {
+  test("Status code is 204", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 204]);
+  });
+  
+}

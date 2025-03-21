@@ -1,0 +1,31 @@
+meta {
+  name: Update Need Assessment
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{base_url}}/api/needs/{{needsAssessment_document_id}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "data": {
+       "need": 101
+          }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information updated", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.need).to.eql(101);
+  });
+  
+}

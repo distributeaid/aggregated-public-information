@@ -1,0 +1,46 @@
+meta {
+  name: Create New Region
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/api/regions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "data": {
+      "Name": "DummyRegionNew",
+      "Overview": "This is Region"
+    }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.Name).to.eql('DummyRegionNew');
+      expect(jsonData.data.Overview).to.eql('This is Region');
+  });
+  
+  test("Extract and store RegionID", function () {
+      var jsonData = res.getBody(); // Parse the response JSON
+      if (jsonData.data.documentId) {
+          bru.setEnvVar("region_id", jsonData.data.id);
+          bru.setEnvVar("region_document_id", jsonData.data.documentId);
+      } else {
+          test("Region ID is missing in response", function () {
+              expect(jsonData.data.id).to.exist;
+          });
+      }
+  });
+  
+  
+}

@@ -1,0 +1,39 @@
+meta {
+  name: Update Needs Survey
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{base_url}}/api/surveys/{{survey_document_id}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "data": {
+      "year": "2026",
+      "reference": "updated-reference-new",
+      "quarter": "Q1"
+    }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information updated", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.year).to.eql('2026');
+      expect(jsonData.data.quarter).to.eql('Q1');
+    expect(jsonData.data.reference).to.eql('updated-reference-new');
+     var expectedYearQuarter = jsonData.data.year + '-' + jsonData.data.quarter;
+      expect(jsonData.data.yearQuarter).to.eql(expectedYearQuarter);
+  });
+  
+  
+  
+}
