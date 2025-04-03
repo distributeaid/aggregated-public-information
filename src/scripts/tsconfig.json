@@ -3,6 +3,10 @@
     "module": "nodenext",
     "moduleResolution": "NodeNext",
     "target": "esnext",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@utils/*": ["utils/*"]
     }
+  }
 }

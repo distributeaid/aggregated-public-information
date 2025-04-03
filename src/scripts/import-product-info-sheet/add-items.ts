@@ -1,9 +1,15 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
-import { toTitleCase, stripAndParseFloat, stripAndParseInt } from "../helpers";
+import {
+  toTitleCase,
+  stripAndParseFloat,
+  stripAndParseInt,
+} from "@utils/helpers";
+import { isFulfilled } from "@utils/promiseUtils";
+import { _isRejected } from "@utils/promiseUtils";
 import { getCategories } from "./get-existing-data";
 import type { NameToIdMap } from "./get-existing-data";
-import { UploadWorkflowStatus } from "../statusCodes";
+import { UploadWorkflowStatus } from "@utils/statusCodes";
 
 type ItemCsv = {
   category: {
@@ -214,18 +220,6 @@ export default async function addItems(products: ItemCsv[]) {
   });
   console.log("Adding items completed!");
 }
-
-const isFulfilled = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseFulfilledResult<T> => {
-  return value.status === "fulfilled";
-};
-
-const _isRejected = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseRejectedResult => {
-  return value.status === "rejected";
-};
 
 /* Parse Item
  * ------------------------------------------------------ */
