@@ -1,0 +1,32 @@
+meta {
+  name: Check Duplicate Region Creation
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/regions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "data": {
+      "Name": "DemoRegionNew",
+      "Overview": "This is Region"
+    }
+  }
+}
+
+tests {
+  test("Status code is 400", function () {
+      expect(res.getStatus()).to.be.oneOf([400, 401]);
+  });
+  
+  test("Correct validation message", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.error.name).to.eql('ValidationError');
+      expect(jsonData.error.message).to.eql('This attribute must be unique');
+  });
+}

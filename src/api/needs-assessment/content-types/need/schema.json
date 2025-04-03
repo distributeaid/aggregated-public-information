@@ -4,9 +4,12 @@
   "info": {
     "singularName": "need",
     "pluralName": "needs",
-    "displayName": "NeedsAssessment.Need"
+    "displayName": "NeedsAssessment.Need",
+    "description": ""
   },
-  "options": {},
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
     "survey": {
       "type": "relation",
@@ -29,7 +32,7 @@
       "relation": "oneToOne",
       "target": "api::product.item"
     },
-    "need": {
+    "amount": {
       "type": "integer",
       "required": true
     },

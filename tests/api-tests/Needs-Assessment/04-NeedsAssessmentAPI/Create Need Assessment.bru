@@ -1,0 +1,63 @@
+meta {
+  name: Create Need Assessment
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/needs
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "data": {
+          
+              "subregion": {
+                  "connect": [
+                      {
+                          "id": {{sub_region_id}},
+                          "documentId": "{{sub_region_document_id}}"
+                      }
+                  ]
+              },
+              "region": {
+                  "connect": [
+                      {
+                          "id": {{region_id}},
+                          "documentId": "{{region_document_id}}"
+                      }
+                  ]
+              },
+      "survey": {
+                  "connect": [
+                      {
+                          "id": {{survey_id}},
+                          "documentId": "{{survey_document_id}}"
+                      }
+                  ]
+              },
+              "need": 88
+          }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.need).to.eql(88);
+  });
+  
+  test("Extract and store RegionID", function () {
+      var jsonData = res.getBody(); // Parse the response JSON
+      bru.setEnvVar("needsAssessment_id", jsonData.data.id);
+      bru.setEnvVar("needsAssessment_document_id", jsonData.data.documentId);
+  });
+  
+  
+}

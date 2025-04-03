@@ -11,7 +11,7 @@ import {
 /*  Add Regions from Needs Assessment Data
  * ------------------------------------------------------- */
 export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
-  console.log("Adding Geo.Regions from the Needs Assessment data ...");
+  console.log("Adding Geo.regions from the Needs Assessment data ...");
 
   const uniqueRegions = consolidateRegions(data);
 
@@ -61,7 +61,7 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
       return resultsMap;
     }, resultsMap);
 
-  console.log("Add Geo.Regions results:");
+  console.log("Add Geo.regions results:");
   Object.keys(resultsMap).forEach((key) => {
     console.log(`     ${key}: ${resultsMap[key].length}`);
 
@@ -156,7 +156,7 @@ async function getRegion({
   //status,
   logs,
 }: RegionUploadWorkflow): Promise<RegionUploadWorkflow> {
-  logs = [...logs, `Log: Checking if Geo.Region "${orig}" already exists.`];
+  logs = [...logs, `Log: Checking if Geo.region "${orig}" already exists.`];
 
   //Fetch the data from Strapi
   const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
@@ -169,15 +169,29 @@ async function getRegion({
 
   const body = await response.json();
   const matchingRegion = body.data.find(
-    (region) => region.Name.toLowerCase() === data.region.toLowerCase(),
+    (region) => region.name.toLowerCase() === data.region.toLowerCase(),
   );
+
+  if (!response.ok) {
+    console.log("Non-ok response");
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to get Geo.region. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
 
   if (matchingRegion) {
     throw {
       data: body.data,
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
-      logs: [...logs, "Log: Found existing Geo.Region. Skipping..."],
+      logs: [...logs, "Log: Found existing Geo.region. Skipping..."],
     };
   }
 
@@ -214,7 +228,7 @@ async function uploadRegion({
   orig,
   logs,
 }: RegionUploadWorkflow): Promise<RegionUploadWorkflow> {
-  logs = [...logs, `Log: Creating Geo.Region "${orig}".`];
+  logs = [...logs, `Log: Creating Geo.region "${orig}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
     method: "POST",

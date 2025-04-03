@@ -13,7 +13,7 @@ import {
 export async function addSubregions(
   data: NeedAssessment[],
 ): Promise<Subregion[]> {
-  console.log("Adding Geo.Subregions from the Needs Assessment data ...");
+  console.log("Adding Geo.subregions from the Needs Assessment data ...");
 
   const uniqueSubregions = consolidateSubregions(data);
 
@@ -21,9 +21,7 @@ export async function addSubregions(
     uniqueSubregions.map((subregion) => {
       return new Promise<SubregionUploadWorkflow>((resolve, _reject) => {
         resolve({
-          data: {
-            subregion,
-          },
+          data: { subregion },
           orig: subregion,
           status: UploadWorkflowStatus.PROCESSING,
           logs: [],
@@ -60,7 +58,7 @@ export async function addSubregions(
       return resultsMap;
     }, resultsMap);
 
-  console.log("Add Geo.Subregions results:");
+  console.log("Add Geo.subregions results:");
 
   Object.keys(resultsMap).forEach((key) => {
     console.log(`     ${key}: ${resultsMap[key].length}`);
@@ -156,7 +154,7 @@ async function getSubregion({
   //status,
   logs,
 }: SubregionUploadWorkflow): Promise<SubregionUploadWorkflow> {
-  logs = [...logs, `Log: Checking if Geo.Subregion "${orig}" already exists.`];
+  logs = [...logs, `Log: Checking if Geo.subregion "${orig}" already exists.`];
 
   //Fetch the data from Strapi
   const response = await fetch(`${STRAPI_ENV.URL}/subregions`, {
@@ -170,15 +168,29 @@ async function getSubregion({
   const body = await response.json();
   const matchingSubregion = body.data.find(
     (subregion) =>
-      subregion.Name.toLowerCase() === data.subregion.toLowerCase(),
+      subregion.name.toLowerCase() === data.subregion.toLowerCase(),
   );
+
+  if (!response.ok) {
+    console.log("Non-ok response");
+    throw {
+      data,
+      orig,
+      status: UploadWorkflowStatus.DUPLICATE_CHECK_ERROR,
+      logs: [
+        ...logs,
+        `Error: Failed to get Geo.subregion. HttpStatus: ${response.status} - ${response.statusText}`,
+        JSON.stringify(body),
+      ],
+    };
+  }
 
   if (matchingSubregion) {
     throw {
       data: body.data,
       orig,
       status: UploadWorkflowStatus.ALREADY_EXISTS,
-      logs: [...logs, "Log: Found existing Geo.Subregion. Skipping..."],
+      logs: [...logs, "Log: Found existing Geo.subregion. Skipping..."],
     };
   }
 
@@ -216,7 +228,7 @@ async function uploadSubregion({
   orig,
   /* status, */ logs,
 }: SubregionUploadWorkflow): Promise<SubregionUploadWorkflow> {
-  logs = [...logs, `Log: Creating Geo.Subregion "${orig}".`];
+  logs = [...logs, `Log: Creating Geo.subregion "${orig}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/subregions`, {
     method: "POST",

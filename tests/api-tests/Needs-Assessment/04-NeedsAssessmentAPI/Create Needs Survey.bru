@@ -1,0 +1,51 @@
+meta {
+  name: Create Needs Survey
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/surveys
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "data": {
+      "year": "2026",
+      "reference": "202",
+      "yearQuarter": "321",
+      "quarter": "Q1"
+    }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.year).to.eql('2026');
+      expect(jsonData.data.quarter).to.eql('Q1');
+    expect(jsonData.data.reference).to.eql('202');
+     var expectedYearQuarter = jsonData.data.year + '-' + jsonData.data.quarter;
+      expect(jsonData.data.yearQuarter).to.eql(expectedYearQuarter);
+  });
+  
+  test("Extract and store SurveyID", function () {
+      var jsonData = res.getBody(); // Parse the response JSON
+      if (jsonData.data.documentId) {
+          bru.setEnvVar("survey_id", jsonData.data.id);
+          bru.setEnvVar("survey_document_id", jsonData.data.documentId);
+      } else {
+          test("Survey ID is missing in response", function () {
+              expect(jsonData.data.id).to.exist;
+          });
+      }
+  });
+  
+  
+}

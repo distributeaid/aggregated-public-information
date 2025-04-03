@@ -1,0 +1,19 @@
+meta {
+  name: Delete Survey
+  type: http
+  seq: 11
+}
+
+delete {
+  url: {{base_url}}/api/surveys/{{survey_document_id}}
+  body: json
+  auth: none
+}
+
+tests {
+  test("Status code is 204", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 204]);
+  });
+  
+  
+}

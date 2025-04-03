@@ -330,6 +330,6 @@ async function uploadShipment({
     data: body.data,
     orig,
     status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, "Success: Created Geo.Country."],
+    logs: [...logs, "Success: Created Geo.country."],
   };
 }

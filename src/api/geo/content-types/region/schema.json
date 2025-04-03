@@ -4,37 +4,37 @@
   "info": {
     "singularName": "region",
     "pluralName": "regions",
-    "displayName": "Geo.Region"
+    "displayName": "Geo.region"
   },
   "options": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Slug": {
+    "slug": {
       "type": "string"
     },
-    "Map": {
+    "map": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": ["images"]
     },
-    "Overview": {
+    "overview": {
       "type": "richtext"
     },
-    "GovernmentResponse": {
+    "governmentResponse": {
       "type": "richtext"
     },
-    "Subregions": {
+    "subregions": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::geo.subregion",
-      "mappedBy": "Region"
+      "mappedBy": "region"
     },
-    "Countries": {
+    "countries": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::geo.country"
