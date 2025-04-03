@@ -5,8 +5,7 @@ import {
   stripAndParseFloat,
   stripAndParseInt,
 } from "@utils/helpers";
-import { isFulfilled } from "@utils/promiseUtils";
-import { _isRejected } from "@utils/promiseUtils";
+import { isFulfilled, _isRejected } from "@utils/promiseUtils";
 import { getCategories } from "./get-existing-data";
 import type { NameToIdMap } from "./get-existing-data";
 import { UploadWorkflowStatus } from "@utils/statusCodes";

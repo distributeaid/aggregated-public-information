@@ -2,8 +2,7 @@ import qs from "qs";
 import lookup from "country-code-lookup";
 import { STRAPI_ENV } from "../strapi-env";
 import { UploadWorkflowStatus } from "@utils/statusCodes";
-import { isFulfilled } from "@utils/promiseUtils";
-import { _isRejected } from "@utils/promiseUtils";
+import { isFulfilled, _isRejected } from "@utils/promiseUtils";
 import {
   Country,
   ShipmentCsv,
