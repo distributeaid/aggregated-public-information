@@ -1,5 +1,7 @@
 import { STRAPI_ENV } from "../strapi-env";
-import { UploadWorkflowStatus } from "../statusCodes";
+import { UploadWorkflowStatus } from "@utils/statusCodes";
+import { isFulfilled } from "@utils/promiseUtils";
+import { _isRejected } from "@utils/promiseUtils";
 import {
   Region,
   NeedAssessment,
@@ -79,18 +81,6 @@ export async function addRegions(data: NeedAssessment[]): Promise<Region[]> {
 
   return validRegions;
 }
-
-const isFulfilled = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseFulfilledResult<T> => {
-  return value.status === "fulfilled";
-};
-
-const _isRejected = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseRejectedResult => {
-  return value.status === "rejected";
-};
 
 /*  Consolidate Regions
  * ------------------------------------------------------- */
