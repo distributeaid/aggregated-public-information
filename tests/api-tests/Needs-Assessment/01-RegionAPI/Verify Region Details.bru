@@ -17,7 +17,7 @@ tests {
   
   test("Correct information saved", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.Name).to.eql('DummyRegionNew');
+      expect(jsonData.data.Name).to.eql('DemoRegionNew');
       expect(jsonData.data.Overview).to.eql('This is Region');
   });
   
