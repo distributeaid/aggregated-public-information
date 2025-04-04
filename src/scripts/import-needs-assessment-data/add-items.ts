@@ -1,7 +1,7 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
-import { UploadWorkflowStatus } from "@utils/statusCodes";
-import { isFulfilled, _isRejected } from "@utils/promiseUtils";
+import { UploadWorkflowStatus } from "../utils/statusCodes";
+import { isFulfilled, _isRejected } from "../utils/promiseUtils";
 import {
   Product,
   NeedAssessment,

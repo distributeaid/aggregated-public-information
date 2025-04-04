@@ -1,8 +1,8 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
-import { toTitleCase, stripAndParseFloat, toBoolean } from "@utils/helpers";
-import { isFulfilled, _isRejected } from "@utils/promiseUtils";
-import { UploadWorkflowStatus } from "@utils/statusCodes";
+import { toTitleCase, stripAndParseFloat, toBoolean } from "../utils/helpers";
+import { isFulfilled, _isRejected } from "../utils/promiseUtils";
+import { UploadWorkflowStatus } from "../utils/statusCodes";
 import {
   Country,
   Shipment,
