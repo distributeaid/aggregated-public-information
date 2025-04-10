@@ -1,15 +1,11 @@
 meta {
   name: Update Category
   type: http
-  seq: 3
+  seq: 4
 }
 
 put {
-  url: {
-  "data": {
-    "name": "DummyCategory"
-  }
-}{{base_url}}/api/categories/{{category_document_id}}
+  url: {{base_url}}/api/categories/{{category_document_id}}
   body: json
   auth: inherit
 }
@@ -17,7 +13,18 @@ put {
 body:json {
   {
     "data": {
-      "name": "DummyCategoryModified"
+      "name": "ModifiedDummyCategory"
     }
   }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+    expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+    var jsonData = res.getBody();
+    expect(jsonData.data.name).to.eql('ModifiedDummyCategory');
+  });
 }

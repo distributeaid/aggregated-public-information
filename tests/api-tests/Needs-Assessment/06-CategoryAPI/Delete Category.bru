@@ -4,8 +4,15 @@ meta {
   seq: 4
 }
 
-get {
+delete {
   url: {{base_url}}/api/categories/{{category_document_id}}
   body: none
   auth: inherit
+}
+
+tests {
+  test("Status code is 204", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 204]);
+  });
+  
 }
