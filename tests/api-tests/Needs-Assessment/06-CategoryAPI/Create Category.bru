@@ -25,7 +25,7 @@ tests {
   
   test("Correct information saved", function () {
     var jsonData = res.getBody();
-    expect(jsonData.data.name).to.eql('DummyItem');
+    expect(jsonData.data.name).to.eql('DummyCategory');
   });
   
   test("Extract and store ItemID", function () {
