@@ -1,0 +1,43 @@
+meta {
+  name: Create Category
+  type: http
+  seq: 1
+}
+
+post {
+  url: 
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "data": {
+      "name": "DummyCategory"
+    }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+    expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+    var jsonData = res.getBody();
+    expect(jsonData.data.name).to.eql('DummyItem');
+  });
+  
+  test("Extract and store ItemID", function () {
+    var jsonData = res.getBody(); // Parse the response JSON
+    if (jsonData.data.documentId) {
+        bru.setEnvVar("category_id", jsonData.data.id);
+        bru.setEnvVar("category_document_id", jsonData.data.documentId);
+    } else {
+        test("Category ID is missing in response", function () {
+            expect(jsonData.data.id).to.exist;
+        });
+    }
+  });
+  
+}

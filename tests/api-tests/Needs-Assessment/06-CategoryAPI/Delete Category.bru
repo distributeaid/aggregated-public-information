@@ -1,0 +1,11 @@
+meta {
+  name: Delete Category
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base_url}}/api/categories/{{category_document_id}}
+  body: none
+  auth: inherit
+}
