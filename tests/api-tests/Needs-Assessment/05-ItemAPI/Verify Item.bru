@@ -17,9 +17,9 @@ tests {
   
   test("Correct information saved", function () {
     var jsonData = res.getBody();
-    expect(jsonData.data.name).to.eql('DummyItem');
-    expect(jsonData.data.age_gender).to.eql('Dummy age_gender');
-    expect(jsonData.data.size_style).to.eql('Dummy size_style');
+    expect(jsonData.data.name).to.eql('DemoItem');
+    expect(jsonData.data.age_gender).to.eql('Demo age_gender');
+    expect(jsonData.data.size_style).to.eql('Demo size_style');
   });
   
 }

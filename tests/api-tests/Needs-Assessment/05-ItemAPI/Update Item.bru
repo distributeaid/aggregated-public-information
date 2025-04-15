@@ -13,8 +13,8 @@ put {
 body:json {
   {
     "data": {
-      "age_gender": "New Dummy age_gender",
-      "size_style": "New Dummy size_style"
+      "age_gender": "New Demo age_gender",
+      "size_style": "New Demo size_style"
     }
   }
 }
@@ -26,9 +26,9 @@ tests {
   
   test("Correct information saved", function () {
     var jsonData = res.getBody();
-    expect(jsonData.data.name).to.eql('DummyItem');
-    expect(jsonData.data.age_gender).to.eql('New Dummy age_gender');
-    expect(jsonData.data.size_style).to.eql('New Dummy size_style');
+    expect(jsonData.data.name).to.eql('Demo Item');
+    expect(jsonData.data.age_gender).to.eql('New Demo age_gender');
+    expect(jsonData.data.size_style).to.eql('New Demo size_style');
   });
   
 }
