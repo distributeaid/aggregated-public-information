@@ -7,8 +7,8 @@ export interface GeoLocation extends Struct.ComponentSchema {
     icon: "pinMap";
   };
   attributes: {
-    Country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    country: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 

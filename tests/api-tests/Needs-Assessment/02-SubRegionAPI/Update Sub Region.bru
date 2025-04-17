@@ -25,7 +25,7 @@ tests {
   
   test("Correct information updated", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.Name).to.eql('DummySubRegionNew');
+      expect(jsonData.data.Name).to.eql('DemoSubregionNew');
       expect(jsonData.data.Overview).to.eql('This is SubRegion');
      expect(jsonData.data.GovernmentResponse).to.eql('This is government response');
   });

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "country",
     "pluralName": "countries",
-    "displayName": "Geo.Country",
+    "displayName": "Geo.country",
     "description": ""
   },
   "options": {
