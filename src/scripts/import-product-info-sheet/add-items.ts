@@ -4,11 +4,11 @@ import {
   toTitleCase,
   stripAndParseFloat,
   stripAndParseInt,
-} from "../utils/helpers";
-import { isFulfilled, _isRejected } from "../utils/promiseUtils";
+} from "../_utils/helpers";
+import { isFulfilled, _isRejected } from "../_utils/promiseUtils";
 import { getCategories } from "./get-existing-data";
 import type { NameToIdMap } from "./get-existing-data";
-import { UploadWorkflowStatus } from "../utils/statusCodes";
+import { UploadWorkflowStatus } from "../_utils/statusCodes";
 
 type ItemCsv = {
   category: {
