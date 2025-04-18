@@ -1,4 +1,4 @@
-import { toTitleCase } from "../utils/helpers";
+import { toTitleCase } from "../_utils/helpers";
 import { STRAPI_ENV } from "../strapi-env";
 import { getCategories } from "./get-existing-data";
 
