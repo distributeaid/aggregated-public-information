@@ -1,0 +1,25 @@
+meta {
+  name: Verify Item
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/api/items/{{item_document_id}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+    expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+    var jsonData = res.getBody();
+    expect(jsonData.data.name).to.eql('DemoItem');
+    expect(jsonData.data.age_gender).to.eql('Demo age_gender');
+    expect(jsonData.data.size_style).to.eql('Demo size_style');
+  });
+  
+}
