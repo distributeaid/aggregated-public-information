@@ -13,8 +13,8 @@ post {
 body:json {
   {
     "data": {
-      "Name": "DemoRegionNew",
-      "Overview": "This is Region"
+      "name": "DemoRegionNew",
+      "overview": "This is Region"
     }
   }
 }
@@ -26,8 +26,8 @@ tests {
   
   test("Correct information saved", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.Name).to.eql('DemoRegionNew');
-      expect(jsonData.data.Overview).to.eql('This is Region');
+      expect(jsonData.data.name).to.eql('DemoRegionNew');
+      expect(jsonData.data.overview).to.eql('This is Region');
   });
   
   test("Extract and store RegionID", function () {

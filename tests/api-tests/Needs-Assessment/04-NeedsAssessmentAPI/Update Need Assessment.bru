@@ -13,7 +13,7 @@ put {
 body:json {
   {
       "data": {
-       "need": 101
+       "amount": 101
           }
   }
 }
@@ -25,7 +25,7 @@ tests {
   
   test("Correct information updated", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.need).to.eql(101);
+      expect(jsonData.data.amount).to.eql(101);
   });
   
 }
