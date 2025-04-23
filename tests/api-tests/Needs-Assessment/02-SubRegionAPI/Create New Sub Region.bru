@@ -30,7 +30,7 @@ tests {
       expect(jsonData.data.overview).to.eql('This is SubRegion');
   });
   
-  test("Extract and store RegionID", function () {
+  test("Extract and store SubRegionID", function () {
       var jsonData = res.getBody(); // Parse the response JSON
       if (jsonData.data.documentId) {
           bru.setEnvVar("sub_region_id", jsonData.data.id);
