@@ -11,8 +11,12 @@ import { addProducts } from "./add-items";
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(join(__dirname, "./needs-data.json"), "utf8");
+    const jsonData = readFileSync(join(__dirname, "./needs-data(8).json"), "utf8");
     const data = JSON.parse(jsonData);
+
+    const itemsWithoutProduct = data.filter(item => !item?.product);
+    console.log("Items missing product:");
+    console.log(itemsWithoutProduct);
 
     //  Process the data and upload to Strapi collections
     const _regions = await addRegions(data);
