@@ -7,6 +7,7 @@ import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
+import { consolidateNeedsByRegion } from "./add-needs";
 
 async function main() {
   try {
@@ -14,15 +15,12 @@ async function main() {
     const jsonData = readFileSync(join(__dirname, "./needs-data(8).json"), "utf8");
     const data = JSON.parse(jsonData);
 
-    const itemsWithoutProduct = data.filter(item => !item?.product);
-    console.log("Items missing product:");
-    console.log(itemsWithoutProduct);
-
     //  Process the data and upload to Strapi collections
     const _regions = await addRegions(data);
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
     const _categories = await addCategories(data);
+    const _products = await addProducts(data);
 
     // Check the number of objects in the needs array to manually compare totals
     function countObjectsInArray(data): number {
@@ -37,7 +35,9 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    const _products = await addProducts(data);
+    const processedNeeds = consolidateNeedsByRegion(data) // check this function is working properly
+
+    // const _products = await addProducts(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {

@@ -41,45 +41,8 @@ export function consolidateNeedsByRegion(
         }
     });
 
-    // Create a set for unique needs - doesn't work - has 10 duplicates
-    // const uniqueNeedSet = new Set<string>();
     const uniqueNeeds: Need[] = [];
     const duplicateNeeds: Need[] =[];
-
-    // consolidatedNeeds.forEach((need) => {
-    //     const needKey = JSON.stringify([
-    //         need.product.item,
-    //         need.product.category,
-    //         need.product.ageGender || "",
-    //         need.product.sizeStyle || "",
-    //         need.product.unit || "",
-    //         // product: {
-    //         //     category: need.product.category,
-    //         //     item: need.product.item,
-    //         //     ageGender: need.product.ageGender || "",
-    //         //     sizeStyle: need.product.sizeStyle || "",
-    //         //     unit: need.product.unit || ""
-    //         // },
-    //         need.amount,
-    //         need.survey.reference,
-    //         need.survey.year,
-    //         need.survey.quarter,
-    //         need.region,
-    //         need.subregion || ""
-    //     ]);
-
-        // console.log('needKey', needKey);
-
-        // if(!uniqueNeedSet.has(needKey)) {
-        //     uniqueNeedSet.add(needKey);
-        //     uniqueNeeds.push(need);
-        // } else {
-        //     console.log('Duplicate found with key:', needKey);
-        //     console.log('Duplicate need:', need);
-        //     duplicateNeeds.push(need);
-            
-        // }
-    // });
 
     consolidatedNeeds.forEach((currentNeed) => {
         let isDuplicate = false;
@@ -91,23 +54,21 @@ export function consolidateNeedsByRegion(
             }
         }
 
-        if (!isDuplicate) {
-            uniqueNeeds.push(currentNeed)
+        if (isDuplicate) {
+            duplicateNeeds.push(currentNeed)
         } else {
-            console.log('Duplicate found:');
-            console.log('Duplicate need:', currentNeed);
-            duplicateNeeds.push(currentNeed);
+            uniqueNeeds.push(currentNeed);
         }
     });    
-    
 
-    // Print region counts after processing the data
+    // Print region counts for analysis after processing the data
     const regionCounts = {};
     uniqueNeeds.forEach((need) => {
         regionCounts[need.region] = 
             (regionCounts[need.region] || 0) +1;
     });
 
+    // Logs for debugging issues with duplicates
     console.log(`Total unique needs: ${uniqueNeeds.length}`);
     console.log("Region counts:", regionCounts);
 
@@ -130,32 +91,27 @@ export function consolidateNeedsByRegion(
 function areNeedsEqual(need1: Need, need2: Need): boolean {
     if (!need1 || !need2) return false;
 
-    if (
-        need1.product.category !== need2.product.category ||
-        need1.product.item !== need2.product.item ||
-        need1.product.ageGender !== need2.product.ageGender ||
-        need1.product.sizeStyle !== need2.product.sizeStyle ||
-        need1.product.unit !== need2.product.unit
-    ) {
-        return false;
-    }
+    const productsMatch = (
+        need1.product.item === need2.product.item &&
+        need1.product.category === need2.product.category &&
+        need1.product.ageGender === need2.product.ageGender &&
+        need1.product.sizeStyle === need2.product.sizeStyle &&
+        need1.product.unit === need2.product.unit
+    );
+
+    if (!productsMatch) return false;
 
     if (need1.amount !== need2.amount) return false;
+   
+    const surveysMatch = (
+        need1.survey.reference === need2.survey.reference &&
+        need1.survey.year === need2.survey.year &&
+        need1.survey.quarter === need2.survey.quarter
+    );
+    
+    if (!surveysMatch) return false;
+    
+    if (need1.region !== need2.region) return false;
 
-    if (
-        need1.survey.reference !== need2.survey.reference ||
-        need1.survey.year !== need2.survey.year ||
-        need1.survey.quarter !== need2.survey.quarter
-    ) {
-        return false;
-    }
-
-    if (
-        need1.region !== need2.region ||
-        need1.subregion !== need2.subregion
-    ) {
-        return false;
-    }
-
-    return true;
+    if (need1.subregion !== need2.subregion) return false;
 }
