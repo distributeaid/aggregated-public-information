@@ -12,7 +12,7 @@ import { consolidateNeedsByRegion } from "./add-needs";
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(join(__dirname, "./needs-data(8).json"), "utf8");
+    const jsonData = readFileSync(join(__dirname, "./needs-data.json"), "utf8");
     const data = JSON.parse(jsonData);
 
     //  Process the data and upload to Strapi collections
@@ -35,9 +35,8 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    const processedNeeds = consolidateNeedsByRegion(data) // check this function is working properly
+    const processedNeeds = consolidateNeedsByRegion(data) // check this function is working properly, modify as required with progress of script
 
-    // const _products = await addProducts(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {

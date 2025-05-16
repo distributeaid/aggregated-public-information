@@ -42,48 +42,46 @@ export function consolidateNeedsByRegion(
     });
 
     const uniqueNeeds: Need[] = [];
-    const duplicateNeeds: Need[] =[];
+    const duplicateNeeds: Need[] =[];   
 
     consolidatedNeeds.forEach((currentNeed) => {
-        let isDuplicate = false;
+        const existingNeedIndex = uniqueNeeds.findIndex(need =>
+            areNeedsEqual(need, currentNeed)
+        );
 
-        for (const existingNeed of uniqueNeeds) {
-            if (areNeedsEqual(currentNeed, existingNeed)) {
-                isDuplicate = true;
-                break;
-            }
-        }
-
-        if (isDuplicate) {
-            duplicateNeeds.push(currentNeed)
+        if (existingNeedIndex !==-1) {
+            duplicateNeeds.push(currentNeed);
         } else {
             uniqueNeeds.push(currentNeed);
         }
-    });    
 
-    // Print region counts for analysis after processing the data
+    });
+
+    // Gather region counts for analysis after processing the data
     const regionCounts = {};
     uniqueNeeds.forEach((need) => {
         regionCounts[need.region] = 
             (regionCounts[need.region] || 0) +1;
     });
 
-    // Logs for debugging issues with duplicates
+    // Logs for investigating the data processed
     console.log(`Total unique needs: ${uniqueNeeds.length}`);
     console.log("Region counts:", regionCounts);
 
-    console.log(`Total consolidated needs: ${consolidatedNeeds.length}`);
     console.log(`Number of duplicates: ${duplicateNeeds.length}`);
 
-    console.log("\nDuplicate needs details:");
-    duplicateNeeds.forEach((need, index) => {
-    console.log(`\nDuplicate #${index + 1}:`);
-    console.log(`Region: ${need.region}`);
-    console.log(`Subregion: ${need.subregion}`);
-    console.log(`Product: ${JSON.stringify(need.product, null, 2)}`);
-    console.log(`Amount: ${need.amount}`);
-    console.log(`Survey: ${JSON.stringify(need.survey)}`);
-  });
+    // NOTE: uncomment to view duplicates for data analysis
+    // if (duplicateNeeds.length > 0) {
+    //     console.log("\nDuplicate needs details:");
+    //     duplicateNeeds.forEach((need, index) => {
+    //     console.log(`\nDuplicate #${index + 1}:`);
+    //     console.log(`Region: ${need.region}`);
+    //     console.log(`Subregion: ${need.subregion}`);
+    //     console.log(`Product: ${JSON.stringify(need.product, null, 2)}`);
+    //     console.log(`Amount: ${need.amount}`);
+    //     console.log(`Survey: ${JSON.stringify(need.survey)}`);
+    // });
+    // }
 
     return uniqueNeeds;
 }
@@ -114,4 +112,6 @@ function areNeedsEqual(need1: Need, need2: Need): boolean {
     if (need1.region !== need2.region) return false;
 
     if (need1.subregion !== need2.subregion) return false;
+
+    return true;
 }
