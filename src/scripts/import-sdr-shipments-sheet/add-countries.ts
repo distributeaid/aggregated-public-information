@@ -1,7 +1,8 @@
 import qs from "qs";
 import lookup from "country-code-lookup";
 import { STRAPI_ENV } from "../strapi-env";
-import { UploadWorkflowStatus } from "../statusCodes";
+import { UploadWorkflowStatus } from "../_utils/statusCodes";
+import { isFulfilled, _isRejected } from "../_utils/promiseUtils";
 import {
   Country,
   ShipmentCsv,
@@ -81,18 +82,6 @@ export async function addCountries(shipments: ShipmentCsv[]) {
 
   return validCountries;
 }
-
-const isFulfilled = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseFulfilledResult<T> => {
-  return value.status === "fulfilled";
-};
-
-const _isRejected = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseRejectedResult => {
-  return value.status === "rejected";
-};
 
 /* Consolidate Countries
  * ------------------------------------------------------ */

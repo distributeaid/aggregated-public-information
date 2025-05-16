@@ -17,8 +17,8 @@ tests {
   
   test("Correct information saved", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.Name).to.eql('DemoSubregionNew');
-      expect(jsonData.data.Overview).to.eql('This is SubRegion');
+      expect(jsonData.data.name).to.eql('DemoSubregionNew');
+      expect(jsonData.data.overview).to.eql('This is SubRegion');
   });
   
 }

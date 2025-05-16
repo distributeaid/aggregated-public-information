@@ -1,4 +1,4 @@
-import { UploadWorkflowStatus } from "../statusCodes";
+import { UploadWorkflowStatus } from "../_utils/statusCodes";
 
 export type Survey = {
   reference: string;

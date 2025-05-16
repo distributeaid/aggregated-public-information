@@ -13,7 +13,7 @@ put {
 body:json {
   {
     "data": {
-      "GovernmentResponse": "This is government response"
+      "governmentResponse": "This is government response"
     }
   }
 }
@@ -25,9 +25,9 @@ tests {
   
   test("Correct information updated", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.Name).to.eql('DemoRegionNew');
-      expect(jsonData.data.Overview).to.eql('This is Region');
-     expect(jsonData.data.GovernmentResponse).to.eql('This is government response');
+      expect(jsonData.data.name).to.eql('DemoRegionNew');
+      expect(jsonData.data.overview).to.eql('This is Region');
+     expect(jsonData.data.governmentResponse).to.eql('This is government response');
   });
   
   

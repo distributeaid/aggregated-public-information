@@ -1,0 +1,18 @@
+meta {
+  name: Delete Item
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{base_url}}/api/items/{{item_document_id}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Status code is 204", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 204]);
+  });
+  
+}

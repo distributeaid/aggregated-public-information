@@ -1,4 +1,4 @@
-import { UploadWorkflowStatus } from "../statusCodes";
+import { UploadWorkflowStatus } from "../_utils/statusCodes";
 
 export type UploadWorkflow<T, TCsv> = {
   data: T;
