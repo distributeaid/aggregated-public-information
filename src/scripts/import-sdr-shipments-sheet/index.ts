@@ -13,37 +13,39 @@ import { addShipments } from "./add-shipments";
         `yarn script:import-sdr-shipments-sheet`
 */
 
-const shipments = await csvToJson({
-  noheader: true,
-  headers: [
-    "number",
-    "sendingCountry",
-    "receivingCountry",
-    "exporter",
-    "importer",
-    "type",
-    "project",
-    "daRoles.needsAssessment",
-    "daRoles.sourcingInKindDonations",
-    "daRoles.sourcingProcurement",
-    "daRoles.sourcingCommunityCollection",
-    "daRoles.aidMatching",
-    "daRoles.firstMileTransportation",
-    "daRoles.firstMileStorageCommunity",
-    "daRoles.firstMileStorageCommercial",
-    "daRoles.mainLegTransportation",
-    "daRoles.customsTransit",
-    "daRoles.customsExport",
-    "daRoles.customsImport",
-    "daRoles.lastMileTransportation",
-    "daRoles.lastMileStorageCommunity",
-    "daRoles.lastMileStorageCommercial",
-    "daRoles.other",
-    "carbonOffsetPaid",
-    "co2TonsGenerated",
-    "carbonOffsetCost",
-  ],
-}).fromFile("src/scripts/import-sdr-shipments-sheet/shipments.csv");
+(async () => {
+  const shipments = await csvToJson({
+    noheader: true,
+    headers: [
+      "number",
+      "sendingCountry",
+      "receivingCountry",
+      "exporter",
+      "importer",
+      "type",
+      "project",
+      "daRoles.needsAssessment",
+      "daRoles.sourcingInKindDonations",
+      "daRoles.sourcingProcurement",
+      "daRoles.sourcingCommunityCollection",
+      "daRoles.aidMatching",
+      "daRoles.firstMileTransportation",
+      "daRoles.firstMileStorageCommunity",
+      "daRoles.firstMileStorageCommercial",
+      "daRoles.mainLegTransportation",
+      "daRoles.customsTransit",
+      "daRoles.customsExport",
+      "daRoles.customsImport",
+      "daRoles.lastMileTransportation",
+      "daRoles.lastMileStorageCommunity",
+      "daRoles.lastMileStorageCommercial",
+      "daRoles.other",
+      "carbonOffsetPaid",
+      "co2TonsGenerated",
+      "carbonOffsetCost",
+    ],
+  }).fromFile("src/scripts/import-sdr-shipments-sheet/shipments.csv");
 
-const countries = await addCountries(shipments);
-const _shipments = await addShipments(shipments, countries);
+  const countries = await addCountries(shipments);
+  const _shipments = await addShipments(shipments, countries);
+})();
