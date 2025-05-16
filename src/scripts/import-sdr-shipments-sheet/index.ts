@@ -1,5 +1,4 @@
 import "dotenv/config";
-import csvToJson from "csvtojson";
 
 import { addCountries } from "./add-countries";
 import { addShipments } from "./add-shipments";
