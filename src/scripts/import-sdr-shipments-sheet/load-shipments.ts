@@ -44,7 +44,7 @@ function shipmentDataPath() {
       process.exit(1);
     }
   } else {
-    console.log("No products file specified. Loading demo data instead.");
+    console.log("No shipments file specified. Loading demo data instead.");
   }
   return process.env.SHIPMENTS_EXPORT_PATH || process.env.SHIPMENTS_DEMO_PATH;
 }
