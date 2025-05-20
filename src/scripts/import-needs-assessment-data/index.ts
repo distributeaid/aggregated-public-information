@@ -35,8 +35,7 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    const processedNeeds = consolidateNeedsByRegion(data) // check this function is working properly, modify as required with progress of script
-
+    const processedNeeds = consolidateNeedsByRegion(data); // check this function is working properly, modify as required with progress of script
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {
