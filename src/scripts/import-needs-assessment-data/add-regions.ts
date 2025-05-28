@@ -203,7 +203,7 @@ async function uploadRegion({
     },
     body: JSON.stringify({
       data: {
-        Name: data.region,
+        name: data.region,
       },
     }),
   });

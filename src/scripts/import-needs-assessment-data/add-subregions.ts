@@ -207,7 +207,7 @@ async function uploadSubregion({
     },
     body: JSON.stringify({
       data: {
-        Name: data.subregion,
+        name: data.subregion,
       },
     }),
   });
