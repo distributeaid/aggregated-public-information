@@ -5,15 +5,15 @@ import { isFulfilled, _isRejected } from "../_utils/promiseUtils";
 import {
   Need,
   NeedAssessment,
-    NeedUploadWorkflow,
-    NeedUploadWorkflowResults,
+  NeedUploadWorkflow,
+  NeedUploadWorkflowResults,
 } from "./types.d";
 
 // Note: Uncomment the required imports during implementation in the code.
 
 /*  Add Needs from Needs Assessment Data
  * ------------------------------------------------------- */
-export async function addNeeds (data: NeedAssessment[]): Promise<Need[]> {
+export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
   console.log("Adding Needs from the Needs Assessment data ....");
 
   const uniqueNeedEntries = consolidateNeedsByRegion(data);
@@ -27,12 +27,11 @@ export async function addNeeds (data: NeedAssessment[]): Promise<Need[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow)
-      
+      return Promise.resolve(initialWorkflow);
     }),
   );
 
-// { "SUCCESS": [], "ALREADY_EXITS": [], ...}
+  // { "SUCCESS": [], "ALREADY_EXITS": [], ...}
   const resultsMap: NeedUploadWorkflowResults = Object.fromEntries(
     Object.keys(UploadWorkflowStatus).map((key) => [key, []]),
   ) as NeedUploadWorkflowResults;
@@ -65,7 +64,7 @@ export async function addNeeds (data: NeedAssessment[]): Promise<Need[]> {
     return [...needs, workflow.data];
   }, [] as Need[]);
 
-  return validNeeds;  
+  return validNeeds;
 }
 
 /* Consolidate the Needs and remove duplicates
