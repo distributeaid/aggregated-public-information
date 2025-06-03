@@ -69,7 +69,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
 
 /* Consolidate the Needs and remove duplicates
  * --------------------------------------------- */
-export function consolidateNeedsByRegion(data: NeedAssessment[]): Need[] {
+function consolidateNeedsByRegion(data: NeedAssessment[]): Need[] {
   const consolidatedNeeds: Need[] = [];
 
   data.forEach((assessment) => {
