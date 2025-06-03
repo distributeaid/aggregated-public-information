@@ -1,14 +1,72 @@
 // import qs from "qs";
 // import { STRAPI_ENV } from "../strapi-env";
-// import { UploadWorkflowStatus } from "../_utils/statusCodes";
+import { UploadWorkflowStatus } from "../_utils/statusCodes";
+import { isFulfilled, _isRejected } from "../_utils/promiseUtils";
 import {
   Need,
   NeedAssessment,
-  //   NeedUploadWorkflow,
-  //   NeedUploadWorkflowResults,
+    NeedUploadWorkflow,
+    NeedUploadWorkflowResults,
 } from "./types.d";
 
 // Note: Uncomment the required imports during implementation in the code.
+
+/*  Add Needs from Needs Assessment Data
+ * ------------------------------------------------------- */
+export async function addNeeds (data: NeedAssessment[]): Promise<Need[]> {
+  console.log("Adding Needs from the Needs Assessment data ....");
+
+  const uniqueNeedEntries = consolidateNeedsByRegion(data);
+
+  const results = await Promise.allSettled<NeedUploadWorkflow>(
+    uniqueNeedEntries.map((need) => {
+      const initialWorkflow = {
+        data: [need],
+        orig: JSON.stringify(need, null, 2),
+        status: UploadWorkflowStatus.PROCESSING,
+        logs: [],
+      };
+
+      return Promise.resolve(initialWorkflow)
+      
+    }),
+  );
+
+// { "SUCCESS": [], "ALREADY_EXITS": [], ...}
+  const resultsMap: NeedUploadWorkflowResults = Object.fromEntries(
+    Object.keys(UploadWorkflowStatus).map((key) => [key, []]),
+  ) as NeedUploadWorkflowResults;
+
+  results.forEach((result) => {
+    const workflowResult = isFulfilled(result) ? result.value : result.reason;
+    const statusKey = workflowResult.status || UploadWorkflowStatus.OTHER;
+    resultsMap[statusKey].push(workflowResult);
+  });
+
+  console.log("Add NeedsAssessment.Need results:");
+  Object.keys(resultsMap).forEach((key) => {
+    console.log(`     ${key}: ${resultsMap[key].length}`);
+
+    // NOTE: uncomment & set the status key to debug different types of results
+    // if (key !== UploadWorkflowStatus.SUCCESS && key !== UploadWorkflowStatus.ALREADY_EXISTS) {
+    //   resultsMap[key].forEach((result) => {
+    //     console.log(result)
+    //     console.log("\n")
+    //   })
+    // }
+  });
+
+  console.log("Adding needs completed!");
+
+  const validNeeds: Need[] = [
+    ...resultsMap[UploadWorkflowStatus.SUCCESS],
+    ...resultsMap[UploadWorkflowStatus.ALREADY_EXISTS],
+  ].reduce((needs: Need[], workflow: NeedUploadWorkflow) => {
+    return [...needs, workflow.data];
+  }, [] as Need[]);
+
+  return validNeeds;  
+}
 
 /* Consolidate the Needs and remove duplicates
  * --------------------------------------------- */
