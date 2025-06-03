@@ -7,7 +7,7 @@ import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
-import { consolidateNeedsByRegion } from "./add-needs";
+import { addNeeds } from "./add-needs";
 
 async function main() {
   try {
@@ -35,7 +35,7 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    const _processedNeeds = consolidateNeedsByRegion(data); // check this function is working properly, modify as required with progress of script
+    const _needs = await addNeeds(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {
