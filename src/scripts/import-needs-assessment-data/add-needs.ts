@@ -27,8 +27,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow)
-      .then(parseNeeds);
+      return Promise.resolve(initialWorkflow).then(parseNeeds);
     }),
   );
 
@@ -169,7 +168,7 @@ function areNeedsEqual(need1: Need, need2: Need): boolean {
 }
 
 /*  Parse Needs
-* --------------------------------------------------- */
+ * --------------------------------------------------- */
 async function parseNeeds({
   data,
   orig,
@@ -194,7 +193,9 @@ async function parseNeeds({
     const parsedData: Need[] = [];
 
     needs.forEach((need) => {
-      logs.push(`Parsing need: ${need.region} | ${need.product} | ${need.amount}`);
+      logs.push(
+        `Parsing need: ${need.region} | ${need.product} | ${need.amount}`,
+      );
 
       if (!need.survey || !need.product) {
         throw {
