@@ -27,7 +27,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow);
+      return Promise.resolve(initialWorkflow).then(parseNeeds);
     }),
   );
 
@@ -165,4 +165,61 @@ function areNeedsEqual(need1: Need, need2: Need): boolean {
   if (need1.subregion !== need2.subregion) return false;
 
   return true;
+}
+
+/*  Parse Needs
+ * --------------------------------------------------- */
+async function parseNeeds({
+  data,
+  orig,
+  status,
+  logs,
+}: NeedUploadWorkflow): Promise<NeedUploadWorkflow> {
+  logs = [...logs, `Log: parsing needs...`];
+
+  const needs = (() => {
+    if (typeof data === "object" && data !== null) {
+      if (Array.isArray(data)) {
+        return data;
+      } else if (Object.hasOwn(data, "need")) {
+        return [(data as Record<string, unknown>).need as Need];
+      }
+    }
+    console.log("Unexpected object structure:", JSON.stringify(data));
+    return [];
+  })();
+
+  return new Promise<NeedUploadWorkflow>((resolve, _reject) => {
+    const parsedData: Need[] = [];
+
+    needs.forEach((need) => {
+      logs.push(
+        `Parsing need: ${need.region} | ${need.product} | ${need.amount}`,
+      );
+
+      if (!need.survey || !need.product) {
+        throw {
+          data,
+          orig,
+          status: UploadWorkflowStatus.ORIGINAL_DATA_INVALID,
+          logs: [
+            ...logs,
+            `Error: Invalid need input: "${need.region}-${need.product}". Expected a non-null value in survey and product.`,
+          ],
+        };
+      }
+
+      const processedNeed: Need = {
+        ...need,
+      };
+      parsedData.push(processedNeed);
+    });
+
+    resolve({
+      data: parsedData,
+      orig,
+      status,
+      logs,
+    });
+  });
 }
