@@ -26,6 +26,13 @@
       "relation": "oneToMany",
       "target": "api::needs-assessment.need",
       "mappedBy": "needs_assessment_survey"
+    },
+    "reference": {
+      "type": "string",
+      "required": true
+    },
+    "yearQuarter": {
+      "type": "string"
     }
   }
 }

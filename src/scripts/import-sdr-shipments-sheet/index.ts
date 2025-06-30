@@ -1,8 +1,8 @@
 import "dotenv/config";
-import csvToJson from "csvtojson";
 
 import { addCountries } from "./add-countries";
 import { addShipments } from "./add-shipments";
+import { loadShipments } from "./load-shipments";
 
 /* How to run this script:
      1. Setup your scripts `.env` file (copy / modify `.env.example`)
@@ -13,37 +13,23 @@ import { addShipments } from "./add-shipments";
         `yarn script:import-sdr-shipments-sheet`
 */
 
-const shipments = await csvToJson({
-  noheader: true,
-  headers: [
-    "number",
-    "sendingCountry",
-    "receivingCountry",
-    "exporter",
-    "importer",
-    "type",
-    "project",
-    "daRoles.needsAssessment",
-    "daRoles.sourcingInKindDonations",
-    "daRoles.sourcingProcurement",
-    "daRoles.sourcingCommunityCollection",
-    "daRoles.aidMatching",
-    "daRoles.firstMileTransportation",
-    "daRoles.firstMileStorageCommunity",
-    "daRoles.firstMileStorageCommercial",
-    "daRoles.mainLegTransportation",
-    "daRoles.customsTransit",
-    "daRoles.customsExport",
-    "daRoles.customsImport",
-    "daRoles.lastMileTransportation",
-    "daRoles.lastMileStorageCommunity",
-    "daRoles.lastMileStorageCommercial",
-    "daRoles.other",
-    "carbonOffsetPaid",
-    "co2TonsGenerated",
-    "carbonOffsetCost",
-  ],
-}).fromFile("src/scripts/import-sdr-shipments-sheet/shipments.csv");
+function configureEnvironment() {
+  // Parse command-line arguments
+  const args = process.argv.slice(2);
+  process.env.VERBOSE = args.includes("-v") ? "true" : "";
 
-const countries = await addCountries(shipments);
-const _shipments = await addShipments(shipments, countries);
+  // If the environmental variables aren't set, remind the user where to set them.
+  if (!process.env.STRAPI_URL || !process.env.STRAPI_API_KEY) {
+    console.error(
+      "Please set STRAPI_URL and STRAPI_API_KEY in the .env file in the scripts directory.",
+    );
+    process.exit(1);
+  }
+}
+
+(async () => {
+  configureEnvironment();
+  const shipmentData = await loadShipments();
+  const countries = await addCountries(shipmentData);
+  await addShipments(shipmentData, countries);
+})();

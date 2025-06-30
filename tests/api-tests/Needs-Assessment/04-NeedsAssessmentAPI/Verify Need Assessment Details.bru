@@ -1,0 +1,26 @@
+meta {
+  name: Verify Need Assessment Details
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{base_url}}/api/needs/{{needsAssessment_document_id}}
+  body: json
+  auth: none
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.amount).to.eql(88);
+      expect(jsonData.data.documentId).to.eql(bru.getEnvVar("needsAssessment_document_id"));
+  
+  });
+  
+  
+}

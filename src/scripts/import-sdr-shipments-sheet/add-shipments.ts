@@ -1,7 +1,8 @@
 import qs from "qs";
 import { STRAPI_ENV } from "../strapi-env";
-import { toTitleCase, stripAndParseFloat, toBoolean } from "../helpers";
-import { UploadWorkflowStatus } from "../statusCodes";
+import { toTitleCase, stripAndParseFloat, toBoolean } from "../_utils/helpers";
+import { isFulfilled, _isRejected } from "../_utils/promiseUtils";
+import { UploadWorkflowStatus } from "../_utils/statusCodes";
 import {
   Country,
   Shipment,
@@ -90,18 +91,6 @@ export async function addShipments(
 
   return validShipments;
 }
-
-const isFulfilled = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseFulfilledResult<T> => {
-  return value.status === "fulfilled";
-};
-
-const _isRejected = <T>(
-  value: PromiseSettledResult<T>,
-): value is PromiseRejectedResult => {
-  return value.status === "rejected";
-};
 
 /* Parse Shipment
  * ------------------------------------------------------
@@ -330,6 +319,6 @@ async function uploadShipment({
     data: body.data,
     orig,
     status: UploadWorkflowStatus.SUCCESS,
-    logs: [...logs, "Success: Created Geo.Country."],
+    logs: [...logs, "Success: Created Geo.country."],
   };
 }

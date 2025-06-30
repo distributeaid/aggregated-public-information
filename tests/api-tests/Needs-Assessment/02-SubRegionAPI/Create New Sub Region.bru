@@ -1,0 +1,46 @@
+meta {
+  name: Create New Sub Region
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/api/subregions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "data": {
+          "name": "DemoSubregionNew",
+          "overview": "This is SubRegion"
+      }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.name).to.eql('DemoSubregionNew');
+      expect(jsonData.data.overview).to.eql('This is SubRegion');
+  });
+  
+  test("Extract and store SubRegionID", function () {
+      var jsonData = res.getBody(); // Parse the response JSON
+      if (jsonData.data.documentId) {
+          bru.setEnvVar("sub_region_id", jsonData.data.id);
+          bru.setEnvVar("sub_region_document_id", jsonData.data.documentId);
+      } else {
+          test("Region ID is missing in response", function () {
+              expect(jsonData.data.id).to.exist;
+          });
+      }
+  });
+  
+  
+}

@@ -4,9 +4,12 @@
   "info": {
     "singularName": "item",
     "pluralName": "items",
-    "displayName": "Product.Item"
+    "displayName": "Product.Item",
+    "description": ""
   },
-  "options": {},
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
     "name": {
       "type": "string",
@@ -54,6 +57,9 @@
       "default": 1,
       "required": true,
       "min": 1
+    },
+    "unit": {
+      "type": "string"
     }
   }
 }
