@@ -44,13 +44,13 @@
     "styled-components": "^6.0.0"
   },
   "engines": {
-    "node": ">=20.0.0 <=22.14.0",
+    "node": ">=20.0.0 <=22.17.0",
     "npm": ">=6.0.0"
   },
   "strapi": {
     "uuid": "679cf8f5-e045-4f0a-afc2-5bc6713ebdf0"
   },
-  "packageManager": "yarn@4.8.1",
+  "packageManager": "yarn@4.9.2",
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@types/eslint": "^9",
