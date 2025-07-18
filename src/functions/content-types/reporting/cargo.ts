@@ -1,3 +1,5 @@
+import { CargoPackage } from "./types";
+
 const volCBMMap = {
   "Banana Box": 0.05,
   Box: 0.056,
@@ -10,7 +12,7 @@ const volCBMMap = {
   "Bulk Bag": 0.729,
 };
 
-export function processReportingCargo(data) {
+export function processReportingCargo(data: CargoPackage) {
   const { packageCount, packageUnit, item } = data;
 
   if (!packageCount || !packageUnit || !item) {
