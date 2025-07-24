@@ -7,7 +7,8 @@ import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
-import { addNeeds } from "./add-needs";
+//import { addNeeds } from "./add-needs";
+import { getRegionIds, getSubregionIds, getSurveyIds, getProductItemIds } from "./get-ids";
 
 async function main() {
   try {
@@ -35,7 +36,16 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    const _needs = await addNeeds(data);
+    const regionResults = await getRegionIds();
+    console.log("Regions data", regionResults.length); // Log region results for test
+    const subregionResults = await getSubregionIds();
+    console.log("Subregions data", subregionResults.length); // Log subregion results for test
+    const surveyResults = await getSurveyIds();
+    console.log("Surveys data", surveyResults.length); // Log survey results for test
+    const productItemResults = await getProductItemIds();
+    console.log("Product Items data", productItemResults.length); // Log product item results for test
+
+    //const _needs = await addNeeds(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {
