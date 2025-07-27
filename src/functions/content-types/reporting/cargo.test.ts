@@ -22,7 +22,7 @@ describe("processReportingCargo", () => {
       packageUnit: "Single Item",
       packageCount: 1,
       item: { countPerCBM: 3 },
-      itemCount: 0, //what to do about this? can I get around having this placeholder?
+      itemCount: 0
     };
     processReportingCargo(oneItem);
     expect(oneItem.itemCount).toEqual(oneItem.packageCount);
