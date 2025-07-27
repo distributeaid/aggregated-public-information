@@ -22,7 +22,7 @@ describe("processReportingCargo", () => {
       packageUnit: "Single Item",
       packageCount: 1,
       item: { countPerCBM: 3 },
-      itemCount: 0
+      itemCount: 0,
     };
     processReportingCargo(oneItem);
     expect(oneItem.itemCount).toEqual(oneItem.packageCount);
