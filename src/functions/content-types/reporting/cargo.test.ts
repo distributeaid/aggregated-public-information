@@ -29,13 +29,13 @@ describe("processReportingCargo", () => {
   });
 
   it("skips calculating item count if packageUnit cannot be mapped", () => {
-    const weirdUnit = {
+    const unmappedPackageUnit = {
       packageUnit: "None of the Above",
       packageCount: 1,
       item: { countPerCBM: 3 },
     };
-    processReportingCargo(weirdUnit);
-    expect(weirdUnit).toEqual(weirdUnit);
+    processReportingCargo(unmappedPackageUnit);
+    expect(unmappedPackageUnit).toEqual(unmappedPackageUnit);
   });
 
   it("updates itemCount", () => {
