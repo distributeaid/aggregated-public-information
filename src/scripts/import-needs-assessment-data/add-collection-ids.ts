@@ -15,6 +15,7 @@ export async function addCollectionIdsToData(
   const regionIdMap = new Map(
     regionResults.map(region => [region.name.toLowerCase(), region.id])
   );
+  console.log(regionIdMap);
   const subregionIdMap = new Map(
     subregionResults.map(subregion => [subregion.name.toLowerCase(), subregion.id])
   );
