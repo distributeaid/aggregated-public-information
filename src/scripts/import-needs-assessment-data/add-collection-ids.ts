@@ -7,7 +7,8 @@ import {
 export async function addCollectionIdsToData(
   data: NeedAssessment[],
   regionResults,
-  subregionResults
+  subregionResults,
+  surveyResults
 ): Promise<Need[]> {
   const processedData: Need[] = [];
   
@@ -15,10 +16,18 @@ export async function addCollectionIdsToData(
   const regionIdMap = new Map(
     regionResults.map(region => [region.name.toLowerCase(), region.id])
   );
-  console.log(regionIdMap);
+  console.log(regionIdMap); // log map to test
   const subregionIdMap = new Map(
     subregionResults.map(subregion => [subregion.name.toLowerCase(), subregion.id])
   );
+  console.log(subregionIdMap); // log map to test
+  const surveyIdMap = new Map(
+    surveyResults.map(survey => [
+      `${survey.reference} | ${survey.yearQuarter}`,
+      survey.id
+    ])
+  );
+  console.log(surveyIdMap); // log map to test
   
   for (const assessment of data) {
     try {
@@ -42,6 +51,8 @@ export async function addCollectionIdsToData(
         subregionId: assessment.place.subregion
           ? Number(subregionIdMap.get(assessment.place.subregion.toLowerCase()) || 0)
           : 0,
+        surveyId: Number(surveyIdMap.get(
+          `${assessment.survey.id} | ${assessment.survey.year}-${assessment.survey.quarter}`) || 0),
       };
       
       if (!processedNeed.regionId) {
@@ -49,6 +60,9 @@ export async function addCollectionIdsToData(
       }
       if (assessment.place.subregion && !processedNeed.subregionId) {
         console.warn(`No subregion ID found for subregion: ${assessment.place.subregion}`);
+      }
+      if (assessment.survey.id && !processedNeed.surveyId) {
+        console.warn(`No survey ID found for survey: ${assessment.survey.id} | ${assessment.survey.year}-${assessment.survey.quarter}`);
       }
       
       processedData.push(processedNeed);
