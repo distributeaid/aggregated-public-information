@@ -34,7 +34,9 @@ export type Need = {
     quarter: string;
   };
   region: string;
+  regionId?: number;
   subregion?: string;
+  subregionId?: number;
   product: {
     category: string;
     item: string;
