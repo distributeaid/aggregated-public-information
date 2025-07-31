@@ -1,21 +1,29 @@
 meta {
-  name: Create New Sub Region
+  name: Create New Region to Link with Sub Region
   type: http
-  seq: 2
+  seq: 5
 }
 
 post {
-  url: {{base_url}}/api/subregions
+  url: {{base_url}}/api/regions
   body: json
   auth: none
 }
 
 body:json {
   {
-      "data": {
-          "name": "DemoSubregionNew",
-          "overview": "This is SubRegion"
+    "data": {
+      "name": "DemoRegionNew",
+      "overview": "This is Region",
+      "subregions": {
+        "connect": [
+          {
+            "id": {{sub_region_id}},
+            "documentId": "{{sub_region_document_id}}"
+          }
+        ]
       }
+    }
   }
 }
 
@@ -26,15 +34,15 @@ tests {
   
   test("Correct information saved", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.name).to.eql('DemoSubregionNew');
-      expect(jsonData.data.overview).to.eql('This is SubRegion');
+      expect(jsonData.data.name).to.eql('DemoRegionNew');
+      expect(jsonData.data.overview).to.eql('This is Region');
   });
   
   test("Extract and store RegionID", function () {
       var jsonData = res.getBody(); // Parse the response JSON
       if (jsonData.data.documentId) {
-          bru.setEnvVar("sub_region_id", jsonData.data.id);
-          bru.setEnvVar("sub_region_document_id", jsonData.data.documentId);
+          bru.setEnvVar("region_id", jsonData.data.id);
+          bru.setEnvVar("region_document_id", jsonData.data.documentId);
       } else {
           test("Region ID is missing in response", function () {
               expect(jsonData.data.id).to.exist;

@@ -38,7 +38,7 @@ body:json {
                       }
                   ]
               },
-              "need": 88
+              "amount": 88
           }
   }
 }
@@ -50,7 +50,7 @@ tests {
   
   test("Correct information saved", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.need).to.eql(88);
+      expect(jsonData.data.amount).to.eql(88);
   });
   
   test("Extract and store RegionID", function () {

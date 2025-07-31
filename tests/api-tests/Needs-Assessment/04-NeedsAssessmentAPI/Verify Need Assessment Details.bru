@@ -17,7 +17,7 @@ tests {
   
   test("Correct information saved", function () {
       var jsonData = res.getBody();
-      expect(jsonData.data.need).to.eql(88);
+      expect(jsonData.data.amount).to.eql(88);
       expect(jsonData.data.documentId).to.eql(bru.getEnvVar("needsAssessment_document_id"));
   
   });
