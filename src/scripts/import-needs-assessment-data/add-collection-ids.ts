@@ -16,18 +16,18 @@ export async function addCollectionIdsToData(
   const regionIdMap = new Map(
     regionResults.map(region => [region.name.toLowerCase(), region.id])
   );
-  console.log(regionIdMap); // log map to test
+  // console.log(regionIdMap); // log map to test
   const subregionIdMap = new Map(
     subregionResults.map(subregion => [subregion.name.toLowerCase(), subregion.id])
   );
-  console.log(subregionIdMap); // log map to test
+  // console.log(subregionIdMap); // log map to test
   const surveyIdMap = new Map(
     surveyResults.map(survey => [
       `${survey.reference} | ${survey.yearQuarter}`,
       survey.id
     ])
   );
-  console.log(surveyIdMap); // log map to test
+  // console.log(surveyIdMap); // log map to test
   
   for (const assessment of data) {
     try {
@@ -45,9 +45,9 @@ export async function addCollectionIdsToData(
           year: assessment.survey.year,
           quarter: assessment.survey.quarter,
         },
-        region: assessment.place.region,
+        region: assessment.place.region ?? "other",
         subregion: assessment.place.subregion || "",
-        regionId: Number(regionIdMap.get(assessment.place.region.toLowerCase()) || 0),
+        regionId: Number(regionIdMap.get((assessment.place.region ?? "other").toLowerCase()) || 0),
         subregionId: assessment.place.subregion
           ? Number(subregionIdMap.get(assessment.place.subregion.toLowerCase()) || 0)
           : 0,

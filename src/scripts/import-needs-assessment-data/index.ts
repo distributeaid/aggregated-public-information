@@ -47,7 +47,7 @@ async function main() {
     console.log("Product Items data", productItemResults.length); // Log product item results for test
 
     const processedData = await addCollectionIdsToData(data, regionResults, subregionResults, surveyResults);
-    console.log(processedData);
+    // console.log(processedData);
     console.log("Processed needs:", processedData.length);
 
     //const _needs = await addNeeds(data);
