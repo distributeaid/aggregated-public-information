@@ -1,5 +1,5 @@
 // import qs from "qs";
-import { STRAPI_ENV } from "../strapi-env";
+// import { STRAPI_ENV } from "../strapi-env";
 import { UploadWorkflowStatus } from "../_utils/statusCodes";
 import { isFulfilled, _isRejected } from "../_utils/promiseUtils";
 import {
@@ -27,8 +27,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow)
-        .then(parseNeeds)
+      return Promise.resolve(initialWorkflow).then(parseNeeds);
     }),
   );
 
