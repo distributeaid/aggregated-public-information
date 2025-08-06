@@ -8,13 +8,21 @@ import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
 //import { addNeeds } from "./add-needs";
-import { getRegionIds, getSubregionIds, getSurveyIds, getProductItemIds } from "./get-ids";
+import {
+  getRegionIds,
+  getSubregionIds,
+  getSurveyIds,
+  getProductItemIds,
+} from "./get-ids";
 import { addCollectionIdsToData } from "./add-collection-ids";
 
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(join(__dirname, "./needs-data(subset).json"), "utf8");
+    const jsonData = readFileSync(
+      join(__dirname, "./needs-data(subset).json"),
+      "utf8",
+    );
     const data = JSON.parse(jsonData);
 
     //  Process the data and upload to Strapi collections
@@ -46,7 +54,12 @@ async function main() {
     const productItemResults = await getProductItemIds();
     console.log("Product Items data", productItemResults.length); // Log product item results for test
 
-    const processedData = await addCollectionIdsToData(data, regionResults, subregionResults, surveyResults);
+    const processedData = await addCollectionIdsToData(
+      data,
+      regionResults,
+      subregionResults,
+      surveyResults,
+    );
     // console.log(processedData);
     console.log("Processed needs:", processedData.length);
 

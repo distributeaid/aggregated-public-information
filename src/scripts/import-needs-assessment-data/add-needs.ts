@@ -28,8 +28,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
       };
 
       return Promise.resolve(initialWorkflow)
-      .then(parseNeeds)
-      .then(getRegionIds);
+        .then(parseNeeds)
     }),
   );
 
@@ -226,62 +225,5 @@ async function parseNeeds({
   });
 }
 
-/**  Get Region Ids 
-*  *********************************************/
-async function getRegionIds({
-  data,
-  orig,
-  status,
-  logs,
-}: NeedUploadWorkflow): Promise<NeedUploadWorkflow> {
-  logs = [
-    ...logs,
-    `Log: Getting the region Id for "${data[0].region}".`,
-  ];
-
-  const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
-    },
-  });
-
-  const regionResults = await response.json();
-  const matchingRegion = regionResults.data.find((region) => {
-    const parsedNeed = data[0];
-    return region.name.toLowerCase() === parsedNeed.region.toLowerCase();
-  });
-
-  if (!response.ok) {
-    console.log("Non-ok response");
-    throw {
-      data,
-      orig,
-      status: UploadWorkflowStatus.PROCESSING,
-      logs: [
-        ...logs,
-        `Error: Failed to get region Id for this Need. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(regionResults),
-      ],
-    };
-  }
-
-  if (matchingRegion) {
-    const updateNeed = {
-      ...data[0],
-      regionId: matchingRegion.id,
-    };
-    data[0] = updateNeed;
-  }
-
-  return {
-    data,
-    orig,
-    status,
-    logs: [
-      ...logs,
-      "Success: Confirmed Need has a matching region Id.",
-    ],
-  };
-}
+/**  Get Ids
+ *  *********************************************/
