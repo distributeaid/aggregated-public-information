@@ -14,7 +14,9 @@ async function getRegionIds() {
   const regionsResponse = await existingRegions.json();
 
   // Check if "Other" region exists
-  if (!regionsResponse.data?.some(region => region.attributes?.name === "Other")) {
+  if (
+    !regionsResponse.data?.some((region) => region.attributes?.name === "Other")
+  ) {
     // Add "Other" region if it's missing
     await fetch(`${STRAPI_ENV.URL}/regions`, {
       method: "POST",
@@ -25,10 +27,10 @@ async function getRegionIds() {
       body: JSON.stringify({
         data: {
           name: "Other",
-        }
+        },
       }),
     });
-    
+
     // Re-fetch to ensure the new "Other" region is included
     return await fetch(`${STRAPI_ENV.URL}/regions`, {
       method: "GET",
@@ -36,7 +38,9 @@ async function getRegionIds() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${STRAPI_ENV.KEY}`,
       },
-    }).then(r => r.json()).then(r => r.data);
+    })
+      .then((r) => r.json())
+      .then((r) => r.data);
   }
 
   return regionsResponse.data;
@@ -90,70 +94,69 @@ async function getProductItemIds() {
   do {
     try {
       const productItemResponse = await fetch(`${STRAPI_ENV.URL}/items?pagination[page]=${currentPage}&pagination[pageSize]=25`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${STRAPI_ENV.KEY}`,
-      },
-    });
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+        },
+      });
 
-    if (!productItemResponse.ok) {
-      throw new Error(`HTTP error! status: ${productItemResponse.status}`);
-    }
+      if (!productItemResponse.ok) {
+        throw new Error(`HTTP error! status: ${productItemResponse.status}`);
+      }
 
-    const data = await productItemResponse.json();
-    
-    // Debugging the items coming in via the page
-    // console.log(`➡️ Page ${currentPage}`);
-    // console.log('➡️ Pagination metadata:', data.meta.pagination);
-    // console.log('➡️ Items received on this page:', data.data.length);
+      const data = await productItemResponse.json();
 
-    if (!data || !data.data) {
-      throw new Error('Invalid response structure: product item data is missing');
-    }
+      // Debugging the items coming in via the page
+      // console.log(`➡️ Page ${currentPage}`);
+      // console.log('➡️ Pagination metadata:', data.meta.pagination);
+      // console.log('➡️ Items received on this page:', data.data.length);
 
-    if (!Array.isArray(data.data)) {
-      throw new Error('Invalid response structure: product item data is not an array');
-    }
+      if (!data || !data.data) {
+        throw new Error('Invalid response structure: product item data is missing');
+      }
 
-    // checking for duplicates before adding to the allItems array
-    const newItems = data.data.filter(item =>
-      !allItems.some(existing => existing.id === item.id)
-    );
+      if (!Array.isArray(data.data)) {
+        throw new Error('Invalid response structure: product item data is not an array');
+      }
 
-    // Debugging for items issue
-    // const previousLength = allItems.length;
-    allItems.push(...newItems);
-    // const newLength = allItems.length;
-    // console.log('Array length after pushing new items:', newLength);
-    // console.log('Items added in this iteration:', newLength - previousLength);
+      // checking for duplicates before adding to the allItems array
+      const newItems = data.data.filter(item =>
+        !allItems.some(existing => existing.id === item.id)
+      );
 
-    //verify no duplicates in current page
-    const currentPageIds = new Set(data.data.map(item => item.id));
-    if (currentPageIds.size !== data.data.length) {
-      console.warn('Warning: Duplicate items detected in current page!');
-    }
+      // Debugging for items issue
+      // const previousLength = allItems.length;
+      allItems.push(...newItems);
+      // const newLength = allItems.length;
+      // console.log('Array length after pushing new items:', newLength);
+      // console.log('Items added in this iteration:', newLength - previousLength);
 
-    totalPages = data.meta.pagination.pageCount;
-    currentPage++;
+      //verify no duplicates in current page
+      const currentPageIds = new Set(data.data.map(item => item.id));
+      if (currentPageIds.size !== data.data.length) {
+        console.warn('Warning: Duplicate items detected in current page!');
+      }
+
+      totalPages = data.meta.pagination.pageCount;
+      currentPage++;
 
     } catch (error) {
       console.error(`Error fetching page ${currentPage}:`, error);
       throw error;
     }
-    
   } while (currentPage <= totalPages);
 
   // final verification that the allItems array does not contain duplicates
-  const finalIds = new Set(allItems.map(item => item.id));
+  const finalIds = new Set(allItems.map((item) => item.id));
 
-  console.log('Final array length:', allItems.length);
-  console.log('Number of unique items:', finalIds.size);
+  console.log("Final array length:", allItems.length);
+  console.log("Number of unique items:", finalIds.size);
 
-// console.log('\nFull array contents:');
-// allItems.forEach((item, index) => {
-//     console.log(`${index}:`, item);
-// });
+  // console.log('\nFull array contents:');
+  // allItems.forEach((item, index) => {
+  //     console.log(`${index}:`, item);
+  // });
 
   return allItems;
 }
