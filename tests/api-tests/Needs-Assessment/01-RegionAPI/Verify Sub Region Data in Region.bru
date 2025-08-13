@@ -1,0 +1,34 @@
+meta {
+  name: Verify Sub Region Data in Region
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{base_url}}/api/regions/{{region_document_id}}?populate=subregions
+  body: json
+  auth: none
+}
+
+params:query {
+  populate: subregions
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+      expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.name).to.eql('DemoRegionNew');
+      expect(jsonData.data.overview).to.eql('This is Region');
+  });
+  
+  test("Verify linked sub-region data", function () {
+      var jsonData = res.getBody();
+      expect(jsonData.data.subregions[0].documentId).to.eql(bru.getEnvVar("sub_region_document_id"));
+      expect(jsonData.data.subregions[0].name).to.eql('DemoSubregionNew');
+  });
+  
+}
