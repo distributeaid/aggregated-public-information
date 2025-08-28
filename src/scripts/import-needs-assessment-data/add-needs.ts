@@ -28,8 +28,8 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
       };
 
       return Promise.resolve(initialWorkflow)
-      .then(parseNeeds)
-      .then(getRegionIds);
+        .then(parseNeeds)
+        .then(getRegionIds);
     }),
   );
 
@@ -226,18 +226,15 @@ async function parseNeeds({
   });
 }
 
-/**  Get Region Ids 
-*  *********************************************/
+/**  Get Region Ids
+ *  *********************************************/
 async function getRegionIds({
   data,
   orig,
   status,
   logs,
 }: NeedUploadWorkflow): Promise<NeedUploadWorkflow> {
-  logs = [
-    ...logs,
-    `Log: Getting the region Id for "${data[0].region}".`,
-  ];
+  logs = [...logs, `Log: Getting the region Id for "${data[0].region}".`];
 
   const response = await fetch(`${STRAPI_ENV.URL}/regions`, {
     method: "GET",
@@ -279,9 +276,6 @@ async function getRegionIds({
     data,
     orig,
     status,
-    logs: [
-      ...logs,
-      "Success: Confirmed Need has a matching region Id.",
-    ],
+    logs: [...logs, "Success: Confirmed Need has a matching region Id."],
   };
 }
