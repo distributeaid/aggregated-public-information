@@ -11,3 +11,6 @@ types/generated/*
 src/api/*/documentation
 src/extensions/documentation
 
+# Ignore specific files that currently cause an E2BIG error when formatted:
+src/scripts/import-needs-assessment-data/get-ids.ts
+src/scripts/import-needs-assessment-data/add-collections.ts
