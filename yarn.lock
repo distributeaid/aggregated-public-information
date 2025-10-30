@@ -11817,13 +11817,13 @@ __metadata:
   linkType: hard
 
 "csvtojson@npm:^2.0.10":
-  version: 2.0.13
-  resolution: "csvtojson@npm:2.0.13"
+  version: 2.0.14
+  resolution: "csvtojson@npm:2.0.14"
   dependencies:
     lodash: "npm:^4.17.21"
   bin:
     csvtojson: bin/csvtojson
-  checksum: 10c0/2bfa01608a6279498dba61dbc6a25179fff3a6842718529ca34ff67da365fc4627329bf8bd621d93504c49cbdb163b812412f9bafbfd9e03ee5e631730a7a8ab
+  checksum: 10c0/94f35e903560e428e8ab922c3f122d46e921df616754577e410d79a50d6405c145ac64d01e825ae6238254d8024cd1c5acddacf2c6b4b38ad1c08bee1a900851
   languageName: node
   linkType: hard
 
