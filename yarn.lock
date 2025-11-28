@@ -839,10 +839,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/code-frame@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/code-frame@npm:7.27.1"
+  dependencies:
+    "@babel/helper-validator-identifier": "npm:^7.27.1"
+    js-tokens: "npm:^4.0.0"
+    picocolors: "npm:^1.1.1"
+  checksum: 10c0/5dd9a18baa5fce4741ba729acc3a3272c49c25cb8736c4b18e113099520e7ef7b545a4096a26d600e4416157e63e87d66db46aa3fbf0a5f2286da2705c12da00
+  languageName: node
+  linkType: hard
+
 "@babel/compat-data@npm:^7.25.2":
   version: 7.25.2
   resolution: "@babel/compat-data@npm:7.25.2"
   checksum: 10c0/5bf1f14d6e5f0d37c19543e99209ff4a94bb97915e1ce01e5334a144aa08cd56b6e62ece8135dac77e126723d63d4d4b96fc603a12c43b88c28f4b5e070270c5
+  languageName: node
+  linkType: hard
+
+"@babel/compat-data@npm:^7.27.2":
+  version: 7.28.5
+  resolution: "@babel/compat-data@npm:7.28.5"
+  checksum: 10c0/702a25de73087b0eba325c1d10979eed7c9b6662677386ba7b5aa6eace0fc0676f78343bae080a0176ae26f58bd5535d73b9d0fbb547fef377692e8b249353a7
   languageName: node
   linkType: hard
 
@@ -869,6 +887,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:^7.24.7":
+  version: 7.28.5
+  resolution: "@babel/core@npm:7.28.5"
+  dependencies:
+    "@babel/code-frame": "npm:^7.27.1"
+    "@babel/generator": "npm:^7.28.5"
+    "@babel/helper-compilation-targets": "npm:^7.27.2"
+    "@babel/helper-module-transforms": "npm:^7.28.3"
+    "@babel/helpers": "npm:^7.28.4"
+    "@babel/parser": "npm:^7.28.5"
+    "@babel/template": "npm:^7.27.2"
+    "@babel/traverse": "npm:^7.28.5"
+    "@babel/types": "npm:^7.28.5"
+    "@jridgewell/remapping": "npm:^2.3.5"
+    convert-source-map: "npm:^2.0.0"
+    debug: "npm:^4.1.0"
+    gensync: "npm:^1.0.0-beta.2"
+    json5: "npm:^2.2.3"
+    semver: "npm:^6.3.1"
+  checksum: 10c0/535f82238027621da6bdffbdbe896ebad3558b311d6f8abc680637a9859b96edbf929ab010757055381570b29cf66c4a295b5618318d27a4273c0e2033925e72
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.25.0, @babel/generator@npm:^7.7.2":
   version: 7.25.0
   resolution: "@babel/generator@npm:7.25.0"
@@ -878,6 +919,28 @@ __metadata:
     "@jridgewell/trace-mapping": "npm:^0.3.25"
     jsesc: "npm:^2.5.1"
   checksum: 10c0/d0e2dfcdc8bdbb5dded34b705ceebf2e0bc1b06795a1530e64fb6a3ccf313c189db7f60c1616effae48114e1a25adc75855bc4496f3779a396b3377bae718ce7
+  languageName: node
+  linkType: hard
+
+"@babel/generator@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/generator@npm:7.28.5"
+  dependencies:
+    "@babel/parser": "npm:^7.28.5"
+    "@babel/types": "npm:^7.28.5"
+    "@jridgewell/gen-mapping": "npm:^0.3.12"
+    "@jridgewell/trace-mapping": "npm:^0.3.28"
+    jsesc: "npm:^3.0.2"
+  checksum: 10c0/9f219fe1d5431b6919f1a5c60db8d5d34fe546c0d8f5a8511b32f847569234ffc8032beb9e7404649a143f54e15224ecb53a3d11b6bb85c3203e573d91fca752
+  languageName: node
+  linkType: hard
+
+"@babel/helper-annotate-as-pure@npm:^7.27.3":
+  version: 7.27.3
+  resolution: "@babel/helper-annotate-as-pure@npm:7.27.3"
+  dependencies:
+    "@babel/types": "npm:^7.27.3"
+  checksum: 10c0/94996ce0a05b7229f956033e6dcd69393db2b0886d0db6aff41e704390402b8cdcca11f61449cb4f86cfd9e61b5ad3a73e4fa661eeed7846b125bd1c33dbc633
   languageName: node
   linkType: hard
 
@@ -894,6 +957,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-compilation-targets@npm:^7.27.2":
+  version: 7.27.2
+  resolution: "@babel/helper-compilation-targets@npm:7.27.2"
+  dependencies:
+    "@babel/compat-data": "npm:^7.27.2"
+    "@babel/helper-validator-option": "npm:^7.27.1"
+    browserslist: "npm:^4.24.0"
+    lru-cache: "npm:^5.1.1"
+    semver: "npm:^6.3.1"
+  checksum: 10c0/f338fa00dcfea931804a7c55d1a1c81b6f0a09787e528ec580d5c21b3ecb3913f6cb0f361368973ce953b824d910d3ac3e8a8ee15192710d3563826447193ad1
+  languageName: node
+  linkType: hard
+
+"@babel/helper-create-class-features-plugin@npm:^7.27.1, @babel/helper-create-class-features-plugin@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/helper-create-class-features-plugin@npm:7.28.5"
+  dependencies:
+    "@babel/helper-annotate-as-pure": "npm:^7.27.3"
+    "@babel/helper-member-expression-to-functions": "npm:^7.28.5"
+    "@babel/helper-optimise-call-expression": "npm:^7.27.1"
+    "@babel/helper-replace-supers": "npm:^7.27.1"
+    "@babel/helper-skip-transparent-expression-wrappers": "npm:^7.27.1"
+    "@babel/traverse": "npm:^7.28.5"
+    semver: "npm:^6.3.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 10c0/786a6514efcf4514aaad85beed419b9184d059f4c9a9a95108f320142764999827252a851f7071de19f29424d369616573ecbaa347f1ce23fb12fc6827d9ff56
+  languageName: node
+  linkType: hard
+
+"@babel/helper-globals@npm:^7.28.0":
+  version: 7.28.0
+  resolution: "@babel/helper-globals@npm:7.28.0"
+  checksum: 10c0/5a0cd0c0e8c764b5f27f2095e4243e8af6fa145daea2b41b53c0c1414fe6ff139e3640f4e2207ae2b3d2153a1abd346f901c26c290ee7cb3881dd922d4ee9232
+  languageName: node
+  linkType: hard
+
+"@babel/helper-member-expression-to-functions@npm:^7.27.1, @babel/helper-member-expression-to-functions@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/helper-member-expression-to-functions@npm:7.28.5"
+  dependencies:
+    "@babel/traverse": "npm:^7.28.5"
+    "@babel/types": "npm:^7.28.5"
+  checksum: 10c0/4e6e05fbf4dffd0bc3e55e28fcaab008850be6de5a7013994ce874ec2beb90619cda4744b11607a60f8aae0227694502908add6188ceb1b5223596e765b44814
+  languageName: node
+  linkType: hard
+
 "@babel/helper-module-imports@npm:^7.16.7, @babel/helper-module-imports@npm:^7.24.7":
   version: 7.24.7
   resolution: "@babel/helper-module-imports@npm:7.24.7"
@@ -901,6 +1011,16 @@ __metadata:
     "@babel/traverse": "npm:^7.24.7"
     "@babel/types": "npm:^7.24.7"
   checksum: 10c0/97c57db6c3eeaea31564286e328a9fb52b0313c5cfcc7eee4bc226aebcf0418ea5b6fe78673c0e4a774512ec6c86e309d0f326e99d2b37bfc16a25a032498af0
+  languageName: node
+  linkType: hard
+
+"@babel/helper-module-imports@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-module-imports@npm:7.27.1"
+  dependencies:
+    "@babel/traverse": "npm:^7.27.1"
+    "@babel/types": "npm:^7.27.1"
+  checksum: 10c0/e00aace096e4e29290ff8648455c2bc4ed982f0d61dbf2db1b5e750b9b98f318bf5788d75a4f974c151bd318fd549e81dbcab595f46b14b81c12eda3023f51e8
   languageName: node
   linkType: hard
 
@@ -918,10 +1038,52 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-module-transforms@npm:^7.27.1, @babel/helper-module-transforms@npm:^7.28.3":
+  version: 7.28.3
+  resolution: "@babel/helper-module-transforms@npm:7.28.3"
+  dependencies:
+    "@babel/helper-module-imports": "npm:^7.27.1"
+    "@babel/helper-validator-identifier": "npm:^7.27.1"
+    "@babel/traverse": "npm:^7.28.3"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 10c0/549be62515a6d50cd4cfefcab1b005c47f89bd9135a22d602ee6a5e3a01f27571868ada10b75b033569f24dc4a2bb8d04bfa05ee75c16da7ade2d0db1437fcdb
+  languageName: node
+  linkType: hard
+
+"@babel/helper-optimise-call-expression@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-optimise-call-expression@npm:7.27.1"
+  dependencies:
+    "@babel/types": "npm:^7.27.1"
+  checksum: 10c0/6b861e7fcf6031b9c9fc2de3cd6c005e94a459d6caf3621d93346b52774925800ca29d4f64595a5ceacf4d161eb0d27649ae385110ed69491d9776686fa488e6
+  languageName: node
+  linkType: hard
+
 "@babel/helper-plugin-utils@npm:^7.0.0, @babel/helper-plugin-utils@npm:^7.10.4, @babel/helper-plugin-utils@npm:^7.12.13, @babel/helper-plugin-utils@npm:^7.14.5, @babel/helper-plugin-utils@npm:^7.24.7, @babel/helper-plugin-utils@npm:^7.8.0":
   version: 7.24.8
   resolution: "@babel/helper-plugin-utils@npm:7.24.8"
   checksum: 10c0/0376037f94a3bfe6b820a39f81220ac04f243eaee7193774b983e956c1750883ff236b30785795abbcda43fac3ece74750566830c2daa4d6e3870bb0dff34c2d
+  languageName: node
+  linkType: hard
+
+"@babel/helper-plugin-utils@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-plugin-utils@npm:7.27.1"
+  checksum: 10c0/94cf22c81a0c11a09b197b41ab488d416ff62254ce13c57e62912c85700dc2e99e555225787a4099ff6bae7a1812d622c80fbaeda824b79baa10a6c5ac4cf69b
+  languageName: node
+  linkType: hard
+
+"@babel/helper-replace-supers@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-replace-supers@npm:7.27.1"
+  dependencies:
+    "@babel/helper-member-expression-to-functions": "npm:^7.27.1"
+    "@babel/helper-optimise-call-expression": "npm:^7.27.1"
+    "@babel/traverse": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 10c0/4f2eaaf5fcc196580221a7ccd0f8873447b5d52745ad4096418f6101a1d2e712e9f93722c9a32bc9769a1dc197e001f60d6f5438d4dfde4b9c6a9e4df719354c
   languageName: node
   linkType: hard
 
@@ -935,10 +1097,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-skip-transparent-expression-wrappers@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-skip-transparent-expression-wrappers@npm:7.27.1"
+  dependencies:
+    "@babel/traverse": "npm:^7.27.1"
+    "@babel/types": "npm:^7.27.1"
+  checksum: 10c0/f625013bcdea422c470223a2614e90d2c1cc9d832e97f32ca1b4f82b34bb4aa67c3904cb4b116375d3b5b753acfb3951ed50835a1e832e7225295c7b0c24dff7
+  languageName: node
+  linkType: hard
+
 "@babel/helper-string-parser@npm:^7.24.8":
   version: 7.24.8
   resolution: "@babel/helper-string-parser@npm:7.24.8"
   checksum: 10c0/6361f72076c17fabf305e252bf6d580106429014b3ab3c1f5c4eb3e6d465536ea6b670cc0e9a637a77a9ad40454d3e41361a2909e70e305116a23d68ce094c08
+  languageName: node
+  linkType: hard
+
+"@babel/helper-string-parser@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-string-parser@npm:7.27.1"
+  checksum: 10c0/8bda3448e07b5583727c103560bcf9c4c24b3c1051a4c516d4050ef69df37bb9a4734a585fe12725b8c2763de0a265aa1e909b485a4e3270b7cfd3e4dbe4b602
   languageName: node
   linkType: hard
 
@@ -949,10 +1128,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-validator-identifier@npm:^7.27.1, @babel/helper-validator-identifier@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/helper-validator-identifier@npm:7.28.5"
+  checksum: 10c0/42aaebed91f739a41f3d80b72752d1f95fd7c72394e8e4bd7cdd88817e0774d80a432451bcba17c2c642c257c483bf1d409dd4548883429ea9493a3bc4ab0847
+  languageName: node
+  linkType: hard
+
 "@babel/helper-validator-option@npm:^7.24.8":
   version: 7.24.8
   resolution: "@babel/helper-validator-option@npm:7.24.8"
   checksum: 10c0/73db93a34ae89201351288bee7623eed81a54000779462a986105b54ffe82069e764afd15171a428b82e7c7a9b5fec10b5d5603b216317a414062edf5c67a21f
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-option@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/helper-validator-option@npm:7.27.1"
+  checksum: 10c0/6fec5f006eba40001a20f26b1ef5dbbda377b7b68c8ad518c05baa9af3f396e780bdfded24c4eef95d14bb7b8fd56192a6ed38d5d439b97d10efc5f1a191d148
   languageName: node
   linkType: hard
 
@@ -963,6 +1156,16 @@ __metadata:
     "@babel/template": "npm:^7.25.0"
     "@babel/types": "npm:^7.25.0"
   checksum: 10c0/b7fe007fc4194268abf70aa3810365085e290e6528dcb9fbbf7a765d43c74b6369ce0f99c5ccd2d44c413853099daa449c9a0123f0b212ac8d18643f2e8174b8
+  languageName: node
+  linkType: hard
+
+"@babel/helpers@npm:^7.28.4":
+  version: 7.28.4
+  resolution: "@babel/helpers@npm:7.28.4"
+  dependencies:
+    "@babel/template": "npm:^7.27.2"
+    "@babel/types": "npm:^7.28.4"
+  checksum: 10c0/aaa5fb8098926dfed5f223adf2c5e4c7fbba4b911b73dfec2d7d3083f8ba694d201a206db673da2d9b3ae8c01793e795767654558c450c8c14b4c2175b4fcb44
   languageName: node
   linkType: hard
 
@@ -986,6 +1189,17 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 10c0/874b01349aedb805d6694f867a752fdc7469778fad76aca4548d2cc6ce96087c3ba5fb917a6f8d05d2d1a74aae309b5f50f1a4dba035f5a2c9fcfe6e106d2c4e
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.24.7, @babel/parser@npm:^7.27.2, @babel/parser@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/parser@npm:7.28.5"
+  dependencies:
+    "@babel/types": "npm:^7.28.5"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 10c0/5bbe48bf2c79594ac02b490a41ffde7ef5aa22a9a88ad6bcc78432a6ba8a9d638d531d868bd1f104633f1f6bba9905746e15185b8276a3756c42b765d131b1ef
   languageName: node
   linkType: hard
 
@@ -1033,6 +1247,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-syntax-flow@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/plugin-syntax-flow@npm:7.27.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/4d34ca47044398665cbe0293baea7be230ca4090bc7981ffba5273402a215c95976c6f811c7b32f10b326cc6aab6886f26c29630c429aa45c3f350c5ccdfdbbf
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-syntax-import-attributes@npm:^7.24.7":
   version: 7.24.7
   resolution: "@babel/plugin-syntax-import-attributes@npm:7.24.7"
@@ -1063,6 +1288,17 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/e98f31b2ec406c57757d115aac81d0336e8434101c224edd9a5c93cefa53faf63eacc69f3138960c8b25401315af03df37f68d316c151c4b933136716ed6906e
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-syntax-jsx@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/plugin-syntax-jsx@npm:7.27.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/bc5afe6a458d5f0492c02a54ad98c5756a0c13bd6d20609aae65acd560a9e141b0876da5f358dce34ea136f271c1016df58b461184d7ae9c4321e0f98588bc84
   languageName: node
   linkType: hard
 
@@ -1165,6 +1401,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-syntax-typescript@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/plugin-syntax-typescript@npm:7.27.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/11589b4c89c66ef02d57bf56c6246267851ec0c361f58929327dc3e070b0dab644be625bbe7fb4c4df30c3634bfdfe31244e1f517be397d2def1487dbbe3c37d
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-syntax-typescript@npm:^7.7.2":
   version: 7.24.7
   resolution: "@babel/plugin-syntax-typescript@npm:7.24.7"
@@ -1173,6 +1420,135 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/cdabd2e8010fb0ad15b49c2c270efc97c4bfe109ead36c7bbcf22da7a74bc3e49702fc4f22f12d2d6049e8e22a5769258df1fd05f0420ae45e11bdd5bc07805a
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-class-properties@npm:^7.24.7":
+  version: 7.27.1
+  resolution: "@babel/plugin-transform-class-properties@npm:7.27.1"
+  dependencies:
+    "@babel/helper-create-class-features-plugin": "npm:^7.27.1"
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/cc0662633c0fe6df95819fef223506ddf26c369c8d64ab21a728d9007ec866bf9436a253909819216c24a82186b6ccbc1ec94d7aaf3f82df227c7c02fa6a704b
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-flow-strip-types@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/plugin-transform-flow-strip-types@npm:7.27.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+    "@babel/plugin-syntax-flow": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/c61c43244aacdcd479ad9ba618e1c095a5db7e4eadc3d19249602febc4e97153230273c014933f5fe4e92062fa56dab9bed4bc430197d5b2ffeb2158a4bf6786
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-modules-commonjs@npm:^7.24.7, @babel/plugin-transform-modules-commonjs@npm:^7.27.1":
+  version: 7.27.1
+  resolution: "@babel/plugin-transform-modules-commonjs@npm:7.27.1"
+  dependencies:
+    "@babel/helper-module-transforms": "npm:^7.27.1"
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/4def972dcd23375a266ea1189115a4ff61744b2c9366fc1de648b3fab2c650faf1a94092de93a33ff18858d2e6c4dddeeee5384cb42ba0129baeab01a5cdf1e2
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-nullish-coalescing-operator@npm:^7.24.7":
+  version: 7.27.1
+  resolution: "@babel/plugin-transform-nullish-coalescing-operator@npm:7.27.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/a435fc03aaa65c6ef8e99b2d61af0994eb5cdd4a28562d78c3b0b0228ca7e501aa255e1dff091a6996d7d3ea808eb5a65fd50ecd28dfb10687a8a1095dcadc7a
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-optional-chaining@npm:^7.24.7":
+  version: 7.28.5
+  resolution: "@babel/plugin-transform-optional-chaining@npm:7.28.5"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+    "@babel/helper-skip-transparent-expression-wrappers": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/adf5f70b1f9eb0dd6ff3d159a714683af3c910775653e667bd9f864c3dc2dc9872aba95f6c1e5f2a9675067241942f4fd0d641147ef4bf2bd8bc15f1fa0f2ed5
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-private-methods@npm:^7.24.7":
+  version: 7.27.1
+  resolution: "@babel/plugin-transform-private-methods@npm:7.27.1"
+  dependencies:
+    "@babel/helper-create-class-features-plugin": "npm:^7.27.1"
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/232bedfe9d28df215fb03cc7623bdde468b1246bdd6dc24465ff4bf9cc5f5a256ae33daea1fafa6cc59705e4d29da9024bb79baccaa5cd92811ac5db9b9244f2
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-typescript@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/plugin-transform-typescript@npm:7.28.5"
+  dependencies:
+    "@babel/helper-annotate-as-pure": "npm:^7.27.3"
+    "@babel/helper-create-class-features-plugin": "npm:^7.28.5"
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+    "@babel/helper-skip-transparent-expression-wrappers": "npm:^7.27.1"
+    "@babel/plugin-syntax-typescript": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/09e574ba5462e56452b4ceecae65e53c8e697a2d3559ce5d210bed10ac28a18aa69377e7550c30520eb29b40c417ee61997d5d58112657f22983244b78915a7c
+  languageName: node
+  linkType: hard
+
+"@babel/preset-flow@npm:^7.24.7":
+  version: 7.27.1
+  resolution: "@babel/preset-flow@npm:7.27.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+    "@babel/helper-validator-option": "npm:^7.27.1"
+    "@babel/plugin-transform-flow-strip-types": "npm:^7.27.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/252216c91ba3cc126f10c81c1df495ef2c622687d17373bc619354a7fb7280ea83f434ed1e7149dbddd712790d16ab60f5b864d007edd153931d780f834e52c1
+  languageName: node
+  linkType: hard
+
+"@babel/preset-typescript@npm:^7.24.7":
+  version: 7.28.5
+  resolution: "@babel/preset-typescript@npm:7.28.5"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.27.1"
+    "@babel/helper-validator-option": "npm:^7.27.1"
+    "@babel/plugin-syntax-jsx": "npm:^7.27.1"
+    "@babel/plugin-transform-modules-commonjs": "npm:^7.27.1"
+    "@babel/plugin-transform-typescript": "npm:^7.28.5"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/b3d55548854c105085dd80f638147aa8295bc186d70492289242d6c857cb03a6c61ec15186440ea10ed4a71cdde7d495f5eb3feda46273f36b0ac926e8409629
+  languageName: node
+  linkType: hard
+
+"@babel/register@npm:^7.24.6":
+  version: 7.28.3
+  resolution: "@babel/register@npm:7.28.3"
+  dependencies:
+    clone-deep: "npm:^4.0.1"
+    find-cache-dir: "npm:^2.0.0"
+    make-dir: "npm:^2.1.0"
+    pirates: "npm:^4.0.6"
+    source-map-support: "npm:^0.5.16"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/ff31870a24e862fca36d5c481eda40be610af215a922560834333a78000b0e159a209dae606d4d93d7456d35ea8caeaaea674cdeaa0c0362e7e30d7f095d2436
   languageName: node
   linkType: hard
 
@@ -1203,6 +1579,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/template@npm:^7.27.2":
+  version: 7.27.2
+  resolution: "@babel/template@npm:7.27.2"
+  dependencies:
+    "@babel/code-frame": "npm:^7.27.1"
+    "@babel/parser": "npm:^7.27.2"
+    "@babel/types": "npm:^7.27.1"
+  checksum: 10c0/ed9e9022651e463cc5f2cc21942f0e74544f1754d231add6348ff1b472985a3b3502041c0be62dc99ed2d12cfae0c51394bf827452b98a2f8769c03b87aadc81
+  languageName: node
+  linkType: hard
+
 "@babel/traverse@npm:^7.24.7, @babel/traverse@npm:^7.25.2":
   version: 7.25.3
   resolution: "@babel/traverse@npm:7.25.3"
@@ -1218,6 +1605,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.27.1, @babel/traverse@npm:^7.28.3, @babel/traverse@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/traverse@npm:7.28.5"
+  dependencies:
+    "@babel/code-frame": "npm:^7.27.1"
+    "@babel/generator": "npm:^7.28.5"
+    "@babel/helper-globals": "npm:^7.28.0"
+    "@babel/parser": "npm:^7.28.5"
+    "@babel/template": "npm:^7.27.2"
+    "@babel/types": "npm:^7.28.5"
+    debug: "npm:^4.3.1"
+  checksum: 10c0/f6c4a595993ae2b73f2d4cd9c062f2e232174d293edd4abe1d715bd6281da8d99e47c65857e8d0917d9384c65972f4acdebc6749a7c40a8fcc38b3c7fb3e706f
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.0.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.24.7, @babel/types@npm:^7.25.0, @babel/types@npm:^7.25.2, @babel/types@npm:^7.3.3":
   version: 7.25.2
   resolution: "@babel/types@npm:7.25.2"
@@ -1229,10 +1631,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.4, @babel/types@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/types@npm:7.28.5"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^7.27.1"
+    "@babel/helper-validator-identifier": "npm:^7.28.5"
+  checksum: 10c0/a5a483d2100befbf125793640dec26b90b95fd233a94c19573325898a5ce1e52cdfa96e495c7dcc31b5eca5b66ce3e6d4a0f5a4a62daec271455959f208ab08a
+  languageName: node
+  linkType: hard
+
 "@bcoe/v8-coverage@npm:^0.2.3":
   version: 0.2.3
   resolution: "@bcoe/v8-coverage@npm:0.2.3"
   checksum: 10c0/6b80ae4cb3db53f486da2dc63b6e190a74c8c3cca16bb2733f234a0b6a9382b09b146488ae08e2b22cf00f6c83e20f3e040a2f7894f05c045c946d6a090b1d52
+  languageName: node
+  linkType: hard
+
+"@borewit/text-codec@npm:^0.1.0":
+  version: 0.1.1
+  resolution: "@borewit/text-codec@npm:0.1.1"
+  checksum: 10c0/c92606b355111053f9db47d485c8679cc09a5be0eb2738aad5b922d3744465f2fce47144ffb27d5106fa431d1d2e5a2e0140d0a22351dccf49693098702c0274
   languageName: node
   linkType: hard
 
@@ -3450,6 +3869,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jridgewell/gen-mapping@npm:^0.3.12":
+  version: 0.3.13
+  resolution: "@jridgewell/gen-mapping@npm:0.3.13"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.5.0"
+    "@jridgewell/trace-mapping": "npm:^0.3.24"
+  checksum: 10c0/9a7d65fb13bd9aec1fbab74cda08496839b7e2ceb31f5ab922b323e94d7c481ce0fc4fd7e12e2610915ed8af51178bdc61e168e92a8c8b8303b030b03489b13b
+  languageName: node
+  linkType: hard
+
 "@jridgewell/gen-mapping@npm:^0.3.5":
   version: 0.3.5
   resolution: "@jridgewell/gen-mapping@npm:0.3.5"
@@ -3458,6 +3887,16 @@ __metadata:
     "@jridgewell/sourcemap-codec": "npm:^1.4.10"
     "@jridgewell/trace-mapping": "npm:^0.3.24"
   checksum: 10c0/1be4fd4a6b0f41337c4f5fdf4afc3bd19e39c3691924817108b82ffcb9c9e609c273f936932b9fba4b3a298ce2eb06d9bff4eb1cc3bd81c4f4ee1b4917e25feb
+  languageName: node
+  linkType: hard
+
+"@jridgewell/remapping@npm:^2.3.5":
+  version: 2.3.5
+  resolution: "@jridgewell/remapping@npm:2.3.5"
+  dependencies:
+    "@jridgewell/gen-mapping": "npm:^0.3.5"
+    "@jridgewell/trace-mapping": "npm:^0.3.24"
+  checksum: 10c0/3de494219ffeb2c5c38711d0d7bb128097edf91893090a2dbc8ee0b55d092bb7347b1fd0f478486c5eab010e855c73927b1666f2107516d472d24a73017d1194
   languageName: node
   linkType: hard
 
@@ -3492,6 +3931,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jridgewell/sourcemap-codec@npm:^1.5.0":
+  version: 1.5.5
+  resolution: "@jridgewell/sourcemap-codec@npm:1.5.5"
+  checksum: 10c0/f9e538f302b63c0ebc06eecb1dd9918dd4289ed36147a0ddce35d6ea4d7ebbda243cda7b2213b6a5e1d8087a298d5cf630fb2bd39329cdecb82017023f6081a0
+  languageName: node
+  linkType: hard
+
 "@jridgewell/trace-mapping@npm:^0.3.12, @jridgewell/trace-mapping@npm:^0.3.18, @jridgewell/trace-mapping@npm:^0.3.20, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
   version: 0.3.25
   resolution: "@jridgewell/trace-mapping@npm:0.3.25"
@@ -3499,6 +3945,16 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 10c0/3d1ce6ebc69df9682a5a8896b414c6537e428a1d68b02fcc8363b04284a8ca0df04d0ee3013132252ab14f2527bc13bea6526a912ecb5658f0e39fd2860b4df4
+  languageName: node
+  linkType: hard
+
+"@jridgewell/trace-mapping@npm:^0.3.28":
+  version: 0.3.31
+  resolution: "@jridgewell/trace-mapping@npm:0.3.31"
+  dependencies:
+    "@jridgewell/resolve-uri": "npm:^3.1.0"
+    "@jridgewell/sourcemap-codec": "npm:^1.4.14"
+  checksum: 10c0/4b30ec8cd56c5fd9a661f088230af01e0c1a3888d11ffb6b47639700f71225be21d1f7e168048d6d4f9449207b978a235c07c8f15c07705685d16dc06280e9d9
   languageName: node
   linkType: hard
 
@@ -6633,9 +7089,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@strapi/admin@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/admin@npm:4.25.24"
+"@strapi/admin@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/admin@npm:4.26.0"
   dependencies:
     "@casl/ability": "npm:6.5.0"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:0.5.11"
@@ -6643,13 +7099,13 @@ __metadata:
     "@radix-ui/react-toolbar": "npm:1.0.4"
     "@reduxjs/toolkit": "npm:1.9.7"
     "@strapi/design-system": "npm:1.19.0"
-    "@strapi/helper-plugin": "npm:4.25.24"
+    "@strapi/helper-plugin": "npm:4.26.0"
     "@strapi/icons": "npm:1.19.0"
-    "@strapi/permissions": "npm:4.25.24"
-    "@strapi/provider-audit-logs-local": "npm:4.25.24"
-    "@strapi/types": "npm:4.25.24"
-    "@strapi/typescript-utils": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/permissions": "npm:4.26.0"
+    "@strapi/provider-audit-logs-local": "npm:4.26.0"
+    "@strapi/types": "npm:4.26.0"
+    "@strapi/typescript-utils": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     "@vitejs/plugin-react-swc": "npm:3.5.0"
     axios: "npm:1.8.2"
     bcryptjs: "npm:2.4.3"
@@ -6745,13 +7201,13 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^5.2.0
     styled-components: ^5.2.1
-  checksum: 10c0/971afb4e266d547629687ed928063b3baff533b2c3c74e6c163db235d1d476544dae2b8a6ef39e33b8cac904c8cb358b8c00d85e6e8f4e2fefb715e51b7cfe80
+  checksum: 10c0/71fd49dd9c62893e8f22785e367b5cab4d76de0950209dc0c9d64e578554a109bc62d3a25b8744facc784cc1ed5fde4b5d8b7dfb72e04a9425527990f9a0ab3b
   languageName: node
   linkType: hard
 
-"@strapi/admin@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/admin@npm:5.29.0"
+"@strapi/admin@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/admin@npm:5.31.2"
   dependencies:
     "@casl/ability": "npm:6.5.0"
     "@internationalized/date": "npm:3.5.4"
@@ -6760,10 +7216,10 @@ __metadata:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/permissions": "npm:5.29.0"
-    "@strapi/types": "npm:5.29.0"
-    "@strapi/typescript-utils": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/permissions": "npm:5.31.2"
+    "@strapi/types": "npm:5.31.2"
+    "@strapi/typescript-utils": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     "@testing-library/dom": "npm:10.1.0"
     "@testing-library/react": "npm:15.0.7"
     "@testing-library/user-event": "npm:14.5.2"
@@ -6792,6 +7248,7 @@ __metadata:
     koa-static: "npm:5.0.0"
     koa2-ratelimit: "npm:^1.1.3"
     lodash: "npm:4.17.21"
+    motion: "npm:12.23.24"
     ora: "npm:5.4.1"
     p-map: "npm:4.0.0"
     passport-local: "npm:1.0.0"
@@ -6821,15 +7278,15 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/a2deb59bac859461eb44b0f2ae89cf1e0f35b119fba4707768996c04e2e987050aecc950ea715e6112a4579cfdd4f4854ce2e93dd73cf7aa5d4d7e316a408d1c
+  checksum: 10c0/9d1c4b72658d46bbbe1d795f7bc2fe319fa6a70b6728aee567c25bd70a3cc78b0fc5e2b8e36c94b2893e7dfb7d501ae5b91a8e3a7be04dae50aaca7e11249d34
   languageName: node
   linkType: hard
 
-"@strapi/cloud-cli@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/cloud-cli@npm:4.25.24"
+"@strapi/cloud-cli@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/cloud-cli@npm:4.26.0"
   dependencies:
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/utils": "npm:4.26.0"
     axios: "npm:1.8.2"
     chalk: "npm:4.1.2"
     cli-progress: "npm:3.12.0"
@@ -6850,15 +7307,15 @@ __metadata:
     yup: "npm:0.32.9"
   bin:
     cloud-cli: ./bin/index.js
-  checksum: 10c0/7db235b5facabfe5f98296b727bdb4a9c29ae59c227865fda0783e20b112f0f2b36f451de2f72da366e407dccee1519307e4af7f83a0d7ac07a453c98c0d12af
+  checksum: 10c0/0a31d89993cfead0cbd4473f776dbfae8d7339096333c296401861af4d9d7a8441a849d2f79eea7f5a569902fe13eb7c05d27a0fade1262a313ef7647a8c8ffc
   languageName: node
   linkType: hard
 
-"@strapi/cloud-cli@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/cloud-cli@npm:5.29.0"
+"@strapi/cloud-cli@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/cloud-cli@npm:5.31.2"
   dependencies:
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     axios: "npm:1.12.2"
     boxen: "npm:5.1.2"
     chalk: "npm:4.1.2"
@@ -6880,13 +7337,13 @@ __metadata:
     yup: "npm:0.32.9"
   bin:
     cloud-cli: bin/index.js
-  checksum: 10c0/3eb36482087a76b65272a060ffb6c49235476bea5c7135514f27d4b8463ea91ec2820ced61201e84a0969b973b47ac27d7e7afbdfd0b195a08fec8eb8f7a4dd7
+  checksum: 10c0/032bd11ff85ddb0cc4860601a452d7e1e7a068d779cbddb94479f3f23ed01a234f29a09a49f728264e0f7d2573d252e5c2ba0724f5326cb78f1392d28bc247ad
   languageName: node
   linkType: hard
 
-"@strapi/content-manager@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/content-manager@npm:5.29.0"
+"@strapi/content-manager@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/content-manager@npm:5.31.2"
   dependencies:
     "@dnd-kit/core": "npm:6.3.1"
     "@dnd-kit/sortable": "npm:10.0.0"
@@ -6896,8 +7353,8 @@ __metadata:
     "@sindresorhus/slugify": "npm:1.1.0"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/types": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/types": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     codemirror5: "npm:codemirror@^5.65.11"
     date-fns: "npm:2.30.0"
     fractional-indexing: "npm:3.2.0"
@@ -6935,20 +7392,20 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/dc037d3c7acd014ec4d79e5163bb53d3b6a8ca654497884b09867c9772522c687f21b5558057167b2a7b509fa6475c0f5b2123429b6b2e2d01621c7604b134c4
+  checksum: 10c0/b6836ae52e69f86c0c29d3a6e33072c23a1dd38875cf93d3046eb00ccb274389ba3680673642c008e812bfd8c4133a66477362c551e93afbf798f1f48ce031b1
   languageName: node
   linkType: hard
 
-"@strapi/content-releases@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/content-releases@npm:4.25.24"
+"@strapi/content-releases@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/content-releases@npm:4.26.0"
   dependencies:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@strapi/design-system": "npm:1.19.0"
-    "@strapi/helper-plugin": "npm:4.25.24"
+    "@strapi/helper-plugin": "npm:4.26.0"
     "@strapi/icons": "npm:1.19.0"
-    "@strapi/types": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/types": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     axios: "npm:1.8.2"
     date-fns: "npm:2.30.0"
     date-fns-tz: "npm:2.0.0"
@@ -6965,20 +7422,20 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: 5.3.4
     styled-components: 5.3.3
-  checksum: 10c0/217aa416eef4faf2c95f4e3f7e307eed034d45bf1e831a56debf5345c59de4008d962a6dfa25f2a47ff9626e35355e82de01d7c7a9cf253f63702259ff9fd244
+  checksum: 10c0/86697911f850154b424f156650a579aa0ee4046ca5717ffa3ec0dfd755a8c384d226502e3a0aad896d36b986bad9033873e1c5d15c279c67cee3ed7c050345fb
   languageName: node
   linkType: hard
 
-"@strapi/content-releases@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/content-releases@npm:5.29.0"
+"@strapi/content-releases@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/content-releases@npm:5.31.2"
   dependencies:
     "@reduxjs/toolkit": "npm:1.9.7"
-    "@strapi/database": "npm:5.29.0"
+    "@strapi/database": "npm:5.31.2"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/types": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/types": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     date-fns: "npm:2.30.0"
     date-fns-tz: "npm:2.0.1"
     formik: "npm:2.4.5"
@@ -6994,13 +7451,13 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/9c2b6406dda9690c7fd71662c84cf03037989c2152ad70343251522e8d27f5fc013c73ee43ee138ea03a0abf2c9a1be9b93d4950fd36359b8bb1ddf5a0274327
+  checksum: 10c0/0896b6ce39dd9d3e9abb90a4984cb2ec89b4193bb9002fe39dae1957baa123e66a43d29a2adaca6098e578cd57e10dacaab70949becc92e9e58586ddfadb85fe
   languageName: node
   linkType: hard
 
-"@strapi/content-type-builder@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/content-type-builder@npm:5.29.0"
+"@strapi/content-type-builder@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/content-type-builder@npm:5.31.2"
   dependencies:
     "@ai-sdk/react": "npm:2.0.26"
     "@dnd-kit/core": "npm:6.3.1"
@@ -7010,9 +7467,9 @@ __metadata:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@sindresorhus/slugify": "npm:1.1.0"
     "@strapi/design-system": "npm:2.0.0-rc.30"
-    "@strapi/generators": "npm:5.29.0"
+    "@strapi/generators": "npm:5.31.2"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     ai: "npm:5.0.26"
     date-fns: "npm:2.30.0"
     fs-extra: "npm:11.2.0"
@@ -7034,25 +7491,25 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/f2fcd41b9fc22180975c52fb094ac7d4b4d153ccdf33574a1a11ae49f6c192506c8a53e38ef31662bcaa6abada50096671234e36b557d419cd7aa11318f9e9b0
+  checksum: 10c0/c0fa7017a46ad012fe2300ea5cd1a42113d4aece11d0402fa8848d5a5e98ba2ba208b105df2f010d52a45e0db658c9bc2a42f65fa07e9a8213dab848186fd335
   languageName: node
   linkType: hard
 
-"@strapi/core@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/core@npm:5.29.0"
+"@strapi/core@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/core@npm:5.31.2"
   dependencies:
     "@koa/cors": "npm:5.0.0"
     "@koa/router": "npm:12.0.2"
     "@paralleldrive/cuid2": "npm:2.2.2"
-    "@strapi/admin": "npm:5.29.0"
-    "@strapi/database": "npm:5.29.0"
-    "@strapi/generators": "npm:5.29.0"
-    "@strapi/logger": "npm:5.29.0"
-    "@strapi/permissions": "npm:5.29.0"
-    "@strapi/types": "npm:5.29.0"
-    "@strapi/typescript-utils": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/admin": "npm:5.31.2"
+    "@strapi/database": "npm:5.31.2"
+    "@strapi/generators": "npm:5.31.2"
+    "@strapi/logger": "npm:5.31.2"
+    "@strapi/permissions": "npm:5.31.2"
+    "@strapi/types": "npm:5.31.2"
+    "@strapi/typescript-utils": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     "@vercel/stega": "npm:0.1.2"
     bcryptjs: "npm:2.4.3"
     boxen: "npm:5.1.2"
@@ -7098,18 +7555,18 @@ __metadata:
     undici: "npm:6.21.2"
     yup: "npm:0.32.9"
     zod: "npm:3.25.67"
-  checksum: 10c0/66f6f74805de9d5d1f768cd0289c662a138718b7d1fff6ffa1b8eb7673b6e623974b4700443ef06f43349949e4a558843d8218334155c6c22b20b2409b11ced8
+  checksum: 10c0/c415897d0e13751fca0fda6e9da80f98f062645bfa462297101ddcc483d2dec5376efe1399f6aa4a760008a15fbe5917ca834f6efc9b82fcf6ca96bb511884ea
   languageName: node
   linkType: hard
 
-"@strapi/data-transfer@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/data-transfer@npm:4.25.24"
+"@strapi/data-transfer@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/data-transfer@npm:4.26.0"
   dependencies:
-    "@strapi/logger": "npm:4.25.24"
-    "@strapi/strapi": "npm:4.25.24"
-    "@strapi/types": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/logger": "npm:4.26.0"
+    "@strapi/strapi": "npm:4.26.0"
+    "@strapi/types": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     chalk: "npm:4.1.2"
     cli-table3: "npm:0.6.5"
     commander: "npm:8.3.0"
@@ -7126,17 +7583,17 @@ __metadata:
     ws: "npm:8.18.0"
   peerDependencies:
     "@strapi/strapi": ^4.14.4
-  checksum: 10c0/5b6d0238a38a5832a7d9be36e1c57c3dc17e9d5bca753cfa6bc08b0dd592ca33b8d7682a8eddaf5e0b22d3a689f28f6f91a4c21db0d894890a1feecdf151dee5
+  checksum: 10c0/6c82a76dc93c6d199f46ce38d20cd84ef1389fe075e95d46a889fdbf857143df076fe12f87398704889ffdf0b4c639147a5e22fdbdf9f1602fe51ffaa318023b
   languageName: node
   linkType: hard
 
-"@strapi/data-transfer@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/data-transfer@npm:5.29.0"
+"@strapi/data-transfer@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/data-transfer@npm:5.31.2"
   dependencies:
-    "@strapi/logger": "npm:5.29.0"
-    "@strapi/types": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/logger": "npm:5.31.2"
+    "@strapi/types": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     chalk: "npm:4.1.2"
     cli-table3: "npm:0.6.5"
     commander: "npm:8.3.0"
@@ -7151,15 +7608,15 @@ __metadata:
     tar: "npm:6.2.1"
     tar-stream: "npm:2.2.0"
     ws: "npm:8.17.1"
-  checksum: 10c0/be3a2b6f083b47b287f8bb88e5d0453500fe91e1b38f5d7363063aa7d20b6d5cc5a924094e8588c6db9a21ad090eb3ba8bc1b59d1f3ff3f5ba27c0544023d48c
+  checksum: 10c0/6971b201ce1899c2bb6fdc7850e9a16340b31c80a525ec0f3ea8ef081026fbecd0923265998c5cf995d39d31d03cc85cfb82a638f7575b44419a2f04cf7d4325
   languageName: node
   linkType: hard
 
-"@strapi/database@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/database@npm:4.25.24"
+"@strapi/database@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/database@npm:4.26.0"
   dependencies:
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/utils": "npm:4.26.0"
     date-fns: "npm:2.30.0"
     debug: "npm:4.3.4"
     fs-extra: "npm:10.0.0"
@@ -7167,16 +7624,16 @@ __metadata:
     lodash: "npm:4.17.21"
     semver: "npm:7.5.4"
     umzug: "npm:3.2.1"
-  checksum: 10c0/d32eecbd6126746105d949344d92622f7cc5aa7feb825c6ca0cb5e79ac6a3c6719acd76780920903de1967bdbf84837711871e5dd6695addbabab1f8dca57e54
+  checksum: 10c0/29f87d80de97c9c8f90d234f3eec53829440f412e838b33d1d9d907f096a99635e6f20b210b758f4269c3330dd1f64264ad13d925f295f903661a67862bba9ca
   languageName: node
   linkType: hard
 
-"@strapi/database@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/database@npm:5.29.0"
+"@strapi/database@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/database@npm:5.31.2"
   dependencies:
     "@paralleldrive/cuid2": "npm:2.2.2"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     ajv: "npm:8.16.0"
     date-fns: "npm:2.30.0"
     debug: "npm:4.3.4"
@@ -7185,7 +7642,7 @@ __metadata:
     lodash: "npm:4.17.21"
     semver: "npm:7.5.4"
     umzug: "npm:3.8.1"
-  checksum: 10c0/592d6f57425cd4a6947a06f8ae67683e9a27693efd89bf91316da7bd970cbbc69b41f33fc7e93bc1d335f15f6bb8a1fbfd5d6db49154c54f85e5f98f5ebe53e8
+  checksum: 10c0/c796df8a2f0017ca224bd40d3cf0300794cebf68775981871e8bc0fe9e4380cfa7d41ced32edf684e35023da6907185961f5a87e7a4a846af08dc6d057522b74
   languageName: node
   linkType: hard
 
@@ -7254,14 +7711,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@strapi/email@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/email@npm:5.29.0"
+"@strapi/email@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/email@npm:5.31.2"
   dependencies:
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/provider-email-sendmail": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/provider-email-sendmail": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     koa2-ratelimit: "npm:^1.1.3"
     lodash: "npm:4.17.21"
     react-intl: "npm:6.6.2"
@@ -7275,13 +7732,13 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/617d211cebcfb09cc009f42bfbae4aa06da226618b6d721556f3c36989aa5fa02c9275e3d14532344b4fbf0c2492ec8343e244728ba833cb93d0728401728838
+  checksum: 10c0/3d5aeed5b2c235ba152812d7a1a708d4e5b64af9a006e5150d03ff862db2c6bf1c1ad8410eea198fa922af0fad1163dc999fa8f4bcf7fc7ffbf566b15bdee74a
   languageName: node
   linkType: hard
 
-"@strapi/generate-new@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/generate-new@npm:4.25.24"
+"@strapi/generate-new@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/generate-new@npm:4.26.0"
   dependencies:
     "@sentry/node": "npm:6.19.7"
     chalk: "npm:^4.1.2"
@@ -7294,47 +7751,49 @@ __metadata:
     ora: "npm:^5.4.1"
     semver: "npm:7.5.4"
     tar: "npm:6.2.1"
-  checksum: 10c0/b1cca6f665d2f874f2073ce709b20632089fc1b8413c2324c5b294e4325d94455578e9ed10ad14d30b2bd26815883c3159aa3b37cbe61ce9dcf861c76d92c99b
+  checksum: 10c0/50b61a349695d1924c4cf0cfc46823464fe70349153d5264a79b52e7113be4f002f6ada7f9d7b8e07fda90d7e73ace30287ce675e7207091291feef9876bfb07
   languageName: node
   linkType: hard
 
-"@strapi/generators@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/generators@npm:4.25.24"
+"@strapi/generators@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/generators@npm:4.26.0"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.0"
-    "@strapi/typescript-utils": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/typescript-utils": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     chalk: "npm:4.1.2"
     copyfiles: "npm:2.4.1"
     fs-extra: "npm:10.0.0"
     node-plop: "npm:0.26.3"
     plop: "npm:2.7.6"
     pluralize: "npm:8.0.0"
-  checksum: 10c0/123cd32897d9272228e3e99b448e3be2143c5f3b8777cdf81f184cdcfa770b8e7c6eb785dc25e62409bc2422426c99df6f385951911f737ac700118c31ad6bf2
+  checksum: 10c0/3d6642c1a52d08a53c96f7f6f2ef8b855915ac9a1993a7f0862ec80c289e78125727d6018e9c5d0a3d58b3107f46c34446aab7131314b457ca1f7ff62d74e2dd
   languageName: node
   linkType: hard
 
-"@strapi/generators@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/generators@npm:5.29.0"
+"@strapi/generators@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/generators@npm:5.31.2"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.0"
-    "@strapi/typescript-utils": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/typescript-utils": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     chalk: "npm:4.1.2"
     copyfiles: "npm:2.4.1"
     fs-extra: "npm:11.2.0"
     handlebars: "npm:4.7.7"
+    jscodeshift: "npm:17.3.0"
+    lodash: "npm:4.17.21"
     plop: "npm:4.0.1"
     pluralize: "npm:8.0.0"
-  checksum: 10c0/cf43aec3289e0cc2d024be050443eb70468b1f127f9c05460cddd443b38cb2652796393a4bb1a12407ad325ceded21526b1293403e4fc3982da986d83c336771
+  checksum: 10c0/fd5b65582677be8e33db4a4fa0be66ae2715548921feea0aaca3c87c38f845f15b5bf6cbcee8edf6b0f3ddb0cf3646c6014a01ee8a99d552b330c3d98e8a028f
   languageName: node
   linkType: hard
 
-"@strapi/helper-plugin@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/helper-plugin@npm:4.25.24"
+"@strapi/helper-plugin@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/helper-plugin@npm:4.26.0"
   dependencies:
     axios: "npm:1.8.2"
     date-fns: "npm:2.30.0"
@@ -7353,18 +7812,18 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^5.2.0
     styled-components: ^5.2.1
-  checksum: 10c0/ac4150d5cb1ff1768aa83d7a6e340cfe4db1089c8977939ed543bbf27ad64e2dbe612d0afe9930459182975ccba8eebc2490a65381c870b98fc322fbb7221cb0
+  checksum: 10c0/38e309532280e4515059414eb5f16d243909ea3a2abe245512712487c96bcfa91c80ba422e3c81b36f8817f0203f7c276df30889d938e361e8ef4f08a46f1e06
   languageName: node
   linkType: hard
 
-"@strapi/i18n@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/i18n@npm:5.29.0"
+"@strapi/i18n@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/i18n@npm:5.31.2"
   dependencies:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     lodash: "npm:4.17.21"
     qs: "npm:6.11.1"
     react-intl: "npm:6.6.2"
@@ -7378,7 +7837,7 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/5dad5b17de9e721035e0ea04f0fd7f338d3341c3a125533729dad2140193ec19e71f6f4cce90ad4aee80285ce29b45978a5cb998413ccd28b07c9cb060b9633d
+  checksum: 10c0/4edd6ea5e1e75cc4413d3421427f403af5f9ff2357ba7b93cb51b9b2de99774d4d9120e7f5415d5b7cfbd984a7149b460e088f76b4662f9055b92ff894afa9b8
   languageName: node
   linkType: hard
 
@@ -7403,34 +7862,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@strapi/logger@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/logger@npm:4.25.24"
+"@strapi/logger@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/logger@npm:4.26.0"
   dependencies:
     lodash: "npm:4.17.21"
     winston: "npm:3.10.0"
-  checksum: 10c0/4fa450e3dcd2c80bc3ee0347959d4add158fd6fe09824e7f14f8ad5a4de25def578db6db758cdfd08df1fe38bc0fad5884f28feb3ffb7bd5f6d80c2be5e1de1a
+  checksum: 10c0/d34e187f41968f667c4fa9ec65bd82d719d339a6bc9374cebeef83749bf1e5bff22508e7267650e0cded88d30edd52d4aff015f63fa7554bc3a17f1ed92530c0
   languageName: node
   linkType: hard
 
-"@strapi/logger@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/logger@npm:5.29.0"
+"@strapi/logger@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/logger@npm:5.31.2"
   dependencies:
     lodash: "npm:4.17.21"
     winston: "npm:3.10.0"
-  checksum: 10c0/08b463f67e90c6851e9a887dd1819e908b04ba584104dc4f92a62a41572d1dbd5f9c9252fe912605f9463319d1afb744ab4c1450f70d111f8dfe1592adcdd444
+  checksum: 10c0/b851e450512a774ce8acaa3e8533338cacca96baab87fd065823062170b001b778d9f6dfa42e4ef2eb18faa2f2c8ee1b7d442813252aa333d421af3e2ad6c68d
   languageName: node
   linkType: hard
 
-"@strapi/openapi@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/openapi@npm:5.29.0"
+"@strapi/openapi@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/openapi@npm:5.31.2"
   dependencies:
     debug: "npm:4.3.4"
     openapi-types: "npm:12.1.3"
     zod: "npm:3.25.67"
-  checksum: 10c0/222032b1bd74c4ec13cce406d306c7faf74837721e6069d61083a4baad59250d2ef65c4c1ae81bef277e13b63933fc238b8dfb1e3d9e8118cee47e02ee925344
+  checksum: 10c0/f916215c089efd073f6d201c88c12236af7a3013417bdcb3443fbf2100703fa363db211ef1ae854ccedd6309f2b77cab5bf847bbd70e97078db96705aa9c5e54
   languageName: node
   linkType: hard
 
@@ -7465,58 +7924,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@strapi/permissions@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/permissions@npm:4.25.24"
+"@strapi/permissions@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/permissions@npm:4.26.0"
   dependencies:
     "@casl/ability": "npm:6.5.0"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/utils": "npm:4.26.0"
     lodash: "npm:4.17.21"
     qs: "npm:6.11.1"
     sift: "npm:16.0.1"
-  checksum: 10c0/cade7263d2960b5f45dac9450b06c1fe20e49808ac8f7094de500a0858e1b2d7eff172f2d29304ee8c299dbae18a6adf383a5933cc1bbf77c3fde7860acd7765
+  checksum: 10c0/7ebff7568f7bc0c7e2935e4b0ad2286e3cd0e901105616890a30eb55999961e351c465acac9febd8be52c6f2d08f10f5fe65dc94b52fcbf7886961d31152c0c3
   languageName: node
   linkType: hard
 
-"@strapi/permissions@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/permissions@npm:5.29.0"
+"@strapi/permissions@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/permissions@npm:5.31.2"
   dependencies:
     "@casl/ability": "npm:6.5.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     lodash: "npm:4.17.21"
     qs: "npm:6.11.1"
     sift: "npm:16.0.1"
-  checksum: 10c0/d5ba0f3c787f46e65d68ae36007ec07c75cf1958c523b7203eaac138606bfa6c85c68acdb1b3d276d5aaa614cb764462cb04813a3fc3196d185a010831cbe4be
+  checksum: 10c0/b105d7e59729d091621657dd9791a49c7dd7e4ad062001ca6413b209c3f1cb72cdae360e37fc50df2cd58b6ddf4c82854f7b48e4e6fb30ef71374e0a5ba53628
   languageName: node
   linkType: hard
 
-"@strapi/plugin-content-manager@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/plugin-content-manager@npm:4.25.24"
+"@strapi/plugin-content-manager@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/plugin-content-manager@npm:4.26.0"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.0"
-    "@strapi/types": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/types": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     koa: "npm:2.16.1"
     koa-bodyparser: "npm:4.4.1"
     lodash: "npm:4.17.21"
     qs: "npm:6.11.1"
-  checksum: 10c0/dd34e2c499cac932aaac25296b0f398f7f98f11be6c995166fc5a29d065ee52b93cdb10f2006051fa42664f4fe314d384cda8ce89e13ae83133daa1a120fd086
+  checksum: 10c0/6ce556441b5f492e77c2a119fa96b56533d5ea79709e6a71d2e3fece7ba2977e985dcb7bd9b4e7fc6912427ea0a9478b166b52245d7c71bcee2da12f85442ed4
   languageName: node
   linkType: hard
 
-"@strapi/plugin-content-type-builder@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/plugin-content-type-builder@npm:4.25.24"
+"@strapi/plugin-content-type-builder@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/plugin-content-type-builder@npm:4.26.0"
   dependencies:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@sindresorhus/slugify": "npm:1.1.0"
     "@strapi/design-system": "npm:1.19.0"
-    "@strapi/generators": "npm:4.25.24"
-    "@strapi/helper-plugin": "npm:4.25.24"
+    "@strapi/generators": "npm:4.26.0"
+    "@strapi/helper-plugin": "npm:4.26.0"
     "@strapi/icons": "npm:1.19.0"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/utils": "npm:4.26.0"
     fs-extra: "npm:10.0.0"
     immer: "npm:9.0.19"
     koa-bodyparser: "npm:4.4.1"
@@ -7534,19 +7993,19 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^5.2.0
     styled-components: ^5.2.1
-  checksum: 10c0/a85aec0275b0831a5edc77d3d5e77fc9ffae670a362e7613f5cbd5b67e1f7ea7cb43b06a7c38603a9c34dce566e3763711335471a0702df4731e51dbf350a225
+  checksum: 10c0/684f4acd2c00f5ce3438878c3ad3564657e23d9b88bcd0ae68edc97244205e9993f12aa9a737e9f26c620ffd25e7b9b6a1b8c67d4bf71d567defd445e7ee28b1
   languageName: node
   linkType: hard
 
-"@strapi/plugin-documentation@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/plugin-documentation@npm:5.29.0"
+"@strapi/plugin-documentation@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/plugin-documentation@npm:5.31.2"
   dependencies:
     "@reduxjs/toolkit": "npm:1.9.7"
-    "@strapi/admin": "npm:5.29.0"
+    "@strapi/admin": "npm:5.31.2"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     bcryptjs: "npm:2.4.3"
     cheerio: "npm:^1.0.0"
     formik: "npm:2.4.5"
@@ -7565,19 +8024,19 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/422818c759f102083190f9d617209488a164774be241d10ba5f2cdac7c75c3016f23d8ac76855a1e9cc12f6c4f4c3478f73c0dceb9bb3c6985e7faed5daa0eb8
+  checksum: 10c0/713b5d761127bdaf9174db19b2e4b1d8bf4e877500e804bd4f58e06ab76a52f5b4f8aa976f2ccc9214a0add6b655fdc059d63d80fdb2922cdb255e9a0eccfb41
   languageName: node
   linkType: hard
 
-"@strapi/plugin-email@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/plugin-email@npm:4.25.24"
+"@strapi/plugin-email@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/plugin-email@npm:4.26.0"
   dependencies:
     "@strapi/design-system": "npm:1.19.0"
-    "@strapi/helper-plugin": "npm:4.25.24"
+    "@strapi/helper-plugin": "npm:4.26.0"
     "@strapi/icons": "npm:1.19.0"
-    "@strapi/provider-email-sendmail": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/provider-email-sendmail": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     lodash: "npm:4.17.21"
     prop-types: "npm:^15.8.1"
     react-intl: "npm:6.4.1"
@@ -7589,19 +8048,19 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^5.2.0
     styled-components: ^5.2.1
-  checksum: 10c0/01dbe3b47b71431e4fbfbf57c542bec815c47e815a1febb8524f3ccd16c26807910585b0c9c85dd6b90ec903a07bb81feeb8f1d02401f3b318bf2ebfea8585ff
+  checksum: 10c0/020ef4ca0f61267ae7924cb33a88b0621b6cbe88c644e6702d0086c25c9fcc28c0f4ea86f558e8f1c9b7906c251b3826b4bf9ee7a656eb2d1a74837f430d57f2
   languageName: node
   linkType: hard
 
-"@strapi/plugin-upload@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/plugin-upload@npm:4.25.24"
+"@strapi/plugin-upload@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/plugin-upload@npm:4.26.0"
   dependencies:
     "@strapi/design-system": "npm:1.19.0"
-    "@strapi/helper-plugin": "npm:4.25.24"
+    "@strapi/helper-plugin": "npm:4.26.0"
     "@strapi/icons": "npm:1.19.0"
-    "@strapi/provider-upload-local": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/provider-upload-local": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     axios: "npm:1.8.2"
     byte-size: "npm:7.0.1"
     cropperjs: "npm:1.6.0"
@@ -7629,17 +8088,17 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^5.2.0
     styled-components: ^5.2.1
-  checksum: 10c0/228d45689558a27b761f6c50edddfd123023d891754e9f54d202d51246b89825ecbc7ba722412861737ff11ebaf2c329e09e24c7b1c5e519055daabfc0335999
+  checksum: 10c0/8ca80363da47b62878128687a536bd08269eb0e8bf1e6b92d04369fa2dfdd6e81aac13e3ec48bf9f0a1db5fddf7fadaa86b86f6a595e3e98c8e07b804338c689
   languageName: node
   linkType: hard
 
-"@strapi/plugin-users-permissions@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/plugin-users-permissions@npm:5.29.0"
+"@strapi/plugin-users-permissions@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/plugin-users-permissions@npm:5.31.2"
   dependencies:
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     bcryptjs: "npm:2.4.3"
     formik: "npm:2.4.5"
     grant: "npm:^5.4.8"
@@ -7663,78 +8122,78 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/50afeab34d5c83a90b5b7638eb337b4dcac061de128742d7ad83f369fa6fb20928dcdfedf59471eb849023dad213d114e10edd102c730bed501cb0620c14e39e
+  checksum: 10c0/c9380d15a6bf406dee03954e1678fc7b522bd48d2fd3902d008f913731ef6e5388b4115391003298ba3efe8fe366df610a41e2721febf2a535fb6f228b81870a
   languageName: node
   linkType: hard
 
-"@strapi/provider-audit-logs-local@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/provider-audit-logs-local@npm:4.25.24"
-  checksum: 10c0/a3b909a5e3a372c4cafbcf97afdc917c4aaa1941a58243314e8e9dc21ca47afcd54c13e941833d4b66dbb28d4f9d4bed91029d582808472ad9788bb06fb4887e
+"@strapi/provider-audit-logs-local@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/provider-audit-logs-local@npm:4.26.0"
+  checksum: 10c0/2617301e2b6b9ca54d6ab418d9ac8fc24b43d8fb2523f5e4ebf35c5583462dd2146b22c2c8687cf38560653c80de6cdd8337cb3cdadb8cb1b83845c86c8c61ba
   languageName: node
   linkType: hard
 
-"@strapi/provider-email-sendmail@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/provider-email-sendmail@npm:4.25.24"
+"@strapi/provider-email-sendmail@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/provider-email-sendmail@npm:4.26.0"
   dependencies:
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/utils": "npm:4.26.0"
     sendmail: "npm:^1.6.1"
-  checksum: 10c0/335791076c5cbe4abfc131774a628015cb2ee9904a4289560835c10f1daef18b21881b017c964c92f70df2230d6d481dbf859d0f3890a771169410d9e622774c
+  checksum: 10c0/1b0ccb115ac50da1d1632d16614ad89fa4c5d96aacebd1477bcf63a3c12bffa78c7937f7b327e0514adec71afd70b0c47b677eb6e5212341258fc5d3165b573b
   languageName: node
   linkType: hard
 
-"@strapi/provider-email-sendmail@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/provider-email-sendmail@npm:5.29.0"
+"@strapi/provider-email-sendmail@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/provider-email-sendmail@npm:5.31.2"
   dependencies:
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     sendmail: "npm:^1.6.1"
-  checksum: 10c0/87a635f78c66a4a63a8b0dd25cea555e93528d8a38fdf3c9bb24404ce7dc9d723026a007b28a66b616092777e0087f301aa683dbac5e7e1043bd1e8084f02f08
+  checksum: 10c0/7b420d95e0ea16b344a121a4839d9d49384274999e32deadb70625e504dde75cc49d795c0ee7c0d1d74ef8c1bcfda47180fbe40407eb1cfbd9ff452439614076
   languageName: node
   linkType: hard
 
-"@strapi/provider-upload-aws-s3@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/provider-upload-aws-s3@npm:5.29.0"
+"@strapi/provider-upload-aws-s3@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/provider-upload-aws-s3@npm:5.31.2"
   dependencies:
     "@aws-sdk/client-s3": "npm:3.600.0"
     "@aws-sdk/lib-storage": "npm:3.433.0"
     "@aws-sdk/s3-request-presigner": "npm:3.433.0"
     "@aws-sdk/types": "npm:3.433.0"
     lodash: "npm:4.17.21"
-  checksum: 10c0/a5efd0fb335140a4843e4167a10b55f65aab8f558b3557eb774c23659e5c279a09ab9b868fb9e0ccc09674b382cd244aab4fb2d86fca9b3e96933b29fe29940b
+  checksum: 10c0/52c1a37df8f3fc9f9cf6cc2879ff5cc9c64f1c240bfaa0cca9134fd254e5f0de639bdde747d58cef123e7f7b274e97f819cf2d2235bbf7c6d3e370bc80ee3a24
   languageName: node
   linkType: hard
 
-"@strapi/provider-upload-local@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/provider-upload-local@npm:4.25.24"
+"@strapi/provider-upload-local@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/provider-upload-local@npm:4.26.0"
   dependencies:
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/utils": "npm:4.26.0"
     fs-extra: "npm:10.0.0"
-  checksum: 10c0/42883f3194111d79371b2f031b4df2ba91591dcbfa704059c2667c7fd9743cd5c568eb9e7da00d3c9d78eb60f293e5df8dce3840bad979ff1ca5248a5851861f
+  checksum: 10c0/a8c8e2e1305a2ca37880c2d75218c8ae5273763b7bc69a30462c95e8530513f4901a1082695104ad79cbb3d26c87558ebdc7edfdd0f4acf8b054e76968d35481
   languageName: node
   linkType: hard
 
-"@strapi/provider-upload-local@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/provider-upload-local@npm:5.29.0"
+"@strapi/provider-upload-local@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/provider-upload-local@npm:5.31.2"
   dependencies:
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     fs-extra: "npm:11.2.0"
-  checksum: 10c0/ef07c7c056b1a10377c1c4d670bacf1a0450d4de2966fb9be395fa6cbdf0267f80f8f21a52c66eee9a53dbcc0125368868319016ed3bc2930cc7e4638c1b00b3
+  checksum: 10c0/0b15d7f0214b1e109cd21364b0b02bf9c93ec6eaff9473966d98a8c5c861230b881fdde87a093017410f7082540ba95bc53308e171dd436d0d6ba975d8bd1587
   languageName: node
   linkType: hard
 
-"@strapi/review-workflows@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/review-workflows@npm:5.29.0"
+"@strapi/review-workflows@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/review-workflows@npm:5.31.2"
   dependencies:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/utils": "npm:5.31.2"
     fractional-indexing: "npm:3.2.0"
     react-dnd: "npm:16.0.1"
     react-dnd-html5-backend: "npm:16.0.1"
@@ -7749,33 +8208,33 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/640aa1a630f4c206617eef619c9a51e97ddc6ad2c7700c4dc8563769997b4525dff6bbb54a1d0ae30bf5a1c51a61623a95fd57247fc8d65d714e29eb3d678223
+  checksum: 10c0/6e9249d1c5bc5fe872eb8837ac5431ef9ea5d0c9b19461b312e4b9dbe020a56216c26b4359ad53ca4d27b86b6bf903f754e229daf83a553e502602acce2c6a66
   languageName: node
   linkType: hard
 
-"@strapi/strapi@npm:4.25.24, @strapi/strapi@npm:^4.14.0":
-  version: 4.25.24
-  resolution: "@strapi/strapi@npm:4.25.24"
+"@strapi/strapi@npm:4.26.0, @strapi/strapi@npm:^4.14.0":
+  version: 4.26.0
+  resolution: "@strapi/strapi@npm:4.26.0"
   dependencies:
     "@koa/cors": "npm:5.0.0"
     "@koa/router": "npm:10.1.1"
-    "@strapi/admin": "npm:4.25.24"
-    "@strapi/cloud-cli": "npm:4.25.24"
-    "@strapi/content-releases": "npm:4.25.24"
-    "@strapi/data-transfer": "npm:4.25.24"
-    "@strapi/database": "npm:4.25.24"
-    "@strapi/generate-new": "npm:4.25.24"
-    "@strapi/generators": "npm:4.25.24"
-    "@strapi/logger": "npm:4.25.24"
+    "@strapi/admin": "npm:4.26.0"
+    "@strapi/cloud-cli": "npm:4.26.0"
+    "@strapi/content-releases": "npm:4.26.0"
+    "@strapi/data-transfer": "npm:4.26.0"
+    "@strapi/database": "npm:4.26.0"
+    "@strapi/generate-new": "npm:4.26.0"
+    "@strapi/generators": "npm:4.26.0"
+    "@strapi/logger": "npm:4.26.0"
     "@strapi/pack-up": "npm:4.23.0"
-    "@strapi/permissions": "npm:4.25.24"
-    "@strapi/plugin-content-manager": "npm:4.25.24"
-    "@strapi/plugin-content-type-builder": "npm:4.25.24"
-    "@strapi/plugin-email": "npm:4.25.24"
-    "@strapi/plugin-upload": "npm:4.25.24"
-    "@strapi/types": "npm:4.25.24"
-    "@strapi/typescript-utils": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/permissions": "npm:4.26.0"
+    "@strapi/plugin-content-manager": "npm:4.26.0"
+    "@strapi/plugin-content-type-builder": "npm:4.26.0"
+    "@strapi/plugin-email": "npm:4.26.0"
+    "@strapi/plugin-upload": "npm:4.26.0"
+    "@strapi/types": "npm:4.26.0"
+    "@strapi/typescript-utils": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     bcryptjs: "npm:2.4.3"
     boxen: "npm:5.1.2"
     chalk: "npm:4.1.2"
@@ -7826,34 +8285,34 @@ __metadata:
     yup: "npm:0.32.9"
   bin:
     strapi: ./bin/strapi.js
-  checksum: 10c0/fec10b73c5312050fc5cb5a5b469f8ee08405bc482102fcde627b69fcd20ed87f13e62929b71a2c52e8d807da06aa2e228d58a24417dc4ee91482ae2fd88491a
+  checksum: 10c0/e861ffcf984ccd9cad2f2a88c56bc1f983ec47820f2b3a48ffb570bf96e160eb9708f8693763265b0c5de29651b55589b02645f0eb44c63c775173c48cba9280
   languageName: node
   linkType: hard
 
 "@strapi/strapi@npm:^5.0.0-rc.9":
-  version: 5.29.0
-  resolution: "@strapi/strapi@npm:5.29.0"
+  version: 5.31.2
+  resolution: "@strapi/strapi@npm:5.31.2"
   dependencies:
     "@pmmmwh/react-refresh-webpack-plugin": "npm:0.5.15"
-    "@strapi/admin": "npm:5.29.0"
-    "@strapi/cloud-cli": "npm:5.29.0"
-    "@strapi/content-manager": "npm:5.29.0"
-    "@strapi/content-releases": "npm:5.29.0"
-    "@strapi/content-type-builder": "npm:5.29.0"
-    "@strapi/core": "npm:5.29.0"
-    "@strapi/data-transfer": "npm:5.29.0"
-    "@strapi/database": "npm:5.29.0"
-    "@strapi/email": "npm:5.29.0"
-    "@strapi/generators": "npm:5.29.0"
-    "@strapi/i18n": "npm:5.29.0"
-    "@strapi/logger": "npm:5.29.0"
-    "@strapi/openapi": "npm:5.29.0"
-    "@strapi/permissions": "npm:5.29.0"
-    "@strapi/review-workflows": "npm:5.29.0"
-    "@strapi/types": "npm:5.29.0"
-    "@strapi/typescript-utils": "npm:5.29.0"
-    "@strapi/upload": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/admin": "npm:5.31.2"
+    "@strapi/cloud-cli": "npm:5.31.2"
+    "@strapi/content-manager": "npm:5.31.2"
+    "@strapi/content-releases": "npm:5.31.2"
+    "@strapi/content-type-builder": "npm:5.31.2"
+    "@strapi/core": "npm:5.31.2"
+    "@strapi/data-transfer": "npm:5.31.2"
+    "@strapi/database": "npm:5.31.2"
+    "@strapi/email": "npm:5.31.2"
+    "@strapi/generators": "npm:5.31.2"
+    "@strapi/i18n": "npm:5.31.2"
+    "@strapi/logger": "npm:5.31.2"
+    "@strapi/openapi": "npm:5.31.2"
+    "@strapi/permissions": "npm:5.31.2"
+    "@strapi/review-workflows": "npm:5.31.2"
+    "@strapi/types": "npm:5.31.2"
+    "@strapi/typescript-utils": "npm:5.31.2"
+    "@strapi/upload": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     "@types/nodemon": "npm:1.19.6"
     "@vitejs/plugin-react-swc": "npm:3.6.0"
     boxen: "npm:5.1.2"
@@ -7905,41 +8364,41 @@ __metadata:
     styled-components: ^6.0.0
   bin:
     strapi: bin/strapi.js
-  checksum: 10c0/cb975f9e39b153a31c1d00729e87e8583bfac1c1fc7dede8cf217f2af6dca0eb732045fe7ab1ec022b8a979487bbed9fd0174b6ebaed25b62a1fe85e7a1e06e2
+  checksum: 10c0/64c20bbb74e03e25cbec41b8a50fff10113466eff436c18e6f10a0b871a2cc4456908708b2eecf485debac3c91f7fc35e8ecd1321dcd1eeaa2018672b0bbe225
   languageName: node
   linkType: hard
 
-"@strapi/types@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/types@npm:4.25.24"
+"@strapi/types@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/types@npm:4.26.0"
   dependencies:
     "@casl/ability": "npm:6.5.0"
     "@koa/cors": "npm:5.0.0"
     "@koa/router": "npm:10.1.1"
-    "@strapi/database": "npm:4.25.24"
-    "@strapi/logger": "npm:4.25.24"
-    "@strapi/permissions": "npm:4.25.24"
-    "@strapi/utils": "npm:4.25.24"
+    "@strapi/database": "npm:4.26.0"
+    "@strapi/logger": "npm:4.26.0"
+    "@strapi/permissions": "npm:4.26.0"
+    "@strapi/utils": "npm:4.26.0"
     commander: "npm:8.3.0"
     https-proxy-agent: "npm:5.0.1"
     koa: "npm:2.16.1"
     node-fetch: "npm:2.7.0"
     node-schedule: "npm:2.1.1"
-  checksum: 10c0/06a6b9b9e0d8e604fca55a856d3a6bb894c3ede522402e705f5194c5c7af81a24dbed5a96db2f4750a21a1a05f675b25d53374098e25d823e5e3577f0ae4f5be
+  checksum: 10c0/dcae4547763b0fc56fa9360aea5711e589e572349f545167719748f144263ce469d9748e0a0b60c29d4b4cbc780459c9c6934b01c33e87e4c8307b38ea1c0ed6
   languageName: node
   linkType: hard
 
-"@strapi/types@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/types@npm:5.29.0"
+"@strapi/types@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/types@npm:5.31.2"
   dependencies:
     "@casl/ability": "npm:6.5.0"
     "@koa/cors": "npm:5.0.0"
     "@koa/router": "npm:12.0.2"
-    "@strapi/database": "npm:5.29.0"
-    "@strapi/logger": "npm:5.29.0"
-    "@strapi/permissions": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/database": "npm:5.31.2"
+    "@strapi/logger": "npm:5.31.2"
+    "@strapi/permissions": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     commander: "npm:8.3.0"
     json-logic-js: "npm:2.0.5"
     koa: "npm:2.16.1"
@@ -7949,13 +8408,13 @@ __metadata:
     typedoc-github-wiki-theme: "npm:1.1.0"
     typedoc-plugin-markdown: "npm:3.17.1"
     zod: "npm:3.25.67"
-  checksum: 10c0/2d8dcbb627b5a9bfdf7a96c50ea6a804b5ace939cab5f14c0968c6f6e619a5f1fe5aa86735d26ae05213a4b398f646efa474ad71cf9dc2f59ea1dcb6e1f63c20
+  checksum: 10c0/eeaba39697eeb0b418064e9a39cf665653aa184023914ddb96c52c3f42baf28b27a23df846b3ce241ab4cb6c5383347c98ca295448290057b6a918e43ca1d2b2
   languageName: node
   linkType: hard
 
-"@strapi/typescript-utils@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/typescript-utils@npm:4.25.24"
+"@strapi/typescript-utils@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/typescript-utils@npm:4.26.0"
   dependencies:
     chalk: "npm:4.1.2"
     cli-table3: "npm:0.6.5"
@@ -7963,13 +8422,13 @@ __metadata:
     lodash: "npm:4.17.21"
     prettier: "npm:2.8.4"
     typescript: "npm:5.2.2"
-  checksum: 10c0/4d50d544c3a60de9f8cb330144accbfaa5548a8e43fe9d0347552c73ab69ad794441b4213fcafc535f35dab5902bec923d9441ce7dd1afaa091f00a64a80c14a
+  checksum: 10c0/d042a44551b2ceeae32f20572a7d36db4085bd4263457f1cb0b260a1b02481e2b61d8638b201240c18696e94029abba5ee4b5036700c379124343d61b0529f04
   languageName: node
   linkType: hard
 
-"@strapi/typescript-utils@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/typescript-utils@npm:5.29.0"
+"@strapi/typescript-utils@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/typescript-utils@npm:5.31.2"
   dependencies:
     chalk: "npm:4.1.2"
     cli-table3: "npm:0.6.5"
@@ -7977,7 +8436,7 @@ __metadata:
     lodash: "npm:4.17.21"
     prettier: "npm:3.3.3"
     typescript: "npm:5.4.4"
-  checksum: 10c0/eefd4cf3e7e8f2971977c3c4ab62f42b6aff3b4e4d7b4a040558516dbcea41722e1b45ef0e35bcaee925d223b90999d6cb88d6242c4dc00d11afa0914e889919
+  checksum: 10c0/2ea4f7d5cc121a442be715a8e55d4275773c70fd26dcd7041b311c3274ea5952e0ba3414eb0e323233f7da2221df41670d0deac0774e91d6c6183426158943ce
   languageName: node
   linkType: hard
 
@@ -8044,19 +8503,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@strapi/upload@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/upload@npm:5.29.0"
+"@strapi/upload@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/upload@npm:5.31.2"
   dependencies:
     "@mux/mux-player-react": "npm:3.1.0"
     "@reduxjs/toolkit": "npm:1.9.7"
     "@strapi/design-system": "npm:2.0.0-rc.30"
     "@strapi/icons": "npm:2.0.0-rc.30"
-    "@strapi/provider-upload-local": "npm:5.29.0"
-    "@strapi/utils": "npm:5.29.0"
+    "@strapi/provider-upload-local": "npm:5.31.2"
+    "@strapi/utils": "npm:5.31.2"
     byte-size: "npm:8.1.1"
     cropperjs: "npm:1.6.1"
     date-fns: "npm:2.30.0"
+    file-type: "npm:21.0.0"
     formik: "npm:2.4.5"
     fs-extra: "npm:11.2.0"
     immer: "npm:9.0.21"
@@ -8080,13 +8540,13 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
-  checksum: 10c0/281e2f6d6e3093c15c7558ecf4e10b3e1c3ea8c72dd879fb5ff0c31dba1b6342958e6eda2921051cff8ddec8ea1d8cba7f7217543cc5e8a06e1e79124060abb5
+  checksum: 10c0/f4a8d0726053aaf9cf649724d47ddf60e58215cb7e6a31b01e1cf373bf051df7fda63ef54f11e8c41692890f6c05b74e3ed6aa8e4fee894e6576a72be0ecb758
   languageName: node
   linkType: hard
 
-"@strapi/utils@npm:4.25.24":
-  version: 4.25.24
-  resolution: "@strapi/utils@npm:4.25.24"
+"@strapi/utils@npm:4.26.0":
+  version: 4.26.0
+  resolution: "@strapi/utils@npm:4.26.0"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.0"
     date-fns: "npm:2.30.0"
@@ -8094,13 +8554,13 @@ __metadata:
     lodash: "npm:4.17.21"
     p-map: "npm:4.0.0"
     yup: "npm:0.32.9"
-  checksum: 10c0/fac7b7638adeb87debc2d36bf01303fb16d976cd7103319be13f267aed13941104d330ff53a297ba5c6b9b81654bab6a9f1f096c65a487023256c4d784511166
+  checksum: 10c0/cff0bf4715d606760032ff6255c0f35f1a6c4364de4e3a8daa9659f8890747a814b4c4cabc1f0cba5e50a234ff5c76d4bf5062430750adcb034e1d394bb765df
   languageName: node
   linkType: hard
 
-"@strapi/utils@npm:5.29.0":
-  version: 5.29.0
-  resolution: "@strapi/utils@npm:5.29.0"
+"@strapi/utils@npm:5.31.2":
+  version: 5.31.2
+  resolution: "@strapi/utils@npm:5.31.2"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.0"
     date-fns: "npm:2.30.0"
@@ -8112,7 +8572,7 @@ __metadata:
     preferred-pm: "npm:3.1.2"
     yup: "npm:0.32.9"
     zod: "npm:3.25.67"
-  checksum: 10c0/cd24260ef3b01ce194ba30be7f630d2723c9c96a5fef7f06b3cf93fafaaecde08d1c58f6319e286ba28ae31a09170518d0d548e7384fc51b356e2556328bf99b
+  checksum: 10c0/854c4101803095fbbd584194fcfa1835c1d3b5e384bbe9f1abb8aa684bfcb331d9f8dc135e7e45ac12139939f345586f1b69a4d04d3b81866d0a1e0ec78aba17
   languageName: node
   linkType: hard
 
@@ -8336,6 +8796,24 @@ __metadata:
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
   checksum: 10c0/68a0c2aa28a3c8e6eb05cafee29705438d7d8a9427423ce5064d44f19c29e89b5636de46dd2f28620fb10abba75c67130185bbc3aa23ac1163a227a5f36641e1
+  languageName: node
+  linkType: hard
+
+"@tokenizer/inflate@npm:^0.2.7":
+  version: 0.2.7
+  resolution: "@tokenizer/inflate@npm:0.2.7"
+  dependencies:
+    debug: "npm:^4.4.0"
+    fflate: "npm:^0.8.2"
+    token-types: "npm:^6.0.0"
+  checksum: 10c0/75bd0c510810dfd62be9d963216b5852cde021e1f8aab43b37662bc6aa75e65fd7277fcab7d463186b55cee36a5b61129916161bdb2a7d18064016156c7daf4f
+  languageName: node
+  linkType: hard
+
+"@tokenizer/token@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@tokenizer/token@npm:0.3.0"
+  checksum: 10c0/7ab9a822d4b5ff3f5bca7f7d14d46bdd8432528e028db4a52be7fbf90c7f495cc1af1324691dda2813c6af8dc4b8eb29de3107d4508165f9aa5b53e7d501f155
   languageName: node
   linkType: hard
 
@@ -9638,9 +10116,9 @@ __metadata:
   resolution: "aggregated-public-information@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.8.0"
-    "@strapi/plugin-documentation": "npm:5.29.0"
-    "@strapi/plugin-users-permissions": "npm:5.29.0"
-    "@strapi/provider-upload-aws-s3": "npm:5.29.0"
+    "@strapi/plugin-documentation": "npm:5.31.2"
+    "@strapi/plugin-users-permissions": "npm:5.31.2"
+    "@strapi/provider-upload-aws-s3": "npm:5.31.2"
     "@strapi/strapi": "npm:^5.0.0-rc.9"
     "@types/eslint": "npm:^9"
     "@types/eslint__js": "npm:^8.42.3"
@@ -10031,6 +10509,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ast-types@npm:^0.16.1":
+  version: 0.16.1
+  resolution: "ast-types@npm:0.16.1"
+  dependencies:
+    tslib: "npm:^2.0.1"
+  checksum: 10c0/abcc49e42eb921a7ebc013d5bec1154651fb6dbc3f497541d488859e681256901b2990b954d530ba0da4d0851271d484f7057d5eff5e07cb73e8b10909f711bf
+  languageName: node
+  linkType: hard
+
 "async@npm:^3.2.3":
   version: 3.2.5
   resolution: "async@npm:3.2.5"
@@ -10259,6 +10746,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"baseline-browser-mapping@npm:^2.8.25":
+  version: 2.8.32
+  resolution: "baseline-browser-mapping@npm:2.8.32"
+  bin:
+    baseline-browser-mapping: dist/cli.js
+  checksum: 10c0/6c4aa0338ad177e946a27412de11769fb6474389a59cc03e13e0538d7285a94052a11525d46bb605ddb913a0c8a1180292d6f05cd4d6bc05bbf597c26bf5ce66
+  languageName: node
+  linkType: hard
+
 "bcryptjs@npm:2.4.3":
   version: 2.4.3
   resolution: "bcryptjs@npm:2.4.3"
@@ -10460,6 +10956,21 @@ __metadata:
   bin:
     browserslist: cli.js
   checksum: 10c0/3063bfdf812815346447f4796c8f04601bf5d62003374305fd323c2a463e42776475bcc5309264e39bcf9a8605851e53560695991a623be988138b3ff8c66642
+  languageName: node
+  linkType: hard
+
+"browserslist@npm:^4.24.0":
+  version: 4.28.0
+  resolution: "browserslist@npm:4.28.0"
+  dependencies:
+    baseline-browser-mapping: "npm:^2.8.25"
+    caniuse-lite: "npm:^1.0.30001754"
+    electron-to-chromium: "npm:^1.5.249"
+    node-releases: "npm:^2.0.27"
+    update-browserslist-db: "npm:^1.1.4"
+  bin:
+    browserslist: cli.js
+  checksum: 10c0/4284fd568f7d40a496963083860d488cb2a89fb055b6affd316bebc59441fec938e090b3e62c0ee065eb0bc88cd1bc145f4300a16c75f3f565621c5823715ae1
   languageName: node
   linkType: hard
 
@@ -10713,6 +11224,13 @@ __metadata:
   version: 1.0.30001651
   resolution: "caniuse-lite@npm:1.0.30001651"
   checksum: 10c0/7821278952a6dbd17358e5d08083d258f092e2a530f5bc1840657cb140fbbc5ec44293bc888258c44a18a9570cde149ed05819ac8320b9710cf22f699891e6ad
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001754":
+  version: 1.0.30001757
+  resolution: "caniuse-lite@npm:1.0.30001757"
+  checksum: 10c0/3ccb71fa2bf1f8c96ff1bf9b918b08806fed33307e20a3ce3259155fda131eaf96cfcd88d3d309c8fd7f8285cc71d89a3b93648a1c04814da31c301f98508d42
   languageName: node
   linkType: hard
 
@@ -11150,6 +11668,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clone-deep@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "clone-deep@npm:4.0.1"
+  dependencies:
+    is-plain-object: "npm:^2.0.4"
+    kind-of: "npm:^6.0.2"
+    shallow-clone: "npm:^3.0.0"
+  checksum: 10c0/637753615aa24adf0f2d505947a1bb75e63964309034a1cf56ba4b1f30af155201edd38d26ffe26911adaae267a3c138b344a4947d39f5fc1b6d6108125aa758
+  languageName: node
+  linkType: hard
+
 "clone-response@npm:^1.0.2":
   version: 1.0.3
   resolution: "clone-response@npm:1.0.3"
@@ -11371,6 +11900,13 @@ __metadata:
   version: 3.0.0
   resolution: "common-path-prefix@npm:3.0.0"
   checksum: 10c0/c4a74294e1b1570f4a8ab435285d185a03976c323caa16359053e749db4fde44e3e6586c29cd051100335e11895767cbbd27ea389108e327d62f38daf4548fdb
+  languageName: node
+  linkType: hard
+
+"commondir@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "commondir@npm:1.0.1"
+  checksum: 10c0/33a124960e471c25ee19280c9ce31ccc19574b566dc514fe4f4ca4c34fa8b0b57cf437671f5de380e11353ea9426213fca17687dd2ef03134fea2dbc53809fd6
   languageName: node
   linkType: hard
 
@@ -11916,7 +12452,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.0.0":
+"debug@npm:^4.0.0, debug@npm:^4.4.0":
   version: 4.4.3
   resolution: "debug@npm:4.4.3"
   dependencies:
@@ -12510,6 +13046,13 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 10c0/b5bb125ee93161bc16bfe6e56c6b04de5ad2aa44234d8f644813cc95d861a6910903132b05093706de2b706599367c4130eb6d170f6b46895686b95f87d017b7
+  languageName: node
+  linkType: hard
+
+"electron-to-chromium@npm:^1.5.249":
+  version: 1.5.262
+  resolution: "electron-to-chromium@npm:1.5.262"
+  checksum: 10c0/4e4e3a307f662991145fd0bbd9045e17af547987a9dc33c30239b1a7b60874989f9b71c636b6c7d2b9052777344d4358a7cf76924203873a392ea1568bf88e5d
   languageName: node
   linkType: hard
 
@@ -13294,6 +13837,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"escalade@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "escalade@npm:3.2.0"
+  checksum: 10c0/ced4dd3a78e15897ed3be74e635110bbf3b08877b0a41be50dcb325ee0e0b5f65fc2d50e9845194d7c4633f327e2e1c6cce00a71b617c5673df0374201d67f65
+  languageName: node
+  linkType: hard
+
 "escape-html@npm:^1.0.3":
   version: 1.0.3
   resolution: "escape-html@npm:1.0.3"
@@ -13448,7 +13998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esprima@npm:^4.0.0":
+"esprima@npm:^4.0.0, esprima@npm:~4.0.0":
   version: 4.0.1
   resolution: "esprima@npm:4.0.1"
   bin:
@@ -13786,6 +14336,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fflate@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "fflate@npm:0.8.2"
+  checksum: 10c0/03448d630c0a583abea594835a9fdb2aaf7d67787055a761515bf4ed862913cfd693b4c4ffd5c3f3b355a70cf1e19033e9ae5aedcca103188aaff91b8bd6e293
+  languageName: node
+  linkType: hard
+
 "figures@npm:^3.0.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
@@ -13810,6 +14367,18 @@ __metadata:
   dependencies:
     tslib: "npm:^2.7.0"
   checksum: 10c0/fe827e0e95410aacfcc3eabc38c29cc36055257f03c1c06b631a2b5af9730c142ad2c52f5d64724d02231709617bda984701f52bd1f4b7aca50fb6585a27c1d2
+  languageName: node
+  linkType: hard
+
+"file-type@npm:21.0.0":
+  version: 21.0.0
+  resolution: "file-type@npm:21.0.0"
+  dependencies:
+    "@tokenizer/inflate": "npm:^0.2.7"
+    strtok3: "npm:^10.2.2"
+    token-types: "npm:^6.0.0"
+    uint8array-extras: "npm:^1.4.0"
+  checksum: 10c0/ee6b0bb5771ad154e236bb77b5c00907743fef3637c3825713c1d6913377d3d969ebba4a6f0aa854b8231552e2c1bd0387229fe67394dc3d08a01819c7d107b1
   languageName: node
   linkType: hard
 
@@ -13838,6 +14407,17 @@ __metadata:
   dependencies:
     to-regex-range: "npm:^5.0.1"
   checksum: 10c0/b75b691bbe065472f38824f694c2f7449d7f5004aa950426a2c28f0306c60db9b880c0b0e4ed819997ffb882d1da02cfcfc819bddc94d71627f5269682edf018
+  languageName: node
+  linkType: hard
+
+"find-cache-dir@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "find-cache-dir@npm:2.1.0"
+  dependencies:
+    commondir: "npm:^1.0.1"
+    make-dir: "npm:^2.0.0"
+    pkg-dir: "npm:^3.0.0"
+  checksum: 10c0/556117fd0af14eb88fb69250f4bba9e905e7c355c6136dff0e161b9cbd1f5285f761b778565a278da73a130f42eccc723d7ad4c002ae547ed1d698d39779dabb
   languageName: node
   linkType: hard
 
@@ -13965,6 +14545,13 @@ __metadata:
   version: 3.3.1
   resolution: "flatted@npm:3.3.1"
   checksum: 10c0/324166b125ee07d4ca9bcf3a5f98d915d5db4f39d711fba640a3178b959919aae1f7cfd8aabcfef5826ed8aa8a2aa14cc85b2d7d18ff638ddf4ae3df39573eaf
+  languageName: node
+  linkType: hard
+
+"flow-parser@npm:0.*":
+  version: 0.291.0
+  resolution: "flow-parser@npm:0.291.0"
+  checksum: 10c0/7db904503187ce26e13bb4e86ce76ce913e54f48fca94f8fc305f9521c9fd75c29d5b70b5701640bb233c4ca0f4febe603ce5e564ffa971f0ddfad5d08f030ba
   languageName: node
   linkType: hard
 
@@ -14148,6 +14735,28 @@ __metadata:
   dependencies:
     map-cache: "npm:^0.2.2"
   checksum: 10c0/5891d1c1d1d5e1a7fb3ccf28515c06731476fa88f7a50f4ede8a0d8d239a338448e7f7cc8b73db48da19c229fa30066104fe6489862065a4f1ed591c42fbeabf
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:^12.23.24":
+  version: 12.23.24
+  resolution: "framer-motion@npm:12.23.24"
+  dependencies:
+    motion-dom: "npm:^12.23.23"
+    motion-utils: "npm:^12.23.6"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/716addd9fa85dd2c1475ab848e14c4e6d3246ced041de84afc19b1d6534c897256c8f2878864cf057039116e56f5ca1b87a4cbb943f0b1cf37199ef7174c3cf8
   languageName: node
   linkType: hard
 
@@ -15296,7 +15905,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ieee754@npm:^1.1.13, ieee754@npm:^1.1.4":
+"ieee754@npm:^1.1.13, ieee754@npm:^1.1.4, ieee754@npm:^1.2.1":
   version: 1.2.1
   resolution: "ieee754@npm:1.2.1"
   checksum: 10c0/b0782ef5e0935b9f12883a2e2aa37baa75da6e66ce6515c168697b42160807d9330de9a32ec1ed73149aea02e0d822e572bca6f1e22bdcbd2149e13b050b17bb
@@ -16717,12 +17326,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jscodeshift@npm:17.3.0":
+  version: 17.3.0
+  resolution: "jscodeshift@npm:17.3.0"
+  dependencies:
+    "@babel/core": "npm:^7.24.7"
+    "@babel/parser": "npm:^7.24.7"
+    "@babel/plugin-transform-class-properties": "npm:^7.24.7"
+    "@babel/plugin-transform-modules-commonjs": "npm:^7.24.7"
+    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.24.7"
+    "@babel/plugin-transform-optional-chaining": "npm:^7.24.7"
+    "@babel/plugin-transform-private-methods": "npm:^7.24.7"
+    "@babel/preset-flow": "npm:^7.24.7"
+    "@babel/preset-typescript": "npm:^7.24.7"
+    "@babel/register": "npm:^7.24.6"
+    flow-parser: "npm:0.*"
+    graceful-fs: "npm:^4.2.4"
+    micromatch: "npm:^4.0.7"
+    neo-async: "npm:^2.5.0"
+    picocolors: "npm:^1.0.1"
+    recast: "npm:^0.23.11"
+    tmp: "npm:^0.2.3"
+    write-file-atomic: "npm:^5.0.1"
+  peerDependencies:
+    "@babel/preset-env": ^7.1.6
+  peerDependenciesMeta:
+    "@babel/preset-env":
+      optional: true
+  bin:
+    jscodeshift: bin/jscodeshift.js
+  checksum: 10c0/366e3c8ec52597a00919c6eb37007b6bcde0037722b89bda0a4416aec36e34717a7c46d10b3e637ac0a2cf91b986e868063fd1e99a943699ac292f7aef78e3ba
+  languageName: node
+  linkType: hard
+
 "jsesc@npm:^2.5.1":
   version: 2.5.2
   resolution: "jsesc@npm:2.5.2"
   bin:
     jsesc: bin/jsesc
   checksum: 10c0/dbf59312e0ebf2b4405ef413ec2b25abb5f8f4d9bc5fb8d9f90381622ebca5f2af6a6aa9a8578f65903f9e33990a6dc798edd0ce5586894bf0e9e31803a1de88
+  languageName: node
+  linkType: hard
+
+"jsesc@npm:^3.0.2":
+  version: 3.1.0
+  resolution: "jsesc@npm:3.1.0"
+  bin:
+    jsesc: bin/jsesc
+  checksum: 10c0/531779df5ec94f47e462da26b4cbf05eb88a83d9f08aac2ba04206508fc598527a153d08bd462bae82fc78b3eaa1a908e1a4a79f886e9238641c4cdefaf118b1
   languageName: node
   linkType: hard
 
@@ -17698,6 +18349,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"make-dir@npm:^2.0.0, make-dir@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "make-dir@npm:2.1.0"
+  dependencies:
+    pify: "npm:^4.0.1"
+    semver: "npm:^5.6.0"
+  checksum: 10c0/ada869944d866229819735bee5548944caef560d7a8536ecbc6536edca28c72add47cc4f6fc39c54fb25d06b58da1f8994cf7d9df7dadea047064749efc085d8
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^3.0.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
@@ -18374,7 +19035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.8":
+"micromatch@npm:^4.0.7, micromatch@npm:^4.0.8":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
   dependencies:
@@ -18663,6 +19324,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"motion-dom@npm:^12.23.23":
+  version: 12.23.23
+  resolution: "motion-dom@npm:12.23.23"
+  dependencies:
+    motion-utils: "npm:^12.23.6"
+  checksum: 10c0/139705731085063519b88f23fcc5b1c13e15707a4ff3365da02ef9a4bf2a2d8ebed9a151c57e7f215ccd9e822365d93c16e28e619fbf25611f61dcff5ee81d75
+  languageName: node
+  linkType: hard
+
+"motion-utils@npm:^12.23.6":
+  version: 12.23.6
+  resolution: "motion-utils@npm:12.23.6"
+  checksum: 10c0/c058e8ba6423b3baa63e985bcc669877ee7d9579d938f5348b4e60c5ea1b4b33dd7f4877434436a4a5807f3cf00370d3fd4079a6fdd6309c5c87aa62b311a897
+  languageName: node
+  linkType: hard
+
+"motion@npm:12.23.24":
+  version: 12.23.24
+  resolution: "motion@npm:12.23.24"
+  dependencies:
+    framer-motion: "npm:^12.23.24"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/d937ddaf50816f97e4e7121f323104fd655045ef122bd03d433370649c00129a5dd928cbe54efe9add22a05b2a9b84b7cfda1fd5c5b1e9c6245cd94e1c24e823
+  languageName: node
+  linkType: hard
+
 "mrmime@npm:^2.0.0":
   version: 2.0.0
   resolution: "mrmime@npm:2.0.0"
@@ -18807,7 +19505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"neo-async@npm:^2.6.0, neo-async@npm:^2.6.2":
+"neo-async@npm:^2.5.0, neo-async@npm:^2.6.0, neo-async@npm:^2.6.2":
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: 10c0/c2f5a604a54a8ec5438a342e1f356dff4bc33ccccdb6dc668d94fe8e5eccfc9d2c2eea6064b0967a767ba63b33763f51ccf2cd2441b461a7322656c1f06b3f5d
@@ -18950,6 +19648,13 @@ __metadata:
   version: 2.0.18
   resolution: "node-releases@npm:2.0.18"
   checksum: 10c0/786ac9db9d7226339e1dc84bbb42007cb054a346bd9257e6aa154d294f01bc6a6cddb1348fa099f079be6580acbb470e3c048effd5f719325abd0179e566fd27
+  languageName: node
+  linkType: hard
+
+"node-releases@npm:^2.0.27":
+  version: 2.0.27
+  resolution: "node-releases@npm:2.0.27"
+  checksum: 10c0/f1e6583b7833ea81880627748d28a3a7ff5703d5409328c216ae57befbced10ce2c991bea86434e8ec39003bd017f70481e2e5f8c1f7e0a7663241f81d6e00e2
   languageName: node
   linkType: hard
 
@@ -19951,6 +20656,22 @@ __metadata:
   version: 4.0.6
   resolution: "pirates@npm:4.0.6"
   checksum: 10c0/00d5fa51f8dded94d7429700fb91a0c1ead00ae2c7fd27089f0c5b63e6eca36197fe46384631872690a66f390c5e27198e99006ab77ae472692ab9c2ca903f36
+  languageName: node
+  linkType: hard
+
+"pirates@npm:^4.0.6":
+  version: 4.0.7
+  resolution: "pirates@npm:4.0.7"
+  checksum: 10c0/a51f108dd811beb779d58a76864bbd49e239fa40c7984cd11596c75a121a8cc789f1c8971d8bb15f0dbf9d48b76c05bb62fcbce840f89b688c0fa64b37e8478a
+  languageName: node
+  linkType: hard
+
+"pkg-dir@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "pkg-dir@npm:3.0.0"
+  dependencies:
+    find-up: "npm:^3.0.0"
+  checksum: 10c0/902a3d0c1f8ac43b1795fa1ba6ffeb37dfd53c91469e969790f6ed5e29ff2bdc50b63ba6115dc056d2efb4a040aa2446d512b3804bdafdf302f734fb3ec21847
   languageName: node
   linkType: hard
 
@@ -21057,6 +21778,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"recast@npm:^0.23.11":
+  version: 0.23.11
+  resolution: "recast@npm:0.23.11"
+  dependencies:
+    ast-types: "npm:^0.16.1"
+    esprima: "npm:~4.0.0"
+    source-map: "npm:~0.6.1"
+    tiny-invariant: "npm:^1.3.3"
+    tslib: "npm:^2.0.1"
+  checksum: 10c0/45b520a8f0868a5a24ecde495be9de3c48e69a54295d82a7331106554b75cfba75d16c909959d056e9ceed47a1be5e061e2db8b9ecbcd6ba44c2f3ef9a47bd18
+  languageName: node
+  linkType: hard
+
 "rechoir@npm:^0.6.2":
   version: 0.6.2
   resolution: "rechoir@npm:0.6.2"
@@ -21760,7 +22494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.6.0":
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
   bin:
@@ -21909,6 +22643,15 @@ __metadata:
   version: 1.2.0
   resolution: "setprototypeof@npm:1.2.0"
   checksum: 10c0/68733173026766fa0d9ecaeb07f0483f4c2dc70ca376b3b7c40b7cda909f94b0918f6c5ad5ce27a9160bdfb475efaa9d5e705a11d8eaae18f9835d20976028bc
+  languageName: node
+  linkType: hard
+
+"shallow-clone@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "shallow-clone@npm:3.0.1"
+  dependencies:
+    kind-of: "npm:^6.0.2"
+  checksum: 10c0/7bab09613a1b9f480c85a9823aebec533015579fa055ba6634aa56ba1f984380670eaf33b8217502931872aa1401c9fcadaa15f9f604d631536df475b05bcf1e
   languageName: node
   linkType: hard
 
@@ -22390,7 +23133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-support@npm:~0.5.20":
+"source-map-support@npm:^0.5.16, source-map-support@npm:~0.5.20":
   version: 0.5.21
   resolution: "source-map-support@npm:0.5.21"
   dependencies:
@@ -22807,6 +23550,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strtok3@npm:^10.2.2":
+  version: 10.3.4
+  resolution: "strtok3@npm:10.3.4"
+  dependencies:
+    "@tokenizer/token": "npm:^0.3.0"
+  checksum: 10c0/277ab69e417f4545e364ffaf9d560c991f531045dbace32d77b5c822cccd76a608b782785a2c60595274288d4d32dced184a5c21dc20348791da697127dc69a8
+  languageName: node
+  linkType: hard
+
 "style-loader@npm:3.3.4":
   version: 3.3.4
   resolution: "style-loader@npm:3.3.4"
@@ -23182,7 +23934,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-invariant@npm:^1.0.2":
+"tiny-invariant@npm:^1.0.2, tiny-invariant@npm:^1.3.3":
   version: 1.3.3
   resolution: "tiny-invariant@npm:1.3.3"
   checksum: 10c0/65af4a07324b591a059b35269cd696aba21bef2107f29b9f5894d83cc143159a204b299553435b03874ebb5b94d019afa8b8eff241c8a4cfee95872c2e1c1c4a
@@ -23238,6 +23990,13 @@ __metadata:
   dependencies:
     os-tmpdir: "npm:~1.0.2"
   checksum: 10c0/69863947b8c29cabad43fe0ce65cec5bb4b481d15d4b4b21e036b060b3edbf3bc7a5541de1bacb437bb3f7c4538f669752627fdf9b4aaf034cebd172ba373408
+  languageName: node
+  linkType: hard
+
+"tmp@npm:^0.2.3":
+  version: 0.2.5
+  resolution: "tmp@npm:0.2.5"
+  checksum: 10c0/cee5bb7d674bb4ba3ab3f3841c2ca7e46daeb2109eec395c1ec7329a91d52fcb21032b79ac25161a37b2565c4858fefab927af9735926a113ef7bac9091a6e0e
   languageName: node
   linkType: hard
 
@@ -23299,6 +24058,17 @@ __metadata:
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 10c0/93937279934bd66cc3270016dd8d0afec14fb7c94a05c72dc57321f8bd1fa97e5bea6d1f7c89e728d077ca31ea125b78320a616a6c6cd0e6b9cb94cb864381c1
+  languageName: node
+  linkType: hard
+
+"token-types@npm:^6.0.0":
+  version: 6.1.1
+  resolution: "token-types@npm:6.1.1"
+  dependencies:
+    "@borewit/text-codec": "npm:^0.1.0"
+    "@tokenizer/token": "npm:^0.3.0"
+    ieee754: "npm:^1.2.1"
+  checksum: 10c0/e2405e7789d41693a09c478b53c47ffadd735a5f4c826d9885787d022ab10e26cc4a67b03593285748bf3b0c0237e0ea2ab268abcb953ea314727201d0f6504d
   languageName: node
   linkType: hard
 
@@ -23432,7 +24202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.7.0":
+"tslib@npm:^2.0.1, tslib@npm:^2.7.0":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
@@ -23674,6 +24444,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uint8array-extras@npm:^1.4.0":
+  version: 1.5.0
+  resolution: "uint8array-extras@npm:1.5.0"
+  checksum: 10c0/0e74641ac7dadb02eadefc1ccdadba6010e007757bda824960de3c72bbe2b04e6d3af75648441f412148c4103261d54fcb60be45a2863beb76643a55fddba3bd
+  languageName: node
+  linkType: hard
+
 "umzug@npm:3.2.1":
   version: 3.2.1
   resolution: "umzug@npm:3.2.1"
@@ -23904,6 +24681,20 @@ __metadata:
   bin:
     update-browserslist-db: cli.js
   checksum: 10c0/a7452de47785842736fb71547651c5bbe5b4dc1e3722ccf48a704b7b34e4dcf633991eaa8e4a6a517ffb738b3252eede3773bef673ef9021baa26b056d63a5b9
+  languageName: node
+  linkType: hard
+
+"update-browserslist-db@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "update-browserslist-db@npm:1.1.4"
+  dependencies:
+    escalade: "npm:^3.2.0"
+    picocolors: "npm:^1.1.1"
+  peerDependencies:
+    browserslist: ">= 4.21.0"
+  bin:
+    update-browserslist-db: cli.js
+  checksum: 10c0/db0c9aaecf1258a6acda5e937fc27a7996ccca7a7580a1b4aa8bba6a9b0e283e5e65c49ebbd74ec29288ef083f1b88d4da13e3d4d326c1e5fc55bf72d7390702
   languageName: node
   linkType: hard
 
@@ -24643,6 +25434,16 @@ __metadata:
     imurmurhash: "npm:^0.1.4"
     signal-exit: "npm:^3.0.7"
   checksum: 10c0/a2c282c95ef5d8e1c27b335ae897b5eca00e85590d92a3fd69a437919b7b93ff36a69ea04145da55829d2164e724bc62202cdb5f4b208b425aba0807889375c7
+  languageName: node
+  linkType: hard
+
+"write-file-atomic@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "write-file-atomic@npm:5.0.1"
+  dependencies:
+    imurmurhash: "npm:^0.1.4"
+    signal-exit: "npm:^4.0.1"
+  checksum: 10c0/e8c850a8e3e74eeadadb8ad23c9d9d63e4e792bd10f4836ed74189ef6e996763959f1249c5650e232f3c77c11169d239cbfc8342fc70f3fe401407d23810505d
   languageName: node
   linkType: hard
 
