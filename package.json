@@ -30,9 +30,9 @@
     "script:import-sdr-shipments-sheet": "esrun src/scripts/import-sdr-shipments-sheet/ dotenv_config_path=./src/scripts/.env"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "5.31.3",
-    "@strapi/plugin-users-permissions": "5.31.3",
-    "@strapi/provider-upload-aws-s3": "5.31.3",
+    "@strapi/plugin-documentation": "5.32.0",
+    "@strapi/plugin-users-permissions": "5.32.0",
+    "@strapi/provider-upload-aws-s3": "5.32.0",
     "@strapi/strapi": "^5.0.0-rc.9",
     "better-sqlite3": "^11.0.0",
     "pg": "^8.11.3",
