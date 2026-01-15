@@ -96,3 +96,40 @@ export type ProductUploadWorkflowResults = UploadWorkflowResults<Product[]>;
 
 export type NeedUploadWorkflow = UploadWorkflow<Need[]>;
 export type NeedUploadWorkflowResults = UploadWorkflowResults<Need[]>;
+
+export type StrapiRegion = {
+  name: string,
+  id: number,
+  documentId: string
+}
+
+export type StrapiSubregion = {
+  name: string,
+  id: number,
+  documentId: string
+}
+
+export type StrapiSurvey = {
+  reference: string,
+  yearQuarter: string,
+  id: number,
+  documentId: string
+}
+
+export type StrapiCategory = {
+  name: string,
+  id: number,
+  documentId: string
+}
+
+export type StrapiProduct = {
+  name: string,
+  id: number,
+  documentId: string,
+  category: {
+    id: number,
+    name: string
+  }
+  ageGender?: string;
+  sizeStyle?: string;
+}
