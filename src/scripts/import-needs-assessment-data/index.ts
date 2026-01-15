@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { join } from "path";
+import { dirname, resolve } from "path";
 import { readFileSync } from "fs";
 
 import { addRegions } from "./add-regions";
@@ -12,7 +12,9 @@ import { addNeeds } from "./add-needs";
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(join(__dirname, "./needs-data.json"), "utf8");
+    const scriptDir = dirname(__filename);
+    const filePath = resolve(scriptDir, "./needs-data.json");
+    const jsonData = readFileSync(filePath, "utf8");
     const data = JSON.parse(jsonData);
 
     //  Process the data and upload to Strapi collections
