@@ -24,3 +24,7 @@ The Bruno test collection is located inside tests. Each module is separated in t
    ```bash
     cd tests/api-tests/Needs-Assessment/01-RegionAPI && bru run --env Global
    ```
+
+#### Useful Links
+
+- [How to include relation fields in Strapi API response](https://docs-v4.strapi.io/dev-docs/api/rest/guides/understanding-populate)
