@@ -8,7 +8,11 @@ import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
 // import { addNeeds } from "./add-needs";
-import { getRegionIds, getSubregionIds } from "./get-ids";
+import { 
+  getCategoryIds, 
+  getRegionIds, 
+  getSubregionIds, 
+  getSurveyIds } from "./get-ids";
 
 async function main() {
   try {
@@ -41,6 +45,8 @@ async function main() {
     const _regionResults = await getRegionIds();
     // console.log("Regions data", regionResults.length);// Log region results for test
     const _subregionResults = await getSubregionIds();
+    const _surveyResults = await getSurveyIds();
+    const _categoryResults = await getCategoryIds();
 
     // const _needs = await addNeeds(data);
   } catch (error) {
