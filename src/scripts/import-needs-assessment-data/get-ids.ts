@@ -2,8 +2,8 @@ import { STRAPI_ENV } from "../strapi-env";
 import {
     StrapiRegion,
     StrapiSubregion,
-    // StrapiSurvey,
-    // StrapiCategory,
+    StrapiSurvey,
+    StrapiCategory,
     // StrapiProduct
 } from "./types";
 
@@ -79,3 +79,41 @@ async function getSubregionIds(): Promise<StrapiSubregion[]> {
 }
 
 export { getSubregionIds };
+
+/*  Get the ids for each survey from Strapi
+ * ------------------------------------------------------- */
+async function getSurveyIds(): Promise<StrapiSurvey[]> {
+  const existingSurveys = await fetch(`${STRAPI_ENV.URL}/surveys`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+  });
+
+  const surveyResponse = await existingSurveys.json();
+
+  console.log("Surveys data", surveyResponse.data.length);// Log survey results for test
+  return surveyResponse.data;
+}
+
+export { getSurveyIds };
+
+/*  Get the ids for each category from Strapi
+ * ------------------------------------------------------- */
+async function getCategoryIds(): Promise<StrapiCategory[]> {
+  const existingCategories = await fetch(`${STRAPI_ENV.URL}/categories`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
+    },
+  });
+
+  const categoryResponse = await existingCategories.json();
+
+  console.log("Categories data", categoryResponse.data.length);// Log category results for test
+  return categoryResponse.data;
+}
+
+export { getCategoryIds };
