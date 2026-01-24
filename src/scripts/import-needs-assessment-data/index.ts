@@ -10,6 +10,7 @@ import { addProducts } from "./add-items";
 // import { addNeeds } from "./add-needs";
 import { 
   getCategoryIds, 
+  getProductItemIds, 
   getRegionIds, 
   getSubregionIds, 
   getSurveyIds } from "./get-ids";
@@ -47,6 +48,7 @@ async function main() {
     const _subregionResults = await getSubregionIds();
     const _surveyResults = await getSurveyIds();
     const _categoryResults = await getCategoryIds();
+    const _productItemResults = await getProductItemIds();
 
     // const _needs = await addNeeds(data);
   } catch (error) {
