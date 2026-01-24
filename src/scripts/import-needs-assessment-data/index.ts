@@ -27,7 +27,7 @@ async function main() {
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
     const _categories = await addCategories(data);
-    const _products = await addProducts(data);
+    const _products = await addProducts(data, getCategoryIds);
 
     // Check the number of objects in the needs array to manually compare totals
     function countObjectsInArray(data): number {
