@@ -43,6 +43,10 @@ export type Need = {
     unit?: string;
   };
   amount: number;
+  regionId?: number;
+  subregionId?: number;
+  surveyId?: number;
+  productId?: number;
 };
 
 export type NeedAssessment = {
