@@ -7,15 +7,36 @@ import {
   NeedAssessment,
   ProductUploadWorkflow,
   ProductUploadWorkflowResults,
+  StrapiCategory,
 } from "./types.d";
+import pLimit from 'p-limit';
 
 /*  Add Products from Needs Assessment Data
  * ------------------------------------------------------- */
-export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
+export async function addProducts(
+  data: NeedAssessment[],
+  getCategoryIdsFn: () =>
+  Promise<StrapiCategory[]>
+  ): Promise<Product[]> {
   console.log("Adding Product.Items from the Needs Assessment data ...");
+
+  const categoryResults = await getCategoryIdsFn();
+
+  if (!Array.isArray(categoryResults)) {
+    throw new Error(
+      `Expected categoryResults to be an array, got ${typeof categoryResults}`
+    );
+  }
+
+  const categories = categoryResults;
+  const categoryIdMap = new Map(
+    categories.map((category) => [category.name.toLowerCase(), category.id]),
+  );
+  console.log([...categoryIdMap.entries()]); // log map to test
 
   const uniqueProductItems = consolidateProductsByCategory(data);
 
+  const limit = pLimit(3);
   const results = await Promise.allSettled<ProductUploadWorkflow>(
     uniqueProductItems.map((product) => {
       const initialWorkflow = {
@@ -25,11 +46,14 @@ export async function addProducts(data: NeedAssessment[]): Promise<Product[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow)
+      return limit (() => 
+        Promise.resolve(initialWorkflow)
         .then(parseProducts)
-        .then(getCategoryIds)
+        // .then(getCategoryIds)
+        .then((workflow) => addCategoryIds(workflow, categoryIdMap))
         .then(getProduct)
-        .then(uploadProduct);
+        .then(uploadProduct)
+      );
     }),
   );
 
@@ -177,59 +201,41 @@ async function parseProducts({
 }
 
 /* Get Category Ids */
-async function getCategoryIds({
-  data,
-  orig,
-  status,
-  logs,
-}: ProductUploadWorkflow): Promise<ProductUploadWorkflow> {
-  logs = [
+async function addCategoryIds(
+  workflow: ProductUploadWorkflow, categoryIdMap: Map<string, number>): Promise<ProductUploadWorkflow> {
+    const { data, orig, status, logs } = workflow;
+  
+  const updatedLogs = [
     ...logs,
-    `Log: Getting the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`,
+    `Log: Adding the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`,
   ];
 
-  const response = await fetch(`${STRAPI_ENV.URL}/categories`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${STRAPI_ENV.KEY}`,
-    },
-  });
+  const categoryName = data[0].category?.toLowerCase();
+  const categoryId = categoryName ? categoryIdMap.get(categoryName) : undefined;
 
-  const categoryResults = await response.json();
-  const matchingCategory = categoryResults.data.find((category) => {
-    const parsedItem = data[0];
-    return category.name.toLowerCase() === parsedItem.category.toLowerCase();
-  });
-
-  if (!response.ok) {
-    console.log("Non-ok response");
+  if (!categoryName || categoryId === undefined) {
     throw {
       data,
       orig,
       status: UploadWorkflowStatus.PROCESSING,
       logs: [
-        ...logs,
-        `Error: Failed to get Product.Item category Id. HttpStatus: ${response.status} - ${response.statusText}`,
-        JSON.stringify(categoryResults),
+        ...updatedLogs,
+        `Error: No category mapping found for "${data[0].category}". Available categories: ${Array.from(categoryIdMap.keys()).join(',')}`,
       ],
     };
   }
 
-  if (matchingCategory) {
-    const updateProduct = {
-      ...data[0],
-      categoryId: matchingCategory.id,
-    };
-    data[0] = updateProduct;
-  }
+  const updatedProduct = {
+    ...data[0],
+    categoryId: categoryId,
+  };
 
   return {
-    data,
+    data: [updatedProduct],
     orig,
     status,
     logs: [
-      ...logs,
+      ...updatedLogs,
       "Success: Confirmed Product.Item has a matching category Id.",
     ],
   };

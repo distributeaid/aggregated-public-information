@@ -35,6 +35,7 @@
     "@strapi/provider-upload-aws-s3": "5.33.1",
     "@strapi/strapi": "^5.0.0-rc.9",
     "better-sqlite3": "^11.0.0",
+    "p-limit": "^7.2.0",
     "pg": "^8.11.3",
     "pg-connection-string": "^2.6.2",
     "react": "^19.0.0",
