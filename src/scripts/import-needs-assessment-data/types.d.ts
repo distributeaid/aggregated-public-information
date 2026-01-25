@@ -134,6 +134,7 @@ export type StrapiProduct = {
     id: number,
     name: string
   }
-  ageGender?: string;
-  sizeStyle?: string;
+  age_gender?: string;
+  size_style?: string;
+  unit?: string;
 }

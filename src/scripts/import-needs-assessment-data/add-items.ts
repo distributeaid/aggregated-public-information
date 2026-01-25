@@ -32,7 +32,7 @@ export async function addProducts(
   const categoryIdMap = new Map(
     categories.map((category) => [category.name.toLowerCase(), category.id]),
   );
-  console.log([...categoryIdMap.entries()]); // log map to test
+  // console.log([...categoryIdMap.entries()]); // log map to test
 
   const uniqueProductItems = consolidateProductsByCategory(data);
 

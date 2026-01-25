@@ -14,12 +14,13 @@ import {
   getRegionIds, 
   getSubregionIds, 
   getSurveyIds } from "./get-ids";
+import { addCollectionIdsToData } from "./add-collection-ids";
 
 async function main() {
   try {
     //  Load the json data
     const scriptDir = dirname(__filename);
-    const filePath = resolve(scriptDir, "./needs-data.json");
+    const filePath = resolve(scriptDir, "./needs-data(subset).json");
     const jsonData = readFileSync(filePath, "utf8");
     const data = JSON.parse(jsonData);
 
@@ -43,12 +44,21 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    const _regionResults = await getRegionIds();
+    // const _regionResults = await getRegionIds();
     // console.log("Regions data", regionResults.length);// Log region results for test
-    const _subregionResults = await getSubregionIds();
-    const _surveyResults = await getSurveyIds();
-    const _categoryResults = await getCategoryIds();
-    const _productItemResults = await getProductItemIds();
+    // const _subregionResults = await getSubregionIds();
+    // const _surveyResults = await getSurveyIds();
+    // const _categoryResults = await getCategoryIds();
+    // const _productItemResults = await getProductItemIds();
+
+    const processedData = await addCollectionIdsToData(
+      data,
+      getRegionIds,
+      getSubregionIds,
+      getSurveyIds,
+      getProductItemIds
+    );
+    console.log("Processed needs:", processedData.length)
 
     // const _needs = await addNeeds(data);
   } catch (error) {

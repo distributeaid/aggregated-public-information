@@ -130,7 +130,7 @@ async function getProductItemIds(): Promise<StrapiProduct[]> {
   do {
     try {
       const existingItemResponse = await fetch(
-        `${STRAPI_ENV.URL}/items?pagination[page]=${currentPage}&pagination[pageSize]=25`,
+        `${STRAPI_ENV.URL}/items?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=25`,
         {
           method: "GET",
           headers: {

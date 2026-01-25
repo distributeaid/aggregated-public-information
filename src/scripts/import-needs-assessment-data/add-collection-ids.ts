@@ -24,7 +24,6 @@ export async function addCollectionIdsToData(
         item: string;
         ageGender?: string;
         sizeStyle?: string;
-        unit?: string;
     }) {
         const normalize = (v?: string | null) => (v ?? "").trim().toLowerCase();
         return [
@@ -32,7 +31,6 @@ export async function addCollectionIdsToData(
         normalize(product.item),
         normalize(product.ageGender),
         normalize(product.sizeStyle),
-        normalize(product.unit),
         ].join(" | ");
     }
     
@@ -77,13 +75,14 @@ export async function addCollectionIdsToData(
         buildProductKey({
             category: product.category.name.toLowerCase(),
             item: product.name.toLowerCase(),
-            ageGender: product.ageGender,
-            sizeStyle: product.sizeStyle,
-            unit: "",
+            ageGender: product.age_gender,
+            sizeStyle: product.size_style,
+            // unit: "",
         }),
         product.id,
     ]),
   );
+  // console.log(productIdMap); // log map to test
 
   for (const assessment of data) {
     try {
@@ -97,7 +96,6 @@ export async function addCollectionIdsToData(
           item: assessment.product.item,
           ageGender: assessment.product.ageGender || "",
           sizeStyle: assessment.product.sizeStyle || "",
-          unit: assessment.product.unit || "",
         },
         amount: assessment.need,
         survey: {
@@ -139,7 +137,7 @@ export async function addCollectionIdsToData(
           `No survey ID found for survey: ${assessment.survey.id} | ${assessment.survey.year}-${assessment.survey.quarter}`,
         );
       }
-      if (!productId) {
+      if (assessment.product && !processedNeed.productId) {
         console.warn(`No product item ID found for: ${productKey}`);
       }
 
