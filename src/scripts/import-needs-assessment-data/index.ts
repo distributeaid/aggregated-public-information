@@ -22,7 +22,7 @@ async function main() {
   try {
     //  Load the json data
     const scriptDir = dirname(__filename);
-    const filePath = resolve(scriptDir, "./needs-data(subset).json");
+    const filePath = resolve(scriptDir, "./needs-data.json");
     const jsonData = readFileSync(filePath, "utf8");
     const data = JSON.parse(jsonData);
 
