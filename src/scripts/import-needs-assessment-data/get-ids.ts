@@ -54,7 +54,7 @@ async function getRegionIds(): Promise<StrapiRegion[]> {
       });
     }
     
-    console.log("Regions data", regionsResponse.data.length);// Log region results for test
+    // console.log("Regions data", regionsResponse.data.length);// Log region results for test
 
     return regionsResponse.data;
 }
@@ -74,7 +74,7 @@ async function getSubregionIds(): Promise<StrapiSubregion[]> {
 
   const subregionResponse = await existingSubregions.json();
 
-  console.log("Subregions data", subregionResponse.data.length);// Log subregion results for test
+  // console.log("Subregions data", subregionResponse.data.length);// Log subregion results for test
   return subregionResponse.data;
 }
 
@@ -93,7 +93,7 @@ async function getSurveyIds(): Promise<StrapiSurvey[]> {
 
   const surveyResponse = await existingSurveys.json();
 
-  console.log("Surveys data", surveyResponse.data.length);// Log survey results for test
+  // console.log("Surveys data", surveyResponse.data.length);// Log survey results for test
   return surveyResponse.data;
 }
 
