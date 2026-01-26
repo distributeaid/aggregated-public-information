@@ -7,14 +7,15 @@ import { addSubregions } from "./add-subregions";
 import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
-// import { addNeeds } from "./add-needs";
+import { addNeeds } from "./add-needs";
 import { 
   getCategoryIds, 
-  getProductItemIds, 
-  getRegionIds, 
-  getSubregionIds, 
-  getSurveyIds } from "./get-ids";
-import { addCollectionIdsToData } from "./add-collection-ids";
+  // getProductItemIds, 
+  // getRegionIds, 
+  // getSubregionIds, 
+  // getSurveyIds,
+ } from "./get-ids";
+// import { addCollectionIdsToData } from "./add-collection-ids";
 
 async function main() {
   try {
@@ -51,16 +52,16 @@ async function main() {
     // const _categoryResults = await getCategoryIds();
     // const _productItemResults = await getProductItemIds();
 
-    const processedData = await addCollectionIdsToData(
-      data,
-      getRegionIds,
-      getSubregionIds,
-      getSurveyIds,
-      getProductItemIds
-    );
-    console.log("Processed needs:", processedData.length)
+    // const processedData = await addCollectionIdsToData(
+    //   data,
+    //   getRegionIds,
+    //   getSubregionIds,
+    //   getSurveyIds,
+    //   getProductItemIds
+    // );
+    // console.log("Processed needs:", processedData.length)
 
-    // const _needs = await addNeeds(data);
+    const _needs = await addNeeds(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {

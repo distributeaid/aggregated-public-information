@@ -8,6 +8,12 @@ import {
   NeedUploadWorkflow,
   NeedUploadWorkflowResults,
 } from "./types.d";
+import { addCollectionIdsToData } from "./add-collection-ids";
+import { 
+  getProductItemIds, 
+  getRegionIds, 
+  getSubregionIds, 
+  getSurveyIds } from "./get-ids";
 
 // Note: Uncomment the required imports during implementation in the code.
 
@@ -18,6 +24,11 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
 
   const uniqueNeedEntries = consolidateNeedsByRegion(data);
 
+  const getRegionIdsFn = getRegionIds;
+  const getSubregionIdsFn = getSubregionIds;
+  const getSurveyIdsFn = getSurveyIds;
+  const getProductItemIdsFn = getProductItemIds;
+
   const results = await Promise.allSettled<NeedUploadWorkflow>(
     uniqueNeedEntries.map((need) => {
       const initialWorkflow = {
@@ -27,7 +38,9 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow).then(parseNeeds);
+      return Promise.resolve(initialWorkflow)
+      .then(parseNeeds)
+      .then((parsed) => addIdsToWorkflow(parsed, getRegionIdsFn, getSubregionIdsFn, getSurveyIdsFn, getProductItemIdsFn));
     }),
   );
 
@@ -222,4 +235,49 @@ async function parseNeeds({
       logs,
     });
   });
+}
+
+/*  Add collection IDs for relation fields to the Needs
+ * --------------------------------------------------- */
+async function addIdsToWorkflow(
+  workflow: NeedUploadWorkflow,
+  getRegionIdsFn: typeof getRegionIds,
+  getSubregionIdsFn: typeof getSubregionIds,
+  getSurveyIdsFn: typeof getSurveyIds,
+  getProductItemIdsFn: typeof getProductItemIds,
+): Promise<NeedUploadWorkflow> {
+  const { data, orig: origin, logs } = workflow;
+  logs.push(`Log: adding relation ids to the needs ...`);
+
+  const [regionIds, subregionIds, surveyIds, productIds] = await Promise.all([
+    getRegionIdsFn(),
+    getSubregionIdsFn(),
+    getSurveyIdsFn(),
+    getProductItemIdsFn()
+  ]);
+
+  try {
+    const enrichedData = await addCollectionIdsToData(
+      data,
+      regionIds,
+      subregionIds,
+      surveyIds,
+      productIds
+    );
+    
+    return {
+    data:enrichedData,
+    orig: origin,
+    status: UploadWorkflowStatus.PROCESSING,
+    logs: [...logs, `Added IDs to ${enrichedData.length} needs`],
+    };
+  } catch (error) {
+    return {
+      data,
+      orig: origin,
+      status: UploadWorkflowStatus.OTHER,
+      logs: [...logs, `Adding ids to the needs failed: ${(error as Error).message}`],
+    };
+  }
+
 }
