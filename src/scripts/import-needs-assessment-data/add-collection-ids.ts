@@ -1,5 +1,4 @@
 import { 
-    NeedAssessment, 
     Need,
     StrapiRegion,
     StrapiSubregion,
@@ -8,15 +7,11 @@ import {
 } from "./types";
 
 export async function addCollectionIdsToData(
-    data: NeedAssessment[],
-    getRegionIdsFn: () =>
-      Promise<StrapiRegion[]>,
-    getSubregionIdsFn: () =>
-      Promise<StrapiSubregion[]>,
-    getSurveyIdsFn: () =>
-      Promise<StrapiSurvey[]>,
-    getProductItemIdsFn: () =>
-      Promise<StrapiProduct[]>,
+    data: Need[],
+    regions: StrapiRegion[],
+    subregions: StrapiSubregion[],
+    surveys: StrapiSurvey[],
+    products: StrapiProduct[],
 ): Promise<Need[]> {
 
     function buildProductKey(product: {
@@ -36,24 +31,18 @@ export async function addCollectionIdsToData(
     
   const processedData: Need[] = [];
 
-  // Fetch collection ids from Strapi
-  const regionResults = await getRegionIdsFn();
-  const subregionResults = await getSubregionIdsFn();
-  const surveyResults = await getSurveyIdsFn();
-  const productItemResults = await getProductItemIdsFn();
-
   // Create maps for the collections required 
   // ******************************************************************/
 
   // Region collection map ****/
   const regionIdMap = new Map(
-    regionResults.map((region) => [region.name.toLowerCase(), region.id]),
+    regions.map((region) => [region.name.toLowerCase(), region.id]),
   );
   // console.log(regionIdMap); // log map to test
 
   // Subregion collection map ****/
   const subregionIdMap = new Map(
-    subregionResults.map((subregion) => [
+    subregions.map((subregion) => [
       subregion.name.toLowerCase(),
       subregion.id,
     ]),
@@ -62,7 +51,7 @@ export async function addCollectionIdsToData(
 
   // Survey colleciton map  ****/
   const surveyIdMap = new Map(
-    surveyResults.map((survey) => [
+    surveys.map((survey) => [
       `${survey.reference} | ${survey.yearQuarter}`,
       survey.id,
     ]),
@@ -71,7 +60,7 @@ export async function addCollectionIdsToData(
 
   // Product Item collection map ****/
   const productIdMap = new Map(
-    productItemResults.map((product) => [
+    products.map((product) => [
         buildProductKey({
             category: product.category.name.toLowerCase(),
             item: product.name.toLowerCase(),
@@ -97,26 +86,26 @@ export async function addCollectionIdsToData(
           ageGender: assessment.product.ageGender || "",
           sizeStyle: assessment.product.sizeStyle || "",
         },
-        amount: assessment.need,
+        amount: assessment.amount,
         survey: {
-          reference: assessment.survey.id,
+          reference: assessment.survey.reference,
           year: assessment.survey.year,
           quarter: assessment.survey.quarter,
         },
-        region: assessment.place.region ?? "other",
-        subregion: assessment.place.subregion || "",
+        region: assessment.region ?? "other",
+        subregion: assessment.subregion || "",
         regionId: Number(
-          regionIdMap.get((assessment.place.region ?? "other").toLowerCase()) ||
+          regionIdMap.get((assessment.region ?? "other").toLowerCase()) ||
             0,
         ),
-        subregionId: assessment.place.subregion
+        subregionId: assessment.subregion
           ? Number(
-              subregionIdMap.get(assessment.place.subregion.toLowerCase()) || 0,
+              subregionIdMap.get(assessment.subregion.toLowerCase()) || 0,
             )
           : undefined,
         surveyId: Number(
           surveyIdMap.get(
-            `${assessment.survey.id} | ${assessment.survey.year}-${assessment.survey.quarter}`,
+            `${assessment.survey.reference} | ${assessment.survey.year}-${assessment.survey.quarter}`,
           ) || 0,
         ),
         productId,
@@ -124,17 +113,17 @@ export async function addCollectionIdsToData(
 
       if (!processedNeed.regionId) {
         console.warn(
-          `No region ID found for region: ${assessment.place.region}`,
+          `No region ID found for region: ${assessment.region}`,
         );
       }
-      if (assessment.place.subregion && !processedNeed.subregionId) {
+      if (assessment.subregion && !processedNeed.subregionId) {
         console.warn(
-          `No subregion ID found for subregion: ${assessment.place.subregion}`,
+          `No subregion ID found for subregion: ${assessment.subregion}`,
         );
       }
-      if (assessment.survey.id && !processedNeed.surveyId) {
+      if (assessment.survey.reference && !processedNeed.surveyId) {
         console.warn(
-          `No survey ID found for survey: ${assessment.survey.id} | ${assessment.survey.year}-${assessment.survey.quarter}`,
+          `No survey ID found for survey: ${assessment.survey.reference} | ${assessment.survey.year}-${assessment.survey.quarter}`,
         );
       }
       if (assessment.product && !processedNeed.productId) {
