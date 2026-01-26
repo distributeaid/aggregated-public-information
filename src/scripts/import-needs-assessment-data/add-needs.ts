@@ -14,6 +14,16 @@ import {
   getRegionIds, 
   getSubregionIds, 
   getSurveyIds } from "./get-ids";
+import {
+  getCachedRegions,
+  getCachedSubregions,
+  getCachedSurveys,
+  getCachedProducts,
+  getCachedRegionsDirect,
+  getCachedSubregionsDirect,
+  getCachedSurveysDirect,
+  getCachedProductsDirect,
+} from "./cache";
 
 // Note: Uncomment the required imports during implementation in the code.
 
@@ -24,10 +34,20 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
 
   const uniqueNeedEntries = consolidateNeedsByRegion(data);
 
+  // Fetch collection Ids
   const getRegionIdsFn = getRegionIds;
   const getSubregionIdsFn = getSubregionIds;
   const getSurveyIdsFn = getSurveyIds;
   const getProductItemIdsFn = getProductItemIds;
+
+  // Populate caches
+  await Promise.all([
+    getCachedRegions(getRegionIdsFn),
+    getCachedSubregions(getSubregionIdsFn),
+    getCachedSurveys(getSurveyIdsFn),
+    getCachedProducts(getProductItemIdsFn)
+  ]);
+  console.log("All caches for relation fields populated");
 
   const results = await Promise.allSettled<NeedUploadWorkflow>(
     uniqueNeedEntries.map((need) => {
@@ -40,7 +60,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
 
       return Promise.resolve(initialWorkflow)
       .then(parseNeeds)
-      .then((parsed) => addIdsToWorkflow(parsed, getRegionIdsFn, getSubregionIdsFn, getSurveyIdsFn, getProductItemIdsFn));
+      .then(addIdsToWorkflow);
     }),
   );
 
@@ -240,21 +260,17 @@ async function parseNeeds({
 /*  Add collection IDs for relation fields to the Needs
  * --------------------------------------------------- */
 async function addIdsToWorkflow(
-  workflow: NeedUploadWorkflow,
-  getRegionIdsFn: typeof getRegionIds,
-  getSubregionIdsFn: typeof getSubregionIds,
-  getSurveyIdsFn: typeof getSurveyIds,
-  getProductItemIdsFn: typeof getProductItemIds,
+  workflow: NeedUploadWorkflow
 ): Promise<NeedUploadWorkflow> {
   const { data, orig: origin, logs } = workflow;
   logs.push(`Log: adding relation ids to the needs ...`);
 
-  const [regionIds, subregionIds, surveyIds, productIds] = await Promise.all([
-    getRegionIdsFn(),
-    getSubregionIdsFn(),
-    getSurveyIdsFn(),
-    getProductItemIdsFn()
-  ]);
+  const [regionIds, subregionIds, surveyIds, productIds] = [
+    getCachedRegionsDirect(),
+    getCachedSubregionsDirect(),
+    getCachedSurveysDirect(),
+    getCachedProductsDirect()
+  ];
 
   try {
     const enrichedData = await addCollectionIdsToData(

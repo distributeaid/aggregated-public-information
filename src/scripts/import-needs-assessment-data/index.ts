@@ -15,6 +15,7 @@ import {
   // getSubregionIds, 
   // getSurveyIds,
  } from "./get-ids";
+import { clearAllCaches } from "./cache";
 // import { addCollectionIdsToData } from "./add-collection-ids";
 
 async function main() {
@@ -61,6 +62,7 @@ async function main() {
     // );
     // console.log("Processed needs:", processedData.length)
 
+    clearAllCaches();
     const _needs = await addNeeds(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);
