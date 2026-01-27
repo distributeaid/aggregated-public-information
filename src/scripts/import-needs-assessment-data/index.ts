@@ -8,15 +8,8 @@ import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
 import { addNeeds } from "./add-needs";
-import { 
-  getCategoryIds, 
-  // getProductItemIds, 
-  // getRegionIds, 
-  // getSubregionIds, 
-  // getSurveyIds,
- } from "./get-ids";
+import { getCategoryIds } from "./get-ids";
 import { clearAllCaches } from "./cache";
-// import { addCollectionIdsToData } from "./add-collection-ids";
 
 async function main() {
   try {
@@ -46,24 +39,9 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
-    // const _regionResults = await getRegionIds();
-    // console.log("Regions data", regionResults.length);// Log region results for test
-    // const _subregionResults = await getSubregionIds();
-    // const _surveyResults = await getSurveyIds();
-    // const _categoryResults = await getCategoryIds();
-    // const _productItemResults = await getProductItemIds();
-
-    // const processedData = await addCollectionIdsToData(
-    //   data,
-    //   getRegionIds,
-    //   getSubregionIds,
-    //   getSurveyIds,
-    //   getProductItemIds
-    // );
-    // console.log("Processed needs:", processedData.length)
-
     clearAllCaches();
     const _needs = await addNeeds(data);
+    
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {

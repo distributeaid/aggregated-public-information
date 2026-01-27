@@ -257,7 +257,7 @@ async function parseNeeds({
   });
 }
 
-/*  Add collection IDs for relation fields to the Needs
+/*  Add collection IDs for relation fields of the Needs
  * --------------------------------------------------- */
 async function addIdsToWorkflow(
   workflow: NeedUploadWorkflow
@@ -285,14 +285,14 @@ async function addIdsToWorkflow(
     data:enrichedData,
     orig: origin,
     status: UploadWorkflowStatus.PROCESSING,
-    logs: [...logs, `Added IDs to ${enrichedData.length} needs`],
+    logs: [...logs, `Added IDs to ${enrichedData.length} need`],
     };
   } catch (error) {
     return {
       data,
       orig: origin,
       status: UploadWorkflowStatus.OTHER,
-      logs: [...logs, `Adding ids to the needs failed: ${(error as Error).message}`],
+      logs: [...logs, `Adding ids to the need failed: ${(error as Error).message}`],
     };
   }
 

@@ -38,7 +38,6 @@ export async function addCollectionIdsToData(
   const regionIdMap = new Map(
     regions.map((region) => [region.name.toLowerCase(), region.id]),
   );
-  // console.log(regionIdMap); // log map to test
 
   // Subregion collection map ****/
   const subregionIdMap = new Map(
@@ -47,7 +46,6 @@ export async function addCollectionIdsToData(
       subregion.id,
     ]),
   );
-  // console.log(subregionIdMap); // log map to test
 
   // Survey colleciton map  ****/
   const surveyIdMap = new Map(
@@ -56,7 +54,6 @@ export async function addCollectionIdsToData(
       survey.id,
     ]),
   );
-  // console.log(surveyIdMap); // log map to test
 
   // Product Item collection map ****/
   const productIdMap = new Map(
@@ -66,12 +63,10 @@ export async function addCollectionIdsToData(
             item: product.name.toLowerCase(),
             ageGender: product.age_gender,
             sizeStyle: product.size_style,
-            // unit: "",
         }),
         product.id,
     ]),
   );
-  // console.log(productIdMap); // log map to test
 
   for (const assessment of data) {
     try {
