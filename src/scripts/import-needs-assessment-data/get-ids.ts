@@ -19,7 +19,7 @@ async function getRegionIds(): Promise<StrapiRegion[]> {
     });
 
     const regionsResponse = await existingRegions.json();
-    console.log("Initial regions count:", regionsResponse.data?.length);
+    // console.log("Initial regions count:", regionsResponse.data?.length);
 
     // Check if "Other" region exists
     if (!regionsResponse.data?.some((region) => region.name === "Other")) {
@@ -49,12 +49,10 @@ async function getRegionIds(): Promise<StrapiRegion[]> {
         })
         .then((r) => r.json())
         .then((r) => {
-        console.log("Regions count after adding 'Other':", r.data?.length);
+        // console.log("Regions count after adding 'Other':", r.data?.length);
         return r.data;
       });
     }
-    
-    // console.log("Regions data", regionsResponse.data.length);// Log region results for test
 
     return regionsResponse.data;
 }
@@ -74,7 +72,6 @@ async function getSubregionIds(): Promise<StrapiSubregion[]> {
 
   const subregionResponse = await existingSubregions.json();
 
-  // console.log("Subregions data", subregionResponse.data.length);// Log subregion results for test
   return subregionResponse.data;
 }
 
@@ -93,7 +90,6 @@ async function getSurveyIds(): Promise<StrapiSurvey[]> {
 
   const surveyResponse = await existingSurveys.json();
 
-  // console.log("Surveys data", surveyResponse.data.length);// Log survey results for test
   return surveyResponse.data;
 }
 
@@ -112,7 +108,6 @@ async function getCategoryIds(): Promise<StrapiCategory[]> {
 
   const categoryResponse = await existingCategories.json();
 
-  // console.log("Categories data", categoryResponse.data.length);// Log category results for test
   return categoryResponse.data;
 }
 
@@ -146,11 +141,6 @@ async function getProductItemIds(): Promise<StrapiProduct[]> {
 
       const existingItems = await existingItemResponse.json();
 
-      // Debugging the items coming in via the page
-      // console.log(`➡️ Page ${currentPage}`);
-      // console.log('➡️ Pagination metadata:', existingItems.meta.pagination);
-      // console.log('➡️ Items received on this page:', existingItems.data.length);
-
       if (!existingItems || !existingItems.data) {
         throw new Error(
           "Invalid response structure: product item data is missing",
@@ -173,7 +163,6 @@ async function getProductItemIds(): Promise<StrapiProduct[]> {
       allItems.push(...newItems);
       // const newLength = allItems.length;
       // console.log('Array length after pushing new items:', newLength);
-      // console.log('Items added in this iteration:', newLength - previousLength);
 
       //verify no duplicates in current page
       const currentPageIds = new Set(existingItems.data.map((item) => item.id));
@@ -192,7 +181,7 @@ async function getProductItemIds(): Promise<StrapiProduct[]> {
   // final verification that the allItems array does not contain duplicates
   const finalIds = new Set(allItems.map((item) => item.id));
 
-  console.log("Final array length:", allItems.length);
+  // console.log("Final array length:", allItems.length);
   console.log("Number of unique items:", finalIds.size);
 
   return allItems;
