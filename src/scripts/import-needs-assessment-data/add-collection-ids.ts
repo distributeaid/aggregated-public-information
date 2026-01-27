@@ -1,37 +1,36 @@
-import { 
-    Need,
-    StrapiRegion,
-    StrapiSubregion,
-    StrapiSurvey,
-    StrapiProduct 
+import {
+  Need,
+  StrapiRegion,
+  StrapiSubregion,
+  StrapiSurvey,
+  StrapiProduct,
 } from "./types";
 
 export async function addCollectionIdsToData(
-    data: Need[],
-    regions: StrapiRegion[],
-    subregions: StrapiSubregion[],
-    surveys: StrapiSurvey[],
-    products: StrapiProduct[],
+  data: Need[],
+  regions: StrapiRegion[],
+  subregions: StrapiSubregion[],
+  surveys: StrapiSurvey[],
+  products: StrapiProduct[],
 ): Promise<Need[]> {
+  function buildProductKey(product: {
+    category: string;
+    item: string;
+    ageGender?: string;
+    sizeStyle?: string;
+  }) {
+    const normalize = (v?: string | null) => (v ?? "").trim().toLowerCase();
+    return [
+      normalize(product.category),
+      normalize(product.item),
+      normalize(product.ageGender),
+      normalize(product.sizeStyle),
+    ].join(" | ");
+  }
 
-    function buildProductKey(product: {
-        category: string;
-        item: string;
-        ageGender?: string;
-        sizeStyle?: string;
-    }) {
-        const normalize = (v?: string | null) => (v ?? "").trim().toLowerCase();
-        return [
-        normalize(product.category),
-        normalize(product.item),
-        normalize(product.ageGender),
-        normalize(product.sizeStyle),
-        ].join(" | ");
-    }
-    
   const processedData: Need[] = [];
 
-  // Create maps for the collections required 
+  // Create maps for the collections required
   // ******************************************************************/
 
   // Region collection map ****/
@@ -41,10 +40,7 @@ export async function addCollectionIdsToData(
 
   // Subregion collection map ****/
   const subregionIdMap = new Map(
-    subregions.map((subregion) => [
-      subregion.name.toLowerCase(),
-      subregion.id,
-    ]),
+    subregions.map((subregion) => [subregion.name.toLowerCase(), subregion.id]),
   );
 
   // Survey colleciton map  ****/
@@ -58,21 +54,20 @@ export async function addCollectionIdsToData(
   // Product Item collection map ****/
   const productIdMap = new Map(
     products.map((product) => [
-        buildProductKey({
-            category: product.category.name.toLowerCase(),
-            item: product.name.toLowerCase(),
-            ageGender: product.age_gender,
-            sizeStyle: product.size_style,
-        }),
-        product.id,
+      buildProductKey({
+        category: product.category.name.toLowerCase(),
+        item: product.name.toLowerCase(),
+        ageGender: product.age_gender,
+        sizeStyle: product.size_style,
+      }),
+      product.id,
     ]),
   );
 
   for (const assessment of data) {
     try {
-
       const productKey = buildProductKey(assessment.product);
-      const productId = Number (productIdMap.get(productKey) || 0);
+      const productId = Number(productIdMap.get(productKey) || 0);
 
       const processedNeed: Need = {
         product: {
@@ -90,13 +85,10 @@ export async function addCollectionIdsToData(
         region: assessment.region ?? "other",
         subregion: assessment.subregion || "",
         regionId: Number(
-          regionIdMap.get((assessment.region ?? "other").toLowerCase()) ||
-            0,
+          regionIdMap.get((assessment.region ?? "other").toLowerCase()) || 0,
         ),
         subregionId: assessment.subregion
-          ? Number(
-              subregionIdMap.get(assessment.subregion.toLowerCase()) || 0,
-            )
+          ? Number(subregionIdMap.get(assessment.subregion.toLowerCase()) || 0)
           : undefined,
         surveyId: Number(
           surveyIdMap.get(
@@ -107,9 +99,7 @@ export async function addCollectionIdsToData(
       };
 
       if (!processedNeed.regionId) {
-        console.warn(
-          `No region ID found for region: ${assessment.region}`,
-        );
+        console.warn(`No region ID found for region: ${assessment.region}`);
       }
       if (assessment.subregion && !processedNeed.subregionId) {
         console.warn(
