@@ -9,11 +9,12 @@ import {
   NeedUploadWorkflowResults,
 } from "./types.d";
 import { addCollectionIdsToData } from "./add-collection-ids";
-import { 
-  getProductItemIds, 
-  getRegionIds, 
-  getSubregionIds, 
-  getSurveyIds } from "./get-ids";
+import {
+  getProductItemIds,
+  getRegionIds,
+  getSubregionIds,
+  getSurveyIds,
+} from "./get-ids";
 import {
   getCachedRegions,
   getCachedSubregions,
@@ -45,7 +46,7 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
     getCachedRegions(getRegionIdsFn),
     getCachedSubregions(getSubregionIdsFn),
     getCachedSurveys(getSurveyIdsFn),
-    getCachedProducts(getProductItemIdsFn)
+    getCachedProducts(getProductItemIdsFn),
   ]);
   console.log("All caches for relation fields populated");
 
@@ -59,8 +60,8 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
       };
 
       return Promise.resolve(initialWorkflow)
-      .then(parseNeeds)
-      .then(addIdsToWorkflow);
+        .then(parseNeeds)
+        .then(addIdsToWorkflow);
     }),
   );
 
@@ -260,7 +261,7 @@ async function parseNeeds({
 /*  Add collection IDs for relation fields of the Needs
  * --------------------------------------------------- */
 async function addIdsToWorkflow(
-  workflow: NeedUploadWorkflow
+  workflow: NeedUploadWorkflow,
 ): Promise<NeedUploadWorkflow> {
   const { data, orig: origin, logs } = workflow;
   logs.push(`Log: adding relation ids to the needs ...`);
@@ -269,7 +270,7 @@ async function addIdsToWorkflow(
     getCachedRegionsDirect(),
     getCachedSubregionsDirect(),
     getCachedSurveysDirect(),
-    getCachedProductsDirect()
+    getCachedProductsDirect(),
   ];
 
   try {
@@ -278,22 +279,24 @@ async function addIdsToWorkflow(
       regionIds,
       subregionIds,
       surveyIds,
-      productIds
+      productIds,
     );
-    
+
     return {
-    data:enrichedData,
-    orig: origin,
-    status: UploadWorkflowStatus.PROCESSING,
-    logs: [...logs, `Added IDs to ${enrichedData.length} need`],
+      data: enrichedData,
+      orig: origin,
+      status: UploadWorkflowStatus.PROCESSING,
+      logs: [...logs, `Added IDs to ${enrichedData.length} need`],
     };
   } catch (error) {
     return {
       data,
       orig: origin,
       status: UploadWorkflowStatus.OTHER,
-      logs: [...logs, `Adding ids to the need failed: ${(error as Error).message}`],
+      logs: [
+        ...logs,
+        `Adding ids to the need failed: ${(error as Error).message}`,
+      ],
     };
   }
-
 }

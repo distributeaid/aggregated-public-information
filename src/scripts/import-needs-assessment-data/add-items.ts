@@ -9,22 +9,21 @@ import {
   ProductUploadWorkflowResults,
   StrapiCategory,
 } from "./types.d";
-import pLimit from 'p-limit';
+import pLimit from "p-limit";
 
 /*  Add Products from Needs Assessment Data
  * ------------------------------------------------------- */
 export async function addProducts(
   data: NeedAssessment[],
-  getCategoryIdsFn: () =>
-  Promise<StrapiCategory[]>
-  ): Promise<Product[]> {
+  getCategoryIdsFn: () => Promise<StrapiCategory[]>,
+): Promise<Product[]> {
   console.log("Adding Product.Items from the Needs Assessment data ...");
 
   const categoryResults = await getCategoryIdsFn();
 
   if (!Array.isArray(categoryResults)) {
     throw new Error(
-      `Expected categoryResults to be an array, got ${typeof categoryResults}`
+      `Expected categoryResults to be an array, got ${typeof categoryResults}`,
     );
   }
 
@@ -46,13 +45,13 @@ export async function addProducts(
         logs: [],
       };
 
-      return limit (() => 
+      return limit(() =>
         Promise.resolve(initialWorkflow)
-        .then(parseProducts)
-        // .then(getCategoryIds)
-        .then((workflow) => addCategoryIds(workflow, categoryIdMap))
-        .then(getProduct)
-        .then(uploadProduct)
+          .then(parseProducts)
+          // .then(getCategoryIds)
+          .then((workflow) => addCategoryIds(workflow, categoryIdMap))
+          .then(getProduct)
+          .then(uploadProduct),
       );
     }),
   );
@@ -202,9 +201,11 @@ async function parseProducts({
 
 /* Get Category Ids */
 async function addCategoryIds(
-  workflow: ProductUploadWorkflow, categoryIdMap: Map<string, number>): Promise<ProductUploadWorkflow> {
-    const { data, orig, status, logs } = workflow;
-  
+  workflow: ProductUploadWorkflow,
+  categoryIdMap: Map<string, number>,
+): Promise<ProductUploadWorkflow> {
+  const { data, orig, status, logs } = workflow;
+
   const updatedLogs = [
     ...logs,
     `Log: Adding the category Id for "${data[0].item} // ${data[0].category} // ${data[0].ageGender} // ${data[0].sizeStyle}".`,
@@ -220,7 +221,7 @@ async function addCategoryIds(
       status: UploadWorkflowStatus.PROCESSING,
       logs: [
         ...updatedLogs,
-        `Error: No category mapping found for "${data[0].category}". Available categories: ${Array.from(categoryIdMap.keys()).join(',')}`,
+        `Error: No category mapping found for "${data[0].category}". Available categories: ${Array.from(categoryIdMap.keys()).join(",")}`,
       ],
     };
   }

@@ -41,7 +41,6 @@ async function main() {
 
     clearAllCaches();
     const _needs = await addNeeds(data);
-    
   } catch (error) {
     console.error("Error processing needs assessment data", error);
     if (error.code === "ENOENT") {
