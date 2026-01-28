@@ -48,7 +48,6 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
     getCachedSurveys(getSurveyIdsFn),
     getCachedProducts(getProductItemIdsFn),
   ]);
-  console.log("All caches for relation fields populated");
 
   const results = await Promise.allSettled<NeedUploadWorkflow>(
     uniqueNeedEntries.map((need) => {

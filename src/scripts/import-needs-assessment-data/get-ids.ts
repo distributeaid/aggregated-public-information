@@ -179,10 +179,10 @@ async function getProductItemIds(): Promise<StrapiProduct[]> {
   } while (currentPage <= totalPages);
 
   // final verification that the allItems array does not contain duplicates
-  const finalIds = new Set(allItems.map((item) => item.id));
+  const _finalIds = new Set(allItems.map((item) => item.id));
 
   // console.log("Final array length:", allItems.length);
-  console.log("Number of unique items:", finalIds.size);
+  // console.log("Number of unique items:", finalIds.size);
 
   return allItems;
 }
