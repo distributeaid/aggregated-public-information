@@ -1,3 +1,5 @@
+import { CargoPackage } from "./types";
+
 const volCBMMap = {
   "Banana Box": 0.05,
   Box: 0.056,
@@ -10,7 +12,7 @@ const volCBMMap = {
   "Bulk Bag": 0.729,
 };
 
-export function processReportingCargo(data) {
+export function processReportingCargo(data: CargoPackage): CargoPackage {
   const { packageCount, packageUnit, item } = data;
 
   if (!packageCount || !packageUnit || !item) {
@@ -24,15 +26,15 @@ export function processReportingCargo(data) {
 
   const volCBM = volCBMMap[packageUnit];
   if (!volCBM) {
+    console.warn(`Unknown package unit: ${packageUnit}`);
     return data;
   }
 
-  const relatedItem = item;
-  if (!relatedItem || !relatedItem.countPerCBM) {
+  const countPerCBM = item.countPerCBM;
+  if (typeof countPerCBM !== "number" || countPerCBM <= 0) {
+    console.warn(`Invalid countPerCBM: ${countPerCBM} for ${packageUnit}`);
     return data;
   }
-
-  const countPerCBM = relatedItem.countPerCBM;
 
   data.itemCount = packageCount * volCBM * countPerCBM;
 
