@@ -1,5 +1,5 @@
 import { processReportingCargo } from "./cargo";
-import type { CargoPackage,  } from "./types";
+import type { CargoPackage } from "./types";
 
 describe("processReportingCargo", () => {
   it("skips calculating item count if there is no package/item", () => {
