@@ -1,5 +1,5 @@
 import { processReportingCargo } from "./cargo";
-import type { CargoPackage, CargoPackageUnit } from "./types";
+import type { CargoPackage,  } from "./types";
 
 describe("processReportingCargo", () => {
   it("skips calculating item count if there is no package/item", () => {
@@ -23,20 +23,20 @@ describe("processReportingCargo", () => {
       packageUnit: "Single Item",
       packageCount: 1,
       item: { countPerCBM: 3 },
-      itemCount: 0, //what to do about this? can I get around having this placeholder?
-    } as CargoPackage;
-    processReportingCargo(oneItem);
+      itemCount: 0,
+    };
+    processReportingCargo(oneItem as CargoPackage);
     expect(oneItem.itemCount).toEqual(oneItem.packageCount);
   });
 
   it("skips calculating item count if packageUnit cannot be mapped", () => {
-    const weirdUnit = {
-      packageUnit: "None of the Above" as CargoPackageUnit,
+    const unmappedPackageUnit = {
+      packageUnit: "None of the Above",
       packageCount: 1,
       item: { countPerCBM: 3 },
-    } as CargoPackage;
-    processReportingCargo(weirdUnit);
-    expect(weirdUnit).toEqual(weirdUnit);
+    };
+    processReportingCargo(unmappedPackageUnit as CargoPackage);
+    expect(unmappedPackageUnit).toEqual(unmappedPackageUnit);
   });
 
   it("updates itemCount", () => {
