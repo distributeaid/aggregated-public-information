@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { join } from "path";
+import { dirname, resolve } from "path";
 import { readFileSync } from "fs";
 
 import { addRegions } from "./add-regions";
@@ -8,11 +8,15 @@ import { addSurveys } from "./add-surveys";
 import { addCategories } from "./add-categories";
 import { addProducts } from "./add-items";
 import { addNeeds } from "./add-needs";
+import { getCategoryIds } from "./get-ids";
+import { clearAllCaches } from "./cache";
 
 async function main() {
   try {
     //  Load the json data
-    const jsonData = readFileSync(join(__dirname, "./needs-data.json"), "utf8");
+    const scriptDir = dirname(__filename);
+    const filePath = resolve(scriptDir, "./needs-data.json");
+    const jsonData = readFileSync(filePath, "utf8");
     const data = JSON.parse(jsonData);
 
     //  Process the data and upload to Strapi collections
@@ -20,7 +24,7 @@ async function main() {
     const _subregions = await addSubregions(data);
     const _surveys = await addSurveys(data);
     const _categories = await addCategories(data);
-    const _products = await addProducts(data);
+    const _products = await addProducts(data, getCategoryIds);
 
     // Check the number of objects in the needs array to manually compare totals
     function countObjectsInArray(data): number {
@@ -35,6 +39,7 @@ async function main() {
     const totalCountInNeeds = countObjectsInArray(data);
     console.log(`Total objects in needs array: ${totalCountInNeeds}`);
 
+    clearAllCaches();
     const _needs = await addNeeds(data);
   } catch (error) {
     console.error("Error processing needs assessment data", error);

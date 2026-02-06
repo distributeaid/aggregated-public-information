@@ -43,6 +43,10 @@ export type Need = {
     unit?: string;
   };
   amount: number;
+  regionId?: number;
+  subregionId?: number;
+  surveyId?: number;
+  productId?: number;
 };
 
 export type NeedAssessment = {
@@ -96,3 +100,41 @@ export type ProductUploadWorkflowResults = UploadWorkflowResults<Product[]>;
 
 export type NeedUploadWorkflow = UploadWorkflow<Need[]>;
 export type NeedUploadWorkflowResults = UploadWorkflowResults<Need[]>;
+
+export type StrapiRegion = {
+  name: string;
+  id: number;
+  documentId: string;
+};
+
+export type StrapiSubregion = {
+  name: string;
+  id: number;
+  documentId: string;
+};
+
+export type StrapiSurvey = {
+  reference: string;
+  yearQuarter: string;
+  id: number;
+  documentId: string;
+};
+
+export type StrapiCategory = {
+  name: string;
+  id: number;
+  documentId: string;
+};
+
+export type StrapiProduct = {
+  name: string;
+  id: number;
+  documentId: string;
+  category: {
+    id: number;
+    name: string;
+  };
+  age_gender?: string;
+  size_style?: string;
+  unit?: string;
+};
