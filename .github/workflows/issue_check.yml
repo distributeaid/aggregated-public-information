@@ -79,3 +79,15 @@ jobs:
                 body: (body || "") + closingKeyword
               });
             }
+
+            // Checks if the PR type is valid and applies label
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: number,
+                labels: [prType]
+              });
+            } catch (e) {
+              console.log(`Label "${prType}" not applied: ${e.message}`);
+            }
