@@ -13,7 +13,6 @@ jobs:
 
     steps:
       - name: Validate PR title and link to Issue
-        uses: distributeaid/centralised-github-actions/.github/actions/pr-title-check-linking@NOISSUE-pr-title-action
+        uses: distributeaid/centralised-github-actions/.github/actions/pr-title-check-linking
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-            
