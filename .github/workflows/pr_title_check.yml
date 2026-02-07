@@ -9,6 +9,7 @@ jobs:
     permissions:
       pull-requests: write
       contents: read
+      issues: read
 
     steps:
       - name: Validate PR title and link to Issue
