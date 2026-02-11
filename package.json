@@ -40,7 +40,7 @@
     "pg-connection-string": "^2.6.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^6.0.0",
+    "react-router-dom": "^7.0.0",
     "strapi-plugin-slugify": "^2.3.5",
     "styled-components": "^6.0.0"
   },
