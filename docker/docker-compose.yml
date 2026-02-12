@@ -1,0 +1,38 @@
+services:
+  strapi-dev:
+    container_name: strapi_dev
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev
+    image: strapi-dev:latest
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    ports:
+      - "1337:1337"
+    volumes:
+      - ..:/opt/app
+      - /opt/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+      POSTGRES_DB: strapi
+    volumes:
+      - strapi_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi -d strapi"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  strapi_db_data:

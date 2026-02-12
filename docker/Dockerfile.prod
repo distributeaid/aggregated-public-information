@@ -1,0 +1,65 @@
+# STAGE 1: Dependency setup
+FROM node:22-bookworm-slim AS deps
+RUN apt-get update && apt-get install -y \
+    build-essential gcc autoconf automake libvips-dev git python3 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN corepack enable
+WORKDIR /opt/app
+
+COPY .yarn ./.yarn
+COPY package.json yarn.lock .yarnrc.yml ./
+
+# Use a cache mount to speed up subsequent installs
+RUN --mount=type=cache,target=/root/.yarn/berry/cache \
+    yarn config set nodeLinker node-modules && \
+    yarn install --immutable
+
+# STAGE 2: Builder
+FROM node:22-bookworm-slim AS build
+RUN corepack enable
+WORKDIR /opt/app
+
+COPY --from=deps /opt/app/node_modules ./node_modules
+COPY . .
+
+# Set production env
+ENV NODE_ENV=production
+
+# ADD THESE DUMMY VARS FOR THE BUILD STEP
+# Strapi needs these to satisfy the config loader during 'yarn build'
+ENV DATABASE_CLIENT=postgres
+ENV APP_KEYS=dummyvalue
+ENV API_TOKEN_SALT=dummyvalue
+ENV ADMIN_JWT_SECRET=dummyvalue
+ENV TRANSFER_TOKEN_SALT=dummyvalue
+# If you use a single URL string, use this instead:
+ENV DATABASE_URL=postgres://user:pass@localhost:5432/db
+
+RUN yarn build
+# STAGE 3: Runtime
+FROM node:22-bookworm-slim
+# libvips is required at runtime for image processing
+RUN apt-get update && apt-get install -y libvips-dev && rm -rf /var/lib/apt/lists/*
+
+RUN corepack enable
+WORKDIR /opt/app
+
+ENV NODE_ENV=production
+ENV PATH=/opt/app/node_modules/.bin:$PATH
+
+# Only copy what's strictly necessary
+COPY --from=deps /opt/app/node_modules ./node_modules
+COPY --from=build /opt/app/dist ./dist
+COPY --from=build /opt/app/public ./public
+COPY --from=build /opt/app/package.json ./package.json
+COPY --from=build /opt/app/config ./config
+
+# Fix permissions for Strapi's writeable directories
+RUN chown -R node:node /opt/app
+
+USER node
+EXPOSE 1337
+
+# Execute the server directly for better signal handling
+CMD ["node", "./node_modules/.bin/strapi", "start"]

@@ -1,0 +1,34 @@
+FROM node:22-bookworm-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    autoconf \
+    automake \
+    libvips-dev \
+    git \
+    python3 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Enable Corepack to manage Yarn
+RUN corepack enable
+
+WORKDIR /opt/app
+
+# We only copy package files initially to use Docker layer caching
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn
+
+# Install dependencies
+RUN yarn config set nodeLinker node-modules && yarn install
+
+# Path for the global node_modules binaries
+ENV PATH=/opt/app/node_modules/.bin:$PATH
+
+# We don't COPY the rest of the code here because we mount it as a volume in docker-compose.
+
+EXPOSE 1337
+
+# Use 'develop' command so we get hot-reloading
+CMD ["yarn", "develop"]
