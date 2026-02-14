@@ -10,7 +10,6 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         NODE_OPTIONS: '--max-old-space-size=2048',
-        NODE_TLS_REJECT_UNAUTHORIZED:0
       }
     }
   ]
