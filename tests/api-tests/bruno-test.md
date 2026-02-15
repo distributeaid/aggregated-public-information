@@ -15,12 +15,14 @@ The Bruno test collection is located inside tests. Each module is separated in t
    ```bash
    cd tests/api-tests/Needs-Assessment && bru run --env Global
    ```
-   But if you have different port or you're running the app from Gitpod, update the base_url. Here's example for gitpod:
-   ```bash
-   cd tests/api-tests/Needs-Assessment && bru run --env Global --env-var base_url=https://1337-distributea-aggregatedp-u2f3iqzwzeh.ws-eu118.gitpod.io
-   ```
-   Or update the base_url in Global.bru which is inside environments folder
+   But if you have a different port, update the base_url in Global.bru which is inside the environments folder.
 3. If you want to run just a specific folder's test:
    ```bash
     cd tests/api-tests/Needs-Assessment/01-RegionAPI && bru run --env Global
    ```
+
+#### Useful Links
+
+- How to include relation fields in Strapi API response:
+   * [REST API: Population & Field Selection (Strapi v5)](https://docs.strapi.io/cms/api/rest/populate-select)
+   * [Understanding the populate parameter for the REST API (Strapi v4)](https://docs-v4.strapi.io/dev-docs/api/rest/guides/understanding-populate)
