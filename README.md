@@ -118,7 +118,8 @@ yarn format:fix
 
 Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
 
-[TODO: Laura Z's notes]
+#### API Usage
+- [Populate relations](https://docs.strapi.io/cms/api/rest/guides/understanding-populate) – Learn how to populate nested and relational data in Strapi API responses.
 
 ## Testing
 
