@@ -122,7 +122,7 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 
 ## Testing
 
-[TODO: Laura Z]
+We use [Bruno](https://www.usebruno.com/) to create and run API tests. See [bruno-test.md](/tests/api-tests/bruno-test.md) for setup and usage instructions.
 
 ## Troubleshooting
 
