@@ -24,5 +24,5 @@ The Bruno test collection is located inside tests. Each module is separated in t
 #### Useful Links
 
 - How to include relation fields in Strapi API response:
-   * [REST API: Population & Field Selection (Strapi v5)](https://docs.strapi.io/cms/api/rest/populate-select)
-   * [Understanding the populate parameter for the REST API (Strapi v4)](https://docs-v4.strapi.io/dev-docs/api/rest/guides/understanding-populate)
+  - [REST API: Population & Field Selection (Strapi v5)](https://docs.strapi.io/cms/api/rest/populate-select)
+  - [Understanding the populate parameter for the REST API (Strapi v4)](https://docs-v4.strapi.io/dev-docs/api/rest/guides/understanding-populate)
