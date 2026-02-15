@@ -1,0 +1,18 @@
+name: PR Title Automated linking
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  enforce-and-automate:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      issues: read
+
+    steps:
+      - name: Validate PR title and link to Issue
+        uses: distributeaid/centralised-github-actions/.github/actions/pr-title-check-linking@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
