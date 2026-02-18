@@ -83,10 +83,10 @@ If you run into trouble, please check out:
 
 - [How to reset your password](https://docs.strapi.io/cms/cli#strapi-admin-1)
 - To recover the email address you used to sign up, run:
-        ```bash
-        npx strapi console
-        await strapi.query('admin::user').findMany()
-        ``
+  ``bash
+      npx strapi console
+      await strapi.query('admin::user').findMany()
+      `
 
 ## Contributing
 
@@ -119,6 +119,7 @@ yarn format:fix
 Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
 
 #### API Usage
+
 - [Populate relations](https://docs.strapi.io/cms/api/rest/guides/understanding-populate) – Learn how to populate nested and relational data in Strapi API responses.
 
 ## Testing
@@ -127,4 +128,4 @@ We use [Bruno](https://www.usebruno.com/) to create and run API tests. See [brun
 
 ## Troubleshooting
 
-If you encounter issues during local environment setup, refer to [contributing.md](https://github.com/distributeaid/docs/blob/main/how-to-DA/contributing.md) for troubleshooting guidance. If you need additional support, reach out to the team via [TODO: decide which link to include here - tech-github-slack-channel or another one]. 
+If you encounter issues during local environment setup, refer to [contributing.md](https://github.com/distributeaid/docs/blob/main/how-to-DA/contributing.md) for troubleshooting guidance. If you need additional support, reach out to the team via [TODO: decide which link to include here - tech-github-slack-channel or another one].
