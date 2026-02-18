@@ -83,10 +83,11 @@ If you run into trouble, please check out:
 
 - [How to reset your password](https://docs.strapi.io/cms/cli#strapi-admin-1)
 - To recover the email address you used to sign up, run:
-  ``bash
-      npx strapi console
-      await strapi.query('admin::user').findMany()
-      `
+
+  ```bash
+    npx strapi console
+    await strapi.query('admin::user').findMany()
+  ```
 
 ## Contributing
 
