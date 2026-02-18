@@ -127,4 +127,4 @@ We use [Bruno](https://www.usebruno.com/) to create and run API tests. See [brun
 
 ## Troubleshooting
 
-[TODO: Laura Z has notes! They'll go in contributing and we'll link here]
+If you encounter issues during local environment setup, refer to [contributing.md](https://github.com/distributeaid/docs/blob/main/how-to-DA/contributing.md) for troubleshooting guidance. If you need additional support, reach out to the team via [TODO: decide which link to include here - tech-github-slack-channel or another one]. 
