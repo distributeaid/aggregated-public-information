@@ -1,6 +1,6 @@
-# Aggregated Public Information
+# README
 
-This project uses [Strapi](https://strapi.io) as a CMS backend.
+This project uses [Strapi](https://strapi.io) as a CMS backend. For most information about contributing to DA (e.g. our dev process and asking for help), please refer first to the [general contributing guide](https://github.com/distributeaid/docs/blob/193d6eaaedb5b9e453f97ae15619d07e6b1e7ba1/how-to-DA/contributing.md). This guide contains other information specific to contributing to this repo.
 
 ## Dev Environment Setup
 
