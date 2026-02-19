@@ -117,12 +117,14 @@ yarn format:fix
 
 Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
 
-[TODO: Laura Z's notes]
+#### API Usage
+
+- [Populate relations](https://docs.strapi.io/cms/api/rest/guides/understanding-populate) – Learn how to populate nested and relational data in Strapi API responses.
 
 ## Testing
 
-[TODO: Laura Z]
+We use [Bruno](https://www.usebruno.com/) to create and run API tests. See [bruno-test.md](/tests/api-tests/bruno-test.md) for setup and usage instructions.
 
 ## Troubleshooting
 
-[TODO: Laura Z has notes! They'll go in contributing and we'll link here]
+If you encounter issues during local environment setup, refer to [contributing.md](https://github.com/distributeaid/docs/blob/main/how-to-DA/contributing.md) for troubleshooting guidance. If you need additional support, reach out to the team via [TODO: decide which link to include here - tech-github-slack-channel or another one].
