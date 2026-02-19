@@ -1,6 +1,15 @@
 # README
 
-This project uses [Strapi](https://strapi.io) as a CMS backend. For most information about contributing to DA (e.g. our dev process and asking for help), please refer first to the [general contributing guide](https://github.com/distributeaid/docs/blob/193d6eaaedb5b9e453f97ae15619d07e6b1e7ba1/how-to-DA/contributing.md). This guide contains other information specific to contributing to this repo.
+This project uses [Strapi](https://strapi.io) as a CMS backend. For most information about contributing to DA (e.g. our dev process and asking for help), please refer to the [general DA contributing guide](https://github.com/distributeaid/docs/blob/193d6eaaedb5b9e453f97ae15619d07e6b1e7ba1/how-to-DA/CONTRIBUTING.md). This guide contains other information specific to contributing to this repo.
+
+## Table of Contents
+
+- [Dev Environment Setup](#dev-environment-setup)
+- [Running a Local Site](#running-a-local-site)
+- [Code Checks](#code-checks)
+- [Learn More About Strapi](#learn-more-about-strapi)
+- [API Testing](#api-testing)
+- [Troubleshooting](#troubleshooting)
 
 ## Dev Environment Setup
 
@@ -27,7 +36,7 @@ corepack enable
 hash -r
 ```
 
-## Get Up and Running
+## Running a Local Site
 
 Once you have a development environment, you can set up your local site!
 
@@ -89,7 +98,7 @@ npx strapi console
 await strapi.query('admin::user').findMany()
 ```
 
-## Contributing
+## Code Checks
 
 Before creating a pull request, test a final time and check for errors:
 
@@ -121,10 +130,10 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 
 - [Populate relations](https://docs.strapi.io/cms/api/rest/guides/understanding-populate) – Learn how to populate nested and relational data in Strapi API responses.
 
-## Testing
+## API Testing
 
 We use [Bruno](https://www.usebruno.com/) to create and run API tests. See [bruno-test.md](/tests/api-tests/bruno-test.md) for setup and usage instructions.
 
 ## Troubleshooting
 
-If you encounter issues during local environment setup, refer to [contributing.md](https://github.com/distributeaid/docs/blob/main/how-to-DA/contributing.md) for troubleshooting guidance. If you need additional support, reach out to the team via [TODO: decide which link to include here - tech-github-slack-channel or another one].
+If you run into any issues, reach out to the team on the `#tech` channel on Slack!
