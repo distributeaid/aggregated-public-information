@@ -6,7 +6,7 @@ export default ({ env }) => ({
     keys: env.array("APP_KEYS"),
   },
   admin: {
-    url: '/admin',
+    url: "/admin",
     autoOpen: false,
     serveAdminPanel: true,
   },
