@@ -1,22 +1,22 @@
-# 🚀 Aggregated Public Information
+# Aggregated Public Information
 
 This project uses [Strapi](https://strapi.io) as a CMS backend.
 
 ## Dev Environment Setup
 
-#### Clone this repository
+### Clone this repository
 
 ```sh
 git clone git@github.com:distributeaid/aggregated-public-information.git
 cd aggregated-public-information
 ```
 
-#### Install nvm 🔧
+### Install nvm
 
-[TODO: copy version info from next-website]
-To develop or contribute to this project, you will need Node.js. We recommend you install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) to manage Node.js versions.
+- [Node.js 18.17 or later](https://nodejs.org/en)
+- [Node Version Manager](https://github.com/SpaceyaTech/mentorlst-dashboard/blob/main/README.md) - to update Node.js
 
-#### Install yarn 🧶
+### Install yarn
 
 To build dependencies, you should also have yarn installed on your system.
 If it is not yet installed, you can run:
@@ -27,11 +27,11 @@ corepack enable
 hash -r
 ```
 
-## Get Up and Running 🚀
+## Get Up and Running
 
 Once you have a development environment, you can set up your local site!
 
-### Set Up Local Private Keys 🔑
+### Set Up Local Private Keys
 
 ```sh
 ./setup.bash
@@ -43,7 +43,7 @@ Once you have a development environment, you can set up your local site!
 yarn install
 ```
 
-### Start Your Server 🌐
+### Start Your Server
 
 In one terminal, run `develop`, this will live rebuild your application as you make changes:
 
@@ -58,7 +58,7 @@ yarn build
 yarn start
 ```
 
-### Run Server Tests ✅
+### Run Server Tests
 
 ```sh
 yarn test
@@ -67,13 +67,13 @@ yarn test
 > [!NOTE]
 > This depends on your application being built! If you don't run `yarn develop` then you must run `yarn build` after each change before running `yarn test`. We have provided `yarn test:without-build` as a convenience in this case.
 
-### View the Site and Set Up an Admin User 👤
+### View the Site and Set Up an Admin User
 
 If you are running locally, your site should be available in the output after you run `yarn develop` - you will see something like
 
-```sh
+```
 One more thing...
-Create your first administrator 💻 by going to the administration panel at:
+Create your first administrator by going to the administration panel at:
 ┌─────────────────────────────┐
 │ http://localhost:1337/admin │
 └─────────────────────────────┘
@@ -103,9 +103,7 @@ yarn lint:fix
 yarn format:fix
 ```
 
-## Learn more 📚
-
-### Strapi
+## Learn more about Strapi
 
 - Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.
