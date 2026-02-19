@@ -6,7 +6,7 @@ This project uses [Strapi](https://strapi.io) as a CMS backend.
 
 ### Clone this repository
 
-```sh
+```bash
 git clone git@github.com:distributeaid/aggregated-public-information.git
 cd aggregated-public-information
 ```
@@ -21,7 +21,7 @@ cd aggregated-public-information
 To build dependencies, you should also have yarn installed on your system.
 If it is not yet installed, you can run:
 
-```sh
+```bash
 npm install --global corepack
 corepack enable
 hash -r
@@ -33,13 +33,13 @@ Once you have a development environment, you can set up your local site!
 
 ### Set Up Local Private Keys
 
-```sh
+```bash
 ./setup.bash
 ```
 
 ### Install your packages
 
-```sh
+```bash
 yarn install
 ```
 
@@ -47,20 +47,20 @@ yarn install
 
 In one terminal, run `develop`, this will live rebuild your application as you make changes:
 
-```sh
+```bash
 yarn develop
 ```
 
 If you want auto-reload disabled, you can just run `build` and then `start`:
 
-```sh
+```bash
 yarn build
 yarn start
 ```
 
 ### Run Server Tests
 
-```sh
+```bash
 yarn test
 ```
 
@@ -83,22 +83,23 @@ If you run into trouble, please check out:
 
 - [How to reset your password](https://docs.strapi.io/cms/cli#strapi-admin-1)
 - To recover the email address you used to sign up, run:
-  ``bash
-      npx strapi console
-      await strapi.query('admin::user').findMany()
-      `
+
+```bash
+npx strapi console
+await strapi.query('admin::user').findMany()
+```
 
 ## Contributing
 
 Before creating a pull request, test a final time and check for errors:
 
-```sh
+```bash
 yarn check:all
 ```
 
 We provide a couple of scripts to automatically fix linting and formatting issues, where possible:
 
-```sh
+```bash
 yarn lint:fix
 yarn format:fix
 ```
