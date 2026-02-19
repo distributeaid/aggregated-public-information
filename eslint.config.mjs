@@ -28,6 +28,7 @@ export default tseslint.config(
       "*.example.ts",
       "*.example.js",
       "types/generated/*",
+      "ecosystem.config.js",
     ],
   },
 );
