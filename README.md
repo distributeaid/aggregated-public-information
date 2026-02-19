@@ -1,79 +1,79 @@
-# 🚀 Aggregated Public Information
+# README
 
-This project uses [Strapi](https://strapi.io) as a CMS backend.
+This project uses [Strapi](https://strapi.io) as a CMS backend. For most information about contributing to DA (e.g. our dev process and asking for help), please refer first to the [general contributing guide](https://github.com/distributeaid/docs/blob/193d6eaaedb5b9e453f97ae15619d07e6b1e7ba1/how-to-DA/contributing.md). This guide contains other information specific to contributing to this repo.
 
 ## Dev Environment Setup
 
-#### Clone this repository
+### Clone this repository
 
-```sh
+```bash
 git clone git@github.com:distributeaid/aggregated-public-information.git
 cd aggregated-public-information
 ```
 
-#### Install nvm 🔧
+### Install nvm
 
-[TODO: copy version info from next-website]
-To develop or contribute to this project, you will need Node.js. We recommend you install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) to manage Node.js versions.
+- [Node.js 18.17 or later](https://nodejs.org/en)
+- [Node Version Manager](https://github.com/SpaceyaTech/mentorlst-dashboard/blob/main/README.md) - to update Node.js
 
-#### Install yarn 🧶
+### Install yarn
 
 To build dependencies, you should also have yarn installed on your system.
 If it is not yet installed, you can run:
 
-```sh
+```bash
 npm install --global corepack
 corepack enable
 hash -r
 ```
 
-## Get Up and Running 🚀
+## Get Up and Running
 
 Once you have a development environment, you can set up your local site!
 
-### Set Up Local Private Keys 🔑
+### Set Up Local Private Keys
 
-```sh
+```bash
 ./setup.bash
 ```
 
 ### Install your packages
 
-```sh
+```bash
 yarn install
 ```
 
-### Start Your Server 🌐
+### Start Your Server
 
 In one terminal, run `develop`, this will live rebuild your application as you make changes:
 
-```sh
+```bash
 yarn develop
 ```
 
 If you want auto-reload disabled, you can just run `build` and then `start`:
 
-```sh
+```bash
 yarn build
 yarn start
 ```
 
-### Run Server Tests ✅
+### Run Server Tests
 
-```sh
+```bash
 yarn test
 ```
 
 > [!NOTE]
 > This depends on your application being built! If you don't run `yarn develop` then you must run `yarn build` after each change before running `yarn test`. We have provided `yarn test:without-build` as a convenience in this case.
 
-### View the Site and Set Up an Admin User 👤
+### View the Site and Set Up an Admin User
 
 If you are running locally, your site should be available in the output after you run `yarn develop` - you will see something like
 
-```sh
+```
 One more thing...
-Create your first administrator 💻 by going to the administration panel at:
+Create your first administrator by going to the administration panel at:
 ┌─────────────────────────────┐
 │ http://localhost:1337/admin │
 └─────────────────────────────┘
@@ -84,29 +84,27 @@ If you run into trouble, please check out:
 - [How to reset your password](https://docs.strapi.io/cms/cli#strapi-admin-1)
 - To recover the email address you used to sign up, run:
 
-  ```bash
-    npx strapi console
-    await strapi.query('admin::user').findMany()
-  ```
+```bash
+npx strapi console
+await strapi.query('admin::user').findMany()
+```
 
 ## Contributing
 
 Before creating a pull request, test a final time and check for errors:
 
-```sh
+```bash
 yarn check:all
 ```
 
 We provide a couple of scripts to automatically fix linting and formatting issues, where possible:
 
-```sh
+```bash
 yarn lint:fix
 yarn format:fix
 ```
 
-## Learn more 📚
-
-### Strapi
+## Learn more about Strapi
 
 - Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.
