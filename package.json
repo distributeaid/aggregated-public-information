@@ -42,6 +42,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^6.0.0",
     "strapi-plugin-slugify": "^2.3.5",
+    "strapi-provider-email-resend": "^1.0.4",
     "styled-components": "^6.0.0"
   },
   "engines": {
