@@ -14,7 +14,7 @@ export default factories.createCoreController(
     },
     async update(ctx) {
       ctx.request.body.data = processSurvey(ctx.request.body.data);
-      return super.create(ctx);
+      return super.update(ctx);
     },
   }),
 );
