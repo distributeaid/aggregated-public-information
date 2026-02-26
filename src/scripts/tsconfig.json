@@ -3,6 +3,8 @@
     "module": "nodenext",
     "moduleResolution": "NodeNext",
     "target": "esnext",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["node"],
+    "skipLibCheck": true
   }
 }

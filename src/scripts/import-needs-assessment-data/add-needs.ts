@@ -8,6 +8,23 @@ import {
   NeedUploadWorkflow,
   NeedUploadWorkflowResults,
 } from "./types.d";
+import { addCollectionIdsToData } from "./add-collection-ids";
+import {
+  getProductItemIds,
+  getRegionIds,
+  getSubregionIds,
+  getSurveyIds,
+} from "./get-ids";
+import {
+  getCachedRegions,
+  getCachedSubregions,
+  getCachedSurveys,
+  getCachedProducts,
+  getCachedRegionsDirect,
+  getCachedSubregionsDirect,
+  getCachedSurveysDirect,
+  getCachedProductsDirect,
+} from "./cache";
 
 // Note: Uncomment the required imports during implementation in the code.
 
@@ -18,6 +35,20 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
 
   const uniqueNeedEntries = consolidateNeedsByRegion(data);
 
+  // Fetch collection Ids
+  const getRegionIdsFn = getRegionIds;
+  const getSubregionIdsFn = getSubregionIds;
+  const getSurveyIdsFn = getSurveyIds;
+  const getProductItemIdsFn = getProductItemIds;
+
+  // Populate caches
+  await Promise.all([
+    getCachedRegions(getRegionIdsFn),
+    getCachedSubregions(getSubregionIdsFn),
+    getCachedSurveys(getSurveyIdsFn),
+    getCachedProducts(getProductItemIdsFn),
+  ]);
+
   const results = await Promise.allSettled<NeedUploadWorkflow>(
     uniqueNeedEntries.map((need) => {
       const initialWorkflow = {
@@ -27,7 +58,9 @@ export async function addNeeds(data: NeedAssessment[]): Promise<Need[]> {
         logs: [],
       };
 
-      return Promise.resolve(initialWorkflow).then(parseNeeds);
+      return Promise.resolve(initialWorkflow)
+        .then(parseNeeds)
+        .then(addIdsToWorkflow);
     }),
   );
 
@@ -222,4 +255,47 @@ async function parseNeeds({
       logs,
     });
   });
+}
+
+/*  Add collection IDs for relation fields of the Needs
+ * --------------------------------------------------- */
+async function addIdsToWorkflow(
+  workflow: NeedUploadWorkflow,
+): Promise<NeedUploadWorkflow> {
+  const { data, orig: origin, logs } = workflow;
+  logs.push(`Log: adding relation ids to the needs ...`);
+
+  const [regionIds, subregionIds, surveyIds, productIds] = [
+    getCachedRegionsDirect(),
+    getCachedSubregionsDirect(),
+    getCachedSurveysDirect(),
+    getCachedProductsDirect(),
+  ];
+
+  try {
+    const enrichedData = await addCollectionIdsToData(
+      data,
+      regionIds,
+      subregionIds,
+      surveyIds,
+      productIds,
+    );
+
+    return {
+      data: enrichedData,
+      orig: origin,
+      status: UploadWorkflowStatus.PROCESSING,
+      logs: [...logs, `Added IDs to ${enrichedData.length} need`],
+    };
+  } catch (error) {
+    return {
+      data,
+      orig: origin,
+      status: UploadWorkflowStatus.OTHER,
+      logs: [
+        ...logs,
+        `Adding ids to the need failed: ${(error as Error).message}`,
+      ],
+    };
+  }
 }
