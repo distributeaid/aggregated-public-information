@@ -1,6 +1,6 @@
 import type { Core } from "@strapi/strapi";
 import { createPublicApiPermissions } from "./createPublicApiPermissions";
-import { subscribeAdminInviteEmail } from "./adminInviteEmail";
+import { subscribeAdminInviteEmail } from "./functions/content-types/group/adminInviteEmail";
 
 export default {
   /**
