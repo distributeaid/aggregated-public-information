@@ -42,9 +42,8 @@ export const subscribeAdminInviteEmail = (strapi: Core.Strapi) => {
 
       if (!user?.email || !user.registrationToken) return;
 
-      const usersPermissionsRedirectUrl = await getUsersPermissionsRedirectUrl(
-        strapi,
-      );
+      const usersPermissionsRedirectUrl =
+        await getUsersPermissionsRedirectUrl(strapi);
 
       if (!usersPermissionsRedirectUrl) {
         strapi.log.warn(
