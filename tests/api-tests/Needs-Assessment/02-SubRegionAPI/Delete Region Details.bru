@@ -1,11 +1,11 @@
 meta {
-  name: Delete Sub Region
+  name: Delete Region Details
   type: http
-  seq: 8
+  seq: 9
 }
 
 delete {
-  url: {{base_url}}/api/subregions/{{sub_region_document_id}}
+  url: {{base_url}}/api/regions/{{region_document_id}}
   body: json
   auth: none
 }
@@ -14,5 +14,6 @@ tests {
   test("Status code is 204", function () {
       expect(res.getStatus()).to.be.oneOf([200, 204]);
   });
+  
   
 }
