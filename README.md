@@ -22,8 +22,12 @@ cd aggregated-public-information
 
 ### Install nvm
 
-- [Node.js 18.17 or later](https://nodejs.org/en)
-- [Node Version Manager](https://github.com/SpaceyaTech/mentorlst-dashboard/blob/main/README.md) - to update Node.js
+Node.js 18.17 or later
+
+Node Version Manager (nvm) – used to manage Node.js versions.
+
+- macOS/Linux: [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm)
+- Windows: [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows)
 
 ### Install yarn
 
