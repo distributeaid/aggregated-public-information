@@ -23,7 +23,7 @@ cd aggregated-public-information
 ### Install nvm
 
 - [Node.js 18.17 or later](https://nodejs.org/en)
-- [Node Version Manager](https://github.com/SpaceyaTech/mentorlst-dashboard/blob/main/README.md) - to update Node.js
+- [Node Version Manager](https://github.com/nvm-sh/nvm?tab=readme-ov-file#important-notes) - to update Node.js
 
 ### Install yarn
 
