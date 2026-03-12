@@ -22,9 +22,9 @@ cd aggregated-public-information
 
 ### Install nvm
 
-Node.js 18.17 or later
+[Node.js](https://nodejs.org/en) 18.17 or later is required
 
-Node Version Manager (nvm) – used to manage Node.js versions.
+Node Version Manager (nvm) – used to manage Node.js versions:
 
 - macOS/Linux: [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm)
 - Windows: [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows)
