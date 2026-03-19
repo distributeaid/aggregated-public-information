@@ -11,8 +11,14 @@ export default ({ env }) => ({
         api_secret: env("CLOUDINARY_SECRET"),
       },
       actionOptions: {
-        upload: { folder: env("CLOUDINARY_FOLDER"), metadata: "location=unset" },
-        uploadStream: { folder: env("CLOUDINARY_FOLDER"), metadata: "location=unset" },
+        upload: {
+          folder: env("CLOUDINARY_FOLDER"),
+          metadata: "location=unset",
+        },
+        uploadStream: {
+          folder: env("CLOUDINARY_FOLDER"),
+          metadata: "location=unset",
+        },
         delete: {},
       },
     },
