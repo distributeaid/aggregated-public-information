@@ -1,0 +1,60 @@
+meta {
+  name: Create Item in Category
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/items?populate[0]=category
+  body: json
+  auth: inherit
+}
+
+params:query {
+  populate[0]: category
+}
+
+body:json {
+  {
+    "data": {
+      "name": "DemoItem",
+      "age_gender": "Demo age_gender",
+      "size_style": "Demo size_style", 
+      "category": {
+        "connect": [
+          {
+            "id": "{{category_id}}", 
+            "documentId": "{{category_document_id}}"
+          }
+        ]
+      }
+    }
+  }
+}
+
+tests {
+  test("Status code is 200 or 201", function () {
+    expect(res.getStatus()).to.be.oneOf([200, 201]);
+  });
+  
+  test("Correct information saved", function () {
+    var jsonData = res.getBody();
+    expect(jsonData.data.name).to.eql('DemoItem');
+    expect(jsonData.data.age_gender).to.eql('Demo age_gender');
+    expect(jsonData.data.size_style).to.eql('Demo size_style');
+    expect(jsonData.data.category.name).to.eql('ModifiedDemoCategory');
+  });
+  
+  test("Extract and store ItemID", function () {
+    var jsonData = res.getBody(); // Parse the response JSON
+    if (jsonData.data.documentId) {
+        bru.setEnvVar("item_id", jsonData.data.id);
+        bru.setEnvVar("item_document_id", jsonData.data.documentId);
+    } else {
+        test("Item ID is missing in response", function () {
+            expect(jsonData.data.id).to.exist;
+        });
+    }
+  });
+  
+}
