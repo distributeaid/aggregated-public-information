@@ -32,7 +32,7 @@
   "dependencies": {
     "@strapi/plugin-documentation": "5.33.1",
     "@strapi/plugin-users-permissions": "5.33.1",
-    "@strapi/provider-upload-aws-s3": "5.33.1",
+    "@strapi/provider-upload-cloudinary": "^5.40.0",
     "@strapi/strapi": "^5.0.0-rc.9",
     "better-sqlite3": "^11.0.0",
     "p-limit": "^7.2.0",
