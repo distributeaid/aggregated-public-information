@@ -2,6 +2,11 @@
 name: Deploy
 
 on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - .github/workflows/deploy.yml
   workflow_dispatch:
     inputs:
       environment:
@@ -20,12 +25,12 @@ jobs:
   deploy:
     uses: distributeaid/infrastructure/.github/workflows/deploy.yml@main
     with:
-      environment: ${{ inputs.environment }}
-      branch: ${{ inputs.branch }}
+      environment: ${{ inputs.environment || 'staging' }}
+      branch: ${{ inputs.branch || github.ref_name }}
       app: aggregated-public-information
       repo_name: aggregated-public-information
       repo_url: git@github.com:distributeaid/aggregated-public-information.git
     secrets:
       UPCLOUD_TOKEN: ${{ secrets.UPCLOUD_TOKEN }}
-      ANSIBLE_SSH_PRIVATE_KEY: ${{ inputs.environment == 'staging' && secrets.ANSIBLE_STAGING_SSH_PRIVATE_KEY || secrets.ANSIBLE_PROD_SSH_PRIVATE_KEY }}
-      SOPS_AGE_KEY: ${{ inputs.environment == 'staging' && secrets.SOPS_STAGING_AGE_KEY || secrets.SOPS_PROD_AGE_KEY }}
+      ANSIBLE_SSH_PRIVATE_KEY: ${{ (inputs.environment || 'staging') == 'staging' && secrets.ANSIBLE_STAGING_SSH_PRIVATE_KEY || secrets.ANSIBLE_PROD_SSH_PRIVATE_KEY }}
+      SOPS_AGE_KEY: ${{ (inputs.environment || 'staging') == 'staging' && secrets.SOPS_STAGING_AGE_KEY || secrets.SOPS_PROD_AGE_KEY }}
