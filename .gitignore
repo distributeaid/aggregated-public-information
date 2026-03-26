@@ -141,6 +141,13 @@ coverage
 ############################
 
 .env
+
+############################
+# Secrets
+############################
+
+# Allow SOPS-encrypted secrets but never plaintext
+.environments/*.secrets.yaml
 license.txt
 exports
 .strapi

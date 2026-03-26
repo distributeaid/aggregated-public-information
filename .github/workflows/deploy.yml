@@ -1,0 +1,31 @@
+---
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        type: choice
+        options:
+          - staging
+          - prod
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: main
+
+jobs:
+  deploy:
+    uses: distributeaid/infrastructure/.github/workflows/deploy.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+      branch: ${{ inputs.branch }}
+      app: aggregated-public-information
+      repo_name: aggregated-public-information
+      repo_url: git@github.com:distributeaid/aggregated-public-information.git
+    secrets:
+      UPCLOUD_TOKEN: ${{ secrets.UPCLOUD_TOKEN }}
+      ANSIBLE_SSH_PRIVATE_KEY: ${{ inputs.environment == 'staging' && secrets.ANSIBLE_STAGING_SSH_PRIVATE_KEY || secrets.ANSIBLE_PROD_SSH_PRIVATE_KEY }}
+      SOPS_AGE_KEY: ${{ inputs.environment == 'staging' && secrets.SOPS_STAGING_AGE_KEY || secrets.SOPS_PROD_AGE_KEY }}
