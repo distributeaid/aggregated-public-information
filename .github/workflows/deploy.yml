@@ -24,6 +24,7 @@ on:
 jobs:
   deploy:
     uses: distributeaid/infrastructure/.github/workflows/deploy.yml@main
+    # adding comment to trigger workflow dispatch
     with:
       environment: ${{ inputs.environment || 'staging' }}
       branch: ${{ inputs.branch || github.ref_name }}
