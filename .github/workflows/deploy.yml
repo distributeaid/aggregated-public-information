@@ -31,6 +31,7 @@ jobs:
       repo_name: aggregated-public-information
       repo_url: git@github.com:distributeaid/aggregated-public-information.git
     secrets:
+      INFRA_CHECKOUT_TOKEN: ${{ secrets.INFRA_CHECKOUT_TOKEN }} 
       UPCLOUD_TOKEN: ${{ secrets.UPCLOUD_TOKEN }}
       ANSIBLE_SSH_PRIVATE_KEY: ${{ (inputs.environment || 'staging') == 'staging' && secrets.ANSIBLE_STAGING_SSH_PRIVATE_KEY || secrets.ANSIBLE_PROD_SSH_PRIVATE_KEY }}
       SOPS_AGE_KEY: ${{ (inputs.environment || 'staging') == 'staging' && secrets.SOPS_STAGING_AGE_KEY || secrets.SOPS_PROD_AGE_KEY }}
