@@ -2,10 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
-    paths:
-      - .github/workflows/deploy.yml
   workflow_dispatch:
     inputs:
       environment:
