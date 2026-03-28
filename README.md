@@ -112,9 +112,7 @@ For staging and production, secrets are stored as SOPS-encrypted files in `.envi
 
 ## Deployment
 
-Merging a pull request to `main` automatically deploys to production.
-
-To deploy manually, go to the [Actions tab](../../actions/workflows/deploy.yml), select **Deploy**, and click **Run workflow**. You can choose the target environment (`staging` or `prod`) and the branch to deploy.
+To deploy, go to the [Actions tab](../../actions/workflows/deploy.yml), select **Deploy**, and click **Run workflow**. You can choose the target environment (`staging` or `prod`) and the branch to deploy.
 
 ## Code Checks
 
