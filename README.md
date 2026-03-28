@@ -6,6 +6,7 @@ This project uses [Strapi](https://strapi.io) as a CMS backend. For most informa
 
 - [Dev Environment Setup](#dev-environment-setup)
 - [Running a Local Site](#running-a-local-site)
+- [Environment Variables](#environment-variables)
 - [Code Checks](#code-checks)
 - [Learn More About Strapi](#learn-more-about-strapi)
 - [API Testing](#api-testing)
@@ -101,6 +102,12 @@ If you run into trouble, please check out:
 npx strapi console
 await strapi.query('admin::user').findMany()
 ```
+
+## Environment Variables
+
+For local development, environment variables are managed through a local `.env` file (see [Set Up Local Private Keys](#set-up-local-private-keys) above).
+
+For staging and production, secrets are stored as SOPS-encrypted files in `.environments/` and decrypted at deploy time by CI. See [.environments/README.md](.environments/README.md) for instructions on editing secrets, granting access to new developers, and removing access.
 
 ## Code Checks
 
