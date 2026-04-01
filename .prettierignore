@@ -11,3 +11,6 @@ types/generated/*
 src/api/*/documentation
 src/extensions/documentation
 
+# SOPS-encrypted secrets
+.environments/*.enc.yaml
+
