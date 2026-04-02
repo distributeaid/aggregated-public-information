@@ -1,3 +1,10 @@
 creation_rules:
   - path_regex: \.enc\.yaml$
-    age: age198gq0jfpeju4hceg3cez9mqpufe9h08upx95e2f70cr3dklttqts35ch5t
+    key_groups:
+      - age:
+          # CI Key
+          - age198gq0jfpeju4hceg3cez9mqpufe9h08upx95e2f70cr3dklttqts35ch5t
+          # Jaime's key
+          - age16z3ewnx22h4j4qxmaj43yysag8a3gnxs46mm9p0s92lcykwr952syq8365
+          # Finn's key
+          - age1k349xhtvfswn44wprj03pnlxafry0y2uyl23hy3e8zpxavjaysmqg62q9y
