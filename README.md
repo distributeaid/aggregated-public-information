@@ -1,6 +1,6 @@
 # README
 
-This project uses [Strapi](https://strapi.io) as a CMS backend. For most information about contributing to DA (e.g. our dev process and asking for help), please refer to the [general DA contributing guide](https://github.com/distributeaid/docs/blob/193d6eaaedb5b9e453f97ae15619d07e6b1e7ba1/how-to-DA/CONTRIBUTING.md). This guide contains other information specific to contributing to this repo.
+This project uses [Strapi](https://strapi.io) as a CMS backend. For most information about contributing to DA (e.g. our dev process and asking for help), please refer to the [general DA contributing guide](https://github.com/distributeaid/docs/blob/main/how-to-DA/CONTRIBUTING.md). This guide contains other information specific to contributing to this repo.
 
 ## Table of Contents
 
