@@ -27,9 +27,8 @@ sudo pacman -S age          # Arch
 **Windows** (PowerShell)
 
 ```powershell
-scoop install sops age
-# or
-winget install mozilla.sops filippo.age
+winget install --id=mozilla.sops -e
+winget install --id=FiloSottile.age -e
 ```
 
 Store your age private key at:
@@ -67,14 +66,19 @@ age-keygen -o "$env:AppData\sops\age\keys.txt"
 
 ## Granting access
 
-1. Add the new public key to `.sops.yaml`:
+1. Add the new public key to `.sops.yaml` under the `age` list in the relevant `key_groups` entry:
 
    ```yaml
    creation_rules:
      - path_regex: \.enc\.yaml$
-       age: >-
-         age198gq0jfpeju4hceg3cez9mqpufe9h08upx95e2f70cr3dklttqts35ch5t,
-         age1<new-key-here>
+       key_groups:
+         - age:
+             # CI Key
+             - age198gq0jfpeju4hceg3cez9mqpufe9h08upx95e2f70cr3dklttqts35ch5t
+             # Existing person's key
+             - age16z3ewnx22h4j4qxmaj43yysag8a3gnxs46mm9p0s92lcykwr952syq8365
+             # New person's key
+             - age1<new-key-here>
    ```
 
 2. Re-encrypt all secrets files:
