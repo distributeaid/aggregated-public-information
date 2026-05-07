@@ -174,6 +174,29 @@ export interface ReportingShipmentRoles extends Struct.ComponentSchema {
   };
 }
 
+export interface ResponseCallToAction extends Struct.ComponentSchema {
+  collectionName: "components_response_call_to_actions";
+  info: {
+    displayName: "Call To Action";
+  };
+  attributes: {
+    buttonLink: Schema.Attribute.String;
+    buttonText: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    imageLink: Schema.Attribute.String;
+    title: Schema.Attribute.Enumeration<
+      [
+        "Give money",
+        "Donate supplies",
+        "Ship aid with us",
+        "Join our network",
+        "Frontline groups",
+      ]
+    > &
+      Schema.Attribute.DefaultTo<"Give money">;
+  };
+}
+
 export interface TeamRole extends Struct.ComponentSchema {
   collectionName: "components_team_roles";
   info: {
@@ -211,6 +234,7 @@ declare module "@strapi/strapi" {
       "product.volume": ProductVolume;
       "product.weight": ProductWeight;
       "reporting.shipment-roles": ReportingShipmentRoles;
+      "response.call-to-action": ResponseCallToAction;
       "team.role": TeamRole;
       "time.duration": TimeDuration;
     }
