@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_response_image_references",
+  "info": {
+    "displayName": "Image Reference"
+  },
+  "options": {},
+  "attributes": {
+    "imageURL": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
