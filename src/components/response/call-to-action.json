@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_response_call_to_actions",
+  "info": {
+    "displayName": "Call To Action"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "enumeration",
+      "required": false,
+      "default": "give money",
+      "enum": [
+        "give money",
+        "donate supplies",
+        "ship aid with us",
+        "join our network",
+        "frontline groups"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "imageLink": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonLink": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
