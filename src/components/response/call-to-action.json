@@ -8,13 +8,13 @@
     "title": {
       "type": "enumeration",
       "required": false,
-      "default": "Give money",
+      "default": "give money",
       "enum": [
-        "Give money",
-        "Donate supplies",
-        "Ship aid with us",
-        "Join our network",
-        "Frontline groups"
+        "give money",
+        "donate supplies",
+        "ship aid with us",
+        "join our network",
+        "frontline groups"
       ]
     },
     "description": {

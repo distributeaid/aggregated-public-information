@@ -186,14 +186,14 @@ export interface ResponseCallToAction extends Struct.ComponentSchema {
     imageLink: Schema.Attribute.String;
     title: Schema.Attribute.Enumeration<
       [
-        "Give money",
-        "Donate supplies",
-        "Ship aid with us",
-        "Join our network",
-        "Frontline groups",
+        "give money",
+        "donate supplies",
+        "ship aid with us",
+        "join our network",
+        "frontline groups",
       ]
     > &
-      Schema.Attribute.DefaultTo<"Give money">;
+      Schema.Attribute.DefaultTo<"give money">;
   };
 }
 
