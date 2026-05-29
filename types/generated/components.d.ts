@@ -205,8 +205,11 @@ export interface TeamRole extends Struct.ComponentSchema {
     icon: "handHeart";
   };
   attributes: {
+    associatedCountry: Schema.Attribute.Relation<
+      "oneToOne",
+      "api::geo.country"
+    >;
     Duration: Schema.Attribute.Component<"time.duration", false>;
-    Location: Schema.Attribute.Component<"geo.location", false>;
     team: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         "plugin::multi-select.multi-select",

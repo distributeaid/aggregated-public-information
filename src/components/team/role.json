@@ -35,10 +35,10 @@
         "fundraising"
       ]
     },
-    "Location": {
-      "type": "component",
-      "component": "geo.location",
-      "repeatable": false
+    "associatedCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
     },
     "Duration": {
       "type": "component",
