@@ -208,7 +208,11 @@ export interface TeamRole extends Struct.ComponentSchema {
     Duration: Schema.Attribute.Component<"time.duration", false>;
     Location: Schema.Attribute.Component<"geo.location", false>;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Type: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ["board member", "director", "coordinator", "volunteer"]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"volunteer">;
   };
 }
 
