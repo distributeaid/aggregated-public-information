@@ -207,6 +207,12 @@ export interface TeamRole extends Struct.ComponentSchema {
   attributes: {
     Duration: Schema.Attribute.Component<"time.duration", false>;
     Location: Schema.Attribute.Component<"geo.location", false>;
+    team: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        "plugin::multi-select.multi-select",
+        ["admin", "operations", "stories", "tech", "design", "fundraising"]
+      > &
+      Schema.Attribute.DefaultTo<"[]">;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<
       ["board member", "director", "coordinator", "volunteer"]

@@ -22,6 +22,19 @@
         "volunteer"
       ]
     },
+    "team": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[]",
+      "options": [
+        "admin",
+        "operations",
+        "stories",
+        "tech",
+        "design",
+        "fundraising"
+      ]
+    },
     "Location": {
       "type": "component",
       "component": "geo.location",
