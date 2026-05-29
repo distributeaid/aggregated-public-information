@@ -229,8 +229,8 @@ export interface TimeDuration extends Struct.ComponentSchema {
     icon: "clock";
   };
   attributes: {
-    End: Schema.Attribute.DateTime;
-    Start: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    end: Schema.Attribute.Date;
+    start: Schema.Attribute.Date & Schema.Attribute.Required;
   };
 }
 
