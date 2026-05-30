@@ -15,12 +15,7 @@
       "type": "enumeration",
       "required": true,
       "default": "volunteer",
-      "enum": [
-        "board member",
-        "director",
-        "coordinator",
-        "volunteer"
-      ]
+      "enum": ["board member", "director", "coordinator", "volunteer"]
     },
     "team": {
       "type": "customField",
