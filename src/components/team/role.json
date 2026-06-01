@@ -11,18 +11,34 @@
       "type": "string",
       "required": true
     },
-    "Type": {
-      "type": "string"
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "default": "volunteer",
+      "enum": ["board member", "director", "coordinator", "volunteer"]
     },
-    "Location": {
-      "type": "component",
-      "repeatable": false,
-      "component": "geo.location"
+    "team": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[]",
+      "options": [
+        "admin",
+        "operations",
+        "stories",
+        "tech",
+        "design",
+        "fundraising"
+      ]
+    },
+    "associatedCountry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo.country"
     },
     "Duration": {
       "type": "component",
-      "repeatable": false,
-      "component": "time.duration"
+      "component": "time.duration",
+      "repeatable": false
     }
   }
 }
