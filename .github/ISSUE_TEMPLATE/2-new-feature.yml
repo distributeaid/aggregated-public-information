@@ -9,7 +9,7 @@ body:
     id: who-are-you
     attributes:
       label: "Who are you?"
-      description: "Give us enough information so that the developer working on this can reach out and ask you followup questions. Let folks know explicitly if you're a DA volunteer, coordinator, etc"
+      description: "Give us enough information so that the developer working on this can reach out and ask you follow-up questions. Let folks know explicitly if you're a DA volunteer, coordinator, etc"
     validations:
       required: true
 
@@ -31,7 +31,7 @@ body:
         - New backend data or fields
         - New API or data output
         - New admin tool
-        - New connection to another system of service
+        - New connection to another system or service
         - New permissions or access behavior
         - Other (please explain in the description above)
     validations:
@@ -105,6 +105,6 @@ body:
     id: additional-images
     attributes:
       label: "Upload additional images"
-      description: "If applicable, add any extra screenhots or mockups that help explain the new feature."
+      description: "If applicable, add any extra screenshots or mockups that help explain the new feature."
     validations:
       required: false
