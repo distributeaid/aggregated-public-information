@@ -1,0 +1,125 @@
+name: "Change Request"
+description: "Request a change or update to an existing feature, API, data model, or admin tool."
+title: "[Change]: "
+labels: ["Enhancement"]
+projects: ["distributeaid/15"]
+type: enhancement
+body:
+  - type: textarea
+    id: who-are-you
+    attributes:
+      label: "Who are you?"
+      description: "Give us enough information so that the developer working on this can reach out and ask you follow-up questions. Let folks know explicitly if you're a DA volunteer, coordinator, etc"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: request-description
+    attributes:
+      label: "What change do you want?"
+      description: "Describe the change you want. A sentence, paragraph, bulletpoints, or checkboxes of specific changes you'd like to see. For example, Change the status field for responses to have different options."
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: "What kind of change is this?"
+      description: "Choose the area this change will affect."
+      multiple: false
+      options:
+        - Change to existing data or fields
+        - Change to existing API or data output
+        - Change to existing admin tool or screen
+        - Change to connection with another system or service
+        - Change to permissions or access behavior
+        - Other (please explain in the description above)
+    validations:
+      required: true
+  
+  - type: textarea
+    id: benefits
+    attributes:
+      label: "Why do you want this change?"
+      description: "Who will benefit? What is difficult or confusing now? How will this change make things better?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: area-of-backend
+    attributes:
+      label: "What parts of the backend will this change involve?"
+      description: "Describe which part of the system behind the website is affected. You can mention the admin tool, data, APIs, or another service. If this supports a public page, mention that too. If you're not sure, just describe what you see and what you need."
+    validations:
+      required: true
+  
+  - type: upload
+    id: screenshots
+    attributes:
+      label: "Upload screenshots or drawings"
+      description: "If helpful, add screenshots or sketches showing the current behavior (what you don't like) and how you want it to work after the change."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: magnitude-of-change
+    attributes:
+      label: "How big of a change is this?"
+      description: "Choose the option that best describes how much this will change what users see or do?"
+      multiple: false
+      options:
+        - Small change (one field, one screen)
+        - Medium change (affects several parts of one screen or feature)
+        - Large change (affects multiple screens or features)
+        - Major change (affects how many people use the system)
+        - I'm not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: existing-content
+    attributes:
+      label: "Links and examples"
+      description: "Share any related pages, tools, API examples, or similar features that would help explain the change. If you know the current name of the feature, field, or screen, include that too."
+    validations:
+      required: false
+
+  - type: upload
+    id: content-files
+    attributes:
+      label: "Upload files"
+      description: "If applicable, add images, PDFs, diagrams, or other reference files."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: additional-content
+    attributes:
+      label: "Do you need help with supporting content or examples?"
+      description: "This field is for things like example data, diagrams, documentation, or text that would help developers build and test the change."
+      multiple: true
+      options:
+        - No, I've provided everything I can.
+        - No, I will provide the content later.
+        - I need help choosing or creating diagrams (for data, flows, or admin layouts).
+        - I need help writing documentation or text (API docs, labels, instructions).
+        - I need help generating example data or stats.
+        - I need help providing other content.
+    validations:
+      required: false
+
+  - type: textarea
+    id: inspiration
+    attributes:
+      label: "Is there inspiration for the request?"
+      description: "Share links or screenshots of other websites, tools, or admin panels that show the kind of change you want. For example, how another system handles similar data."
+    validations:
+      required: false
+
+  - type: upload
+    id: additional-images
+    attributes:
+      label: "Upload additional images"
+      description: "If applicable, add any extra screenshots or mockups that help explain the change."
+    validations:
+      required: false    
