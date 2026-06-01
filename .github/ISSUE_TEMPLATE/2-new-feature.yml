@@ -52,7 +52,7 @@ body:
       description: "Describe which part of the system behind the website is affected. You can mention the admin tool, data, APIs, or another service. If this supports a public page, mention that too. If you're not sure, just describe what you see and what you need."
     validations:
       required: true
-  
+
   - type: upload
     id: screenshots
     attributes:
@@ -76,7 +76,7 @@ body:
       description: "If applicable, add images, PDFs, diagrams, or other reference files with content you'd like to add."
     validations:
       required: false
-  
+
   - type: dropdown
     id: additional-content
     attributes:

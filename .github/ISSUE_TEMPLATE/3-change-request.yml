@@ -12,7 +12,7 @@ body:
       description: "Give us enough information so that the developer working on this can reach out and ask you follow-up questions. Let folks know explicitly if you're a DA volunteer, coordinator, etc"
     validations:
       required: true
-  
+
   - type: textarea
     id: request-description
     attributes:
@@ -20,7 +20,7 @@ body:
       description: "Describe the change you want. A sentence, paragraph, bulletpoints, or checkboxes of specific changes you'd like to see. For example, Change the status field for responses to have different options."
     validations:
       required: true
-  
+
   - type: dropdown
     id: change-type
     attributes:
@@ -36,7 +36,7 @@ body:
         - Other (please explain in the description above)
     validations:
       required: true
-  
+
   - type: textarea
     id: benefits
     attributes:
@@ -52,7 +52,7 @@ body:
       description: "Describe which part of the system behind the website is affected. You can mention the admin tool, data, APIs, or another service. If this supports a public page, mention that too. If you're not sure, just describe what you see and what you need."
     validations:
       required: true
-  
+
   - type: upload
     id: screenshots
     attributes:
@@ -122,4 +122,4 @@ body:
       label: "Upload additional images"
       description: "If applicable, add any extra screenshots or mockups that help explain the change."
     validations:
-      required: false    
+      required: false
