@@ -6,12 +6,12 @@
   },
   "options": {},
   "attributes": {
-    "Start": {
-      "type": "datetime",
+    "start": {
+      "type": "date",
       "required": true
     },
-    "End": {
-      "type": "datetime",
+    "end": {
+      "type": "date",
       "required": false
     }
   }
