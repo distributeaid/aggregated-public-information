@@ -9,6 +9,7 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "Name": {
       "type": "string",
@@ -22,9 +23,11 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
-    "From": {
+    "homeCountry": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.country"
@@ -34,8 +37,8 @@
     },
     "Roles": {
       "type": "component",
-      "repeatable": true,
       "component": "team.role",
+      "repeatable": true,
       "required": true
     }
   }

@@ -1083,7 +1083,7 @@ export interface ApiTeamMember extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    From: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
+    homeCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::team.member"> &
       Schema.Attribute.Private;
