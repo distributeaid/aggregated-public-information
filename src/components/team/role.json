@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
@@ -35,7 +35,7 @@
       "relation": "oneToOne",
       "target": "api::geo.country"
     },
-    "Duration": {
+    "duration": {
       "type": "component",
       "component": "time.duration",
       "repeatable": false
