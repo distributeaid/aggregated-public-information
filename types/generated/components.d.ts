@@ -215,10 +215,23 @@ export interface TeamRole extends Struct.ComponentSchema {
     icon: "handHeart";
   };
   attributes: {
-    Duration: Schema.Attribute.Component<"time.duration", false>;
-    Location: Schema.Attribute.Component<"geo.location", false>;
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Type: Schema.Attribute.String;
+    associatedCountry: Schema.Attribute.Relation<
+      "oneToOne",
+      "api::geo.country"
+    >;
+    duration: Schema.Attribute.Component<"time.duration", false>;
+    team: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        "plugin::multi-select.multi-select",
+        ["admin", "operations", "stories", "tech", "design", "fundraising"]
+      > &
+      Schema.Attribute.DefaultTo<"[]">;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      ["board member", "director", "coordinator", "volunteer"]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"volunteer">;
   };
 }
 
@@ -229,8 +242,8 @@ export interface TimeDuration extends Struct.ComponentSchema {
     icon: "clock";
   };
   attributes: {
-    End: Schema.Attribute.DateTime;
-    Start: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    end: Schema.Attribute.Date;
+    start: Schema.Attribute.Date & Schema.Attribute.Required;
   };
 }
 

@@ -1079,21 +1079,21 @@ export interface ApiTeamMember extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Bio: Schema.Attribute.RichText;
+    bio: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    From: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
+    homeCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::team.member"> &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    Profile: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
-    Pronouns: Schema.Attribute.String;
+    profile: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
+    pronouns: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    Roles: Schema.Attribute.Component<"team.role", true> &
+    roles: Schema.Attribute.Component<"team.role", true> &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
