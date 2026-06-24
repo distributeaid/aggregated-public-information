@@ -6,7 +6,8 @@
   "options": {},
   "attributes": {
     "imageURL": {
-      "type": "string"
+      "type": "string",
+      "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
     }
   },
   "config": {}
