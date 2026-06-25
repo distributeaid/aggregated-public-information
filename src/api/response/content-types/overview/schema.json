@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "overviews",
+  "info": {
+    "singularName": "overview",
+    "pluralName": "overviews",
+    "displayName": "Response.Overview"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "processImageMobile": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "processImageDesktop": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
