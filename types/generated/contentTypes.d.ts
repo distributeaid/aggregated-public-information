@@ -1079,6 +1079,10 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    callToActionCards: Schema.Attribute.Component<
+      "response.call-to-action",
+      true
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
