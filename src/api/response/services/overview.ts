@@ -2,6 +2,6 @@
  * response service
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreService('api::response.overview');
+export default factories.createCoreService("api::response.overview");
