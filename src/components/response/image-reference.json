@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_response_image_references",
+  "info": {
+    "displayName": "Image Reference"
+  },
+  "options": {},
+  "attributes": {
+    "imageURL": {
+      "type": "string",
+      "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
+    }
+  },
+  "config": {}
+}
