@@ -18,6 +18,11 @@
     "description": {
       "type": "text"
     },
+    "imageGallery": {
+      "type": "component",
+      "component": "response.image-reference",
+      "repeatable": true
+    },
     "processImageMobile": {
       "type": "media",
       "multiple": false,
