@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fundraisers",
+  "info": {
+    "singularName": "fundraiser",
+    "pluralName": "fundraisers",
+    "displayName": "Response.Fundraiser"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "amountRaised": {
+      "type": "biginteger"
+    },
+    "goalTotal": {
+      "type": "biginteger"
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

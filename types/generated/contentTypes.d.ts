@@ -1068,6 +1068,38 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiResponseFundraiser extends Struct.CollectionTypeSchema {
+  collectionName: "fundraisers";
+  info: {
+    displayName: "Response.Fundraiser";
+    pluralName: "fundraisers";
+    singularName: "fundraiser";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amountRaised: Schema.Attribute.BigInteger;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    featuredImage: Schema.Attribute.Media<"images">;
+    goalTotal: Schema.Attribute.BigInteger;
+    isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::response.fundraiser"
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTeamMember extends Struct.CollectionTypeSchema {
   collectionName: "members";
   info: {
@@ -1662,6 +1694,7 @@ declare module "@strapi/strapi" {
       "api::reporting.cargo": ApiReportingCargo;
       "api::reporting.movement": ApiReportingMovement;
       "api::reporting.shipment": ApiReportingShipment;
+      "api::response.fundraiser": ApiResponseFundraiser;
       "api::team.member": ApiTeamMember;
       "plugin::content-releases.release": PluginContentReleasesRelease;
       "plugin::content-releases.release-action": PluginContentReleasesReleaseAction;
