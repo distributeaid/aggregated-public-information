@@ -15,12 +15,9 @@
       "type": "string",
       "required": true
     },
-    "featuredImage": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+    "featuredImageURL": {
+      "type": "string",
+      "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
     },
     "amountRaised": {
       "type": "biginteger"
