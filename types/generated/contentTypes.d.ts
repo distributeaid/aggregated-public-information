@@ -1083,7 +1083,7 @@ export interface ApiResponseFundraiser extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    featuredImage: Schema.Attribute.Media<"images">;
+    featuredImageURL: Schema.Attribute.String;
     goalTotal: Schema.Attribute.BigInteger;
     isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
