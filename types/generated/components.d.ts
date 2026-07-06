@@ -197,6 +197,17 @@ export interface ResponseCallToAction extends Struct.ComponentSchema {
   };
 }
 
+export interface ResponseDetail extends Struct.ComponentSchema {
+  collectionName: "components_response_details";
+  info: {
+    displayName: "Detail";
+  };
+  attributes: {
+    specifics: Schema.Attribute.Text;
+    summary: Schema.Attribute.String;
+  };
+}
+
 export interface ResponseImageReference extends Struct.ComponentSchema {
   collectionName: "components_response_image_references";
   info: {
@@ -258,6 +269,7 @@ declare module "@strapi/strapi" {
       "product.weight": ProductWeight;
       "reporting.shipment-roles": ReportingShipmentRoles;
       "response.call-to-action": ResponseCallToAction;
+      "response.detail": ResponseDetail;
       "response.image-reference": ResponseImageReference;
       "team.role": TeamRole;
       "time.duration": TimeDuration;
