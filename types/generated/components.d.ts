@@ -218,6 +218,18 @@ export interface ResponseImageReference extends Struct.ComponentSchema {
   };
 }
 
+export interface ResponseStatistic extends Struct.ComponentSchema {
+  collectionName: "components_response_statistics";
+  info: {
+    displayName: "Statistic";
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    unit: Schema.Attribute.String;
+    value: Schema.Attribute.BigInteger;
+  };
+}
+
 export interface TeamRole extends Struct.ComponentSchema {
   collectionName: "components_team_roles";
   info: {
@@ -271,6 +283,7 @@ declare module "@strapi/strapi" {
       "response.call-to-action": ResponseCallToAction;
       "response.detail": ResponseDetail;
       "response.image-reference": ResponseImageReference;
+      "response.statistic": ResponseStatistic;
       "team.role": TeamRole;
       "time.duration": TimeDuration;
     }
