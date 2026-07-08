@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "overviews",
+  "info": {
+    "singularName": "overview",
+    "pluralName": "overviews",
+    "displayName": "Response.Overview"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "imageGallery": {
+      "type": "component",
+      "component": "response.image-reference",
+      "repeatable": true
+    },
+    "processImageMobile": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "processImageDesktop": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "callToActionCards": {
+      "type": "component",
+      "component": "response.call-to-action",
+      "repeatable": true
+    }
+  }
+}
