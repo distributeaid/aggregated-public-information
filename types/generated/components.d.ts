@@ -197,6 +197,17 @@ export interface ResponseCallToAction extends Struct.ComponentSchema {
   };
 }
 
+export interface ResponseDetail extends Struct.ComponentSchema {
+  collectionName: "components_response_details";
+  info: {
+    displayName: "Detail";
+  };
+  attributes: {
+    specifics: Schema.Attribute.Text;
+    summary: Schema.Attribute.String;
+  };
+}
+
 export interface ResponseImageReference extends Struct.ComponentSchema {
   collectionName: "components_response_image_references";
   info: {
@@ -204,6 +215,18 @@ export interface ResponseImageReference extends Struct.ComponentSchema {
   };
   attributes: {
     imageURL: Schema.Attribute.String;
+  };
+}
+
+export interface ResponseStatistic extends Struct.ComponentSchema {
+  collectionName: "components_response_statistics";
+  info: {
+    displayName: "Statistic";
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    unit: Schema.Attribute.String;
+    value: Schema.Attribute.BigInteger;
   };
 }
 
@@ -258,7 +281,9 @@ declare module "@strapi/strapi" {
       "product.weight": ProductWeight;
       "reporting.shipment-roles": ReportingShipmentRoles;
       "response.call-to-action": ResponseCallToAction;
+      "response.detail": ResponseDetail;
       "response.image-reference": ResponseImageReference;
+      "response.statistic": ResponseStatistic;
       "team.role": TeamRole;
       "time.duration": TimeDuration;
     }

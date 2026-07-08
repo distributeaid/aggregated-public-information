@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fundraisers",
+  "info": {
+    "singularName": "fundraiser",
+    "pluralName": "fundraisers",
+    "displayName": "Response.Fundraiser"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "featuredImageURL": {
+      "type": "string",
+      "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
+    },
+    "amountRaised": {
+      "type": "biginteger"
+    },
+    "goalTotal": {
+      "type": "biginteger"
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
