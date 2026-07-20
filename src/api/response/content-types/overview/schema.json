@@ -37,6 +37,11 @@
       "type": "component",
       "component": "response.call-to-action",
       "repeatable": true
+    },
+    "faqs": {
+      "type": "component",
+      "component": "response.faq-item",
+      "repeatable": true
     }
   }
 }

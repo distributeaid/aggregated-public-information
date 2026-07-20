@@ -1119,6 +1119,7 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    faqs: Schema.Attribute.Component<"response.faq-item", true>;
     imageGallery: Schema.Attribute.Component<"response.image-reference", true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
