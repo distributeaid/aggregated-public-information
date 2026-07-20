@@ -208,6 +208,17 @@ export interface ResponseDetail extends Struct.ComponentSchema {
   };
 }
 
+export interface ResponseFaqItem extends Struct.ComponentSchema {
+  collectionName: "components_response_faq_items";
+  info: {
+    displayName: "FAQ Item";
+  };
+  attributes: {
+    answer: Schema.Attribute.Text & Schema.Attribute.Required;
+    question: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ResponseImageReference extends Struct.ComponentSchema {
   collectionName: "components_response_image_references";
   info: {
@@ -282,6 +293,7 @@ declare module "@strapi/strapi" {
       "reporting.shipment-roles": ReportingShipmentRoles;
       "response.call-to-action": ResponseCallToAction;
       "response.detail": ResponseDetail;
+      "response.faq-item": ResponseFaqItem;
       "response.image-reference": ResponseImageReference;
       "response.statistic": ResponseStatistic;
       "team.role": TeamRole;
