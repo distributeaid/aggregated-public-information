@@ -15,8 +15,11 @@
       "type": "string",
       "required": true
     },
-    "description": {
+    "subHeading": {
       "type": "text"
+    },
+    "description": {
+      "type": "richtext"
     },
     "imageGallery": {
       "type": "component",

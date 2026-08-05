@@ -1118,8 +1118,7 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    faqs: Schema.Attribute.Component<"response.faq-item", true>;
+    description: Schema.Attribute.RichText;
     imageGallery: Schema.Attribute.Component<"response.image-reference", true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1131,6 +1130,7 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     processImageDesktop: Schema.Attribute.Media<"images">;
     processImageMobile: Schema.Attribute.Media<"images">;
     publishedAt: Schema.Attribute.DateTime;
+    subHeading: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
