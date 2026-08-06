@@ -1,0 +1,87 @@
+name: "Bug Report"
+description: "File a bug report."
+title: "[Bug]: "
+labels: ["Bug", "Triage"]
+projects: ["distributeaid/15"]
+type: bug
+body:
+  - type: textarea
+    id: who-are-you
+    attributes:
+      label: "Who are you?"
+      description: "Give us enough information so that the developer working on this can reach out and ask you follow-up questions. Let folks know explicitly if you're a DA volunteer, coordinator, etc."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: "What kind of bug is this?"
+      description: "Choose all that apply."
+      multiple: true
+      options:
+        - Something is broken or not working as expected
+        - The system is too slow or unresponsive
+        - Data is missing, wrong, or inconsistent
+        - Permissions or access are wrong (someone can/can't do something they should)
+        - Strapi admin UI is confusing or broken
+        - Connection to another system is failing (API, service, etc.)
+        - Other (tell us more in the fields below)
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "What actually happens?"
+      description: "Please provide step-by-step details if possible."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "What are you expecting to happen?"
+      description: "A concise description of what you expected to happen."
+    validations:
+      required: true
+
+  - type: textarea
+    id: workarounds
+    attributes:
+      label: "What current workarounds are you using? Or are you stuck?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-component
+    attributes:
+      label: "What area does the bug apply to?"
+      description: "Choose all that apply."
+      multiple: true
+      options:
+        - APIs (the system behind the website that sends/receives data)
+        - Data models (how data is organized, fields, relationships)
+        - Strapi UI (the admin tool where users manage content)
+
+  - type: textarea
+    id: affected-component-details
+    attributes:
+      label: "What part of the area is affected?"
+      description: "Be as specific as you can. Attach a screenshot, or specify the starting point of the process and describe where the issue occurs. "
+      validations:
+        required: true
+
+  - type: upload
+    id: screenshots
+    attributes:
+      label: "Upload screenshots"
+      description: "If applicable, add any additional images or screenshots to help explain the problem you encountered."
+    validations:
+      required: false
+
+  - type: textarea
+    id: inspiration
+    attributes:
+      label: "Do you have examples of how this should work?"
+      description: "List links or screenshots of examples which demonstrate the fix you're requesting."
+    validations:
+      required: false
