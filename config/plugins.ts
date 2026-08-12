@@ -17,16 +17,16 @@ export default ({ env }) => ({
       shouldUpdateSlug: true,
       contentTypes: {
         region: {
-          field: "Slug",
-          references: "Name",
+          field: "slug",
+          references: "name",
         },
         subregion: {
-          field: "Slug",
-          references: "Name",
+          field: "slug",
+          references: "name",
         },
         country: {
-          field: "Slug",
-          references: "Code",
+          field: "slug",
+          references: "code",
         },
       },
     },
