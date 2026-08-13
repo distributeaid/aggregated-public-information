@@ -7,7 +7,17 @@
   "attributes": {
     "imageURL": {
       "type": "string",
+      "required": true,
       "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
+    },
+    "altText": {
+      "type": "text"
+    },
+    "attributionName": {
+      "type": "string"
+    },
+    "attributionURL": {
+      "type": "string"
     }
   },
   "config": {}
