@@ -183,6 +183,9 @@ export interface ResponseCallToAction extends Struct.ComponentSchema {
     buttonLink: Schema.Attribute.String;
     buttonText: Schema.Attribute.String;
     description: Schema.Attribute.Text;
+    imageAltText: Schema.Attribute.Text;
+    imageAttributionName: Schema.Attribute.String;
+    imageAttributionURL: Schema.Attribute.String;
     imageLink: Schema.Attribute.String;
     title: Schema.Attribute.Enumeration<
       [
@@ -208,6 +211,18 @@ export interface ResponseDetail extends Struct.ComponentSchema {
   };
 }
 
+export interface ResponseDonateCtaButton extends Struct.ComponentSchema {
+  collectionName: "components_response_donate_cta_buttons";
+  info: {
+    displayName: "Response Donation CTA";
+  };
+  attributes: {
+    bannerText: Schema.Attribute.String;
+    buttonLink: Schema.Attribute.String & Schema.Attribute.Required;
+    buttonText: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ResponseFaqItem extends Struct.ComponentSchema {
   collectionName: "components_response_faq_items";
   info: {
@@ -225,7 +240,34 @@ export interface ResponseImageReference extends Struct.ComponentSchema {
     displayName: "Image Reference";
   };
   attributes: {
-    imageURL: Schema.Attribute.String;
+    altText: Schema.Attribute.Text;
+    attributionName: Schema.Attribute.String;
+    attributionURL: Schema.Attribute.String;
+    imageURL: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ResponseImpactStatisticsSection
+  extends Struct.ComponentSchema {
+  collectionName: "components_response_impact_statistics_sections";
+  info: {
+    displayName: "Impact Statistics Section";
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<"response.donate-cta-button", false> &
+      Schema.Attribute.Required;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"By The Numbers">;
+    statistics: Schema.Attribute.Component<"response.statistic", true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 4;
+          min: 1;
+        },
+        number
+      >;
   };
 }
 
@@ -235,9 +277,21 @@ export interface ResponseStatistic extends Struct.ComponentSchema {
     displayName: "Statistic";
   };
   attributes: {
+    category: Schema.Attribute.Enumeration<
+      ["currency", "items", "shipments", "time"]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"items">;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     unit: Schema.Attribute.String;
-    value: Schema.Attribute.BigInteger;
+    value: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
   };
 }
 
@@ -293,8 +347,10 @@ declare module "@strapi/strapi" {
       "reporting.shipment-roles": ReportingShipmentRoles;
       "response.call-to-action": ResponseCallToAction;
       "response.detail": ResponseDetail;
+      "response.donate-cta-button": ResponseDonateCtaButton;
       "response.faq-item": ResponseFaqItem;
       "response.image-reference": ResponseImageReference;
+      "response.impact-statistics-section": ResponseImpactStatisticsSection;
       "response.statistic": ResponseStatistic;
       "team.role": TeamRole;
       "time.duration": TimeDuration;
