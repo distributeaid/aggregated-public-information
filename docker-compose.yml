@@ -13,24 +13,17 @@ services:
       - .env
     volumes:
       - strapi-data:/app/.tmp # Persist the SQLite database
-      - ./src:/app/src # Bind mount to enable two-way sync ('host' to 'container' and vice-versa) for 'src' directory (docker compose's watch mode supports 'host' to 'container' unidirectional sync only)
+      # Bind mounts to enable two-way sync ('host' to 'container' and vice-versa) since docker compose's watch mode supports 'host' to 'container' (unidirectional sync only)
+      - ./src:/app/src
+      - ./config:/app/config
+      - ./types:/app/types
+      - ./public/uploads:/app/public/uploads
+      - ./database:/app/database
+
     networks:
       - local-dev
     develop:
       watch:
-        # Source code changes
-        - action: sync
-          path: ./public
-          target: /app/public
-        - action: sync
-          path: ./config
-          target: /app/config
-
-        # Configuration changes
-        - action: sync+restart
-          path: ./types
-          target: /app/types
-
         # Dependency changes
         - action: rebuild
           path: ./package.json

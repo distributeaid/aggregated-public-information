@@ -47,19 +47,7 @@ The setup utilizes a hybrid approach with Docker Compose watch and bind-mounts f
 
 ### Source Code Changes (Hot Reload)
 
-Docker compose `watch` feature does not provide a data sync between container and host i.e code changes generated in the container's files are not reflected as changes in the host files. Therefore, files in `/src` use bind-mounts for two-way data sync ensuring that the code changes in the container's files generated via Strapi UI actions are immediately reflected in the host files.
-
-Files in `/config` and `/public` directories:
-
-- **Action**: `sync`
-- **Behavior**: Files are synced to the container without restart, changes are hot-reloaded
-
-### Configuration Changes (Restart Required)
-
-Files in `/types` directory:
-
-- **Action**: `sync+restart`
-- **Behavior**: Files are synced and the container is restarted to apply configuration changes
+Docker compose `watch` feature does not provide a data sync between container and host i.e code changes generated in the container's files are not reflected as changes in the host files. Therefore, `/src`, `/config`, `/types`, `/public/uploads` and `/database` directories use bind-mounts for two-way data sync ensuring that the code changes in the container's files generated via Strapi UI actions are immediately reflected in the host files.
 
 ### Dependency Changes (Rebuild Required)
 
@@ -75,10 +63,9 @@ Dependency files:
 ## Development Workflow
 
 1. **Initial Setup**: Run `docker compose up --watch` to build and start the container
-2. **Code Changes**: Edit files in `/src` or `/config` or `/public` - changes sync automatically with hot-reload
-3. **Config Changes**: Edit config files - container restarts automatically
-4. **Dependency Changes**: Add/remove packages in `package.json` - image rebuilds automatically
-5. **Stop**: Press `Ctrl+C` or run `docker compose down` (optionally, use `docker compose down --rmi all` to remove image)
+2. **Code Changes**: Edit files (via host or Strapi UI) and observe file changes under `/src`, `/types`, `/config`, `/public/uploads`, `/database` directories
+3. **Dependency Changes**: Add/remove packages in `package.json` - image rebuilds automatically
+4. **Stop**: Press `Ctrl+C` or run `docker compose down` (optionally, use `docker compose down --rmi all` to remove image)
 
 ## Troubleshooting
 
