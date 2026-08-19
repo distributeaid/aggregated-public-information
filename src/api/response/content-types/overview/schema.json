@@ -44,7 +44,8 @@
       "repeatable": true
     },
     "processHeading": {
-      "type": "string"
+      "type": "string",
+      "default": "How We Work"
     },
     "processFootnote": {
       "type": "text"

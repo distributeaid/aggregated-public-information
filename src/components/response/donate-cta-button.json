@@ -1,16 +1,18 @@
 {
   "collectionName": "components_response_donate_cta_buttons",
   "info": {
-    "displayName": "Response Donation CTA"
+    "displayName": "Donation CTA"
   },
   "options": {},
   "attributes": {
     "buttonText": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "Donate"
     },
     "bannerText": {
-      "type": "string"
+      "type": "string",
+      "default": "Help support this project"
     },
     "buttonLink": {
       "type": "string",
