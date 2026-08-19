@@ -214,12 +214,15 @@ export interface ResponseDetail extends Struct.ComponentSchema {
 export interface ResponseDonateCtaButton extends Struct.ComponentSchema {
   collectionName: "components_response_donate_cta_buttons";
   info: {
-    displayName: "Response Donation CTA";
+    displayName: "Donation CTA";
   };
   attributes: {
-    bannerText: Schema.Attribute.String;
+    bannerText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Help support this project">;
     buttonLink: Schema.Attribute.String & Schema.Attribute.Required;
-    buttonText: Schema.Attribute.String & Schema.Attribute.Required;
+    buttonText: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"Donate">;
   };
 }
 

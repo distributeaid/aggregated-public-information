@@ -1136,7 +1136,8 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     processFootnote: Schema.Attribute.Text;
-    processHeading: Schema.Attribute.String;
+    processHeading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"How We Work">;
     processImageDesktop: Schema.Attribute.Media<"images">;
     processImageMobile: Schema.Attribute.Media<"images">;
     publishedAt: Schema.Attribute.DateTime;
