@@ -21,6 +21,16 @@
       "type": "text"
     },
     "imageLink": {
+      "type": "string",
+      "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
+    },
+    "imageAltText": {
+      "type": "text"
+    },
+    "imageAttributionName": {
+      "type": "string"
+    },
+    "imageAttributionURL": {
       "type": "string"
     },
     "buttonText": {

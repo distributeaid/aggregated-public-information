@@ -15,16 +15,40 @@
       "type": "string",
       "required": true
     },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
     "subHeading": {
       "type": "text"
     },
+    "impactStatistics": {
+      "type": "component",
+      "component": "response.impact-statistics-section",
+      "repeatable": false
+    },
+    "aboutHeading": {
+      "type": "string"
+    },
     "description": {
       "type": "richtext"
+    },
+    "details": {
+      "type": "component",
+      "component": "response.detail",
+      "repeatable": true
     },
     "imageGallery": {
       "type": "component",
       "component": "response.image-reference",
       "repeatable": true
+    },
+    "processHeading": {
+      "type": "string",
+      "default": "How We Work"
+    },
+    "processFootnote": {
+      "type": "text"
     },
     "processImageMobile": {
       "type": "media",

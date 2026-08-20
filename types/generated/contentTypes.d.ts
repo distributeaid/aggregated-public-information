@@ -1112,6 +1112,7 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    aboutHeading: Schema.Attribute.String;
     callToActionCards: Schema.Attribute.Component<
       "response.call-to-action",
       true
@@ -1120,8 +1121,13 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
+    details: Schema.Attribute.Component<"response.detail", true>;
     faqs: Schema.Attribute.Component<"response.faq-item", true>;
     imageGallery: Schema.Attribute.Component<"response.image-reference", true>;
+    impactStatistics: Schema.Attribute.Component<
+      "response.impact-statistics-section",
+      false
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       "oneToMany",
@@ -1129,9 +1135,13 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    processFootnote: Schema.Attribute.Text;
+    processHeading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"How We Work">;
     processImageDesktop: Schema.Attribute.Media<"images">;
     processImageMobile: Schema.Attribute.Media<"images">;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String & Schema.Attribute.Unique;
     subHeading: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
