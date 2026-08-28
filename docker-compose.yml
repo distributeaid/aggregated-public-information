@@ -19,7 +19,6 @@ services:
       - ./types:/app/types
       - ./public/uploads:/app/public/uploads
       - ./database:/app/database
-
     networks:
       - local-dev
     develop:
