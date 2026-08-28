@@ -10,10 +10,18 @@
       "required": true
     },
     "value": {
-      "type": "biginteger"
+      "type": "integer",
+      "required": true,
+      "min": 1
     },
     "unit": {
       "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "required": true,
+      "default": "items",
+      "enum": ["currency", "items", "shipments", "time"]
     }
   },
   "config": {}

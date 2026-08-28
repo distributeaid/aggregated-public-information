@@ -28,6 +28,10 @@ export default ({ env }) => ({
           field: "slug",
           references: "code",
         },
+        overview: {
+          field: "slug",
+          references: "name",
+        },
       },
     },
   },
