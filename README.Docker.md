@@ -11,10 +11,13 @@ This project uses a hybrid approach with Docker Compose `watch` feature and bind
 **IMPORTANT**: Ensure Docker Desktop is installed (if not yet installed, download and run the installer — it will prompt to enable WSL2 during setup)
 
 Check WSL version support:
+
 ```powershell
 wsl --version
 ```
+
 If this command isn't recognized, update WSL first:
+
 ```powershell
 wsl --update
 ```
@@ -31,10 +34,13 @@ wsl --install -d Ubuntu
 - On first launch it will prompt you to create a **UNIX username and password** — this is separate from your Windows login, and is your sudo user inside the distro.
 
 Verify it installed as WSL2 (not the older WSL1):
+
 ```powershell
 wsl -l -v
 ```
+
 You should see something like:
+
 ```
   NAME              STATE           VERSION
 * Ubuntu            Running         2
@@ -45,6 +51,7 @@ You should see something like:
 > **Note:** `docker-desktop` and `docker-desktop-data` are internal distros Docker Desktop creates for itself — don't develop inside those. Your Ubuntu distro is what you'll actually use.
 
 If Ubuntu shows as version 1, convert it:
+
 ```powershell
 wsl --set-version Ubuntu 2
 ```
@@ -60,6 +67,7 @@ wsl --set-version Ubuntu 2
 This makes the `docker` and `docker compose` CLI commands available inside Ubuntu, talking to the Docker engine that Docker Desktop runs in the background — you don't need to install Docker Engine separately inside Ubuntu itself.
 
 Verify from inside Ubuntu (open it via Start Menu, or `wsl -d Ubuntu` from PowerShell):
+
 ```bash
 docker --version
 docker compose version
@@ -96,11 +104,11 @@ sudo chown -R $USER:$USER .
 This recursively sets the owner and group of everything in the current directory to your logged-in Linux user, which resolves the typical "permission denied" issues when an editor, Docker container (running as root by default), or another tool has written files owned by a different user.
 
 ### 5. Connect your editor to WSL
- 
+
 Most modern editors (VSCode, Cursor, Windsurf, Antigravity, and others built on the same architecture) support a "remote/WSL" mode: the editor UI runs on Windows, but it attaches to the Ubuntu filesystem so the terminal, language servers, linters, debuggers, and any tooling all run natively inside Linux — this is what avoids the cross-filesystem slowness and tooling mismatches you'd get from just opening `\\wsl$\...` as a regular folder.
- 
+
 General steps (specifics vary slightly by editor):
- 
+
 1. Install the editor's **WSL remote extension/plugin** if it's not bundled by default (in VSCode-derived editors this is typically named something like "WSL" or "Remote - WSL").
 2. Open the editor normally (from Windows), then connect to WSL:
    - Open the **Command Palette** (usually `Ctrl+Shift+P`) and run a command like **"WSL: Connect to WSL"** or **"Reopen Folder in WSL"** (naming varies slightly by editor).
@@ -109,7 +117,7 @@ General steps (specifics vary slightly by editor):
 3. Confirm you're actually connected to WSL and not just browsing the folder over a network path — editors typically show an indicator (often bottom-left) naming the connected distro, e.g. "WSL: ubuntu".
 
 ### 6. Quick sanity checklist
- 
+
 - `wsl -l -v` shows Ubuntu running WSL **version 2**
 - Docker Desktop → Settings → Resources → WSL Integration has Ubuntu enabled
 - `docker run hello-world` works from inside Ubuntu
