@@ -223,6 +223,10 @@ Ensure your Docker Compose version is `2.22.0` or higher:
 docker compose version
 ```
 
+## Testing
+
+See [`tests/dockerization/test-cases.md`](tests/dockerization/test-cases.md) for the verification tests run against the Dockerized Strapi backend, including completed tests and tests still outstanding.
+
 ## References
 
 - [Docker Compose Watch](https://docs.docker.com/compose/file-watch/)
