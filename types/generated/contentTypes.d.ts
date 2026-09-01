@@ -1123,6 +1123,10 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.RichText;
     details: Schema.Attribute.Component<"response.detail", true>;
     faqs: Schema.Attribute.Component<"response.faq-item", true>;
+    fundraisers: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::response.fundraiser"
+    >;
     imageGallery: Schema.Attribute.Component<"response.image-reference", true>;
     impactStatistics: Schema.Attribute.Component<
       "response.impact-statistics-section",
