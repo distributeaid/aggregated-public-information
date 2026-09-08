@@ -69,6 +69,11 @@
       "type": "component",
       "component": "response.faq-item",
       "repeatable": true
+    },
+    "fundraisers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::response.fundraiser"
     }
   }
 }
