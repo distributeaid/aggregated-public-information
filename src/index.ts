@@ -1,5 +1,4 @@
 import type { Core } from "@strapi/strapi";
-import { createPublicApiPermissions } from "./createPublicApiPermissions";
 import { subscribeAdminInviteEmail } from "./functions/content-types/group/adminInviteEmail";
 
 export default {
@@ -20,6 +19,5 @@ export default {
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     subscribeAdminInviteEmail(strapi);
-    await createPublicApiPermissions(strapi);
   },
 };
