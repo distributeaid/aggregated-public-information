@@ -2,8 +2,6 @@ import { setupStrapi, cleanupStrapi } from "./helpers/strapi";
 import request from "supertest";
 import { createPublicApiPermissions } from "../src/createPublicApiPermissions";
 
-jest.setTimeout(10000);
-
 // user mock data
 const mockUserData = {
   username: "tester",
@@ -16,15 +14,27 @@ const mockUserData = {
 
 beforeAll(async () => {
   await setupStrapi();
-  await createPublicApiPermissions(strapi);
-});
+}, 60000);
 
 afterAll(async () => {
   await cleanupStrapi();
 });
 
-it("strapi is defined", async () => {
-  expect(strapi).toBeDefined();
+it("does not grant public API permissions during application bootstrap", async () => {
+  const publicRole = await strapi
+    .query("plugin::users-permissions.role")
+    .findOne({ where: { type: "public" } });
+
+  const permission = await strapi
+    .query("plugin::users-permissions.permission")
+    .findOne({
+      where: {
+        action: "api::product.item.find",
+        role: publicRole.id,
+      },
+    });
+
+  expect(permission).toBeNull();
 });
 
 it("should login user and return jwt token", async () => {
@@ -83,7 +93,23 @@ it("should return users data for authenticated user", async () => {
     });
 });
 
-it("should get product item data", async () => {
+it("should get product item data after explicitly enabling test permissions", async () => {
+  await createPublicApiPermissions(strapi);
+
+  const publicRole = await strapi
+    .query("plugin::users-permissions.role")
+    .findOne({ where: { type: "public" } });
+  const permission = await strapi
+    .query("plugin::users-permissions.permission")
+    .findOne({
+      where: {
+        action: "api::product.item.find",
+        role: publicRole.id,
+      },
+    });
+
+  expect(permission).not.toBeNull();
+
   await request(strapi.server.httpServer)
     .get("/api/items?populate=*")
     .set("accept", "application/json")
