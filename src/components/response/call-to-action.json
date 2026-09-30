@@ -7,7 +7,7 @@
   "attributes": {
     "title": {
       "type": "enumeration",
-      "required": false,
+      "required": true,
       "default": "give money",
       "enum": [
         "give money",
@@ -18,10 +18,12 @@
       ]
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "imageLink": {
       "type": "string",
+      "required": true,
       "regex": "^https:\\/\\/res\\.cloudinary\\.com\\/dthervbn8\\/image\\/upload\\/.+$"
     },
     "imageAltText": {
@@ -34,10 +36,12 @@
       "type": "string"
     },
     "buttonText": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "buttonLink": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   },
   "config": {}
