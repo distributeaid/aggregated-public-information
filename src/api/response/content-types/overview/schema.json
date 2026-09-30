@@ -19,7 +19,8 @@
       "type": "text"
     },
     "description": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "imageGallery": {
       "type": "component",
@@ -30,17 +31,22 @@
     "processImageMobile": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "processImageDesktop": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "callToActionCards": {
       "type": "component",
       "component": "response.call-to-action",
-      "repeatable": true
+      "repeatable": true,
+      "required": true
     },
     "faqs": {
       "type": "component",
