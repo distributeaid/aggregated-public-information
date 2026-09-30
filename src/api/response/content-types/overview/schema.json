@@ -15,50 +15,31 @@
       "type": "string",
       "required": true
     },
-    "slug": {
-      "type": "string",
-      "unique": true
-    },
     "subHeading": {
       "type": "text"
-    },
-    "impactStatistics": {
-      "type": "component",
-      "component": "response.impact-statistics-section",
-      "repeatable": false
-    },
-    "aboutHeading": {
-      "type": "string"
     },
     "description": {
       "type": "richtext"
     },
-    "details": {
-      "type": "component",
-      "component": "response.detail",
-      "repeatable": true
-    },
     "imageGallery": {
       "type": "component",
       "component": "response.image-reference",
-      "repeatable": true
-    },
-    "processHeading": {
-      "type": "string",
-      "default": "How We Work"
-    },
-    "processFootnote": {
-      "type": "text"
+      "repeatable": true,
+      "max": 2
     },
     "processImageMobile": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "processImageDesktop": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "callToActionCards": {
       "type": "component",
@@ -69,6 +50,30 @@
       "type": "component",
       "component": "response.faq-item",
       "repeatable": true
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "impactStatistics": {
+      "type": "component",
+      "component": "response.impact-statistics-section",
+      "repeatable": false
+    },
+    "aboutHeading": {
+      "type": "string"
+    },
+    "details": {
+      "type": "component",
+      "component": "response.detail",
+      "repeatable": true
+    },
+    "processHeading": {
+      "type": "string",
+      "default": "How We Work"
+    },
+    "processFootnote": {
+      "type": "text"
     },
     "fundraisers": {
       "type": "relation",

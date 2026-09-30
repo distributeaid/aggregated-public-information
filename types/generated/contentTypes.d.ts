@@ -1127,7 +1127,13 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
       "oneToMany",
       "api::response.fundraiser"
     >;
-    imageGallery: Schema.Attribute.Component<"response.image-reference", true>;
+    imageGallery: Schema.Attribute.Component<"response.image-reference", true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+        },
+        number
+      >;
     impactStatistics: Schema.Attribute.Component<
       "response.impact-statistics-section",
       false
