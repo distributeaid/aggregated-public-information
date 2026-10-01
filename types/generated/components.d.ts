@@ -180,13 +180,13 @@ export interface ResponseCallToAction extends Struct.ComponentSchema {
     displayName: "Call To Action";
   };
   attributes: {
-    buttonLink: Schema.Attribute.String;
-    buttonText: Schema.Attribute.String;
-    description: Schema.Attribute.Text;
+    buttonLink: Schema.Attribute.String & Schema.Attribute.Required;
+    buttonText: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
     imageAltText: Schema.Attribute.Text;
     imageAttributionName: Schema.Attribute.String;
     imageAttributionURL: Schema.Attribute.String;
-    imageLink: Schema.Attribute.String;
+    imageLink: Schema.Attribute.String & Schema.Attribute.Required;
     title: Schema.Attribute.Enumeration<
       [
         "give money",
@@ -196,6 +196,7 @@ export interface ResponseCallToAction extends Struct.ComponentSchema {
         "frontline groups",
       ]
     > &
+      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<"give money">;
   };
 }

@@ -1116,18 +1116,25 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     callToActionCards: Schema.Attribute.Component<
       "response.call-to-action",
       true
-    >;
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.RichText;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
     details: Schema.Attribute.Component<"response.detail", true>;
     faqs: Schema.Attribute.Component<"response.faq-item", true>;
     fundraisers: Schema.Attribute.Relation<
       "oneToMany",
       "api::response.fundraiser"
     >;
-    imageGallery: Schema.Attribute.Component<"response.image-reference", true>;
+    imageGallery: Schema.Attribute.Component<"response.image-reference", true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+        },
+        number
+      >;
     impactStatistics: Schema.Attribute.Component<
       "response.impact-statistics-section",
       false
