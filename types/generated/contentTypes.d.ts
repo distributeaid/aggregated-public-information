@@ -612,7 +612,7 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<"code">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -644,7 +644,7 @@ export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
       Schema.Attribute.Unique;
     overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<"name">;
     subregions: Schema.Attribute.Relation<"oneToMany", "api::geo.subregion">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
@@ -681,7 +681,7 @@ export interface ApiGeoSubregion extends Struct.CollectionTypeSchema {
     overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.Relation<"manyToOne", "api::geo.region">;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<"name">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -1152,7 +1152,7 @@ export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
     processImageDesktop: Schema.Attribute.Media<"images">;
     processImageMobile: Schema.Attribute.Media<"images">;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String & Schema.Attribute.Unique;
+    slug: Schema.Attribute.UID<"name">;
     subHeading: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
@@ -1427,44 +1427,6 @@ export interface PluginReviewWorkflowsWorkflowStage
       "manyToOne",
       "plugin::review-workflows.workflow"
     >;
-  };
-}
-
-export interface PluginSlugifySlug extends Struct.CollectionTypeSchema {
-  collectionName: "slugs";
-  info: {
-    displayName: "slug";
-    pluralName: "slugs";
-    singularName: "slug";
-  };
-  options: {
-    comment: "";
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    "content-manager": {
-      visible: false;
-    };
-    "content-type-builder": {
-      visible: false;
-    };
-  };
-  attributes: {
-    count: Schema.Attribute.Integer;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      "oneToMany",
-      "plugin::slugify.slug"
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.Text;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -1762,7 +1724,6 @@ declare module "@strapi/strapi" {
       "plugin::i18n.locale": PluginI18NLocale;
       "plugin::review-workflows.workflow": PluginReviewWorkflowsWorkflow;
       "plugin::review-workflows.workflow-stage": PluginReviewWorkflowsWorkflowStage;
-      "plugin::slugify.slug": PluginSlugifySlug;
       "plugin::upload.file": PluginUploadFile;
       "plugin::upload.folder": PluginUploadFolder;
       "plugin::users-permissions.permission": PluginUsersPermissionsPermission;
