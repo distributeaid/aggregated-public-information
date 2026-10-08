@@ -24,7 +24,8 @@
       "maxLength": 3
     },
     "slug": {
-      "type": "string"
+      "type": "uid",
+      "targetField": "code"
     }
   }
 }

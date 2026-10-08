@@ -15,18 +15,42 @@
       "type": "string",
       "required": true
     },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
     "subHeading": {
       "type": "text"
+    },
+    "impactStatistics": {
+      "type": "component",
+      "component": "response.impact-statistics-section",
+      "repeatable": false
+    },
+    "aboutHeading": {
+      "type": "string"
     },
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "details": {
+      "type": "component",
+      "component": "response.detail",
+      "repeatable": true
     },
     "imageGallery": {
       "type": "component",
       "component": "response.image-reference",
       "repeatable": true,
       "max": 2
+    },
+    "processHeading": {
+      "type": "string",
+      "default": "How We Work"
+    },
+    "processFootnote": {
+      "type": "text"
     },
     "processImageMobile": {
       "type": "media",
@@ -48,30 +72,6 @@
       "type": "component",
       "component": "response.faq-item",
       "repeatable": true
-    },
-    "slug": {
-      "type": "string",
-      "unique": true
-    },
-    "impactStatistics": {
-      "type": "component",
-      "component": "response.impact-statistics-section",
-      "repeatable": false
-    },
-    "aboutHeading": {
-      "type": "string"
-    },
-    "details": {
-      "type": "component",
-      "component": "response.detail",
-      "repeatable": true
-    },
-    "processHeading": {
-      "type": "string",
-      "default": "How We Work"
-    },
-    "processFootnote": {
-      "type": "text"
     },
     "fundraisers": {
       "type": "relation",
