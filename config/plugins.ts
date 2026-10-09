@@ -11,28 +11,4 @@ export default ({ env }) => ({
       },
     },
   },
-  slugify: {
-    enabled: true,
-    config: {
-      shouldUpdateSlug: true,
-      contentTypes: {
-        region: {
-          field: "slug",
-          references: "name",
-        },
-        subregion: {
-          field: "slug",
-          references: "name",
-        },
-        country: {
-          field: "slug",
-          references: "code",
-        },
-        overview: {
-          field: "slug",
-          references: "name",
-        },
-      },
-    },
-  },
 });
