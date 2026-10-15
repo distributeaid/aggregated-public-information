@@ -8,7 +8,7 @@ export type ImageRef = {
   publicPath?: string;
 };
 
-export type CheckStatus = "ok" | "missing" | "unknown";
+export type CheckStatus = "ok" | "missing" | "invalid" | "unknown";
 
 export type CheckResult = ImageRef & {
   status: CheckStatus;
