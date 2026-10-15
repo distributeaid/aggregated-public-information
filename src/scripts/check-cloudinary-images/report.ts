@@ -14,10 +14,7 @@ const printResult = (result: CheckResult, heading: string) => {
   console.log(`${heading}  ${result.displayName} → "${result.label}"`);
   console.log(`         ${result.field}`);
   console.log(`         ${result.url}`);
-
-  if (result.status === "unknown") {
-    console.log(`         could not check: ${result.detail}`);
-  }
+  console.log(`         result: ${result.detail}`);
 
   const edit = adminUrl(result);
   if (edit) console.log(`         edit: ${edit}`);
@@ -31,19 +28,22 @@ const printResult = (result: CheckResult, heading: string) => {
 
 export function reportResults(results: CheckResult[]): {
   missing: CheckResult[];
+  invalid: CheckResult[];
   unknown: CheckResult[];
 } {
   const missing = results.filter((result) => result.status === "missing");
+  const invalid = results.filter((result) => result.status === "invalid");
   const unknown = results.filter((result) => result.status === "unknown");
 
   console.log(`Checked ${results.length} published image URL(s).\n`);
 
   for (const result of missing) printResult(result, "MISSING");
+  for (const result of invalid) printResult(result, "INVALID_URL");
   for (const result of unknown) printResult(result, "UNKNOWN");
 
   console.log(
-    `${missing.length} missing, ${unknown.length} could not be checked.`,
+    `${missing.length} missing, ${invalid.length} invalid URL/transformation, ${unknown.length} could not be checked.`,
   );
 
-  return { missing, unknown };
+  return { missing, invalid, unknown };
 }

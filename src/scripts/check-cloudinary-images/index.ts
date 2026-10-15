@@ -31,10 +31,10 @@ async function main(): Promise<void> {
     refs.map((ref) => limit(() => checkImageRef(ref))),
   );
 
-  const { missing } = reportResults(results);
+  reportResults(results);
 
-  // Only a confirmed 404 fails the run; an unreachable host is not a finding.
-  if (missing.length > 0) process.exitCode = 1;
+  // Any image not confirmed OK fails the run, including ones that couldn't be checked.
+  if (results.some((result) => result.status !== "ok")) process.exitCode = 1;
 }
 
 void main().catch((error: unknown) => {
