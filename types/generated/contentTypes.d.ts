@@ -874,6 +874,46 @@ export interface ApiProductItem extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiRecruitingRole extends Struct.CollectionTypeSchema {
+  collectionName: "recruiting_roles";
+  info: {
+    displayName: "Recruiting roles";
+    pluralName: "roles";
+    singularName: "role";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    applicationInstructions: Schema.Attribute.RichText &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    facts: Schema.Attribute.Component<"recruiting.fact", true>;
+    isOpen: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::recruiting.role"
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sections: Schema.Attribute.Component<"recruiting.section", true>;
+    slug: Schema.Attribute.UID<"title"> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiReportingCargo extends Struct.CollectionTypeSchema {
   collectionName: "cargos";
   info: {
@@ -1713,6 +1753,7 @@ declare module "@strapi/strapi" {
       "api::needs-assessment.survey": ApiNeedsAssessmentSurvey;
       "api::product.category": ApiProductCategory;
       "api::product.item": ApiProductItem;
+      "api::recruiting.role": ApiRecruitingRole;
       "api::reporting.cargo": ApiReportingCargo;
       "api::reporting.movement": ApiReportingMovement;
       "api::reporting.shipment": ApiReportingShipment;

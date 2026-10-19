@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recruiting_roles",
+  "info": {
+    "singularName": "role",
+    "pluralName": "roles",
+    "displayName": "Recruiting roles"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 250
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "isOpen": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "facts": {
+      "type": "component",
+      "component": "recruiting.fact",
+      "repeatable": true
+    },
+    "sections": {
+      "type": "component",
+      "component": "recruiting.section",
+      "repeatable": true
+    },
+    "applicationInstructions": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
