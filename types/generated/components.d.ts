@@ -255,7 +255,7 @@ export interface ResponseFaqItem extends Struct.ComponentSchema {
     displayName: "FAQ Item";
   };
   attributes: {
-    answer: Schema.Attribute.Text & Schema.Attribute.Required;
+    answer: Schema.Attribute.RichText & Schema.Attribute.Required;
     question: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

@@ -10,7 +10,7 @@
       "required": true
     },
     "answer": {
-      "type": "text",
+      "type": "richtext",
       "required": true
     }
   },
