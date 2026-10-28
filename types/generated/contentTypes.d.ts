@@ -877,7 +877,7 @@ export interface ApiProductItem extends Struct.CollectionTypeSchema {
 export interface ApiRecruitingRole extends Struct.CollectionTypeSchema {
   collectionName: "recruiting_roles";
   info: {
-    displayName: "Recruiting roles";
+    displayName: "Recruiting.Role";
     pluralName: "roles";
     singularName: "role";
   };
@@ -890,7 +890,6 @@ export interface ApiRecruitingRole extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    facts: Schema.Attribute.Component<"recruiting.fact", true>;
     isOpen: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -901,6 +900,7 @@ export interface ApiRecruitingRole extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    roleDetails: Schema.Attribute.Component<"recruiting.role-detail", true>;
     sections: Schema.Attribute.Component<"recruiting.section", true>;
     slug: Schema.Attribute.UID<"title"> & Schema.Attribute.Required;
     title: Schema.Attribute.String &

@@ -120,10 +120,10 @@ export interface ProductWeight extends Struct.ComponentSchema {
   };
 }
 
-export interface RecruitingFact extends Struct.ComponentSchema {
+export interface RecruitingRoleDetail extends Struct.ComponentSchema {
   collectionName: "components_recruiting_facts";
   info: {
-    displayName: "Recruiting role fact";
+    displayName: "Role Detail";
   };
   attributes: {
     label: Schema.Attribute.String & Schema.Attribute.Required;
@@ -134,7 +134,7 @@ export interface RecruitingFact extends Struct.ComponentSchema {
 export interface RecruitingSection extends Struct.ComponentSchema {
   collectionName: "components_recruiting_sections";
   info: {
-    displayName: "Recruiting role section";
+    displayName: "Role Section";
   };
   attributes: {
     content: Schema.Attribute.RichText & Schema.Attribute.Required;
@@ -370,7 +370,7 @@ declare module "@strapi/strapi" {
       "product.value": ProductValue;
       "product.volume": ProductVolume;
       "product.weight": ProductWeight;
-      "recruiting.fact": RecruitingFact;
+      "recruiting.role-detail": RecruitingRoleDetail;
       "recruiting.section": RecruitingSection;
       "reporting.shipment-roles": ReportingShipmentRoles;
       "response.call-to-action": ResponseCallToAction;
