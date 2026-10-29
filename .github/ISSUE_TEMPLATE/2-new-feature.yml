@@ -1,0 +1,110 @@
+name: "New Feature Request"
+description: "Request a new feature."
+title: "[Feature]: "
+labels: ["Enhancement"]
+projects: ["distributeaid/15"]
+type: enhancement
+body:
+  - type: textarea
+    id: who-are-you
+    attributes:
+      label: "Who are you?"
+      description: "Give us enough information so that the developer working on this can reach out and ask you follow-up questions. Let folks know explicitly if you're a DA volunteer, coordinator, etc"
+    validations:
+      required: true
+
+  - type: textarea
+    id: request-description
+    attributes:
+      label: "What new feature do you want?"
+      description: "Describe the new capability you want. A sentence, paragraph, bulletpoints, or checkboxes of specific additions you'd like to see. For example, We need a status field for responses (planned, active, finished)."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-area
+    attributes:
+      label: "What kind of new feature is this?"
+      description: "Choose the area this new feature will affect."
+      multiple: false
+      options:
+        - New backend data or fields
+        - New API or data output
+        - New admin tool
+        - New connection to another system or service
+        - New permissions or access behavior
+        - Other (please explain in the description above)
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: "Why do you want this new feature?"
+      description: "Who will benefit? What can people do after this feature exists that they cannot do now? How do people currently do this (if at all)?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: area-of-backend
+    attributes:
+      label: "What parts of the backend will this feature involve?"
+      description: "Describe which part of the system behind the website is affected. You can mention the admin tool, data, APIs, or another service. If this supports a public page, mention that too. If you're not sure, just describe what you see and what you need."
+    validations:
+      required: true
+
+  - type: upload
+    id: screenshots
+    attributes:
+      label: "Upload screenshots or drawings"
+      description: "If helpful, add screenshots, sketches, or diagrams to show what you mean."
+    validations:
+      required: false
+
+  - type: textarea
+    id: existing-content
+    attributes:
+      label: "Links and examples"
+      description: "Share any related pages, tools, API examples, or similar features that would help explain the new request."
+    validations:
+      required: false
+
+  - type: upload
+    id: content-files
+    attributes:
+      label: "Upload files"
+      description: "If applicable, add images, PDFs, diagrams, or other reference files with content you'd like to add."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: additional-content
+    attributes:
+      label: "Do you need help with supporting content or examples?"
+      description: "Use this if the feature needs supporting content like example data, diagrams, documentation, or text that would help developers build and test the new feature."
+      multiple: true
+      options:
+        - No, I've provided everything I can.
+        - No, I will provide the content later.
+        - I need help choosing or creating diagrams (for data, flows, or admin layouts).
+        - I need help writing documentation or text (API docs, labels, instructions).
+        - I need help generating example data or stats.
+        - I need help providing other content.
+    validations:
+      required: false
+
+  - type: textarea
+    id: inspiration
+    attributes:
+      label: "Is there inspiration for your new feature?"
+      description: "Share links or screenshots of other websites, tools, or admin panels that show the kind of feature you want."
+    validations:
+      required: false
+
+  - type: upload
+    id: additional-images
+    attributes:
+      label: "Upload additional images"
+      description: "If applicable, add any extra screenshots or mockups that help explain the new feature."
+    validations:
+      required: false
