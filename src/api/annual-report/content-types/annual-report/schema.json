@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "annual_reports",
+  "info": {
+    "singularName": "annual-report",
+    "pluralName": "annual-reports",
+    "displayName": "Annual Report"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "integer",
+      "required": true,
+      "unique": true,
+      "min": 0
+    },
+    "reportUrl": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "releaseDate": {
+      "type": "date",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}
