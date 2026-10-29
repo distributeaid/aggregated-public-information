@@ -42,9 +42,6 @@
     },
     "description": {
       "type": "richtext"
-    },
-    "coverImageURL": {
-      "type": "string"
     }
   }
 }

@@ -445,7 +445,6 @@ export interface ApiAnnualReportAnnualReport
     coverImage: Schema.Attribute.Media<
       "images" | "files" | "videos" | "audios"
     >;
-    coverImageURL: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;

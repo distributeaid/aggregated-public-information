@@ -2,6 +2,8 @@
  * annual-report controller
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::annual-report.annual-report');
+export default factories.createCoreController(
+  "api::annual-report.annual-report",
+);

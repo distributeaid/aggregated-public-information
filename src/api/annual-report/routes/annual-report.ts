@@ -2,6 +2,6 @@
  * annual-report router
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreRouter('api::annual-report.annual-report');
+export default factories.createCoreRouter("api::annual-report.annual-report");
