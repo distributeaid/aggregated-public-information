@@ -68,7 +68,7 @@ body:
       label: "What part of the area is affected?"
       description: "Be as specific as you can. Attach a screenshot, or specify the starting point of the process and describe where the issue occurs. "
     validations:
-        required: true
+      required: true
 
   - type: upload
     id: screenshots
