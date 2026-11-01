@@ -14,7 +14,8 @@
       "unique": true
     },
     "slug": {
-      "type": "string"
+      "type": "uid",
+      "targetField": "name"
     },
     "map": {
       "type": "media",

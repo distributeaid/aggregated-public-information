@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_response_impact_statistics_sections",
+  "info": {
+    "displayName": "Impact Statistics Section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "default": "By The Numbers"
+    },
+    "statistics": {
+      "type": "component",
+      "component": "response.statistic",
+      "repeatable": true,
+      "required": true,
+      "min": 1,
+      "max": 4
+    },
+    "cta": {
+      "type": "component",
+      "component": "response.donate-cta-button",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

@@ -39,26 +39,23 @@ export async function createPublicApiPermissions(strapi: Core.Strapi) {
     });
 
   // set the permissions
-  const promises = [];
-  Object.keys(newPermissions).map((group) => {
-    Object.keys(newPermissions[group]).map((endpoint) => {
-      const actions = newPermissions[group][endpoint];
+  const promises = Object.entries(newPermissions).flatMap(
+    ([group, endpoints]) =>
+      Object.entries(endpoints).flatMap(([endpoint, actions]) =>
+        actions.map((action) => {
+          strapi.log.info(
+            `creating public role for '${group}.${endpoint}.${action}'`,
+          );
 
-      const permissionsToCreate = actions.map((action) => {
-        strapi.log.info(
-          `creating public role for '${group}.${endpoint}.${action}'`,
-        );
+          return strapi.query("plugin::users-permissions.permission").create({
+            data: {
+              action: `api::${group}.${endpoint}.${action}`,
+              role: publicRole.id,
+            },
+          });
+        }),
+      ),
+  );
 
-        return strapi.query("plugin::users-permissions.permission").create({
-          data: {
-            action: `api::${group}.${endpoint}.${action}`,
-            role: publicRole.id,
-          },
-        });
-      });
-
-      promises.push(permissionsToCreate);
-    });
-    Promise.all(promises);
-  });
+  await Promise.all(promises);
 }

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_response_statistics",
+  "info": {
+    "displayName": "Statistic"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "unit": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "required": true,
+      "default": "items",
+      "enum": ["currency", "items", "shipments", "time"]
+    }
+  },
+  "config": {}
+}

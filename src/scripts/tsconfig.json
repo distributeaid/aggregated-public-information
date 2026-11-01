@@ -4,7 +4,7 @@
     "moduleResolution": "NodeNext",
     "target": "esnext",
     "esModuleInterop": true,
-    "types": ["node"],
+    "types": ["node", "jest"],
     "skipLibCheck": true
   }
 }

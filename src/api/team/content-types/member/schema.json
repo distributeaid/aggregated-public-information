@@ -9,33 +9,34 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Pronouns": {
+    "pronouns": {
       "type": "string"
     },
-    "Profile": {
+    "profile": {
       "type": "media",
       "multiple": false,
       "required": true,
       "allowedTypes": ["images"]
     },
-    "From": {
+    "homeCountry": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::geo.country"
     },
-    "Bio": {
+    "bio": {
       "type": "richtext"
     },
-    "Roles": {
+    "roles": {
       "type": "component",
-      "repeatable": true,
       "component": "team.role",
+      "repeatable": true,
       "required": true
     }
   }

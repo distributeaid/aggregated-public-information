@@ -612,7 +612,7 @@ export interface ApiGeoCountry extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<"code">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -644,7 +644,7 @@ export interface ApiGeoRegion extends Struct.CollectionTypeSchema {
       Schema.Attribute.Unique;
     overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<"name">;
     subregions: Schema.Attribute.Relation<"oneToMany", "api::geo.subregion">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
@@ -681,7 +681,7 @@ export interface ApiGeoSubregion extends Struct.CollectionTypeSchema {
     overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.Relation<"manyToOne", "api::geo.region">;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<"name">;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
@@ -871,6 +871,46 @@ export interface ApiProductItem extends Struct.CollectionTypeSchema {
     value: Schema.Attribute.Component<"product.value", true>;
     volume: Schema.Attribute.Component<"product.volume", true>;
     weight: Schema.Attribute.Component<"product.weight", true>;
+  };
+}
+
+export interface ApiRecruitingRole extends Struct.CollectionTypeSchema {
+  collectionName: "recruiting_roles";
+  info: {
+    displayName: "Recruiting.Role";
+    pluralName: "roles";
+    singularName: "role";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    applicationInstructions: Schema.Attribute.RichText &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    isOpen: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::recruiting.role"
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    roleDetails: Schema.Attribute.Component<"recruiting.role-detail", true>;
+    sections: Schema.Attribute.Component<"recruiting.section", true>;
+    slug: Schema.Attribute.UID<"title"> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1068,6 +1108,98 @@ export interface ApiReportingShipment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiResponseFundraiser extends Struct.CollectionTypeSchema {
+  collectionName: "fundraisers";
+  info: {
+    displayName: "Response.Fundraiser";
+    pluralName: "fundraisers";
+    singularName: "fundraiser";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amountRaised: Schema.Attribute.BigInteger;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    donateURL: Schema.Attribute.String & Schema.Attribute.Required;
+    featuredImageURL: Schema.Attribute.String;
+    goalTotal: Schema.Attribute.BigInteger;
+    isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::response.fundraiser"
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiResponseOverview extends Struct.CollectionTypeSchema {
+  collectionName: "overviews";
+  info: {
+    displayName: "Response.Overview";
+    pluralName: "overviews";
+    singularName: "overview";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aboutHeading: Schema.Attribute.String;
+    callToActionCards: Schema.Attribute.Component<
+      "response.call-to-action",
+      true
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    details: Schema.Attribute.Component<"response.detail", true>;
+    faqs: Schema.Attribute.Component<"response.faq-item", true>;
+    fundraisers: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::response.fundraiser"
+    >;
+    imageGallery: Schema.Attribute.Component<"response.image-reference", true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+        },
+        number
+      >;
+    impactStatistics: Schema.Attribute.Component<
+      "response.impact-statistics-section",
+      false
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::response.overview"
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    processFootnote: Schema.Attribute.Text;
+    processHeading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"How We Work">;
+    processImageDesktop: Schema.Attribute.Media<"images">;
+    processImageMobile: Schema.Attribute.Media<"images">;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<"name">;
+    subHeading: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTeamMember extends Struct.CollectionTypeSchema {
   collectionName: "members";
   info: {
@@ -1079,21 +1211,21 @@ export interface ApiTeamMember extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Bio: Schema.Attribute.RichText;
+    bio: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private;
-    From: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
+    homeCountry: Schema.Attribute.Relation<"oneToOne", "api::geo.country">;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::team.member"> &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    Profile: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
-    Pronouns: Schema.Attribute.String;
+    profile: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
+    pronouns: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    Roles: Schema.Attribute.Component<"team.role", true> &
+    roles: Schema.Attribute.Component<"team.role", true> &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
@@ -1335,44 +1467,6 @@ export interface PluginReviewWorkflowsWorkflowStage
       "manyToOne",
       "plugin::review-workflows.workflow"
     >;
-  };
-}
-
-export interface PluginSlugifySlug extends Struct.CollectionTypeSchema {
-  collectionName: "slugs";
-  info: {
-    displayName: "slug";
-    pluralName: "slugs";
-    singularName: "slug";
-  };
-  options: {
-    comment: "";
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    "content-manager": {
-      visible: false;
-    };
-    "content-type-builder": {
-      visible: false;
-    };
-  };
-  attributes: {
-    count: Schema.Attribute.Integer;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      "oneToMany",
-      "plugin::slugify.slug"
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.Text;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -1659,16 +1753,18 @@ declare module "@strapi/strapi" {
       "api::needs-assessment.survey": ApiNeedsAssessmentSurvey;
       "api::product.category": ApiProductCategory;
       "api::product.item": ApiProductItem;
+      "api::recruiting.role": ApiRecruitingRole;
       "api::reporting.cargo": ApiReportingCargo;
       "api::reporting.movement": ApiReportingMovement;
       "api::reporting.shipment": ApiReportingShipment;
+      "api::response.fundraiser": ApiResponseFundraiser;
+      "api::response.overview": ApiResponseOverview;
       "api::team.member": ApiTeamMember;
       "plugin::content-releases.release": PluginContentReleasesRelease;
       "plugin::content-releases.release-action": PluginContentReleasesReleaseAction;
       "plugin::i18n.locale": PluginI18NLocale;
       "plugin::review-workflows.workflow": PluginReviewWorkflowsWorkflow;
       "plugin::review-workflows.workflow-stage": PluginReviewWorkflowsWorkflowStage;
-      "plugin::slugify.slug": PluginSlugifySlug;
       "plugin::upload.file": PluginUploadFile;
       "plugin::upload.folder": PluginUploadFolder;
       "plugin::users-permissions.permission": PluginUsersPermissionsPermission;

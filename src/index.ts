@@ -1,6 +1,6 @@
 import type { Core } from "@strapi/strapi";
-import { createPublicApiPermissions } from "./createPublicApiPermissions";
 import { subscribeAdminInviteEmail } from "./functions/content-types/group/adminInviteEmail";
+import { registerSlugMiddleware } from "./functions/content-types/slug";
 
 export default {
   /**
@@ -9,7 +9,9 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+  register({ strapi }: { strapi: Core.Strapi }) {
+    registerSlugMiddleware(strapi);
+  },
 
   /**
    * An asynchronous bootstrap function that runs before
@@ -20,6 +22,5 @@ export default {
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     subscribeAdminInviteEmail(strapi);
-    await createPublicApiPermissions(strapi);
   },
 };

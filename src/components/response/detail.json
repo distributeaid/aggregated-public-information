@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_response_details",
+  "info": {
+    "displayName": "Detail"
+  },
+  "options": {},
+  "attributes": {
+    "summary": {
+      "type": "string"
+    },
+    "specifics": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

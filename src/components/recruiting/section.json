@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_recruiting_sections",
+  "info": {
+    "displayName": "Role Section"
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

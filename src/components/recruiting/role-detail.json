@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_recruiting_facts",
+  "info": {
+    "displayName": "Role Detail"
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

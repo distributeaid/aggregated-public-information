@@ -1,0 +1,43 @@
+services:
+  backend-dev:
+    image: backend:dev
+    platform: linux/amd64 # Forces to use the x86_64 (amd64) architecture for better compatibility
+    pull_policy: never
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: backend-dev
+    ports:
+      - 1337:1337
+    env_file:
+      - .env
+    volumes:
+      - strapi-data:/app/.tmp # Persist the SQLite database
+      # Bind mounts to enable two-way sync ('host' to 'container' and vice-versa) since docker compose's watch mode supports 'host' to 'container' (unidirectional sync only)
+      - ./src:/app/src
+      - ./config:/app/config
+      - ./types:/app/types
+      - ./public/uploads:/app/public/uploads
+      - ./database:/app/database
+    networks:
+      - local-dev
+    develop:
+      watch:
+        # Dependency changes
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./yarn.lock
+        - action: rebuild
+          path: ./.yarnrc.yml
+        - action: rebuild
+          path: ./.yarn
+
+networks:
+  local-dev:
+    name: local-dev
+    driver: bridge
+
+volumes:
+  strapi-data:
+    driver: local

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_response_donate_cta_buttons",
+  "info": {
+    "displayName": "Donation CTA"
+  },
+  "options": {},
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "required": true,
+      "default": "Donate"
+    },
+    "bannerText": {
+      "type": "string",
+      "default": "Help support this project"
+    },
+    "buttonLink": {
+      "type": "string",
+      "required": true,
+      "regex": "^[Hh][Tt][Tt][Pp][Ss]?:\\/\\/(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\\.)+[A-Za-z]{2,63}(?:[\\/?#]\\S*)?$"
+    }
+  },
+  "config": {}
+}
