@@ -1,5 +1,5 @@
 name: "Change Request"
-description: "Request a change or update to an existing feature, API, data model, or admin tool."
+description: "Request a change or update to an existing feature, API, data model, user guide, or admin tool."
 title: "[Change]: "
 labels: ["Enhancement"]
 projects: ["distributeaid/15"]
@@ -25,7 +25,7 @@ body:
     id: change-type
     attributes:
       label: "What kind of change is this?"
-      description: "Choose the area this change will affect."
+      description: "Choose the primary area this change will affect."
       multiple: false
       options:
         - Change to existing data or fields
@@ -33,6 +33,7 @@ body:
         - Change to existing admin tool or screen
         - Change to connection with another system or service
         - Change to permissions or access behavior
+        - Change to user guides
         - Other (please explain in the description above)
     validations:
       required: true
@@ -49,7 +50,7 @@ body:
     id: area-of-backend
     attributes:
       label: "What parts of the backend will this change involve?"
-      description: "Describe which part of the system behind the website is affected. You can mention the admin tool, data, APIs, or another service. If this supports a public page, mention that too. If you're not sure, just describe what you see and what you need."
+      description: "Describe which part of the system is affected. You can mention the admin tool, data, APIs, user guides, or another service. If this supports a public page, mention that too. If you're not sure, just describe what you see and what you need."
     validations:
       required: true
 
