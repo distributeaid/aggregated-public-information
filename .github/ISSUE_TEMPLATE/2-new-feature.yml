@@ -25,7 +25,7 @@ body:
     id: feature-area
     attributes:
       label: "What kind of new feature is this?"
-      description: "Choose the area this new feature will affect."
+      description: "Choose the primary area this new feature will affect."
       multiple: false
       options:
         - New backend data or fields
@@ -33,6 +33,7 @@ body:
         - New admin tool
         - New connection to another system or service
         - New permissions or access behavior
+        - New user guide (instructions for managing content in a specific Strapi collection)
         - Other (please explain in the description above)
     validations:
       required: true
