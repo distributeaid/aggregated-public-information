@@ -26,6 +26,7 @@ body:
         - Permissions or access are wrong (someone can/can't do something they should)
         - Strapi admin UI is confusing or broken
         - Connection to another system is failing (API, service, etc.)
+        - User guides are incomplete, incorrect, or unclear
         - Other (tell us more in the fields below)
 
   - type: textarea
@@ -52,18 +53,21 @@ body:
       required: true
 
   - type: dropdown
-    id: affected-component
+    id: affected-area
     attributes:
-      label: "What area does the bug apply to?"
+      label: "Which areas are affected?"
       description: "Choose all that apply."
       multiple: true
       options:
-        - APIs (the system behind the website that sends/receives data)
+        - APIs (how the system sends and receives data)
         - Data models (how data is organized, fields, relationships)
-        - Strapi UI (the admin tool where users manage content)
+        - Strapi admin UI (the interface used to manage content)
+        - User guides (instructions for managing content in a specific Strapi collection)
+        - Other (describe the area in the fields below)
+        - Not sure
 
   - type: textarea
-    id: affected-component-details
+    id: affected-area-details
     attributes:
       label: "What part of the area is affected?"
       description: "Be as specific as you can. Attach a screenshot, or specify the starting point of the process and describe where the issue occurs. "
