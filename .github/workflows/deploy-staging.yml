@@ -3,8 +3,45 @@ name: Deploy Staging
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
 jobs:
+  cloudinary-check:
+    name: Cloudinary image check
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: yarn
+          cache-dependency-path: yarn.lock
+      - name: Install checker dependencies
+        run: corepack yarn install --immutable
+      - name: Check published staging images before deployment
+        timeout-minutes: 10
+        shell: bash
+        env:
+          STRAPI_URL: ${{ secrets.STRAPI_URL }}
+          STRAPI_API_KEY: ${{ secrets.STRAPI_API_KEY }}
+        run: corepack yarn script:check-cloudinary-images 2>&1 | tee cloudinary-check.log
+      - name: Notify Slack
+        if: ${{ failure() }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        run: node .github/scripts/notify-cloudinary-failure.mjs
+
   deploy:
+    needs: cloudinary-check
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -12,7 +49,7 @@ jobs:
         uses: distributeaid/centralised-github-actions/.github/actions/ansible-deploy@main
         with:
           environment: staging
-          branch: ${{ github.ref_name }}
+          branch: ${{ github.sha }}
           repo_name: aggregated-public-information
           infra_checkout_token: ${{ secrets.INFRA_CHECKOUT_TOKEN }}
           upcloud_token: ${{ secrets.UPCLOUD_TOKEN }}
