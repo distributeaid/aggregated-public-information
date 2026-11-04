@@ -43,7 +43,7 @@ export async function addCollectionIdsToData(
     subregions.map((subregion) => [subregion.name.toLowerCase(), subregion.id]),
   );
 
-  // Survey colleciton map  ****/
+  // Survey collection map  ****/
   const surveyIdMap = new Map(
     surveys.map((survey) => [
       `${survey.reference} | ${survey.yearQuarter}`,

@@ -281,11 +281,35 @@ async function addIdsToWorkflow(
       productIds,
     );
 
+    const missingRegionIds = enrichedData.filter(need =>!need.regionId || need.regionId === 0).length;
+    const missingSurveyIds = enrichedData.filter(need =>!need.surveyId || need.surveyId === 0).length;
+    const missingProductIds = enrichedData.filter(need =>!need.productId || need.productId === 0).length;
+    
+    const validNeeds = enrichedData.filter((need) =>
+      need.regionId && need.regionId > 0 &&
+      need.surveyId && need.surveyId > 0 &&
+      need.productId && need.productId > 0
+    );
+
+    const totalInvalid = enrichedData.length - validNeeds.length;
+    const newLogs = [
+      ...logs,
+      `Added IDs to ${enrichedData.length} needs`,
+      `Missing ${missingRegionIds} region, ${missingSurveyIds} survey, ${missingProductIds} product`,
+      `Valid needs: ${validNeeds.length}/${enrichedData.length}`
+    ];
+
+    if (totalInvalid > 0) {
+      newLogs.push(`Other: ${totalInvalid} needs require manual entry`)
+    }
+
     return {
-      data: enrichedData,
+      data: validNeeds,
       orig: origin,
-      status: UploadWorkflowStatus.PROCESSING,
-      logs: [...logs, `Added IDs to ${enrichedData.length} need`],
+      status: validNeeds.length > 0
+      ? UploadWorkflowStatus.PROCESSING
+      : UploadWorkflowStatus.OTHER,
+      logs: newLogs,
     };
   } catch (error) {
     return {
