@@ -22,13 +22,13 @@ let text;
 if (checked && counts) {
   const [missing, invalid, unknown] = counts.slice(1).map(Number);
   text = [
-    ":x: *Cloudinary image check failed. Staging was not deployed.*",
+    ":x: *Cloudinary image check failed. Production was not deployed.*",
     `${missing + invalid + unknown} of ${checked} images need attention: ${missing} missing, ${invalid} broken link, ${unknown} couldn't be checked.`,
     `${logLink} for details.`,
   ].join("\n");
 } else {
   text = [
-    ":x: *Cloudinary image check couldn't run. Staging was not deployed.*",
+    ":x: *Cloudinary image check couldn't run. Production was not deployed.*",
     logLink,
   ].join("\n");
 }
