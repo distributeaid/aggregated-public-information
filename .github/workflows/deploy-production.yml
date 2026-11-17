@@ -2,6 +2,11 @@ name: Deploy Production
 
 on:
   workflow_dispatch:
+    inputs:
+      bypass_cloudinary_check:
+        description: "Skip image check (manual override)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -13,6 +18,7 @@ concurrency:
 jobs:
   cloudinary-check:
     name: Cloudinary image check
+    if: ${{ !inputs.bypass_cloudinary_check }}
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -42,9 +48,19 @@ jobs:
 
   deploy:
     needs: cloudinary-check
+    if: >-
+      ${{ !cancelled() &&
+          ((!inputs.bypass_cloudinary_check && needs.cloudinary-check.result == 'success') ||
+           (inputs.bypass_cloudinary_check && needs.cloudinary-check.result == 'skipped')) }}
     runs-on: ubuntu-latest
     environment: prod
     steps:
+      - name: Record manual override
+        if: ${{ inputs.bypass_cloudinary_check }}
+        shell: bash
+        run: |
+          echo "::warning::Manual override: Cloudinary image check skipped."
+          echo "## Manual override: image check skipped" >> "$GITHUB_STEP_SUMMARY"
       - name: Deploy application
         uses: distributeaid/centralised-github-actions/.github/actions/ansible-deploy@main
         with:
