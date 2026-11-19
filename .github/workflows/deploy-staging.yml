@@ -2,6 +2,11 @@ name: Deploy Staging
 
 on:
   workflow_dispatch:
+    inputs:
+      bypass_cloudinary_check:
+        description: "Skip image check (manual override)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -13,6 +18,7 @@ concurrency:
 jobs:
   cloudinary-check:
     name: Cloudinary image check
+    if: ${{ !inputs.bypass_cloudinary_check }}
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -33,18 +39,22 @@ jobs:
           STRAPI_URL: ${{ secrets.STRAPI_URL }}
           STRAPI_API_KEY: ${{ secrets.STRAPI_API_KEY }}
         run: corepack yarn script:check-cloudinary-images 2>&1 | tee cloudinary-check.log
-      - name: Notify Slack
-        if: ${{ failure() }}
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
-        run: node .github/scripts/notify-cloudinary-failure.mjs
 
   deploy:
     needs: cloudinary-check
+    if: >-
+      ${{ !cancelled() &&
+          ((!inputs.bypass_cloudinary_check && needs.cloudinary-check.result == 'success') ||
+           (inputs.bypass_cloudinary_check && needs.cloudinary-check.result == 'skipped')) }}
     runs-on: ubuntu-latest
     environment: staging
     steps:
+      - name: Record manual override
+        if: ${{ inputs.bypass_cloudinary_check }}
+        shell: bash
+        run: |
+          echo "::warning::Manual override: Cloudinary image check skipped."
+          echo "## Manual override: image check skipped" >> "$GITHUB_STEP_SUMMARY"
       - name: Deploy application
         uses: distributeaid/centralised-github-actions/.github/actions/ansible-deploy@main
         with:
