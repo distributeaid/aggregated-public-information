@@ -2,17 +2,70 @@ name: Deploy Production
 
 on:
   workflow_dispatch:
+    inputs:
+      bypass_cloudinary_check:
+        description: "Skip image check (manual override)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  cloudinary-check:
+    name: Cloudinary image check
+    if: ${{ !inputs.bypass_cloudinary_check }}
     runs-on: ubuntu-latest
     environment: prod
     steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: yarn
+          cache-dependency-path: yarn.lock
+      - name: Install checker dependencies
+        run: corepack yarn install --immutable
+      - name: Check published production images before deployment
+        timeout-minutes: 10
+        shell: bash
+        env:
+          STRAPI_URL: ${{ secrets.STRAPI_PROD_URL }}
+          STRAPI_API_KEY: ${{ secrets.STRAPI_PROD_API_KEY }}
+        run: corepack yarn script:check-cloudinary-images 2>&1 | tee cloudinary-check.log
+      - name: Notify Slack
+        if: ${{ failure() }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        run: node .github/scripts/notify-cloudinary-failure.mjs
+
+  deploy:
+    needs: cloudinary-check
+    if: >-
+      ${{ !cancelled() &&
+          ((!inputs.bypass_cloudinary_check && needs.cloudinary-check.result == 'success') ||
+           (inputs.bypass_cloudinary_check && needs.cloudinary-check.result == 'skipped')) }}
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Record manual override
+        if: ${{ inputs.bypass_cloudinary_check }}
+        shell: bash
+        run: |
+          echo "::warning::Manual override: Cloudinary image check skipped."
+          echo "## Manual override: image check skipped" >> "$GITHUB_STEP_SUMMARY"
       - name: Deploy application
         uses: distributeaid/centralised-github-actions/.github/actions/ansible-deploy@main
         with:
           environment: prod
-          branch: ${{ github.ref_name }}
+          branch: ${{ github.sha }}
           repo_name: aggregated-public-information
           infra_checkout_token: ${{ secrets.INFRA_CHECKOUT_TOKEN }}
           upcloud_token: ${{ secrets.UPCLOUD_TOKEN }}

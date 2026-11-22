@@ -21,7 +21,7 @@ async function main(): Promise<void> {
 
   if (!process.env.STRAPI_URL || !STRAPI_ENV.KEY) {
     throw new Error(
-      "STRAPI_URL and STRAPI_API_KEY must both be set in src/scripts/.env.",
+      "STRAPI_URL and STRAPI_API_KEY must both be set (in the environment or src/scripts/.env).",
     );
   }
 
